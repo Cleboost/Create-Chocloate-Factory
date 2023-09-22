@@ -17,10 +17,7 @@
 
 ## What is it?
 
-Create Chocolate Factory is a NeoForge mod that allows you to modify the game by adding new items, weapons, blocks, and more. One of
-its key features is to be able to generate the texture pack automatically from the configuration, which greatly
-simplifies the work of administrators. It also includes an extensive API which can be used by developers to be able to
-increase oraxen features.
+Create Chocolate Factory is a NeoForge mod that .... In Writing
 
 ## Features
 
