@@ -1,0 +1,13 @@
+{
+  "item.createchocolatefactory.machete": "Machete",
+  "item.createchocolatefactory.cocoa_bark": "Cocoa beam bark",
+
+  "block.createchocolatefactory.cocoa_block_closed": "Cocoa beam",
+  "block.createchocolatefactory.cocoa_block_opened": "Opened cocoa beam",
+
+  "tooltip.createchocolatefactory.cocoa_block_closed": "A block of cocoa beans!\nTo open it use the machete !",
+  "tooltip.createchocolatefactory.machete": "A machete! Breaks leaves and cocoa beam !",
+  "tooltip.createchocolatefactory.cocoa_block_opened": "An opened cocoa beam !\nTo open it use the machete !",
+
+  "item_group.createchocolatefactory.tab": "Chocolate Factory"
+}
