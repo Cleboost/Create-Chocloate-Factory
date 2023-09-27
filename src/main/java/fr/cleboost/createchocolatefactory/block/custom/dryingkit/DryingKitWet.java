@@ -41,7 +41,10 @@ public class DryingKitWet extends DirectionalBlock {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
     }
 
-    @Override
+    public boolean isRandomlyTicking(@NotNull BlockState pState) {
+        return true;
+    }
+
     public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
         this.tick(pState, pLevel, pPos, pRandom);
         pLevel.players().forEach(player -> {
