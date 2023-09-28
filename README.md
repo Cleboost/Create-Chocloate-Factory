@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://zupimages.net/up/23/38/okzv.png" alt="Create Chocolate Factory" width="256">
+  <img src="https://github.com/Cleboost/Create-Chocloate-Factory/blob/master/src/main/resources/logo.png?raw=true" alt="Create Chocolate Factory">
   <br>
 </h1>
 
