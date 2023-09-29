@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "createchocolatefactory:block/mint/mint_stage0"
+    },
+    "age=1": {
+      "model": "createchocolatefactory:block/mint/mint_stage1"
+    }
+  }
+}
