@@ -35,5 +35,5 @@ Create Chocolate Factory is an open source mod, every body can use it for free. 
 
 - Cleboost (Owner)
 - Youritch (Developer)
-- \_T0aday\_ (Graphic Designer)
+- \_T0ady\_ (Graphic Designer)
 - Nathan (Translator)
