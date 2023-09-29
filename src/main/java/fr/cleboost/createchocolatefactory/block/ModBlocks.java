@@ -1,8 +1,10 @@
 package fr.cleboost.createchocolatefactory.block;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.custom.CocoaBlockClosed;
-import fr.cleboost.createchocolatefactory.block.custom.CocoaBlockOpened;
+import fr.cleboost.createchocolatefactory.block.custom.MintCropBlock;
+import fr.cleboost.createchocolatefactory.block.custom.cocoablock.CocoaBlockClosed;
+import fr.cleboost.createchocolatefactory.block.custom.cocoablock.CocoaBlockOpened;
+import fr.cleboost.createchocolatefactory.block.custom.StrawberryCropBlock;
 import fr.cleboost.createchocolatefactory.block.custom.dryingkit.DryingKitDirty;
 import fr.cleboost.createchocolatefactory.block.custom.dryingkit.DryingKitEmpty;
 import fr.cleboost.createchocolatefactory.block.custom.dryingkit.DryingKitWet;
@@ -32,7 +34,7 @@ public class ModBlocks {
         () -> new CocoaBlockClosed(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BONE_BLOCK)));
 
     public static final RegistryObject<Block> DRYING_KIT_EMPTY = registerBlock("drying_kit_empty",
-            () -> new DryingKitEmpty(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO)));
+            () -> new DryingKitEmpty(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO).noOcclusion()));
 
     public static final RegistryObject<Block> DRYING_KIT_WET = registerBlock("drying_kit_wet",
             () -> new DryingKitWet(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO)));
@@ -40,7 +42,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> DRYING_KIT_DIRTY = registerBlock("drying_kit_dirty",
             () -> new DryingKitDirty(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO)));
 
-
+    public static final RegistryObject<Block> STRAWBERRY_CROP = BLOCKS.register("strawberry_crop",
+            () -> new StrawberryCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> MINT_CROP = BLOCKS.register("mint_crop",
+            () -> new MintCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion().noCollission()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
