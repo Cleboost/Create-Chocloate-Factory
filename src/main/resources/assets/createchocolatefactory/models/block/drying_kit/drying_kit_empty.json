@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "createchocolatefactory:block/drying_kit_general",
 		"particle": "createchocolatefactory:block/drying_kit_general"
