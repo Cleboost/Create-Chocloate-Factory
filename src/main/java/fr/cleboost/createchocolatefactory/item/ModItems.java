@@ -1,9 +1,11 @@
 package fr.cleboost.createchocolatefactory.item;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.block.ModBlocks;
 import fr.cleboost.createchocolatefactory.item.custom.LogoItem;
 import fr.cleboost.createchocolatefactory.item.custom.MacheteItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -29,7 +31,12 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoods.DARK_CHOCOLATE)));
     public static final RegistryObject<Item> BROWN_CHOCOLATE_BUNNY = ITEMS.register("brown_chocolate_bunny",
             () -> new Item(new Item.Properties().food(ModFoods.BROWN_CHOCOLATE)));
-
+    public static final RegistryObject<Item> STRAWBERRY_SEEDS = ITEMS.register("strawberry_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.STRAWBERRY_CROP.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MINT_SEEDS = ITEMS.register("mint_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.MINT_CROP.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MINT_LEAF = ITEMS.register("mint_leaf",
+            () -> new Item(new Item.Properties().food(ModFoods.MINT)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
