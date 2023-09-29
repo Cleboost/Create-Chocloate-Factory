@@ -54,7 +54,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                     .hasBlockStateProperties(ModBlocks.MINT_CROP.get())
                     .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MintCropBlock.AGE, 1));
 
-            this.add(ModBlocks.MINT_CROP.get(), createCropDrops(ModBlocks.MINT_CROP.get(), ModItems.LOGO.get(),
+            this.add(ModBlocks.MINT_CROP.get(), createCropDrops(ModBlocks.MINT_CROP.get(), ModItems.MINT_LEAF.get(),
                     ModItems.MINT_SEEDS.get(), lootitemcondition$builder));
         }
 
