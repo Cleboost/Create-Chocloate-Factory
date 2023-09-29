@@ -37,6 +37,10 @@ public class ModItems {
             () -> new ItemNameBlockItem(ModBlocks.MINT_CROP.get(), new Item.Properties()));
     public static final RegistryObject<Item> MINT_LEAF = ITEMS.register("mint_leaf",
             () -> new Item(new Item.Properties().food(ModFoods.MINT)));
+    public static final RegistryObject<Item> ORANGE = ITEMS.register("orange",
+            () -> new Item(new Item.Properties().food(ModFoods.ORANGE)));
+    public static final RegistryObject<Item> ORANGE_WEDGE = ITEMS.register("orange_wedge",
+            () -> new Item(new Item.Properties().food(ModFoods.ORANGE_WEDGE)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
