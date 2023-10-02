@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "createchocolatefactory:block/drying_kit_general",
 		"1": "minecraft:block/moss_block",
