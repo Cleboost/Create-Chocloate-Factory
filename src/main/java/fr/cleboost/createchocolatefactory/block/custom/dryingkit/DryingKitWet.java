@@ -52,12 +52,6 @@ public class DryingKitWet extends DirectionalBlock {
         });
         //if (!pLevel.canSeeSky(pPos)) return;
 
-        //Send tick to all players
-
-        pLevel.players().forEach(player -> {
-            player.displayClientMessage(Component.literal(String.valueOf(tickLevel)), true);
-        });
-
         if (tickLevel >= 100) {
             pLevel.setBlockAndUpdate(pPos, ModBlocks.DRYING_KIT_DIRTY.get().defaultBlockState());
         } else {
