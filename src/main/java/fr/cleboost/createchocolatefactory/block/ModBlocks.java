@@ -1,10 +1,11 @@
 package fr.cleboost.createchocolatefactory.block;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.block.custom.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.block.custom.MintCropBlock;
+import fr.cleboost.createchocolatefactory.block.custom.PigBlock;
 import fr.cleboost.createchocolatefactory.block.custom.cocoablock.CocoaBlockClosed;
 import fr.cleboost.createchocolatefactory.block.custom.cocoablock.CocoaBlockOpened;
-import fr.cleboost.createchocolatefactory.block.custom.StrawberryCropBlock;
 import fr.cleboost.createchocolatefactory.block.custom.dryingkit.DryingKitDirty;
 import fr.cleboost.createchocolatefactory.block.custom.dryingkit.DryingKitEmpty;
 import fr.cleboost.createchocolatefactory.block.custom.dryingkit.DryingKitWet;
@@ -26,26 +27,25 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, CreateChocolateFactory.MOD_ID);
 
+
     //Define blocks here
     public static final RegistryObject<Block> COCOA_BLOCK_OPENED = registerBlock("cocoa_block_opened",
         () -> new CocoaBlockOpened(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BONE_BLOCK)));
-
     public static final RegistryObject<Block> COCOA_BLOCK_CLOSED = registerBlock("cocoa_block_closed",
         () -> new CocoaBlockClosed(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BONE_BLOCK)));
-
     public static final RegistryObject<Block> DRYING_KIT_EMPTY = registerBlock("drying_kit_empty",
             () -> new DryingKitEmpty(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO).noOcclusion()));
-
     public static final RegistryObject<Block> DRYING_KIT_WET = registerBlock("drying_kit_wet",
             () -> new DryingKitWet(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO)));
-
     public static final RegistryObject<Block> DRYING_KIT_DIRTY = registerBlock("drying_kit_dirty",
             () -> new DryingKitDirty(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO)));
-
-    public static final RegistryObject<Block> STRAWBERRY_CROP = BLOCKS.register("strawberry_crop",
-            () -> new StrawberryCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion().noCollission()));
     public static final RegistryObject<Block> MINT_CROP = BLOCKS.register("mint_crop",
             () -> new MintCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> PIG_BLOCK = registerBlock("pig_block",
+            () -> new PigBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> DRYING_KIT = registerBlock("drying_kit",
+            () -> new DryingKitBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

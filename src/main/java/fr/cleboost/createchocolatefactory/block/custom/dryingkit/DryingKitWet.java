@@ -12,6 +12,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +24,8 @@ import java.util.List;
 public class DryingKitWet extends DirectionalBlock {
 
     private int tickLevel = 0;
+    public static final int MAX_AGE = 1;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
     public DryingKitWet(Properties pProperties) {
         super(pProperties);
     }
@@ -33,6 +37,7 @@ public class DryingKitWet extends DirectionalBlock {
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING);
+        pBuilder.add(AGE);
     }
 
     @Override
@@ -41,6 +46,14 @@ public class DryingKitWet extends DirectionalBlock {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
     }
 
+
+    public @NotNull IntegerProperty getAgeProperty() {
+        return AGE;
+    }
+
+    public int getMaxAge() {
+        return MAX_AGE;
+    }
     public boolean isRandomlyTicking(@NotNull BlockState pState) {
         return true;
     }

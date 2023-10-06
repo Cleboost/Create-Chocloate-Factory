@@ -2,6 +2,7 @@ package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
 import fr.cleboost.createchocolatefactory.block.ModBlocks;
+import fr.cleboost.createchocolatefactory.blockentity.ModBlocksEntity;
 import fr.cleboost.createchocolatefactory.item.ModCreativeModTabs;
 import fr.cleboost.createchocolatefactory.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -31,6 +32,7 @@ public class CreateChocolateFactory {
         ModCreativeModTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlocksEntity.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
