@@ -12,7 +12,7 @@ public class DryingKitEntity extends BlockEntity implements TickableBlockEntity 
     private int tickCount = 0;
     private boolean tickerEnable = false;
     public DryingKitEntity(BlockPos pPos, BlockState pBlockState) {
-        super (ModBlocksEntity.PIG_BLOCK_ENTITY.get(), pPos, pBlockState);
+        super(ModBlocksEntity.PIG_BLOCK_ENTITY.get(), pPos, pBlockState);
     }
 
     public void setTickerEnable() {
