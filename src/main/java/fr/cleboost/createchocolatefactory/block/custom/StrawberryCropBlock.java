@@ -10,11 +10,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.NotNull;
 
-public class MintCropBlock extends CropBlock {
-    public static final int MAX_AGE = 1;
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
+public class StrawberryCropBlock extends CropBlock {
+    public static final int MAX_AGE = 5;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_5;
 
-    public MintCropBlock(Properties pProperties) {
+    public StrawberryCropBlock(Properties pProperties) {
         super(pProperties);
     }
 
