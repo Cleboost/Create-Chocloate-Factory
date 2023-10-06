@@ -28,7 +28,9 @@ public class CocoaBlockClosed extends DirectionalBlock {
         return Block.box(3.0D, 0.0D, 6.0D, 14.7D, 4.0D, 10.0D);
     }
 
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        super.createBlockStateDefinition(pBuilder);
         pBuilder.add(FACING);
     }
 
