@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.NotNull;
-
+/*
 public class StrawberryCropBlock extends CropBlock {
     public static final int MAX_AGE = 5;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_5;
@@ -38,3 +38,4 @@ public class StrawberryCropBlock extends CropBlock {
         pBuilder.add(AGE);
     }
 }
+ */

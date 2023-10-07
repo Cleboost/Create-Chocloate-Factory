@@ -17,7 +17,7 @@
 
 ## What is it?
 
-Create Chocolate Factory is a NeoForge mod that .... In Writing
+Create Chocolate Factory is a NeoForge mod that add chocolate in minecraft, with machines to make chocolate and a goal to the chocolate !!
 
 ## Features
 
