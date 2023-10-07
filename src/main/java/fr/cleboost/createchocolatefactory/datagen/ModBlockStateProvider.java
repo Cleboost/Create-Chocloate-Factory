@@ -2,7 +2,7 @@ package fr.cleboost.createchocolatefactory.datagen;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.ModBlocks;
-//import fr.cleboost.createchocolatefactory.block.custom.StrawberryCropBlock;
+import fr.cleboost.createchocolatefactory.block.custom.StrawberryCropBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -33,18 +33,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //makeStrawberryCrop((CropBlock) ModBlocks.STRAWBERRY_CROP.get(), "strawberry_stage", "strawberry_stage");
     }
 
-    public void makeStrawberryCrop(CropBlock block, String modelName, String textureName) {
+    /*public void makeStrawberryCrop(CropBlock block, String modelName, String textureName) {
         Function<BlockState, ConfiguredModel[]> function = state -> strawberryStates(state, block, modelName, textureName);
 
         getVariantBuilder(block).forAllStates(function);
     }
     private ConfiguredModel[] strawberryStates(BlockState state, CropBlock block, String modelName, String textureName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
-        /*models[0] = new ConfiguredModel(models().crop(modelName + state.getValue(((StrawberryCropBlock) block).getAgeProperty()),
-                new ResourceLocation(CreateChocolateFactory.MOD_ID, "block/" + textureName + state.getValue(((StrawberryCropBlock) block).getAgeProperty()))).renderType("cutout"));*/
+        models[0] = new ConfiguredModel(models().crop(modelName + state.getValue(((StrawberryCropBlock) block).getAgeProperty()),
+                new ResourceLocation(CreateChocolateFactory.MOD_ID, "block/" + textureName + state.getValue(((StrawberryCropBlock) block).getAgeProperty()))).renderType("cutout"));
 
         return models;
-    }
+    }*/
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));

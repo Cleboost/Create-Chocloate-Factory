@@ -20,7 +20,6 @@ public class MintCropBlock extends CropBlock {
 
     @Override
     protected @NotNull ItemLike getBaseSeedId() {
-        //return ModItems.STRAWBERRY_SEEDS.get();
         return ModItems.MINT_SEEDS.get();
     }
 

@@ -20,6 +20,7 @@ public class ConfigDataGenerator {
 
         //excludesBlocksGenerate.add(ModBlocks.STRAWBERRY_CROP);
         excludesBlocksGenerate.add(ModBlocks.MINT_CROP);
+        excludesBlocksGenerate.add(ModBlocks.DRYING_KIT);
 
     }
 
