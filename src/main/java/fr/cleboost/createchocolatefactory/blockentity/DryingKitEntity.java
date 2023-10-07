@@ -29,7 +29,6 @@ public class DryingKitEntity extends BlockEntity implements TickableBlockEntity 
         if (level == null || level.isClientSide()) return;
         if (!tickerEnable) return;
         tickCount++;
-        CreateChocolateFactory.LOGGER.info("Tick count: " + tickCount);
         if (tickCount >= 100) {
             tickCount = 0;
             tickerEnable = false;

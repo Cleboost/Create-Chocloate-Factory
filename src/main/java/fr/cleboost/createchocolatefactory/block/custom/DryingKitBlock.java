@@ -78,6 +78,15 @@ public class DryingKitBlock extends Block implements EntityBlock {
         if (pLevel.isClientSide()) return InteractionResult.PASS;
         if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY)) {
             ItemStack itemStack = pPlayer.getItemInHand(pHand);
+            if (pPlayer.isCreative()) {
+                if (itemStack.getItem() == ModItems.COCOA_BEANS_WET.get()) {
+                    pLevel.setBlockAndUpdate(pPos, ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.WET));
+                    DryingKitEntity blockEntity = (DryingKitEntity) pLevel.getBlockEntity(pPos);
+                    assert blockEntity != null;
+                    blockEntity.setTickerEnable();
+                    return InteractionResult.SUCCESS;
+                }
+            }
             if (itemStack.getItem() == ModItems.COCOA_BEANS_WET.get()) {
                 if (itemStack.getCount() >= 9) {
                     itemStack.shrink(9);
@@ -89,6 +98,11 @@ public class DryingKitBlock extends Block implements EntityBlock {
                 }
             }
             return InteractionResult.PASS;
+        }
+        if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DIRTY)) {
+            Block.popResource(pLevel, pPos, new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9));
+            pLevel.setBlockAndUpdate(pPos, ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY));
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
