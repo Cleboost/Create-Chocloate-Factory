@@ -9,6 +9,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = CreateChocolateFactory.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -30,8 +31,11 @@ public class DataGenerators {
         ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
                 new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
+        //Langs generators :
+        for (String lang : ConfigDataGenerator.langIndex) {
+            generator.addProvider(event.includeServer(), new ModLangGenerator(packOutput, CreateChocolateFactory.MOD_ID, lang));
 
-
+        }
     }
 
 }

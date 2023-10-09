@@ -1,7 +1,7 @@
-package fr.cleboost.createchocolatefactory.blockentity;
+package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.ModBlocks;
+import fr.cleboost.createchocolatefactory.blockentity.DryingKitBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,10 +15,8 @@ public class ModBlocksEntity {
 
 
     //Define blocks entities here
-    public static final RegistryObject<BlockEntityType<PigBlockEntity>> PIG_BLOCK_ENTITY =
-            BLOCKS_ENTITIES.register("pig_block_entity", () -> BlockEntityType.Builder.of(PigBlockEntity::new, ModBlocks.PIG_BLOCK.get()).build(null));
-    public static final RegistryObject<BlockEntityType<DryingKitEntity>> DRYING_KIT_ENTITY =
-            BLOCKS_ENTITIES.register("drying_kit_entity", () -> BlockEntityType.Builder.of(DryingKitEntity::new, ModBlocks.DRYING_KIT.get()).build(null));
+    public static final RegistryObject<BlockEntityType<DryingKitBlockEntity>> DRYING_KIT_ENTITY =
+            BLOCKS_ENTITIES.register("drying_kit_entity", () -> BlockEntityType.Builder.of(DryingKitBlockEntity::new, ModBlocks.DRYING_KIT.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCKS_ENTITIES.register(eventBus);

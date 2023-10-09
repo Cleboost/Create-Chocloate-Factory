@@ -1,9 +1,6 @@
 package fr.cleboost.createchocolatefactory.datagen.loot;
 
-import fr.cleboost.createchocolatefactory.block.ModBlocks;
-import fr.cleboost.createchocolatefactory.block.custom.MintCropBlock;
-import fr.cleboost.createchocolatefactory.item.ModItems;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -13,8 +10,6 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
@@ -31,19 +26,15 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         for (RegistryObject<Block> block : ModBlocks.BLOCKS.getEntries()) {
             this.dropSelf(block.get());
         }
-
-        /*this.add(ModBlocks.SAPPHIRE_BLOCK.get(),
-                block -> numberDrop(ModBlocks.SAPPHIRE_BLOCK.get(), ModItems.RAW_SAPPHIRE.get(),2.0F, 5.0F));*/
-
         //Lootable for Mint
-        {
+        /*{
             LootItemCondition.Builder lootitemcondition$builder = LootItemBlockStatePropertyCondition
                     .hasBlockStateProperties(ModBlocks.MINT_CROP.get())
                     .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MintCropBlock.AGE, 1));
 
             this.add(ModBlocks.MINT_CROP.get(), createCropDrops(ModBlocks.MINT_CROP.get(), ModItems.MINT_LEAF.get(),
                     ModItems.MINT_SEEDS.get(), lootitemcondition$builder));
-        }
+        }*/
 
 
     }

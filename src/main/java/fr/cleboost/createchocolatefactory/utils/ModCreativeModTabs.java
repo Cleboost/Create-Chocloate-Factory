@@ -1,14 +1,9 @@
-package fr.cleboost.createchocolatefactory.item;
+package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -22,6 +17,7 @@ public class ModCreativeModTabs {
             .icon(() -> new ItemStack(ModItems.LOGO.get()))
             .title(Component.translatable("item_group.createchocolatefactory.tab"))
             .displayItems((pParameters, pOutput) -> {
+                pOutput.accept(Items.COCOA_BEANS);
                 for (RegistryObject<Item> item : ModItems.ITEMS.getEntries()) {
                     pOutput.accept(item.get());
                 }

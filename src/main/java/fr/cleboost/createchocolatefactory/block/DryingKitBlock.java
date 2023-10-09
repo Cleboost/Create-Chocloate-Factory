@@ -1,14 +1,15 @@
-package fr.cleboost.createchocolatefactory.block.custom;
+package fr.cleboost.createchocolatefactory.block;
 
-import fr.cleboost.createchocolatefactory.block.ModBlocks;
-import fr.cleboost.createchocolatefactory.blockentity.DryingKitEntity;
-import fr.cleboost.createchocolatefactory.blockentity.ModBlocksEntity;
+import fr.cleboost.createchocolatefactory.utils.ModBlocks;
+import fr.cleboost.createchocolatefactory.blockentity.DryingKitBlockEntity;
+import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
 import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
-import fr.cleboost.createchocolatefactory.item.ModItems;
+import fr.cleboost.createchocolatefactory.utils.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -37,7 +38,7 @@ public class DryingKitBlock extends Block implements EntityBlock {
 
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState p_154346_, @NotNull BlockGetter p_154347_, @NotNull BlockPos p_154348_, @NotNull CollisionContext p_154349_) {
-        return Block.box(0.0D, 0.0D, 0.0D, 16.7D, 4.0D, 16.0D);
+        return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
     }
 
     @Override
@@ -58,8 +59,8 @@ public class DryingKitBlock extends Block implements EntityBlock {
 
     public enum State implements StringRepresentable {
         EMPTY("empty"),
-        WET("wet"),
-        DIRTY("dirty");
+        DRYING("drying"),
+        DRY("dry");
 
         private final String name;
 
@@ -75,21 +76,59 @@ public class DryingKitBlock extends Block implements EntityBlock {
 
     @Override
     public InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
-        if (pLevel.isClientSide()) return InteractionResult.PASS;
+        if (pLevel.isClientSide() || pHand != InteractionHand.MAIN_HAND) return InteractionResult.PASS;
         if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY)) {
             ItemStack itemStack = pPlayer.getItemInHand(pHand);
-            if (itemStack.getItem() == ModItems.COCOA_BEANS_WET.get()) {
-                if (itemStack.getCount() >= 9) {
-                    itemStack.shrink(9);
-                    pLevel.setBlockAndUpdate(pPos, ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.WET));
-                    DryingKitEntity blockEntity = (DryingKitEntity) pLevel.getBlockEntity(pPos);
+            if (itemStack.is(ModItems.COCOA_BEANS_WET.get())) {
+                if (itemStack.getCount() >= 9 || pPlayer.isCreative()) {
+                    if (!pPlayer.isCreative()) itemStack.shrink(9);
+                    pLevel.setBlockAndUpdate(pPos, ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING));
+                    DryingKitBlockEntity blockEntity = (DryingKitBlockEntity) pLevel.getBlockEntity(pPos);
                     assert blockEntity != null;
+                    blockEntity.setTickToDry();
                     blockEntity.setTickerEnable();
                     return InteractionResult.SUCCESS;
                 }
             }
             return InteractionResult.PASS;
         }
+        /*if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.WET)) {
+            return InteractionResult.PASS;
+        }*/
+        if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRY)) {
+            ItemStack itemStack = pPlayer.getItemInHand(pHand);
+            if (itemStack.isEmpty() || itemStack.is(ModItems.COCOA_BEANS_DIRTY.get())) {
+                if (itemStack.isEmpty()) {
+                    ItemStack cocoa_dirty = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9);
+                    pPlayer.setItemInHand(pHand, cocoa_dirty);
+                } else {
+                    if (itemStack.getCount() > 55) return InteractionResult.PASS;
+                    ItemStack cocoa_dirty = itemStack.copy();
+                    cocoa_dirty.grow(9);
+                    pPlayer.setItemInHand(pHand, cocoa_dirty);
+                }
+                pLevel.setBlockAndUpdate(pPos, ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY));
+                return InteractionResult.SUCCESS;
+
+            }
+            return InteractionResult.PASS;
+        }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+        if (pLevel.isClientSide() || pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY) || pNewState.is(ModBlocks.DRYING_KIT.get())) return;
+        if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING)) {
+            ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_WET.get(),9);
+            var itemsE = new ItemEntity(pLevel,pPos.getX()+0.5D,pPos.getY()+0.5D,pPos.getZ()+0.5D,cocoas);
+            pLevel.addFreshEntity(itemsE);
+        }
+        if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRY)) {
+            ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(),9);
+            var itemsE = new ItemEntity(pLevel,pPos.getX()+0.5D,pPos.getY()+0.5D,pPos.getZ()+0.5D,cocoas);
+            pLevel.addFreshEntity(itemsE);
+        }
     }
 }

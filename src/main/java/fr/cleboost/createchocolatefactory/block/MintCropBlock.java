@@ -1,6 +1,6 @@
-package fr.cleboost.createchocolatefactory.block.custom;
+package fr.cleboost.createchocolatefactory.block;
 
-import fr.cleboost.createchocolatefactory.item.ModItems;
+import fr.cleboost.createchocolatefactory.utils.ModItems;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
