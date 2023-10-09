@@ -3,11 +3,11 @@
     "state=empty": {
       "model": "createchocolatefactory:block/drying_kit/drying_kit_empty"
     },
-    "state=wet": {
-      "model": "createchocolatefactory:block/drying_kit/drying_kit_wet"
+    "state=drying": {
+      "model": "createchocolatefactory:block/drying_kit/drying_kit_drying"
     },
-    "state=dirty": {
-      "model": "createchocolatefactory:block/drying_kit/drying_kit_dirty"
+    "state=dry": {
+      "model": "createchocolatefactory:block/drying_kit/drying_kit_dry"
     }
   }
 }
