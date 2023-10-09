@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "DPD",
+    "PBP",
+    "DPD"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:light_blue_dye"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "B": {
+      "item": "minecraft:cocoa_beans"
+    }
+  },
+  "result": {
+    "item": "createchocolatefactory:logo"
+  }
+}
