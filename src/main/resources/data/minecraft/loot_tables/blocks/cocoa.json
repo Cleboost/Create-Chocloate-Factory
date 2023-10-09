@@ -2,33 +2,28 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0.0,
+      "rolls": 1.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
+          "conditions": [
             {
-              "add": false,
-              "conditions": [
-                {
-                  "block": "minecraft:cocoa",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "age": "2"
-                  }
-                }
-              ],
-              "count": 1,
-              "function": "minecraft:set_count"
+              "block": "minecraft:cocoa",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "age": "2"
+              }
             },
             {
-              "function": "minecraft:explosion_decay"
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "tag": "createchocolatefactory:machete_like"
+              }
             }
           ],
-          "name": "minecraft:air"
+          "name": "createchocolatefactory:cocoa_block_closed"
         }
-      ],
-      "rolls": 1.0
+      ]
     }
   ],
   "random_sequence": "minecraft:blocks/cocoa"
