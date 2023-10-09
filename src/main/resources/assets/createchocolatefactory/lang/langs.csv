@@ -1,0 +1,14 @@
+Full Unique Name (auto),Category,Name,fr_fr,en_us
+block.createchocolatefactory.cocoa_block_closed,block,cocoa_block_closed,Cabosse de cacao,Cocoa bean
+block.createchocolatefactory.cocoa_block_opened,block,cocoa_block_opened,Cabosse de cacao ouverte,Opened cocoa bean
+block.createchocolatefactory.drying_kit,block,drying_kit,Kit de séchage,Drying Kit
+item.createchocolatefactory.machete,item,machete,Machette,Machete
+item.createchocolatefactory.cocoa_bark,item,cocoa_bark,Pelure de cabosse,Cocoa Bark
+item.createchocolatefactory.cocoa_beans_wet,item,cocoa_beans_wet,Fève de cacao,Wet Cocoa Bean
+item.createchocolatefactory.cocoa_beans_dirty,item,cocoa_beans_dirty,Fève de cacao sale,Dirty Cocoa Bean
+item.createchocolatefactory.logo,item,logo,Logo de Create Chocolate Factory ,Create Chocolate Factory's logo
+item_group.createchocolatefactory.tab,item_group,tab,L'Usine de Chocolat,Chocolate Factory
+tooltip.createchocolatefactory.cocoa_block_closed,tooltip,cocoa_block_closed,Utilisez une machette pour l'ouvrir !,To open it use the machete !
+tooltip.createchocolatefactory.machete,tooltip,machete,Coupe les feuilles et les cabosses de cacao,Break leaves and cocoa bean !
+tooltip.createchocolatefactory.cocoa_block_opened,tooltip,cocoa_block_opened,Pour recupérer les fèves de cacao utilisez une machette !,To get the cocoa use the machete !
+tooltip.createchocolatefactory.logo,tooltip,logo,Pour décorer votre usine.,To decorate your factory.
