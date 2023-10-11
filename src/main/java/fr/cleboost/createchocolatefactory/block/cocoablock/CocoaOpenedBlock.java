@@ -52,8 +52,8 @@ public class CocoaOpenedBlock extends DirectionalBlock {
         if (!pLevel.isClientSide() && pPlayer.getItemInHand(pHand).is(ModTags.Items.MACHETE_LIKE)) {
             Random random = new Random();
             pLevel.destroyBlock(pPos, false);
-            Block.popResource(pLevel, pPos, new ItemStack(ModItems.COCOA_BEANS_WET.get(), random.nextInt(5, 7)));
-            Block.popResource(pLevel, pPos, new ItemStack(ModItems.COCOA_BARK.get(), random.nextInt(1, 3)));
+            Block.popResource(pLevel, pPos, new ItemStack(ModItems.COCOA_BEANS_WET.get(), random.nextInt(4, 7)));//4-6
+            Block.popResource(pLevel, pPos, new ItemStack(ModItems.COCOA_BARK.get(), random.nextInt(1, 4)));//1-3
             pPlayer.getItemInHand(pHand).hurtAndBreak(1, pPlayer, playerEvent -> pPlayer.broadcastBreakEvent(pPlayer.getUsedItemHand()));
             return InteractionResult.SUCCESS;
         }

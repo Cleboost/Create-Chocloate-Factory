@@ -56,7 +56,7 @@ public class CocoaClosedBlock extends DirectionalBlock {
             Random random = new Random();
             pLevel.destroyBlock(pPos, false);
             pLevel.setBlockAndUpdate(pPos, ModBlocks.COCOA_BLOCK_OPENED.get().defaultBlockState());
-            Block.popResource(pLevel, pPos, new ItemStack(ModItems.COCOA_BARK.get(), random.nextInt(1, 3)));
+            Block.popResource(pLevel, pPos, new ItemStack(ModItems.COCOA_BARK.get(), random.nextInt(1, 4)));//1-3
             pPlayer.getItemInHand(pHand).hurtAndBreak(1,pPlayer,playerEvent -> pPlayer.broadcastBreakEvent(pPlayer.getUsedItemHand()));
             return InteractionResult.SUCCESS;
         }
