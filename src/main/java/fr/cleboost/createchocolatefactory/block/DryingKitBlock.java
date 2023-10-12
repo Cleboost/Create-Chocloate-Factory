@@ -102,7 +102,7 @@ public class DryingKitBlock extends Block implements EntityBlock {
                     ItemStack cocoa_dirty = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9);
                     pPlayer.setItemInHand(pHand, cocoa_dirty);
                 } else {
-                    if (itemStack.getCount() > 55) return InteractionResult.PASS;
+                    if (itemStack.getCount() + 9 > itemStack.getMaxStackSize()) return InteractionResult.PASS;
                     ItemStack cocoa_dirty = itemStack.copy();
                     cocoa_dirty.grow(9);
                     pPlayer.setItemInHand(pHand, cocoa_dirty);
@@ -119,15 +119,16 @@ public class DryingKitBlock extends Block implements EntityBlock {
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-        if (pLevel.isClientSide() || pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY) || pNewState.is(ModBlocks.DRYING_KIT.get())) return;
+        if (pLevel.isClientSide() || pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY) || pNewState.is(ModBlocks.DRYING_KIT.get()))
+            return;
         if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING)) {
-            ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_WET.get(),9);
-            var itemsE = new ItemEntity(pLevel,pPos.getX()+0.5D,pPos.getY()+0.5D,pPos.getZ()+0.5D,cocoas);
+            ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_WET.get(), 9);
+            var itemsE = new ItemEntity(pLevel, pPos.getX() + 0.5D, pPos.getY() + 0.5D, pPos.getZ() + 0.5D, cocoas);
             pLevel.addFreshEntity(itemsE);
         }
         if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRY)) {
-            ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(),9);
-            var itemsE = new ItemEntity(pLevel,pPos.getX()+0.5D,pPos.getY()+0.5D,pPos.getZ()+0.5D,cocoas);
+            ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9);
+            var itemsE = new ItemEntity(pLevel, pPos.getX() + 0.5D, pPos.getY() + 0.5D, pPos.getZ() + 0.5D, cocoas);
             pLevel.addFreshEntity(itemsE);
         }
     }
