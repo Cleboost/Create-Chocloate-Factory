@@ -16,3 +16,8 @@ tooltip.createchocolatefactory.logo,tooltip,logo,Pour décorer votre usine.,To d
 tooltip.createchocolatefactory.bar0,tooltip,bar0,Entiere,Full
 tooltip.createchocolatefactory.bar1,tooltip,bar1,Demi,Half
 tooltip.createchocolatefactory.bar2,tooltip,bar2,Quart,Quarter
+item.createchocolatefactory.orange,item,orange,Orange,Orange
+item.createchocolatefactory.orange_wedge,item,orange_wedge,Quartier d'orange,Orange Wedge
+item.createchocolatefactory.mint_leaf,item,mint_leaf,Feuille de menthe,Mint Leaf
+item.createchocolatefactory.mint_seed,item,mint_seed,Graine de menthe ,Mint Seed
+item.createchocolatefactory.orange_juice,item,orange_juice,Jus d'orange,Orange Juice
