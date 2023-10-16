@@ -7,6 +7,7 @@ import fr.cleboost.createchocolatefactory.block.cocoablock.CocoaClosedBlock;
 import fr.cleboost.createchocolatefactory.block.cocoablock.CocoaOpenedBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
