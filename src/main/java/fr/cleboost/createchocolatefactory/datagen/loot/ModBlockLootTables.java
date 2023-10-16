@@ -35,15 +35,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
             this.add(ModBlocks.MINT_CROP.get(), createCropDrops(ModBlocks.MINT_CROP.get(), ModItems.MINT_LEAF.get(),
                     ModItems.MINT_SEEDS.get(), lootitemcondition$builder));
         }*/
-
-
-    }
-
-    protected LootTable.Builder numberDrop(Block pBlock, Item item, float minDrop, float maxDrop) {
-        return createSilkTouchDispatchTable(pBlock,
-            this.applyExplosionCondition(pBlock, LootItem.lootTableItem(item)
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(minDrop, maxDrop)))
-                .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
     }
 
     @Override

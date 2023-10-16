@@ -54,9 +54,12 @@ public class BarItem extends Item implements ItemColor {
     }
 
     public static int getEatProgress(@NotNull ItemStack pStack) {
-        if (pStack.hasTag() && pStack.getTag().contains(CreateChocolateFactory.MOD_ID)) {
-            if (!pStack.getTag().getCompound(CreateChocolateFactory.MOD_ID).contains("eatProgress")) return 0;
-            return pStack.getTag().getCompound(CreateChocolateFactory.MOD_ID).getInt("eatProgress");
+        if (pStack.hasTag()) {
+            assert pStack.getTag() != null;
+            if (pStack.getTag().contains(CreateChocolateFactory.MOD_ID)) {
+                if (!pStack.getTag().getCompound(CreateChocolateFactory.MOD_ID).contains("eatProgress")) return 0;
+                return pStack.getTag().getCompound(CreateChocolateFactory.MOD_ID).getInt("eatProgress");
+            }
         }
         return 0;
     }

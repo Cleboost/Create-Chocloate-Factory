@@ -23,40 +23,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider pProvider) {
-
-        /*this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-            ModBlocks.SAPPHIRE_BLOCK.get(),
-            /ModBlocks.RAW_SAPPHIRE_BLOCK.get()
-        );*/
-
-        /*this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
-            ModBlocks.COCOA_BLOCK.get()
-        );*/
-
-        /*this.tag(BlockTags.MINEABLE_WITH_HOE).add(
-            ModBlocks.COCOA_BLOCK.get()
-        );*/
-
-        /*this.tag(BlockTags.MINEABLE_WITH_AXE).add(
-            ModBlocks.COCOA_BLOCK_OPENED.get()
-        );*/
-
-        /*this.tag(BlockTags.NEEDS_STONE_TOOL).add(
-            ModBlocks.RAW_SAPPHIRE_BLOCK.get()
-        );*/
-
-        /*this.tag(BlockTags.NEEDS_IRON_TOOL).add(
-            ModBlocks.SAPPHIRE_BLOCK.get()
-        );*/
-
-        /*this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
-            ModBlocks.RAW_SAPPHIRE_BLOCK.get()
-        );*/
-
-        /*this.tag(Tags.Blocks.NEEDS_NETHERITE_TOOL)
-            .add(ModBlocks.SOUND_BLOCK.get());*/
-
-
         //Custom tags ->
         this.tag(ModTags.Blocks.MACHETE_BREAKABLE)
                 .add(Blocks.COCOA)

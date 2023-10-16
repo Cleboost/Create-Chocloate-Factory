@@ -92,9 +92,6 @@ public class DryingKitBlock extends Block implements EntityBlock {
             }
             return InteractionResult.PASS;
         }
-        /*if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.WET)) {
-            return InteractionResult.PASS;
-        }*/
         if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRY)) {
             ItemStack itemStack = pPlayer.getItemInHand(pHand);
             if (itemStack.isEmpty() || itemStack.is(ModItems.COCOA_BEANS_DIRTY.get())) {
