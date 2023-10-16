@@ -16,15 +16,7 @@ public class ModLangGenerator extends LanguageProvider {
     @Override
     protected void addTranslations() {
         String lang = this.getName().replace("Languages: ", "");
-        String os = System.getProperty("os.name").toLowerCase();
-        File csvF;
-        if (os.contains("win")) {
-            csvF = new File("../src/main/resources/assets/createchocolatefactory/lang/langs.csv");
-        } else if (os.contains("mac")) {
-            csvF = new File("../../src/main/resources/assets/createchocolatefactory/lang/langs.csv");
-        } else {
-            throw new RuntimeException("OS not supported");
-        }
+        File csvF = new File("../../src/main/resources/assets/createchocolatefactory/lang/langs.csv");
 
         try {
             FileReader fr = new FileReader(csvF);
