@@ -6,6 +6,8 @@ import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
 import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
 import fr.cleboost.createchocolatefactory.utils.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -14,7 +16,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -42,6 +47,11 @@ public class DryingKitBlock extends Block implements EntityBlock {
     }
 
     @Override
+    public VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, CollisionContext pContext) {
+        return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
+    }
+
+    @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pBlockState) {
         return ModBlocksEntity.DRYING_KIT_ENTITY.get().create(pPos, pBlockState);
     }
@@ -55,6 +65,16 @@ public class DryingKitBlock extends Block implements EntityBlock {
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
         pBuilder.add(STATE);
+    }
+
+    @Override
+    public boolean canSurvive(BlockState pState, LevelReader pLevelR, BlockPos pPos) {
+        return pLevelR.getBlockState(pPos.below()).isSolidRender(pLevelR, pPos.below());
+    }
+
+    @Override
+    public BlockState updateShape(BlockState p_152926_, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
+        return !p_152926_.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(p_152926_, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
     }
 
     public enum State implements StringRepresentable {
