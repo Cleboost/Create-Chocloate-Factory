@@ -27,3 +27,4 @@ forge*changelog.txt
 backup/
 src/generated/
 gradle/
+gradlew
