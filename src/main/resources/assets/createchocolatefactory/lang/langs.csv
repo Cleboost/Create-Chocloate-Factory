@@ -7,8 +7,12 @@ item.createchocolatefactory.cocoa_bark,item,cocoa_bark,Pelure de cabosse,Cocoa B
 item.createchocolatefactory.cocoa_beans_wet,item,cocoa_beans_wet,Fève de cacao,Wet Cocoa Bean
 item.createchocolatefactory.cocoa_beans_dirty,item,cocoa_beans_dirty,Fève de cacao sale,Dirty Cocoa Bean
 item.createchocolatefactory.logo,item,logo,Logo de Create Chocolate Factory ,Create Chocolate Factory's logo
+item.createchocolatefactory.chocolate_bar,item,chocolate_bar,Barre de Chocolat,Chocolate Bars
 item_group.createchocolatefactory.tab,item_group,tab,L'Usine de Chocolat,Chocolate Factory
 tooltip.createchocolatefactory.cocoa_block_closed,tooltip,cocoa_block_closed,Utilisez une machette pour l'ouvrir !,To open it use the machete !
 tooltip.createchocolatefactory.machete,tooltip,machete,Coupe les feuilles et les cabosses de cacao,Break leaves and cocoa bean !
-tooltip.createchocolatefactory.cocoa_block_opened,tooltip,cocoa_block_opened,Pour recupérer les fèves de cacao utilisez une machette !,To get the cocoa use the machete !
+tooltip.createchocolatefactory.cocoa_block_opened,tooltip,cocoa_block_opened,Pour recupérer les fèves de cacao utilisez une machette !,To get the cocoa beans use the machete !
 tooltip.createchocolatefactory.logo,tooltip,logo,Pour décorer votre usine.,To decorate your factory.
+tooltip.createchocolatefactory.bar0,tooltip,bar0,Entiere,Full
+tooltip.createchocolatefactory.bar1,tooltip,bar1,Demi,Half
+tooltip.createchocolatefactory.bar2,tooltip,bar2,Quart,Quarter

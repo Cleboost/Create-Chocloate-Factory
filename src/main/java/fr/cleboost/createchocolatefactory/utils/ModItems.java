@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.item.BarItem;
 import fr.cleboost.createchocolatefactory.item.FuelItem;
 import fr.cleboost.createchocolatefactory.item.LogoItem;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
@@ -40,6 +41,8 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoods.ORANGE_WEDGE).stacksTo(16)));
     public static final RegistryObject<Item> ORANGE_JUICE = ITEMS.register("orange_juice",
             () -> new Item(new Item.Properties().food(ModFoods.ORANGE_WEDGE)));
+    public static final RegistryObject<Item> BARS = ITEMS.register("chocolate_bar",
+            () -> new BarItem(new Item.Properties().food(ModFoods.BARS).stacksTo(1)));
 
 
     public static void register(IEventBus eventBus) {

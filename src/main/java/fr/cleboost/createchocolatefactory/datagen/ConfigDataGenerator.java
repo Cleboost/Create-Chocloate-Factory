@@ -23,6 +23,7 @@ public class ConfigDataGenerator {
     static {
         excludesItemsGenerate.add(ModItems.MACHETE);
         excludesItemsGenerate.add(ModItems.LOGO);
+        excludesItemsGenerate.add(ModItems.BARS);
     }
     static final ArrayList<String> langIndex = new ArrayList<>();
     static {

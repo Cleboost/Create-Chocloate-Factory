@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createchocolatefactory:item/bar0",
+    "layer1": "createchocolatefactory:item/bar_paper"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "minecraft:eatprogress": 1
+      },
+      "model": "createchocolatefactory:item/bar1"
+    },
+    {
+      "predicate": {
+        "minecraft:eatprogress": 2
+      },
+      "model": "createchocolatefactory:item/bar2"
+    }
+  ]
+}
