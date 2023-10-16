@@ -8,7 +8,7 @@
 		"fixed": {
 			"rotation": [0, 180, 0],
 			"translation": [0, 0, 0.75],
-			"scale": [2.5, 2.5, 2.5]
+			"scale": [3, 3, 3]
 		}
 	}
 }

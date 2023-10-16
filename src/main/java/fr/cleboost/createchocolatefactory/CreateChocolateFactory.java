@@ -1,16 +1,10 @@
 package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
-import fr.cleboost.createchocolatefactory.block.ModBlocks;
-import fr.cleboost.createchocolatefactory.blockentity.ModBlocksEntity;
-import fr.cleboost.createchocolatefactory.item.ModCreativeModTabs;
-import fr.cleboost.createchocolatefactory.item.ModItems;
-import net.minecraft.world.item.CreativeModeTabs;
+import fr.cleboost.createchocolatefactory.utils.*;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.entity.item.ItemEvent;
-import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,7 +27,6 @@ public class CreateChocolateFactory {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlocksEntity.register(modEventBus);
-
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -44,7 +37,8 @@ public class CreateChocolateFactory {
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent void onServerStarting(ServerStartingEvent event) {
+    @SubscribeEvent
+    void onServerStarting(ServerStartingEvent event) {
         LOGGER.info("HELLO from server starting");
     }
 
@@ -53,7 +47,17 @@ public class CreateChocolateFactory {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            ModItemProperties.addCustomItemProperties();
         }
+    }
+
+    @SubscribeEvent
+    public void registerItemColors(RegisterColorHandlersEvent.Item event) {
+        CreateChocolateFactory.LOGGER.info("###########################");
+        event.register(((pStack, pTintIndex) -> {
+            CreateChocolateFactory.LOGGER.info(">>>>> pTintIndex from mod : " + pTintIndex);
+            if (pTintIndex == 0) return 10511680;
+            return -1;
+        }), ModItems.BARS.get());
     }
 }

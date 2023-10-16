@@ -1,8 +1,8 @@
 package fr.cleboost.createchocolatefactory.datagen;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.ModBlocks;
-import fr.cleboost.createchocolatefactory.item.ModItems;
+import fr.cleboost.createchocolatefactory.utils.ModBlocks;
+import fr.cleboost.createchocolatefactory.utils.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
