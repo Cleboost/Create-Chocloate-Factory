@@ -35,9 +35,8 @@ public class BarItem extends Item implements ItemColor {
         //EAT :
         player.getFoodData().eat(pStack.getItem(), pStack, pLivingEntity);
         player.awardStat(Stats.ITEM_USED.get(pStack.getItem()));
-        pLevel.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, pLevel.random.nextFloat() * 0.1F + 0.9F);
+        pLevel.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, pLevel.random.nextFloat() * 0.1F + 0.9F);
         player.gameEvent(GameEvent.EAT);
-        //
         if (eatProgress++ > 1) {
             if (player instanceof ServerPlayer) {
                 CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, pStack);
@@ -81,7 +80,7 @@ public class BarItem extends Item implements ItemColor {
         pTooltipComponents.add(Component.translatable("tooltip.createchocolatefactory.bar" + eatProgress));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
-    @Override
+
     public int getColor(@NotNull ItemStack pStack, int pTintIndex) {
         CreateChocolateFactory.LOGGER.info("###########################");
         CreateChocolateFactory.LOGGER.info(">>>>> pTintIndex from class : "+pTintIndex);
