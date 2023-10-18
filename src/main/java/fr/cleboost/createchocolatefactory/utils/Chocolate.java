@@ -4,6 +4,8 @@ import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 
+import java.util.Objects;
+
 public class Chocolate {
     private float strength = 100F;
     private float milk = 0F;
@@ -32,7 +34,6 @@ public class Chocolate {
         this.milk = (coef * this.milk) + (amount * boolToInt(ingredient.equals("milk")));
         this.sugar = (coef * this.sugar) + (amount * boolToInt(ingredient.equals("sugar")));
         this.cocoaButter = (coef * this.cocoaButter) + (amount * boolToInt(ingredient.equals("cocoaButter")));
-
     }
 
     private int boolToInt(Boolean bool) {
@@ -46,7 +47,7 @@ public class Chocolate {
         data.putFloat("milk", this.milk);
         data.putFloat("sugar", this.sugar);
         data.putFloat("cocoaButter", this.cocoaButter);
-        return new CompoundTag().put(CreateChocolateFactory.MOD_ID, new CompoundTag().put("chocolate", data));
+        return new CompoundTag().put(CreateChocolateFactory.MOD_ID, Objects.requireNonNull(new CompoundTag().put("chocolate", data)));
     }
 
     public int getCocoaButter() {
