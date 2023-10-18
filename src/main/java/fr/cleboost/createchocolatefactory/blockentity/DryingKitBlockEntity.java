@@ -28,7 +28,6 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
         if (this.level.getBiome(this.worldPosition).is(Tags.Biomes.IS_HOT)) multyplier *= 1.5F;
         if (this.level.getBiome(this.worldPosition).is(Tags.Biomes.IS_WET)) multyplier *= 0.5F;
         this.tickToDry=Math.round(this.tickToDry/multyplier);
-        CreateChocolateFactory.LOGGER.info(String.valueOf(this.tickToDry));
     }
 
     public void setTickerEnable() {
