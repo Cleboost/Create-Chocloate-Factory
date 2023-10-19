@@ -10,6 +10,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -39,28 +40,25 @@ public class CreateChocolateFactory {
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             ModItemProperties.addCustomItemProperties();
         }
     }
-    /*Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = LogicalSide.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            ModItemProperties.addCustomItemProperties();
-        }*/
-    }
 
-}
-    /*@SubscribeEvent
-    public void registerItemColors(RegisterColorHandlersEvent.@NotNull Item event) {
-        CreateChocolateFactory.LOGGER.info("###########################");
-        event.register(((pStack, pTintIndex) -> {
-            CreateChocolateFactory.LOGGER.info(">>>>> pTintIndex from mod : " + pTintIndex);
-            if (pTintIndex == 0) return 10511680;
-            return -1;
-        }), ModItems.BARS.get());
+    /*(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = LogicalSide.CLIENT)
+    public static class LogicalClientModEvents {
+        @SubscribeEvent
+        public void registerItemColors(RegisterColorHandlersEvent.@NotNull Item event) {
+            CreateChocolateFactory.LOGGER.info("###########################");
+            event.register(((pStack, pTintIndex) -> {
+                CreateChocolateFactory.LOGGER.info(">>>>> pTintIndex from mod : " + pTintIndex);
+                if (pTintIndex == 0) return 10511680;
+                return -1;
+            }), ModItems.BARS.get());
+        }
+
     }*/
+}
