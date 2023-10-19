@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
+import fr.cleboost.createchocolatefactory.item.BarItem;
 import fr.cleboost.createchocolatefactory.utils.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -46,19 +47,19 @@ public class CreateChocolateFactory {
         public static void onClientSetup(FMLClientSetupEvent event) {
             ModItemProperties.addCustomItemProperties();
         }
-    }
-
-    /*(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = LogicalSide.CLIENT)
-    public static class LogicalClientModEvents {
         @SubscribeEvent
-        public void registerItemColors(RegisterColorHandlersEvent.@NotNull Item event) {
+        public static void registerItemColors(RegisterColorHandlersEvent.@NotNull Item event) {
             CreateChocolateFactory.LOGGER.info("###########################");
             event.register(((pStack, pTintIndex) -> {
-                CreateChocolateFactory.LOGGER.info(">>>>> pTintIndex from mod : " + pTintIndex);
-                if (pTintIndex == 0) return 10511680;
-                return -1;
+                if (pTintIndex > 0) return -1;
+                return new Chocolate(pStack.getTag()).getColor();
             }), ModItems.BARS.get());
         }
+    }
+
+    /*@EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = LogicalSide.CLIENT)
+    public static class LogicalClientModEvents {
+
 
     }*/
 }
