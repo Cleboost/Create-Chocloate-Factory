@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BarItem extends Item implements ItemColor {
+public class BarItem extends Item {
     public BarItem(Properties pProperties) {
         super(pProperties);
     }
@@ -79,12 +79,5 @@ public class BarItem extends Item implements ItemColor {
         int eatProgress = getEatProgress(pStack);
         pTooltipComponents.add(Component.translatable("tooltip.createchocolatefactory.bar" + eatProgress));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-    }
-
-    public int getColor(@NotNull ItemStack pStack, int pTintIndex) {
-        CreateChocolateFactory.LOGGER.info("###########################");
-        CreateChocolateFactory.LOGGER.info(">>>>> pTintIndex from class : "+pTintIndex);
-        if (pTintIndex==0) return 10511680;
-        return -1;
     }
 }
