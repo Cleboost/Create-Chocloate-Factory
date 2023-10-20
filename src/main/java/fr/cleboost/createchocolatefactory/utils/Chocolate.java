@@ -8,8 +8,8 @@ import java.nio.ByteBuffer;
 import java.util.Objects;
 
 public class Chocolate {
-    private float strength = 100F;
-    private float milk = 0F;
+    private float strength = 50F;
+    private float milk = 50F;
     private float sugar = 0F;
     private float cocoaButter = 0F;
 
@@ -37,10 +37,6 @@ public class Chocolate {
         this.cocoaButter = (coef * this.cocoaButter) + (amount * boolToInt(ingredient.equals("cocoaButter")));
     }
 
-    private int boolToInt(Boolean bool) {
-        return bool ? 1 : 0;
-    }
-
     //Getter
     public Tag getTag() {
         CompoundTag data = new CompoundTag();
@@ -53,8 +49,12 @@ public class Chocolate {
 
     public int getColor() {
         //alpha red green blue
-        byte[] bytes = {120, (byte) (12.3*this.strength), 63, 0};
-        CreateChocolateFactory.LOGGER.info(String.valueOf(ByteBuffer.wrap(bytes).getInt()));
+        byte[] bytes = {
+                120,
+                castToByte((0.9*Math.pow(this.strength,0.8)+1.15*Math.pow(this.milk,1.11))*1.4-7),
+                castToByte((0.405*this.strength+0.5*Math.pow(this.milk, 1.5))*0.5-13),
+                castToByte((1.8*this.strength+1.1*Math.pow(this.milk,1.6))*0.11-16)
+        }; //do not touch any of this calculation pls
         return ByteBuffer.wrap(bytes).getInt();
     }
 
@@ -72,5 +72,13 @@ public class Chocolate {
 
     public int getStreght() {
         return Math.round(this.strength);
+    }
+
+    private byte castToByte(double x) {
+        int y = (int) Math.round(x);
+        return (byte) (Math.max(Math.min(y,255),0));
+    }
+    private int boolToInt(Boolean bool) {
+        return bool ? 1 : 0;
     }
 }
