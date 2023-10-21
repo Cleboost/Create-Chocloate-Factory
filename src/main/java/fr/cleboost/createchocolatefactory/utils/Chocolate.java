@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import java.nio.ByteBuffer;
 import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 public class Chocolate {
     private float strength = 100F;
@@ -15,9 +16,7 @@ public class Chocolate {
     private float cocoaButter = 0F;
 
     public Chocolate(CompoundTag tag) {
-        if (tag == null || tag.isEmpty()) return;
-        if (!tag.contains(CreateChocolateFactory.MOD_ID)) return;
-        if (!tag.getCompound(CreateChocolateFactory.MOD_ID).contains("chocolate")) return;
+        if (!Chocolate.hasChocolateProperties(tag)) return;
         CompoundTag info = tag.getCompound(CreateChocolateFactory.MOD_ID).getCompound("chocolate");
         this.strength = info.getFloat("strength");
         this.milk = info.getFloat("milk");
@@ -28,15 +27,17 @@ public class Chocolate {
     }
     public Chocolate(boolean creative) {
         if (!creative) return;
+        CreateChocolateFactory.LOGGER.info("creatif");
         Random rand = new Random();
         float sum = 0F;
-        this.strength = rand.nextFloat(0F,100F);
+        this.strength = rand.nextFloat(30F,71F);
         sum+=this.strength;
-        this.milk = rand.nextFloat(0F,100F-sum);
+        this.milk = rand.nextFloat(20F,101F-sum);
         sum+=this.milk;
-        this.sugar = rand.nextFloat(0F,100F-sum);
+        this.sugar = rand.nextFloat(0F,101F-sum);
         sum+=this.sugar;
-        this.cocoaButter = rand.nextFloat(0F,100F-sum);
+        this.cocoaButter = rand.nextFloat(0F,101F-sum);
+        CreateChocolateFactory.LOGGER.info("s:"+this.strength+" m:"+this.milk);
     }
 
     public void addIngredients(String ingredient, int amount) {
@@ -59,10 +60,13 @@ public class Chocolate {
         data.putFloat("sugar", this.sugar);
         data.putFloat("cocoaButter", this.cocoaButter);
         if (tag.contains(CreateChocolateFactory.MOD_ID)) {
+            if (tag.getCompound(CreateChocolateFactory.MOD_ID).contains("chocolate")) tag.getCompound(CreateChocolateFactory.MOD_ID).remove("chocolate");
             tag.getCompound(CreateChocolateFactory.MOD_ID).put("chocolate", data);
             return;
         }
-        tag.put(CreateChocolateFactory.MOD_ID, Objects.requireNonNull(new CompoundTag().put("chocolate", data)));
+        CompoundTag chTag = new CompoundTag();
+        chTag.put("chocolate", data);
+        tag.put(CreateChocolateFactory.MOD_ID, chTag);
     }
 
     public int getColor() {
@@ -94,9 +98,20 @@ public class Chocolate {
 
     private byte castToByte(double x) {
         int y = (int) Math.round(x);
-        return (byte) (Math.max(Math.min(y,255),0));
+        return (byte) (Math.max(Math.min(y,255),0)/2);
     }
     private int boolToInt(Boolean bool) {
         return bool ? 1 : 0;
+    }
+    public static boolean hasChocolateProperties(CompoundTag tag) {
+        if (tag == null || tag.isEmpty()) return false;
+        if (!tag.contains(CreateChocolateFactory.MOD_ID)) return false;
+        if (!tag.getCompound(CreateChocolateFactory.MOD_ID).contains("chocolate")) return false;
+        CompoundTag chocolateProp = tag.getCompound(CreateChocolateFactory.MOD_ID).getCompound("chocolate");
+        if (!chocolateProp.contains("strength") || !chocolateProp.contains("milk") || !chocolateProp.contains("sugar") || !chocolateProp.contains("cocoaButter")) {
+            tag.getCompound(CreateChocolateFactory.MOD_ID).remove("chocolate");
+            return false;
+        }
+        return true;
     }
 }
