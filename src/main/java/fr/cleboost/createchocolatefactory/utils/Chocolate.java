@@ -27,17 +27,15 @@ public class Chocolate {
     }
     public Chocolate(boolean creative) {
         if (!creative) return;
-        CreateChocolateFactory.LOGGER.info("creatif");
         Random rand = new Random();
         float sum = 0F;
-        this.strength = rand.nextFloat(30F,71F);
+        this.strength = rand.nextFloat(0F,101F);
         sum+=this.strength;
-        this.milk = rand.nextFloat(20F,101F-sum);
+        this.milk = rand.nextFloat(0F,101F-sum);
         sum+=this.milk;
         this.sugar = rand.nextFloat(0F,101F-sum);
         sum+=this.sugar;
         this.cocoaButter = rand.nextFloat(0F,101F-sum);
-        CreateChocolateFactory.LOGGER.info("s:"+this.strength+" m:"+this.milk);
     }
 
     public void addIngredients(String ingredient, int amount) {
@@ -113,5 +111,13 @@ public class Chocolate {
             return false;
         }
         return true;
+    }
+
+    //values here might change
+    public int getNutrition() {
+        return Math.round(this.cocoaButter/10);
+    }
+    public float getSaturationModifier() {
+        return (1+this.cocoaButter/100)*(1+this.milk/100);
     }
 }
