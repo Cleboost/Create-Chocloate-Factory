@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -58,10 +59,10 @@ public class BarItem extends Item {
 
     public static int getEatProgress(@NotNull ItemStack pStack) {
         if (pStack.hasTag()) {
-            assert pStack.getTag() != null;
-            if (pStack.getTag().contains(CreateChocolateFactory.MOD_ID)) {
-                if (!pStack.getTag().getCompound(CreateChocolateFactory.MOD_ID).contains("eatProgress")) return 0;
-                return pStack.getTag().getCompound(CreateChocolateFactory.MOD_ID).getInt("eatProgress");
+            CompoundTag tag = pStack.getTag();
+            if (tag != null && tag.contains(CreateChocolateFactory.MOD_ID)) {
+                if (!tag.getCompound(CreateChocolateFactory.MOD_ID).contains("eatProgress")) return 0;
+                return tag.getCompound(CreateChocolateFactory.MOD_ID).getInt("eatProgress");
             }
         }
         return 0;
@@ -83,5 +84,16 @@ public class BarItem extends Item {
         int eatProgress = getEatProgress(pStack);
         pTooltipComponents.add(Component.translatable("tooltip.createchocolatefactory.bar" + eatProgress));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+        if (!pLevel.isClientSide()) return;
+        if (Chocolate.hasChocolateProperties(pStack.getTag())) return;
+        Chocolate ch;
+        if (((Player) (pEntity)).isCreative()) ch = new Chocolate(true);
+        else ch = new Chocolate(pStack.getTag());
+        ch.saveTag(pStack);
     }
 }
