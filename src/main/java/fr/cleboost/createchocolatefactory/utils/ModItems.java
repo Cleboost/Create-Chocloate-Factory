@@ -2,7 +2,7 @@ package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.item.BarItem;
-import fr.cleboost.createchocolatefactory.item.base.FuelItem;
+import fr.cleboost.createchocolatefactory.item.utils.FuelItem;
 import fr.cleboost.createchocolatefactory.item.LogoItem;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
 import net.minecraft.world.item.Item;
