@@ -13,6 +13,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -34,8 +35,9 @@ public class BarItem extends Item {
             return pStack;
         int eatProgress = getEatProgress(pStack);
         Player player = (Player) (pLivingEntity);
+        Chocolate ch = new Chocolate(pStack.getTag());
         //EAT :
-        player.getFoodData().eat(pStack.getItem(), pStack, pLivingEntity);
+        player.getFoodData().eat(ch.getNutrition(), ch.getSaturationModifier());
         player.awardStat(Stats.ITEM_USED.get(pStack.getItem()));
         pLevel.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, pLevel.random.nextFloat() * 0.1F + 0.9F);
         player.gameEvent(GameEvent.EAT);
@@ -50,8 +52,7 @@ public class BarItem extends Item {
             }
         } else {
             setEatProgress(pStack, eatProgress);
-            Chocolate ch = new Chocolate(pStack.getTag());
-            ch.addIngredients("milk",10);
+            ch.addIngredients("milk", 10);
             ch.saveTag(pStack);
         }
         return pStack;
@@ -82,8 +83,15 @@ public class BarItem extends Item {
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         int eatProgress = getEatProgress(pStack);
+        //Chocolate ch = new Chocolate(pStack.getTag());
         pTooltipComponents.add(Component.translatable("tooltip.createchocolatefactory.bar" + eatProgress));
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        /*pTooltipComponents.add(
+                Component.translatable("tooltip.createchocolatefactory.strength",
+                Component.literal(ch.getStreght() + "%"),
+                Component.literal(ch.getMilk() + "%"),
+                Component.literal(ch.getSugar() + "%"),
+                Component.literal(ch.getCocoaButter() + "%")
+        ));*/
     }
 
     @Override
