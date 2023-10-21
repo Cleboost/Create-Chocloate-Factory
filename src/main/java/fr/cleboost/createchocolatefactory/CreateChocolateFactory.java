@@ -56,10 +56,4 @@ public class CreateChocolateFactory {
             }), ModItems.BARS.get());
         }
     }
-
-    /*@EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = LogicalSide.CLIENT)
-    public static class LogicalClientModEvents {
-
-
-    }*/
 }
