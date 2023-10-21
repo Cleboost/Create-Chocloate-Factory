@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory.item;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.nbt.CompoundTag;
@@ -48,6 +49,9 @@ public class BarItem extends Item {
             }
         } else {
             setEatProgress(pStack, eatProgress);
+            Chocolate ch = new Chocolate(pStack.getTag());
+            ch.addIngredients("milk",10);
+            ch.saveTag(pStack);
         }
         return pStack;
     }

@@ -2,18 +2,20 @@ package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.world.item.ItemStack;
 
 import java.nio.ByteBuffer;
 import java.util.Objects;
+import java.util.Random;
 
 public class Chocolate {
-    private float strength = 50F;
-    private float milk = 50F;
+    private float strength = 100F;
+    private float milk = 0F;
     private float sugar = 0F;
     private float cocoaButter = 0F;
 
     public Chocolate(CompoundTag tag) {
+        if (tag == null || tag.isEmpty()) return;
         if (!tag.contains(CreateChocolateFactory.MOD_ID)) return;
         if (!tag.getCompound(CreateChocolateFactory.MOD_ID).contains("chocolate")) return;
         CompoundTag info = tag.getCompound(CreateChocolateFactory.MOD_ID).getCompound("chocolate");
@@ -22,12 +24,23 @@ public class Chocolate {
         this.sugar = info.getFloat("sugar");
         this.cocoaButter = info.getFloat("cocoaButter");
     }
-
     public Chocolate() {
+    }
+    public Chocolate(boolean creative) {
+        if (!creative) return;
+        Random rand = new Random();
+        float sum = 0F;
+        this.strength = rand.nextFloat(0F,100F);
+        sum+=this.strength;
+        this.milk = rand.nextFloat(0F,100F-sum);
+        sum+=this.milk;
+        this.sugar = rand.nextFloat(0F,100F-sum);
+        sum+=this.sugar;
+        this.cocoaButter = rand.nextFloat(0F,100F-sum);
     }
 
     public void addIngredients(String ingredient, int amount) {
-        if (ingredient.matches("^(strenght|milk|sugar|cocoaButter)$")) return;
+        if (!ingredient.matches("^(strenght|milk|sugar|cocoaButter)$")) return;
         if (boolToInt(ingredient.equals("strength")) * (amount + this.strength) > 100 || boolToInt(ingredient.equals("milk")) * (amount + this.milk) > 100 && boolToInt(ingredient.equals("sugar")) * (amount + this.sugar) > 100 && boolToInt(ingredient.equals("cocoaButter")) * (amount + this.cocoaButter) > 100)
             return;
         float coef = 1F - amount / 100F;
@@ -38,13 +51,18 @@ public class Chocolate {
     }
 
     //Getter
-    public Tag getTag() {
+    public void saveTag(ItemStack pStack) {
+        CompoundTag tag = pStack.getOrCreateTag();
         CompoundTag data = new CompoundTag();
         data.putFloat("strength", this.strength);
         data.putFloat("milk", this.milk);
         data.putFloat("sugar", this.sugar);
         data.putFloat("cocoaButter", this.cocoaButter);
-        return new CompoundTag().put(CreateChocolateFactory.MOD_ID, Objects.requireNonNull(new CompoundTag().put("chocolate", data)));
+        if (tag.contains(CreateChocolateFactory.MOD_ID)) {
+            tag.getCompound(CreateChocolateFactory.MOD_ID).put("chocolate", data);
+            return;
+        }
+        tag.put(CreateChocolateFactory.MOD_ID, Objects.requireNonNull(new CompoundTag().put("chocolate", data)));
     }
 
     public int getColor() {
