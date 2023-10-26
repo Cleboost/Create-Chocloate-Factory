@@ -1,3 +1,6 @@
 {
-    "parent": "createchocolatefactory:block/cocoa_block_opened"
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "createchocolatefactory:item/cocoa_block_opened"
+    }
 }
