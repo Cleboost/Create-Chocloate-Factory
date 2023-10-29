@@ -46,7 +46,7 @@ public class CocoaClosedPod extends DirectionalBlock {
 
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, @NotNull TooltipFlag pFlag) {
-        pTooltip.add(Component.translatable("tooltip.createchocolatefactory.cocoa_block_closed"));
+        pTooltip.add(Component.translatable("tooltip.createchocolatefactory.cocoa_pod_closed"));
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
     }
 
