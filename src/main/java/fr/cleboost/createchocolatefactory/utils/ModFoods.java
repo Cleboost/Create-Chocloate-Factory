@@ -14,6 +14,6 @@ public class ModFoods {
             .saturationMod(0.2f).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200), 0.1f).build();
     public static final FoodProperties ORANGE_WEDGE = new FoodProperties.Builder().nutrition(1).fast()
             .saturationMod(0.2f).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200), 0.8f).build();
-    public static final FoodProperties BARS = new FoodProperties.Builder().nutrition(1)
-            .saturationMod(0.2f).fast().build();
+    public static final FoodProperties CHOCOLATE_FAST = new FoodProperties.Builder().fast().build();
+    public static final FoodProperties CHOCOLATE_SLOW = new FoodProperties.Builder().build();
 }
