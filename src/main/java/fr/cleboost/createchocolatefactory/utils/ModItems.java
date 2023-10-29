@@ -1,7 +1,8 @@
 package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.item.BarItem;
+import fr.cleboost.createchocolatefactory.item.utils.ChocolateItem;
+import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import fr.cleboost.createchocolatefactory.item.utils.FuelItem;
 import fr.cleboost.createchocolatefactory.item.LogoItem;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
@@ -27,10 +28,6 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> COCOA_BARK = ITEMS.register("cocoa_bark",
             () -> new FuelItem(new Item.Properties(), 100));
-    public static final RegistryObject<Item> BLACK_CHOCOLATE_BUNNY = ITEMS.register("black_chocolate_bunny",
-            () -> new Item(new Item.Properties().food(ModFoods.DARK_CHOCOLATE)));
-    public static final RegistryObject<Item> BROWN_CHOCOLATE_BUNNY = ITEMS.register("brown_chocolate_bunny",
-            () -> new Item(new Item.Properties().food(ModFoods.BROWN_CHOCOLATE)));
     public static final RegistryObject<Item> MINT_SEEDS = ITEMS.register("mint_seeds",
             () -> new ItemNameBlockItem(ModBlocks.MINT_CROP.get(), new Item.Properties()));
     public static final RegistryObject<Item> MINT_LEAF = ITEMS.register("mint_leaf",
@@ -42,8 +39,11 @@ public class ModItems {
     public static final RegistryObject<Item> ORANGE_JUICE = ITEMS.register("orange_juice",
             () -> new Item(new Item.Properties().food(ModFoods.ORANGE_WEDGE)));
     public static final RegistryObject<Item> BARS = ITEMS.register("chocolate_bar",
-            () -> new BarItem(new Item.Properties().food(ModFoods.BARS).stacksTo(1)));
-
+            () -> new ChocolateProgressItem(new Item.Properties().food(ModFoods.CHOCOLATE_FAST).stacksTo(1), 3));
+    public static final RegistryObject<Item> BUNNY = ITEMS.register("chocolate_bunny",
+            () -> new ChocolateItem(new Item.Properties().food(ModFoods.CHOCOLATE_FAST)));
+    public static final RegistryObject<Item> EGG = ITEMS.register("chocolate_egg",
+            () -> new ChocolateItem(new Item.Properties().food(ModFoods.CHOCOLATE_SLOW)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
