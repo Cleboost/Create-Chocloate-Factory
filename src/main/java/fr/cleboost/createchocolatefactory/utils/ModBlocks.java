@@ -3,11 +3,10 @@ package fr.cleboost.createchocolatefactory.utils;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.block.MintCropBlock;
-import fr.cleboost.createchocolatefactory.block.cocoablock.CocoaClosedBlock;
-import fr.cleboost.createchocolatefactory.block.cocoablock.CocoaOpenedBlock;
+import fr.cleboost.createchocolatefactory.block.cocoablock.CocoaClosedPod;
+import fr.cleboost.createchocolatefactory.block.cocoablock.CocoaOpenedPod;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -24,10 +23,10 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, CreateChocolateFactory.MOD_ID);
 
     //custom block :
-    public static final RegistryObject<Block> COCOA_BLOCK_OPENED = registerBlock("cocoa_block_opened",
-        () -> new CocoaOpenedBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO).ignitedByLava()));
-    public static final RegistryObject<Block> COCOA_BLOCK_CLOSED = registerBlock("cocoa_block_closed",
-        () -> new CocoaClosedBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO).ignitedByLava()));
+    public static final RegistryObject<Block> COCOA_POD_OPENED = registerBlock("cocoa_pod_opened",
+        () -> new CocoaOpenedPod(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO).ignitedByLava()));
+    public static final RegistryObject<Block> COCOA_POD_CLOSED = registerBlock("cocoa_pod_closed",
+        () -> new CocoaClosedPod(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO).ignitedByLava()));
     public static final RegistryObject<Block> MINT_CROP = BLOCKS.register("mint_crop",
             () -> new MintCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion().noCollission()));
 

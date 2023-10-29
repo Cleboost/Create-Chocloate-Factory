@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "createchocolatefactory:item/cocoa_block_closed"
+        "layer0": "createchocolatefactory:item/cocoa_pod_opened"
     }
 }

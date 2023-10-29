@@ -12,8 +12,8 @@ public class ConfigDataGenerator {
     static final ArrayList<RegistryObject<Block>> excludesBlocksGenerate = new ArrayList<>();
 
     static {
-        excludesBlocksGenerate.add(ModBlocks.COCOA_BLOCK_OPENED);
-        excludesBlocksGenerate.add(ModBlocks.COCOA_BLOCK_CLOSED);
+        excludesBlocksGenerate.add(ModBlocks.COCOA_POD_OPENED);
+        excludesBlocksGenerate.add(ModBlocks.COCOA_POD_CLOSED);
 
         excludesBlocksGenerate.add(ModBlocks.MINT_CROP);
         excludesBlocksGenerate.add(ModBlocks.DRYING_KIT);

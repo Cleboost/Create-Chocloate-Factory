@@ -1,5 +1,6 @@
 package fr.cleboost.createchocolatefactory.block.cocoablock;
 
+import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import fr.cleboost.createchocolatefactory.utils.ModItems;
 import fr.cleboost.createchocolatefactory.utils.ModTags;
 import net.minecraft.core.BlockPos;
@@ -24,8 +25,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class CocoaOpenedBlock extends DirectionalBlock {
-    public CocoaOpenedBlock(Properties pProperties) {
+public class CocoaClosedPod extends DirectionalBlock {
+
+    public static final boolean CustomModel = true;
+
+    public CocoaClosedPod(Properties pProperties) {
         super(pProperties);
     }
 
@@ -33,7 +37,6 @@ public class CocoaOpenedBlock extends DirectionalBlock {
     public @NotNull VoxelShape getShape(@NotNull BlockState p_154346_, @NotNull BlockGetter p_154347_, @NotNull BlockPos p_154348_, @NotNull CollisionContext p_154349_) {
         return Block.box(3.0D, 0.0D, 6.0D, 14.7D, 4.0D, 10.0D);
     }
-
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
@@ -43,7 +46,7 @@ public class CocoaOpenedBlock extends DirectionalBlock {
 
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, @NotNull TooltipFlag pFlag) {
-        pTooltip.add(Component.translatable("tooltip.createchocolatefactory.cocoa_block_opened"));
+        pTooltip.add(Component.translatable("tooltip.createchocolatefactory.cocoa_block_closed"));
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
     }
 
@@ -52,9 +55,9 @@ public class CocoaOpenedBlock extends DirectionalBlock {
         if (!pLevel.isClientSide() && pPlayer.getItemInHand(pHand).is(ModTags.Items.MACHETE_LIKE)) {
             Random random = new Random();
             pLevel.destroyBlock(pPos, false);
-            Block.popResource(pLevel, pPos, new ItemStack(ModItems.COCOA_BEANS_WET.get(), random.nextInt(4, 7)));//4-6
+            pLevel.setBlockAndUpdate(pPos, ModBlocks.COCOA_POD_OPENED.get().defaultBlockState());
             Block.popResource(pLevel, pPos, new ItemStack(ModItems.COCOA_BARK.get(), random.nextInt(1, 4)));//1-3
-            pPlayer.getItemInHand(pHand).hurtAndBreak(1, pPlayer, playerEvent -> pPlayer.broadcastBreakEvent(pPlayer.getUsedItemHand()));
+            pPlayer.getItemInHand(pHand).hurtAndBreak(1,pPlayer,playerEvent -> pPlayer.broadcastBreakEvent(pPlayer.getUsedItemHand()));
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
