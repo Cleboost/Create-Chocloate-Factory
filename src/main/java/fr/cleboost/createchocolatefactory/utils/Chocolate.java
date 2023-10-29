@@ -10,8 +10,8 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 public class Chocolate {
-    private float strength = 100F;
-    private float milk = 0F;
+    private float strength = 70F;
+    private float milk = 30F;
     private float sugar = 0F;
     private float cocoaButter = 0F;
 
@@ -71,9 +71,9 @@ public class Chocolate {
         //alpha red green blue
         byte[] bytes = {
                 120,
-                castToByte((0.9*Math.pow(this.strength,0.8)+1.15*Math.pow(this.milk,1.11))*1.4-7),
-                castToByte((0.405*this.strength+0.5*Math.pow(this.milk, 1.5))*0.5-13),
-                castToByte((1.8*this.strength+1.1*Math.pow(this.milk,1.6))*0.11-16)
+                castToByte((0.9*Math.pow(this.strength+this.cocoaButter,0.7)+1.15*Math.pow(this.milk+this.sugar,1.11))*1.4-7),
+                castToByte((0.405*(this.strength+this.cocoaButter)+0.5*Math.pow(this.milk+this.sugar, 1.5))*0.5-13),
+                castToByte((1.8*(this.strength+this.cocoaButter)+1.1*Math.pow(this.milk+this.sugar,1.6))*0.11-16)
         }; //do not touch any of this calculation pls
         return ByteBuffer.wrap(bytes).getInt();
     }
@@ -96,7 +96,7 @@ public class Chocolate {
 
     private byte castToByte(double x) {
         int y = (int) Math.round(x);
-        return (byte) (Math.max(Math.min(y,255),0)/2);
+        return (byte) (Math.max(Math.min(y,255),0));
     }
     private int boolToInt(Boolean bool) {
         return bool ? 1 : 0;
