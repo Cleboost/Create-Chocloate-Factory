@@ -1,20 +1,16 @@
-package fr.cleboost.createchocolatefactory.item;
+package fr.cleboost.createchocolatefactory.item.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -24,9 +20,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BarItem extends Item {
-    public BarItem(Properties pProperties) {
+public class ChocolateProgressItem extends ChocolateItem {
+    public final int progressStage;
+
+    public ChocolateProgressItem(Properties pProperties, int progressStage) {
         super(pProperties);
+        this.progressStage = progressStage - 1;
     }
 
     @Override
@@ -41,7 +40,7 @@ public class BarItem extends Item {
         player.awardStat(Stats.ITEM_USED.get(pStack.getItem()));
         pLevel.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, pLevel.random.nextFloat() * 0.1F + 0.9F);
         player.gameEvent(GameEvent.EAT);
-        if (eatProgress++ > 1) {
+        if (eatProgress++ >= progressStage) {
             if (player instanceof ServerPlayer) {
                 CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, pStack);
             }
@@ -52,8 +51,6 @@ public class BarItem extends Item {
             }
         } else {
             setEatProgress(pStack, eatProgress);
-            ch.addIngredients("milk", 10);
-            ch.saveTag(pStack);
         }
         return pStack;
     }
@@ -83,25 +80,6 @@ public class BarItem extends Item {
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         int eatProgress = getEatProgress(pStack);
-        //Chocolate ch = new Chocolate(pStack.getTag());
-        pTooltipComponents.add(Component.translatable("tooltip.createchocolatefactory.bar" + eatProgress));
-        /*pTooltipComponents.add(
-                Component.translatable("tooltip.createchocolatefactory.strength",
-                Component.literal(ch.getStreght() + "%"),
-                Component.literal(ch.getMilk() + "%"),
-                Component.literal(ch.getSugar() + "%"),
-                Component.literal(ch.getCocoaButter() + "%")
-        ));*/
-    }
-
-    @Override
-    public void inventoryTick(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
-        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
-        if (!pLevel.isClientSide()) return;
-        if (Chocolate.hasChocolateProperties(pStack.getTag())) return;
-        Chocolate ch;
-        if (((Player) (pEntity)).isCreative()) ch = new Chocolate(true);
-        else ch = new Chocolate(pStack.getTag());
-        ch.saveTag(pStack);
+        pTooltipComponents.add(Component.translatable("tooltip.createchocolatefactory.progress" + eatProgress));
     }
 }
