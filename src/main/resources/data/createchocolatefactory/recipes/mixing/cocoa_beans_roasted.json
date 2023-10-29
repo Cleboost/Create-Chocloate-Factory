@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:cocoa_beans",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "item": "createchocolatefactory:cocoa_beans_roasted",
+      "count": 1
+    }
+  ],
+  "heatRequirement": "heated"
+}
