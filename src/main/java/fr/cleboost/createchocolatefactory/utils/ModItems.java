@@ -41,9 +41,11 @@ public class ModItems {
     public static final RegistryObject<Item> BARS = ITEMS.register("chocolate_bar",
             () -> new ChocolateProgressItem(new Item.Properties().food(ModFoods.CHOCOLATE_FAST).stacksTo(1), 3));
     public static final RegistryObject<Item> BUNNY = ITEMS.register("chocolate_bunny",
-            () -> new ChocolateItem(new Item.Properties().food(ModFoods.CHOCOLATE_FAST)));
+            () -> new ChocolateItem(new Item.Properties().food(ModFoods.CHOCOLATE_FAST).stacksTo(1)));
     public static final RegistryObject<Item> EGG = ITEMS.register("chocolate_egg",
-            () -> new ChocolateItem(new Item.Properties().food(ModFoods.CHOCOLATE_SLOW)));
+            () -> new ChocolateItem(new Item.Properties().food(ModFoods.CHOCOLATE_SLOW).stacksTo(1)));
+    public static final RegistryObject<Item> ROASTED_COCOA = ITEMS.register("cocoa_beans_roasted",
+            () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
