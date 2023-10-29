@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:cocoa_pod_closed"
+    },
+    {
+      "tag": "createchocolatefactory:machete_like"
+    }
+  ],
+  "results": [
+    {
+      "item": "createchocolatefactory:cocoa_pod_opened"
+    }
+  ]
+}
