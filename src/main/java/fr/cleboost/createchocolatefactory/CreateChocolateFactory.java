@@ -1,7 +1,6 @@
 package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
-import fr.cleboost.createchocolatefactory.item.BarItem;
 import fr.cleboost.createchocolatefactory.utils.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -9,11 +8,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -47,13 +44,14 @@ public class CreateChocolateFactory {
         public static void onClientSetup(FMLClientSetupEvent event) {
             ModItemProperties.addCustomItemProperties();
         }
+
         @SubscribeEvent
         public static void registerItemColors(RegisterColorHandlersEvent.@NotNull Item event) {
             CreateChocolateFactory.LOGGER.info("###########################");
             event.register(((pStack, pTintIndex) -> {
                 if (pTintIndex > 0) return -1;
                 return new Chocolate(pStack.getTag()).getColor();
-            }), ModItems.BARS.get());
+            }), ModItems.BARS.get(), ModItems.BUNNY.get(), ModItems.EGG.get());
         }
     }
 }
