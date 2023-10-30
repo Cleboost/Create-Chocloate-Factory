@@ -18,21 +18,25 @@ public class MintCropBlock extends CropBlock {
         super(pProperties);
     }
 
+    //Define the base seed of the crop
     @Override
     protected @NotNull ItemLike getBaseSeedId() {
         return ModItems.MINT_SEEDS.get();
     }
 
+    //Function for get age of the block (use only by Minecraft)
     @Override
     public @NotNull IntegerProperty getAgeProperty() {
         return AGE;
     }
 
+    //Function for get max age of the block (use only by Minecraft)
     @Override
     public int getMaxAge() {
         return MAX_AGE;
     }
 
+    //Create block state definition model state
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(AGE);

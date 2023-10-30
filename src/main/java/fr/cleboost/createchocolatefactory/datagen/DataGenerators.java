@@ -9,7 +9,6 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = CreateChocolateFactory.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -33,7 +32,6 @@ public class DataGenerators {
         //Langs generators :
         for (String lang : ConfigDataGenerator.langIndex) {
             generator.addProvider(event.includeServer(), new ModLangGenerator(packOutput, CreateChocolateFactory.MOD_ID, lang));
-
         }
     }
 }

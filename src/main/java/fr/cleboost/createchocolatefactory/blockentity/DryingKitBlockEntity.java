@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 
 public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEntity {
     private int tickCount = 0;
@@ -19,6 +20,7 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
         super(ModBlocksEntity.DRYING_KIT_ENTITY.get(), pPos, pBlockState);
     }
 
+    //Define time bonus/malus for the drying kit
     public void setTickToDry() {
         assert this.level != null;
         float multyplier = 1F;
@@ -30,12 +32,14 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
         this.tickToDry=Math.round(this.tickToDry/multyplier);
     }
 
+    //Enable the ticker
     public void setTickerEnable() {
         this.tickerEnable = true;
     }
 
+    //Load data from block entity when
     @Override
-    public void load(CompoundTag nbt) {
+    public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
         CompoundTag data = nbt.getCompound(CreateChocolateFactory.MOD_ID);
         this.tickCount = data.getInt("counter");
@@ -43,8 +47,9 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
         this.tickToDry = data.getInt("time");
     }
 
+    //Save data to block when map is saved
     @Override
-    protected void saveAdditional(CompoundTag nbt) {
+    protected void saveAdditional(@NotNull CompoundTag nbt) {
         super.saveAdditional(nbt);
         var data = new CompoundTag();
         data.putInt("counter", this.tickCount);
@@ -52,10 +57,7 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
         nbt.put(CreateChocolateFactory.MOD_ID, data);
     }
 
-    public boolean isTickerEnable() {
-        return this.tickerEnable;
-    }
-
+    //Add tick to block for change state
     @Override
     public void tick() {
         if (this.level == null || this.level.isClientSide() || !this.tickerEnable) return;
