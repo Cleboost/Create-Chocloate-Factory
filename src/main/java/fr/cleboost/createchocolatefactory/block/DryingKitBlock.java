@@ -1,13 +1,12 @@
 package fr.cleboost.createchocolatefactory.block;
 
-import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import fr.cleboost.createchocolatefactory.blockentity.DryingKitBlockEntity;
-import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
 import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
+import fr.cleboost.createchocolatefactory.utils.ModBlocks;
+import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
 import fr.cleboost.createchocolatefactory.utils.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -31,7 +30,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class DryingKitBlock extends Block implements EntityBlock {
 
