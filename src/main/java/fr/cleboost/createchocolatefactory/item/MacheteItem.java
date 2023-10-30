@@ -37,7 +37,6 @@ public class MacheteItem extends AxeItem {
         if (level.isClientSide) return super.useOn(pContext);
         BlockPos blockpos = pContext.getClickedPos();
         BlockState bs = level.getBlockState(blockpos);
-        CreateChocolateFactory.LOGGER.info(String.valueOf(bs.is(ModTags.Blocks.MACHETE_CLEANABLE)));
         if (bs.is(ModTags.Blocks.MACHETE_CLEANABLE)) {
             Player player = pContext.getPlayer();
             assert player != null;
