@@ -40,42 +40,49 @@ public class DryingKitBlock extends Block implements EntityBlock {
         registerDefaultState(this.defaultBlockState().setValue(STATE, State.EMPTY));
     }
 
+    //Define the hitbox of the block
     @Override
-    public @NotNull VoxelShape getShape(@NotNull BlockState p_154346_, @NotNull BlockGetter p_154347_, @NotNull BlockPos p_154348_, @NotNull CollisionContext p_154349_) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos p_154348_, @NotNull CollisionContext pContext) {
         return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
     }
 
+    //Define collision box (because the block get property of scaffolding)
     @Override
-    public VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, CollisionContext pContext) {
+    public @NotNull VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
         return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
     }
 
+    //Create the block entity when the block is placed
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pBlockState) {
         return ModBlocksEntity.DRYING_KIT_ENTITY.get().create(pPos, pBlockState);
     }
 
+    //Init ticker for block entity
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockEntityType<T> pBlockEntityType) {
         return TickableBlockEntity.getTickerHelper(pLevel);
     }
 
+    //Create blockstate
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
         pBuilder.add(STATE);
     }
 
+    //The block can only be placed on a solid block (2 functions)
     @Override
-    public boolean canSurvive(BlockState pState, LevelReader pLevelR, BlockPos pPos) {
+    public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevelR, BlockPos pPos) {
         return pLevelR.getBlockState(pPos.below()).isSolidRender(pLevelR, pPos.below());
     }
 
     @Override
-    public BlockState updateShape(BlockState p_152926_, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
-        return !p_152926_.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(p_152926_, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+    public @NotNull BlockState updateShape(BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
+        return !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
     }
 
+    //Define the 3 states of the block
     public enum State implements StringRepresentable {
         EMPTY("empty"),
         DRYING("drying"),
@@ -93,6 +100,8 @@ public class DryingKitBlock extends Block implements EntityBlock {
         }
     }
 
+    //When player right-click on the block, if the block is empty, the player can put 9 cocoa beans wet in the block, else,
+    // the block is drying so the player can take 9 cocoa beans dirty
     @Override
     public InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         if (pLevel.isClientSide() || pHand != InteractionHand.MAIN_HAND) return InteractionResult.PASS;
@@ -115,8 +124,12 @@ public class DryingKitBlock extends Block implements EntityBlock {
             ItemStack itemStack = pPlayer.getItemInHand(pHand);
             if (itemStack.isEmpty() || itemStack.is(ModItems.COCOA_BEANS_DIRTY.get())) {
                 if (itemStack.isEmpty()) {
-                    ItemStack cocoa_dirty = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9);
-                    pPlayer.setItemInHand(pHand, cocoa_dirty);
+                    //ItemStack cocoa_dirty = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9);
+                    //pPlayer.setItemInHand(pHand, cocoa_dirty);
+                    //Drop 9 cocoa beans dirty
+                    ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9);
+                    var itemsE = new ItemEntity(pLevel, pPos.getX() + 0.5D, pPos.getY() + 0.5D, pPos.getZ() + 0.5D, cocoas);
+                    pLevel.addFreshEntity(itemsE);
                 } else {
                     if (itemStack.getCount() + 9 > itemStack.getMaxStackSize()) return InteractionResult.PASS;
                     ItemStack cocoa_dirty = itemStack.copy();
@@ -132,6 +145,7 @@ public class DryingKitBlock extends Block implements EntityBlock {
         return InteractionResult.PASS;
     }
 
+    //Drop cocoa beans when the block is broken if the block is drying or dry
     @Override
     public void onRemove(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pNewState, boolean pIsMoving) {
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
