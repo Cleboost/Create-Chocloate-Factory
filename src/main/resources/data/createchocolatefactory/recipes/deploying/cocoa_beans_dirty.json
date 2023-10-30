@@ -10,7 +10,13 @@
   ],
   "results": [
     {
-      "item": "createchocolatefactory:cocoa_beans_wet"
-    } 
+      "item": "createchocolatefactory:cocoa_beans_wet",
+      "count": 5
+    },
+    {
+      "item": "createchocolatefactory:cocoa_beans_wet",
+      "count": 2,
+      "chance": 0.1
+    }
   ]
 }
