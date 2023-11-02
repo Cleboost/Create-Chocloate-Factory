@@ -21,5 +21,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider pProvider) {
         this.tag(ModTags.Items.MACHETE_LIKE)
                 .add(ModItems.MACHETE.get());
+        this.tag(ModTags.Items.CHOCOLATE)
+                .add(ModItems.EGG.get())
+                .add(ModItems.BUNNY.get())
+                .add(ModItems.BARS.get());
     }
 }

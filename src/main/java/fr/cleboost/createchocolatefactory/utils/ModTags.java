@@ -13,6 +13,7 @@ public class ModTags {
 
         public static final TagKey<Block> MACHETE_BREAKABLE = tag("machete_breakable");
         public static final TagKey<Block> MACHETE_CLEANABLE = tag("machete_cleanable");
+        public static final TagKey<Block> CHOCOLATE = tag("chocolate");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(CreateChocolateFactory.MOD_ID, name));
@@ -21,6 +22,7 @@ public class ModTags {
 
     public static class Items {
         public static final TagKey<Item> MACHETE_LIKE = tag("machete_like");
+        public static final TagKey<Item> CHOCOLATE = tag("chocolate");
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(CreateChocolateFactory.MOD_ID, name));
         }
