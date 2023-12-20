@@ -1,13 +1,13 @@
 package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.fluid.ModFluids;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import fr.cleboost.createchocolatefactory.item.utils.FuelItem;
 import fr.cleboost.createchocolatefactory.item.LogoItem;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -46,6 +46,10 @@ public class ModItems {
             () -> new ChocolateItem(new Item.Properties().food(ModFoods.CHOCOLATE_SLOW).stacksTo(1)));
     public static final RegistryObject<Item> ROASTED_COCOA = ITEMS.register("cocoa_beans_roasted",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> COCOA_BUTTER_BOWL = ITEMS.register("cocoa_butter_bowl",
+            () -> new BucketItem(ModFluids.SOURCE_SOAP_WATER,
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BOWL).food(ModFoods.COCOA_BUTTER)
+            ));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
