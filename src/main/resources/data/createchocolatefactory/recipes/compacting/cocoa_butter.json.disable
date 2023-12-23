@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:cocoa_beans_wet"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "createchocolatefactory:cocoa_butter_fluid",
+      "nbt": {},
+      "amount": 50
+    }
+  ]
+}

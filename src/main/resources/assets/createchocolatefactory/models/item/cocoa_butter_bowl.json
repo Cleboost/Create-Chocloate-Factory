@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "createchocolatefactory:item/cocoa_butter_bowl"
+    "layer0": "createchocolatefactory:item/cocoa_butter_bowl",
+    "layer1": "minecraft:item/bowl"
   }
 }

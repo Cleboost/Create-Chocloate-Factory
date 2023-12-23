@@ -34,7 +34,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> DRYING_KIT = registerBlock("drying_kit",
             () -> new DryingKitBlock(BlockBehaviour.Properties.copy(Blocks.SCAFFOLDING).noOcclusion().destroyTime(0.1F).speedFactor(0.9F).ignitedByLava()));
     public static final RegistryObject<LiquidBlock> COCOA_BUTTER_FLUID = BLOCKS.register("cocoa_butter_fluid",
-            () -> new LiquidBlock(ModFluids.SOURCE_SOAP_WATER, BlockBehaviour.Properties.copy(Blocks.WATER)));
+            () -> new LiquidBlock(ModFluids.SOURCE_COCOA_BUTTER, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

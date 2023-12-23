@@ -46,9 +46,9 @@ public class ModItems {
             () -> new ChocolateItem(new Item.Properties().food(ModFoods.CHOCOLATE_SLOW).stacksTo(1)));
     public static final RegistryObject<Item> ROASTED_COCOA = ITEMS.register("cocoa_beans_roasted",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> COCOA_BUTTER_BOWL = ITEMS.register("cocoa_butter_bowl",
-            () -> new BucketItem(ModFluids.SOURCE_SOAP_WATER,
-                    new Item.Properties().stacksTo(1).craftRemainder(Items.BOWL).food(ModFoods.COCOA_BUTTER)
+    public static final RegistryObject<Item> COCOA_BUTTER_BUCKET = ITEMS.register("cocoa_butter_bucket",
+            () -> new BucketItem(ModFluids.SOURCE_COCOA_BUTTER,
+                    new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)
             ));
 
     public static void register(IEventBus eventBus) {

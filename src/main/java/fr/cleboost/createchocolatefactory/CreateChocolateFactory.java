@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
+import fr.cleboost.createchocolatefactory.fluid.ModFluidTypes;
 import fr.cleboost.createchocolatefactory.fluid.ModFluids;
 import fr.cleboost.createchocolatefactory.utils.*;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -31,6 +32,9 @@ public class CreateChocolateFactory {
         ModBlocks.register(modEventBus);
         ModBlocksEntity.register(modEventBus);
 
+        ModFluids.register(modEventBus);
+        ModFluidTypes.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -46,8 +50,8 @@ public class CreateChocolateFactory {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             ModItemProperties.addCustomItemProperties();
-            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_SOAP_WATER.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_SOAP_WATER.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_COCOA_BUTTER.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_COCOA_BUTTER.get(), RenderType.translucent());
         }
 
         @SubscribeEvent
