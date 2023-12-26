@@ -17,6 +17,7 @@ public class ConfigDataGenerator {
 
         excludesBlocksGenerate.add(ModBlocks.MINT_CROP);
         excludesBlocksGenerate.add(ModBlocks.DRYING_KIT);
+        excludesBlocksGenerate.add(ModBlocks.CHOCOLATE_BASIN);
 
     }
 
