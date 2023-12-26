@@ -15,7 +15,7 @@ public class ModFluids {
     public static final DeferredRegister<Fluid> FLUIDS =
             DeferredRegister.create(ForgeRegistries.FLUIDS, CreateChocolateFactory.MOD_ID);
 
-    public static final RegistryObject<FlowingFluid> SOURCE_COCOA_BUTTER = FLUIDS.register("source_cocoa_butter",
+    public static final RegistryObject<FlowingFluid> SOURCE_COCOA_BUTTER = FLUIDS.register("cocoa_butter",
             () -> new ForgeFlowingFluid.Source(ModFluids.COCOA_BUTTER_FLUID_PROPERTIES));
     public static final RegistryObject<FlowingFluid> FLOWING_COCOA_BUTTER = FLUIDS.register("flowing_cocoa_butter",
             () -> new ForgeFlowingFluid.Flowing(ModFluids.COCOA_BUTTER_FLUID_PROPERTIES));

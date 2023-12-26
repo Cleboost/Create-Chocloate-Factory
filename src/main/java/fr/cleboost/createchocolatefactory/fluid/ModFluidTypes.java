@@ -1,5 +1,6 @@
 package fr.cleboost.createchocolatefactory.fluid;
 
+import net.minecraft.world.level.material.Fluids;
 import org.joml.Vector3f;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import net.minecraft.resources.ResourceLocation;
@@ -7,6 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.common.SoundAction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.fluids.FluidType.Properties.*;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -20,7 +22,7 @@ public class ModFluidTypes {
             DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, CreateChocolateFactory.MOD_ID);
 
     public static final RegistryObject<FluidType> COCOA_BUTTER_FLUID_TYPE = register("cocoa_butter_fluid",
-            FluidType.Properties.create().lightLevel(2).density(15).viscosity(15).sound(SoundAction.get("drink"),
+            FluidType.Properties.create().motionScale(0.001F).canDrown(true).lightLevel(15).density(1).viscosity(1).temperature(10).sound(SoundAction.get("drink"),
                     SoundEvents.HONEY_DRINK));
 
 

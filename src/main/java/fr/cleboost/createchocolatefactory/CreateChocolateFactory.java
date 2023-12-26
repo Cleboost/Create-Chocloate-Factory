@@ -32,8 +32,8 @@ public class CreateChocolateFactory {
         ModBlocks.register(modEventBus);
         ModBlocksEntity.register(modEventBus);
 
-        ModFluids.register(modEventBus);
         ModFluidTypes.register(modEventBus);
+        ModFluids.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
