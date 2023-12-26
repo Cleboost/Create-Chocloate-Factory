@@ -1,7 +1,11 @@
 package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
+import fr.cleboost.createchocolatefactory.fluid.ModFluidTypes;
+import fr.cleboost.createchocolatefactory.fluid.ModFluids;
 import fr.cleboost.createchocolatefactory.utils.*;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,6 +32,9 @@ public class CreateChocolateFactory {
         ModBlocks.register(modEventBus);
         ModBlocksEntity.register(modEventBus);
 
+        ModFluidTypes.register(modEventBus);
+        ModFluids.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -43,11 +50,13 @@ public class CreateChocolateFactory {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             ModItemProperties.addCustomItemProperties();
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_COCOA_BUTTER.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_COCOA_BUTTER.get(), RenderType.translucent());
         }
 
         @SubscribeEvent
         public static void registerItemColors(RegisterColorHandlersEvent.@NotNull Item event) {
-            CreateChocolateFactory.LOGGER.info("###########################");
+            //CreateChocolateFactory.LOGGER.info("###########################");
             event.register(((pStack, pTintIndex) -> {
                 if (pTintIndex > 0) return -1;
                 return new Chocolate(pStack.getTag()).getColor();
