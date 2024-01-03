@@ -12,6 +12,7 @@ public class FuelItem extends Item {
         super(pProperties);
         this.burnTime = burnTime;
     }
+
     @Override
     public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
         return this.burnTime;

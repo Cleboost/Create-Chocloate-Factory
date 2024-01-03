@@ -15,12 +15,11 @@ public class ModFluids {
     public static final DeferredRegister<Fluid> FLUIDS =
             DeferredRegister.create(ForgeRegistries.FLUIDS, CreateChocolateFactory.MOD_ID);
 
+    //Cocoa Butter Fluid
     public static final RegistryObject<FlowingFluid> SOURCE_COCOA_BUTTER = FLUIDS.register("cocoa_butter",
             () -> new ForgeFlowingFluid.Source(ModFluids.COCOA_BUTTER_FLUID_PROPERTIES));
     public static final RegistryObject<FlowingFluid> FLOWING_COCOA_BUTTER = FLUIDS.register("flowing_cocoa_butter",
             () -> new ForgeFlowingFluid.Flowing(ModFluids.COCOA_BUTTER_FLUID_PROPERTIES));
-
-
     public static final ForgeFlowingFluid.Properties COCOA_BUTTER_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
             ModFluidTypes.COCOA_BUTTER_FLUID_TYPE, SOURCE_COCOA_BUTTER, FLOWING_COCOA_BUTTER)
             .slopeFindDistance(4).levelDecreasePerBlock(3).block(ModBlocks.COCOA_BUTTER_FLUID)

@@ -1,7 +1,9 @@
 package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.entity.custom.ModBoatEntity;
 import fr.cleboost.createchocolatefactory.fluid.ModFluids;
+import fr.cleboost.createchocolatefactory.item.ModBoatItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import fr.cleboost.createchocolatefactory.item.utils.FuelItem;
@@ -50,6 +52,11 @@ public class ModItems {
             () -> new BucketItem(ModFluids.SOURCE_COCOA_BUTTER,
                     new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)
             ));
+
+    public static final RegistryObject<Item> PINE_BOAT = ITEMS.register("pine_boat",
+            () -> new ModBoatItem(false, ModBoatEntity.Type.PINE, new Item.Properties()));
+    public static final RegistryObject<Item> PINE_CHEST_BOAT = ITEMS.register("pine_chest_boat",
+            () -> new ModBoatItem(true, ModBoatEntity.Type.PINE, new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
