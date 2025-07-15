@@ -10,6 +10,7 @@
     "item.createchocolatefactory.orange_juice": "Orange Juice",
     "item.createchocolatefactory.machete": "Machete",
     "item.createchocolatefactory.cocoa_bark": "Cocoa Bark",
+    "item.createchocolatefactory.logo": "CCF Logo",
     "block.createchocolatefactory.cocoa_pod": "Cocoa Pod",
     "tooltip.createchocolatefactory.cocoa_pod": "Right click with a machete to open the pod and get cocoa bark & damp cocoa beans"
 }
