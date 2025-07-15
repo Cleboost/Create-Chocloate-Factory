@@ -1,11 +1,17 @@
 {
+    "itemGroup.createchocolatefactory.createchocolatefactory_tab": "Create Chocolate Factory",
     "item.createchocolatefactory.cocoa_beans_dirty": "Fève de cacao sale",
     "item.createchocolatefactory.cocoa_beans_wet": "Wet Cocoa Beans",
-    "item.createchocolatefactory.cocoa_beans_roasted": "Roasted Cocoa Beans",
+    "item.createchocolatefactory.cocoa_beans_roasted": "Fève de cacao torréfié",
     "item.createchocolatefactory.mint_leaf": "Feuille de menthe",
-    "item.createchocolatefactory.mint_seeds": "Mint Seeds",
+    "item.createchocolatefactory.mint_seeds": "Graine de menthe",
     "item.createchocolatefactory.orange": "Orange",
-    "item.createchocolatefactory.orange_wedge": "Orange Wedge",
-    "item.createchocolatefactory.orange_juice": "Orange Juice",
-    "item.createchocolatefactory.machete": "Machette"
+    "item.createchocolatefactory.orange_wedge": "Quartier d'orange",
+    "item.createchocolatefactory.orange_juice": "Jus d'orange",
+    "item.createchocolatefactory.machete": "Machette",
+    "item.createchocolatefactory.cocoa_bark": "Épluchure de cabosse",
+    "item.createchocolatefactory.logo": "CCF Logo",
+    "block.createchocolatefactory.cocoa_pod": "Fève de cacao",
+    "block.createchocolatefactory.drying_kit": "Drying Kit",
+    "tooltip.createchocolatefactory.cocoa_pod": "Clique droit avec une machette pour ouvrir la fève de cacao et obtient de l'écorce de cacao et de la fève de cacao humide"
 }
