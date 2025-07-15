@@ -2,6 +2,7 @@ package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.CocoaPod;
+import fr.cleboost.createchocolatefactory.items.CocoaPodItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -36,6 +37,11 @@ public class ModBlocks {
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<Block> block) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        if (name.equals("cocoa_pod")) {
+            ModItems.ITEMS.register(name, () -> new CocoaPodItem(new Item.Properties()));
+        } else {
+            ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        }
     }
 
     public static void register(IEventBus eventBus) {
