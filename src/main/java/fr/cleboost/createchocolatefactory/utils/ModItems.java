@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.items.utils.FuelItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -38,6 +39,9 @@ public class ModItems {
 
     public static final DeferredItem<Item> ORANGE_WEDGE = ITEMS.register("orange_wedge",
             () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> COCOA_BARK = ITEMS.register("cocoa_bark",
+            () -> new FuelItem(new Item.Properties(), 100));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

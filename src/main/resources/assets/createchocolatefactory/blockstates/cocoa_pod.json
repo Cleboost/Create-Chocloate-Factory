@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "opened=false": {
+      "model": "createchocolatefactory:block/cocoa_pod/cocoa_pod_closed"
+    },
+    "opened=true": {
+      "model": "createchocolatefactory:block/cocoa_pod/cocoa_pod_opened"
+    }
+  }
+}

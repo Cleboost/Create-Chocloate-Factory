@@ -12,7 +12,7 @@ public class ConfigDataGenerator {
     static final ArrayList<Holder<Block>> excludesBlocksGenerate = new ArrayList<>();
 
     static {
-        excludesBlocksGenerate.add(ModBlocks.COCOA_POD_CLOSED);
+        excludesBlocksGenerate.add(ModBlocks.COCOA_POD);
     }
 
     static final ArrayList<Holder<Item>> excludesItemsGenerate = new ArrayList<>();

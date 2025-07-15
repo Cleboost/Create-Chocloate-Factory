@@ -1,0 +1,81 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"0": "createchocolatefactory:block/drying_kit_general",
+		"particle": "createchocolatefactory:block/drying_kit_general"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 3, 3],
+			"faces": {
+				"north": {"uv": [0, 13, 16, 16], "texture": "#0"},
+				"east": {"uv": [13, 10, 16, 13], "texture": "#0"},
+				"south": {"uv": [0, 13, 16, 16], "texture": "#0"},
+				"west": {"uv": [13, 10, 16, 13], "texture": "#0"},
+				"up": {"uv": [0, 13, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 13, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 0, 13],
+			"to": [16, 3, 16],
+			"faces": {
+				"north": {"uv": [0, 13, 16, 16], "texture": "#0"},
+				"east": {"uv": [13, 10, 16, 13], "texture": "#0"},
+				"south": {"uv": [0, 13, 16, 16], "texture": "#0"},
+				"west": {"uv": [13, 10, 16, 13], "texture": "#0"},
+				"up": {"uv": [0, 13, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 13, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 0, 3],
+			"to": [3, 3, 13],
+			"faces": {
+				"north": {"uv": [13, 10, 16, 13], "texture": "#0"},
+				"east": {"uv": [13, 0, 16, 10], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [13, 10, 16, 13], "texture": "#0"},
+				"west": {"uv": [13, 0, 16, 10], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [13, 0, 16, 10], "texture": "#0"},
+				"down": {"uv": [13, 0, 16, 10], "texture": "#0"}
+			}
+		},
+		{
+			"from": [13, 0, 3],
+			"to": [16, 3, 13],
+			"faces": {
+				"north": {"uv": [13, 10, 16, 13], "texture": "#0"},
+				"east": {"uv": [13, 0, 16, 10], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [13, 10, 16, 13], "texture": "#0"},
+				"west": {"uv": [13, 0, 16, 10], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [13, 0, 16, 10], "texture": "#0"},
+				"down": {"uv": [13, 0, 16, 10], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 2, 3],
+			"to": [13, 2, 13],
+			"faces": {
+				"north": {"uv": [0, 0, 10, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 10, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 10, 0], "texture": "#0"},
+				"west": {"uv": [0, 0, 10, 0], "texture": "#0"},
+				"up": {"uv": [0, 0, 10, 10], "texture": "#0"},
+				"down": {"uv": [0, 0, 10, 10], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 20, 0],
+			"translation": [0, 4, 0],
+			"scale": [0.78, 0.78, 0.78]
+		},
+		"fixed": {
+			"rotation": [-90, 0, 0],
+			"translation": [0, 0, -5.25]
+		}
+	}
+}
