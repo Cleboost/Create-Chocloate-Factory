@@ -12,5 +12,6 @@
     "item.createchocolatefactory.cocoa_bark": "Kakaoernte",
     "item.createchocolatefactory.logo": "CCF Logo",
     "block.createchocolatefactory.cocoa_pod": "Kakaoschote",
+    "block.createchocolatefactory.drying_kit": "Drying Kit",
     "tooltip.createchocolatefactory.cocoa_pod": "Rechtsklick mit der Machete um die Schote zu öffnen und Kakaoernte sowie feuchte Kakaobohnen zu erhalten"
 }
