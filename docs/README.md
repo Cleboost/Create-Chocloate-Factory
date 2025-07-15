@@ -1,6 +1,0 @@
----
-description: In writing
----
-
-# Installation
-
