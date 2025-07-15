@@ -1,4 +1,5 @@
 {
+    "itemGroup.createchocolatefactory.createchocolatefactory_tab": "Create Chocolate Factory",
     "item.createchocolatefactory.cocoa_beans_dirty": "Dirty Cocoa Beans",
     "item.createchocolatefactory.cocoa_beans_wet": "Damp Cocoa Beans",
     "item.createchocolatefactory.cocoa_beans_roasted": "Roasted Cocoa Beans",
@@ -9,6 +10,6 @@
     "item.createchocolatefactory.orange_juice": "Orange Juice",
     "item.createchocolatefactory.machete": "Machete",
     "item.createchocolatefactory.cocoa_bark": "Cocoa Bark",
-    "tooltip.createchocolatefactory.cocoa_pod_closed": "Right click with a machete to open the pod and get cocoa bark",
-    "tooltip.createchocolatefactory.cocoa_pod_opened": "Right click with a machete to close the pod and get cocoa bark"
+    "block.createchocolatefactory.cocoa_pod": "Cocoa Pod",
+    "tooltip.createchocolatefactory.cocoa_pod": "Right click with a machete to open the pod and get cocoa bark & damp cocoa beans"
 }
