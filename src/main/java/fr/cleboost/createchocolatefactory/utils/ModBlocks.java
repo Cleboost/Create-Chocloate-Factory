@@ -2,6 +2,7 @@ package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.CocoaPod;
+import fr.cleboost.createchocolatefactory.block.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.items.CocoaPodItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -24,8 +25,8 @@ public class ModBlocks {
         () -> new CocoaPod(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO).ignitedByLava()));
     // public static final RegistryObject<Block> MINT_CROP = BLOCKS.register("mint_crop",
     //         () -> new MintCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion().noCollission()));
-    // public static final RegistryObject<Block> DRYING_KIT = registerBlock("drying_kit",
-    //         () -> new DryingKitBlock(BlockBehaviour.Properties.copy(Blocks.SCAFFOLDING).noOcclusion().destroyTime(0.1F).speedFactor(0.9F).ignitedByLava()));
+    public static final DeferredBlock<Block> DRYING_KIT = registerBlock("drying_kit",
+            () -> new DryingKitBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SCAFFOLDING).noOcclusion().destroyTime(0.1F).speedFactor(0.9F).ignitedByLava()));
     // public static final RegistryObject<LiquidBlock> COCOA_BUTTER_FLUID = BLOCKS.register("source_cocoa_butter",
     //         () -> new LiquidBlock(ModFluids.SOURCE_COCOA_BUTTER, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
@@ -36,7 +37,6 @@ public class ModBlocks {
     }
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<Block> block) {
-        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
         if (name.equals("cocoa_pod")) {
             ModItems.ITEMS.register(name, () -> new CocoaPodItem(new Item.Properties()));
         } else {
