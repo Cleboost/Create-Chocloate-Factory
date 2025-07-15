@@ -17,7 +17,7 @@ public class ModTab {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATE_CHOCOLATE_FACTORY_TAB = CREATIVE_MODE_TABS.register("createchocolatefactory_tab",
         () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(ModItems.LOGO.get()))
-            .title(Component.translatable("item_group.createchocolatefactory.tab"))
+            .title(Component.translatable("itemGroup.createchocolatefactory.createchocolatefactory_tab"))
             .displayItems((pParameters, pOutput) -> {
                 pOutput.accept(ModItems.LOGO.get());
                 for (DeferredHolder<Item, ? extends Item> item : ModItems.ITEMS.getEntries()) {
