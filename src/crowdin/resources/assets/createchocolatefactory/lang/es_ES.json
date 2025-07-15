@@ -13,5 +13,6 @@
     "item.createchocolatefactory.logo": "CCF Logo",
     "block.createchocolatefactory.cocoa_pod": "Vaina de cacao",
     "block.createchocolatefactory.drying_kit": "Drying Kit",
-    "tooltip.createchocolatefactory.cocoa_pod": "Haz clic derecho con el machete para abrir la vaina y obtener corteza de cacao y granos de cacao húmedos"
+    "tooltip.createchocolatefactory.cocoa_pod": "Haz clic derecho con el machete para abrir la vaina y obtener corteza de cacao y granos de cacao húmedos",
+    "tooltip.createchocolatefactory.machete": "Right click on a leaf block to break it and the block below it"
 }
