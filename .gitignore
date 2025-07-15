@@ -2,3 +2,4 @@
 build/
 run/
 .cache
+.vscode/settings.json
