@@ -1,7 +1,7 @@
 {
     "itemGroup.createchocolatefactory.createchocolatefactory_tab": "Create Chocolate Factory",
-    "item.createchocolatefactory.cocoa_beans_dirty": "Dirty Cocoa Beans",
-    "item.createchocolatefactory.cocoa_beans_wet": "Wet Cocoa Beans",
+    "item.createchocolatefactory.cocoa_beans_dirty": "Granos de cacao sucios",
+    "item.createchocolatefactory.cocoa_beans_wet": "Granos de cacao húmedos",
     "item.createchocolatefactory.cocoa_beans_roasted": "Roasted Cocoa Beans",
     "item.createchocolatefactory.mint_leaf": "Mint Leaf",
     "item.createchocolatefactory.mint_seeds": "Mint Seeds",
@@ -9,7 +9,8 @@
     "item.createchocolatefactory.orange_wedge": "Orange Wedge",
     "item.createchocolatefactory.orange_juice": "Orange Juice",
     "item.createchocolatefactory.machete": "Machete",
-    "item.createchocolatefactory.cocoa_bark": "Cocoa Bark",
-    "block.createchocolatefactory.cocoa_pod": "Cocoa Pod",
+    "item.createchocolatefactory.cocoa_bark": "Corteza de cacao",
+    "item.createchocolatefactory.logo": "CCF Logo",
+    "block.createchocolatefactory.cocoa_pod": "Vaina de cacao",
     "tooltip.createchocolatefactory.cocoa_pod": "Right click with a machete to open the pod and get cocoa bark & damp cocoa beans"
 }
