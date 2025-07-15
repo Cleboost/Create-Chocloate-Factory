@@ -1,11 +1,14 @@
 {
     "item.createchocolatefactory.cocoa_beans_dirty": "Fève de cacao sale",
-    "item.createchocolatefactory.cocoa_beans_wet": "Fève de cacao humide",
+    "item.createchocolatefactory.cocoa_beans_wet": "Damp Cocoa Beans",
     "item.createchocolatefactory.cocoa_beans_roasted": "Fève de cacao torréfié",
     "item.createchocolatefactory.mint_leaf": "Feuille de menthe",
     "item.createchocolatefactory.mint_seeds": "Graine de menthe",
     "item.createchocolatefactory.orange": "Orange",
     "item.createchocolatefactory.orange_wedge": "Quartier d'orange",
     "item.createchocolatefactory.orange_juice": "Jus d'orange",
-    "item.createchocolatefactory.machete": "Machette"
+    "item.createchocolatefactory.machete": "Machette",
+    "item.createchocolatefactory.cocoa_bark": "Cocoa Bark",
+    "tooltip.createchocolatefactory.cocoa_pod_closed": "Right click with a machete to open the pod and get cocoa bark",
+    "tooltip.createchocolatefactory.cocoa_pod_opened": "Right click with a machete to close the pod and get cocoa bark"
 }
