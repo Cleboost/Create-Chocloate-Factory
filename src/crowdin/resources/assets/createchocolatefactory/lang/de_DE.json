@@ -4,12 +4,13 @@
     "item.createchocolatefactory.cocoa_beans_wet": "Feuchte Kakaobohnen",
     "item.createchocolatefactory.cocoa_beans_roasted": "Geröstete Kakaobohnen",
     "item.createchocolatefactory.mint_leaf": "Minzblatt",
-    "item.createchocolatefactory.mint_seeds": "Minzsamen",
+    "item.createchocolatefactory.mint_seeds": "Minz-Saatgut",
     "item.createchocolatefactory.orange": "Orange",
     "item.createchocolatefactory.orange_wedge": "Orangenscheiben",
     "item.createchocolatefactory.orange_juice": "Orangensaft",
     "item.createchocolatefactory.machete": "Machete",
     "item.createchocolatefactory.cocoa_bark": "Kakaoernte",
-    "block.createchocolatefactory.cocoa_pod": "Cocoa Pod",
-    "tooltip.createchocolatefactory.cocoa_pod": "Right click with a machete to open the pod and get cocoa bark & damp cocoa beans"
+    "item.createchocolatefactory.logo": "CCF Logo",
+    "block.createchocolatefactory.cocoa_pod": "Kakaoschote",
+    "tooltip.createchocolatefactory.cocoa_pod": "Rechtsklick mit der Machete um die Schote zu öffnen und Kakaoernte sowie feuchte Kakaobohnen zu erhalten"
 }
