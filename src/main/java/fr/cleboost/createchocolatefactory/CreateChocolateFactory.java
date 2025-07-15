@@ -2,6 +2,7 @@ package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
 
+import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import fr.cleboost.createchocolatefactory.utils.ModItems;
 import fr.cleboost.createchocolatefactory.utils.ModTab;
 import net.neoforged.bus.api.IEventBus;
@@ -16,5 +17,6 @@ public class CreateChocolateFactory {
     public CreateChocolateFactory(IEventBus modEventBus) {
         ModTab.register(modEventBus);
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
     }
 }
