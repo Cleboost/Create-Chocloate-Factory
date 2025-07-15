@@ -1,7 +1,7 @@
 package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.cocoa.CocoaClosedPod;
+import fr.cleboost.createchocolatefactory.block.CocoaPod;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,8 +19,8 @@ public class ModBlocks {
 
     // public static final RegistryObject<Block> COCOA_POD_OPENED = registerBlock("cocoa_pod_opened",
     //     () -> new CocoaOpenedPod(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO).ignitedByLava()));
-    public static final DeferredBlock<Block> COCOA_POD_CLOSED = registerBlock("cocoa_pod_closed",
-        () -> new CocoaClosedPod(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO).ignitedByLava()));
+    public static final DeferredBlock<Block> COCOA_POD = registerBlock("cocoa_pod",
+        () -> new CocoaPod(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).destroyTime(0.1F).sound(SoundType.BAMBOO).ignitedByLava()));
     // public static final RegistryObject<Block> MINT_CROP = BLOCKS.register("mint_crop",
     //         () -> new MintCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion().noCollission()));
     // public static final RegistryObject<Block> DRYING_KIT = registerBlock("drying_kit",

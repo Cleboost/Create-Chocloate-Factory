@@ -23,8 +23,12 @@ public class ModItemModelProvider extends ItemModelProvider {
                 continue;
             }
             ResourceLocation id = item.unwrapKey().orElseThrow().location();
-            if (ModBlocks.BLOCKS.getEntries().stream().anyMatch(block ->
-                    block.getId().equals(id))) {
+            if (ModBlocks.BLOCKS.getEntries().stream().anyMatch(block -> block.getId().equals(id))) {
+                if (ModBlocks.BLOCKS.getEntries().stream()
+                        .filter(block -> block.getId().equals(id))
+                        .anyMatch(block -> ConfigDataGenerator.excludesBlocksGenerate.contains(block))) {
+                    continue;
+                }
                 blockItem(item);
             } else {
                 simpleItem(item);
