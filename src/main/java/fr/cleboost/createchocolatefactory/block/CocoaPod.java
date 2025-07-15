@@ -47,7 +47,7 @@ public class CocoaPod extends Block {
     }
 
     public void appendHoverText(@NotNull ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, @NotNull TooltipFlag flag) {
-        tooltip.add(Component.translatable("tooltip.createchocolatefactory.cocoa_pod_closed"));
+        tooltip.add(Component.translatable("tooltip.createchocolatefactory.cocoa_pod"));
     }
 
     @Override
@@ -66,6 +66,7 @@ public class CocoaPod extends Block {
             if (!level.isClientSide() && player.getItemInHand(hand).is(ModItems.MACHETE.get())) {
                 Block.popResource(level, pos, new ItemStack(ModItems.COCOA_BARK.get(), level.random.nextInt(1, 4)));
                 if (state.getValue(OPENED)) {
+                    Block.popResource(level, pos, new ItemStack(ModItems.COCOA_BEANS_WET.get(), 1));
                     level.destroyBlock(pos, false);
                 } else {
                     level.setBlockAndUpdate(pos, state.setValue(OPENED, true));
