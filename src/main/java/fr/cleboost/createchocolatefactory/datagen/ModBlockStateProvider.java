@@ -16,16 +16,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        for (DeferredHolder<Block, ? extends Block> blockRegistryObject : ModBlocks.BLOCKS.getEntries()) {
-            if (ConfigDataGenerator.excludesBlocksGenerate.contains(blockRegistryObject)) {
+        for (DeferredHolder<Block, ? extends Block> blockHolder : ModBlocks.BLOCKS.getEntries()) {
+            if (ConfigDataGenerator.excludesBlocksGenerate.contains(blockHolder)) {
                 continue;
             }
-            blockWithItem(blockRegistryObject);
+            blockWithItem(blockHolder);
         }
-
     }
 
-    private void blockWithItem(DeferredHolder<Block, ? extends Block> blockRegistryObject) {
-        simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    private void blockWithItem(DeferredHolder<Block, ? extends Block> blockHolder) {
+        simpleBlockWithItem(blockHolder.get(), cubeAll(blockHolder.get()));
     }
 }
