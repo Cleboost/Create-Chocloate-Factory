@@ -13,5 +13,6 @@
     "item.createchocolatefactory.logo": "CCF Logo",
     "block.createchocolatefactory.cocoa_pod": "Kakaoschote",
     "block.createchocolatefactory.drying_kit": "Drying Kit",
-    "tooltip.createchocolatefactory.cocoa_pod": "Rechtsklick mit der Machete um die Schote zu öffnen und Kakaoernte sowie feuchte Kakaobohnen zu erhalten"
+    "tooltip.createchocolatefactory.cocoa_pod": "Rechtsklick mit der Machete um die Schote zu öffnen und Kakaoernte sowie feuchte Kakaobohnen zu erhalten",
+    "tooltip.createchocolatefactory.machete": "Right click on a leaf block to break it and the block below it"
 }
