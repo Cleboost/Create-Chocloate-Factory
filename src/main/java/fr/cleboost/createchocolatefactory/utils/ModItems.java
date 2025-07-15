@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.items.MacheteItem;
 import fr.cleboost.createchocolatefactory.items.utils.FuelItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -23,7 +24,7 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> MACHETE = ITEMS.register("machete",
-            () -> new Item(new Item.Properties()));
+            () -> new MacheteItem(new Item.Properties()));
 
     public static final DeferredItem<Item> MINT_LEAF = ITEMS.register("mint_leaf",
             () -> new Item(new Item.Properties()));

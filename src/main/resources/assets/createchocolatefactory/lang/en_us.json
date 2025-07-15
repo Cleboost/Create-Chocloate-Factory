@@ -13,5 +13,6 @@
     "item.createchocolatefactory.logo": "CCF Logo",
     "block.createchocolatefactory.cocoa_pod": "Cocoa Pod",
     "block.createchocolatefactory.drying_kit": "Drying Kit",
-    "tooltip.createchocolatefactory.cocoa_pod": "Right click with a machete to open the pod and get cocoa bark & damp cocoa beans"
+    "tooltip.createchocolatefactory.cocoa_pod": "Right click with a machete to open the pod and get cocoa bark & damp cocoa beans",
+    "tooltip.createchocolatefactory.machete": "Right click on a leaf block to break it and the block below it"
 }
