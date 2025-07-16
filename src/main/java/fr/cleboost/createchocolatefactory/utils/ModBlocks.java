@@ -3,7 +3,7 @@ package fr.cleboost.createchocolatefactory.utils;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.CocoaPod;
 import fr.cleboost.createchocolatefactory.block.DryingKitBlock;
-import fr.cleboost.createchocolatefactory.items.CocoaPodItem;
+import fr.cleboost.createchocolatefactory.item.CocoaPodItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

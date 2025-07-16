@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.items.utils;
+package fr.cleboost.createchocolatefactory.item.utils;
 
 import org.jetbrains.annotations.NotNull;
 

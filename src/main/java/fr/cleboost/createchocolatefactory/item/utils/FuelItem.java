@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.items.utils;
+package fr.cleboost.createchocolatefactory.item.utils;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

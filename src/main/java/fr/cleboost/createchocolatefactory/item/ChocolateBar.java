@@ -1,6 +1,6 @@
-package fr.cleboost.createchocolatefactory.items;
+package fr.cleboost.createchocolatefactory.item;
 
-import fr.cleboost.createchocolatefactory.items.utils.ChocolateProgressItem;
+import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 
 public class ChocolateBar extends ChocolateProgressItem {
     public ChocolateBar(Properties properties) {
