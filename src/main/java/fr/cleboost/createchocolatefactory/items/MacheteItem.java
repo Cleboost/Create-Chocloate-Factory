@@ -42,22 +42,17 @@ public class MacheteItem extends Item {
         BlockPos blockpos = pContext.getClickedPos();
         BlockState bs = level.getBlockState(blockpos);
         
-        // Vérifier si c'est un bloc de feuilles
         if (bs.getBlock() instanceof LeavesBlock) {
             Player player = pContext.getPlayer();
             if (player != null) {
-                // Casser le bloc de feuilles
                 level.destroyBlock(blockpos, true);
                 
-                // Casser le bloc juste en dessous (zone 1x2)
                 BlockState bsBelow = level.getBlockState(blockpos.below());
                 if (!bsBelow.isAir() && bsBelow.getDestroySpeed(level, blockpos.below()) >= 0) {
                     level.destroyBlock(blockpos.below(), true);
-                    // Consommer de la durabilité pour le bloc en dessous
                     pContext.getItemInHand().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
                 
-                // Consommer de la durabilité pour le bloc de feuilles
                 pContext.getItemInHand().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 
                 return InteractionResult.SUCCESS;
