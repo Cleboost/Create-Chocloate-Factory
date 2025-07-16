@@ -13,6 +13,7 @@ public class ConfigDataGenerator {
 
     static {
         excludesBlocksGenerate.add(ModBlocks.COCOA_POD);
+        excludesBlocksGenerate.add(ModBlocks.DRYING_KIT);
     }
 
     static final ArrayList<Holder<Item>> excludesItemsGenerate = new ArrayList<>();
@@ -20,6 +21,7 @@ public class ConfigDataGenerator {
     static {
         excludesItemsGenerate.add(ModItems.MACHETE);
         excludesItemsGenerate.add(ModItems.LOGO);
+        excludesItemsGenerate.add(ModItems.CHOCOLATE_BAR);
     }
 
     static final ArrayList<String> langIndex = new ArrayList<>();
