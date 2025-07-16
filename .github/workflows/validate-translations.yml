@@ -1,10 +1,9 @@
 name: Validate Translations
 
 on:
-  pull_request:
-    paths:
-      - 'src/crowdin/**/*.json'
-      - 'src/main/resources/assets/createchocolatefactory/lang/*.json'
+  workflow_dispatch:
+  push:
+    branches: l10n_crowdin_translations
 
 jobs:
   validate-translations:
