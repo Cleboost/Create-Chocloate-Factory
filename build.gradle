@@ -10,6 +10,9 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+    maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
+    maven { url "https://maven.createmod.net" }
+    maven { url "https://maven.ithundxr.dev/snapshots" }
 }
 
 base {
@@ -68,6 +71,11 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 sourceSets.main.resources { srcDir 'src/crowdin/resources' }
 
 dependencies {
+    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
+    implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
+    runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
+    implementation("com.tterrag.registrate:Registrate:${registrate_version}")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
@@ -98,9 +106,7 @@ publishing {
         }
     }
     repositories {
-        maven {
-            url "file://${project.projectDir}/repo"
-        }
+        maven { url "file://${project.projectDir}/repo" }
     }
 }
 

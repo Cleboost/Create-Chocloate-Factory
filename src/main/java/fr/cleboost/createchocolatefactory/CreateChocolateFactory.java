@@ -2,6 +2,7 @@ package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
 
+import fr.cleboost.createchocolatefactory.registry.PonderRegister;
 import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
 import fr.cleboost.createchocolatefactory.utils.ModDataComponents;
