@@ -16,12 +16,18 @@ env:
 jobs:
   crowdin-sync:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      actions: read
+      id-token: write
+      checks: write
+
+      
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Crowdin Action
         uses: crowdin/github-action@v2
