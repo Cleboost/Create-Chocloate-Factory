@@ -1,0 +1,7 @@
+{
+  "parent": "createchocolatefactory:item/chocolate_bar",
+  "textures": {
+    "layer0": "createchocolatefactory:item/bar/bar2",
+    "layer1": "createchocolatefactory:item/bar/bar_paper"
+  }
+}
