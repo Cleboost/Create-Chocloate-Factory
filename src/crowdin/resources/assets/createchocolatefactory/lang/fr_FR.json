@@ -14,5 +14,5 @@
     "block.createchocolatefactory.cocoa_pod": "Fève de cacao",
     "block.createchocolatefactory.drying_kit": "Kit de séchage",
     "tooltip.createchocolatefactory.cocoa_pod": "Clique droit avec une machette pour ouvrir la fève de cacao et obtient de l'écorce de cacao et de la fève de cacao humide",
-    "tooltip.createchocolatefactory.machete": "Right click on a leaf block to break it and the block below it"
+    "tooltip.createchocolatefactory.machete": "Faites un clic droit sur un bloc de feuille pour le casser et le bloc au-dessous de lui"
 }
