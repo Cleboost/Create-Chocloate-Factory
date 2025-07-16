@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEntity {
     private int tickCount = 0;
     private boolean tickerEnable = false;
-    private int tickToDry = 7000;
+    private int tickToDry = 3000;
 
     public DryingKitBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlocksEntity.DRYING_KIT_ENTITY.get(), pPos, pBlockState);
