@@ -1,3 +1,11 @@
 files:
   - source: /src/main/resources/assets/createchocolatefactory/lang/en_us.json
     translation: /src/crowdin/resources/assets/createchocolatefactory/lang/%locale_with_underscore%.json
+
+branches:
+  - main
+
+languages:
+  - fr_FR
+  - de_DE
+  - es_ES

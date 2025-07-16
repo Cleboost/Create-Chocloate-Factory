@@ -1,0 +1,35 @@
+name: Crowdin Sync
+
+on:
+  push:
+    branches: main
+    paths:
+      - 'src/main/resources/assets/createchocolatefactory/lang/en_us.json'
+  pull_request:
+    branches: main
+  workflow_dispatch:
+
+env:
+  CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+  CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+
+jobs:
+  crowdin-sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Crowdin Action
+        uses: crowdin/github-action@v1
+        with:
+          upload_sources: true
+          upload_translations: false
+          download_translations: true
+          create_pull_request: true
+          crowdin_branch_name: ${{ github.head_ref || github.ref_name }}
+          crowdin_branch_name_source: ${{ github.head_ref || github.ref_name }}
+          crowdin_branch_name_translation: ${{ github.head_ref || github.ref_name }}
