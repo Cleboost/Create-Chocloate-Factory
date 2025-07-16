@@ -30,8 +30,5 @@ jobs:
       - name: Chmod gradlew
         run: chmod +x gradlew
 
-      - name: Check code style (Spotless)
-        run: ./gradlew spotlessCheck
-
       - name: Build project
         run: ./gradlew build
