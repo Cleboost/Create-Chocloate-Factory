@@ -19,6 +19,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+
+import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import fr.cleboost.createchocolatefactory.utils.ModItems;
 
 public class CocoaPod extends Block {
@@ -63,5 +65,17 @@ public class CocoaPod extends Block {
             return ItemInteractionResult.SUCCESS;
         }
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+
+    @Override
+    public void onRemove(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean movedByPiston) {
+        super.onRemove(state, level, pos, newState, movedByPiston);
+        if (!state.is(newState.getBlock())) {
+            if (state.getValue(OPENED)) {
+                Block.popResource(level, pos, new ItemStack(ModItems.COCOA_BARK.get(), level.random.nextInt(1, 4)));
+            } else {
+                Block.popResource(level, pos, new ItemStack(ModBlocks.COCOA_POD.get(), 1));
+            }
+        }
     }
 }
