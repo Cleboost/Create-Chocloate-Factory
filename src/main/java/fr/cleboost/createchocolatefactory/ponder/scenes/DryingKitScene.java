@@ -43,7 +43,7 @@ public class DryingKitScene {
         scene.world().modifyBlock(centerPos, (state) -> {
             return state.setValue(DryingKitBlock.STATE, DryingKitBlock.State.DRY);
         }, false);
-        scene.idle(40);
+        scene.idle(25);
         scene.overlay().showControls(centerVec, Pointing.DOWN,30).rightClick();
         scene.idle(30);
 
