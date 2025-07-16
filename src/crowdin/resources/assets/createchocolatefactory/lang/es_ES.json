@@ -11,8 +11,14 @@
     "item.createchocolatefactory.machete": "Machete",
     "item.createchocolatefactory.cocoa_bark": "Corteza de cacao",
     "item.createchocolatefactory.logo": "CCF Logo",
+    "item.createchocolatefactory.chocolate_bar": "Chocolate Bar",
     "block.createchocolatefactory.cocoa_pod": "Vaina de cacao",
     "block.createchocolatefactory.drying_kit": "Drying Kit",
     "tooltip.createchocolatefactory.cocoa_pod": "Haz clic derecho con el machete para abrir la vaina y obtener corteza de cacao y granos de cacao húmedos",
-    "tooltip.createchocolatefactory.machete": "Right click on a leaf block to break it and the block below it"
+    "tooltip.createchocolatefactory.machete": "Right click on a leaf block to break it and the block below it",
+    "tooltip.createchocolatefactory.progress": "This food has been eat %s time",
+    "tooltip.createchocolatefactory.chocolate.hold_shift": "Hold shift for more information about the chocolate",
+    "tooltip.createchocolatefactory.chocolate.composition": "Chocolate composition: %s sugar, %s cocoa, %s milk",
+    "createchocolatefactory.ponder.drying_kit.header": "Drying Kit",
+    "createchocolatefactory.ponder.drying_kit": "Drying Kit"
 }
