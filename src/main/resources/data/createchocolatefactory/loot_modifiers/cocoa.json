@@ -1,0 +1,8 @@
+{
+    "type": "createchocolatefactory:cocoa",
+    "conditions": [
+        {
+            "block": "minecraft:cocoa"
+        }
+    ]
+}

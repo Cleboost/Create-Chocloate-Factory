@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.items;
+package fr.cleboost.createchocolatefactory.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

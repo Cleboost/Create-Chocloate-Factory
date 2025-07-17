@@ -1,12 +1,13 @@
 package fr.cleboost.createchocolatefactory.block;
 
-import fr.cleboost.createchocolatefactory.blockentity.DryingKitBlockEntity;
 import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
 import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
 import fr.cleboost.createchocolatefactory.utils.ModItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -29,7 +30,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.ItemInteractionResult;
-import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class DryingKitBlock extends Block implements EntityBlock {
 
@@ -42,43 +44,45 @@ public class DryingKitBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel,
-            @NotNull BlockPos p_154348_, @NotNull CollisionContext pContext) {
+    public @Nonnull VoxelShape getShape(@Nonnull BlockState pState, @Nonnull BlockGetter pLevel,
+            @Nonnull BlockPos p_154348_, @Nonnull CollisionContext pContext) {
         return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
     }
 
     @Override
-    public @NotNull VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel,
-            @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    public @Nonnull VoxelShape getCollisionShape(@Nonnull BlockState pState, @Nonnull BlockGetter pLevel,
+            @Nonnull BlockPos pPos, @Nonnull CollisionContext pContext) {
         return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
     }
 
     @Override
-    public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pBlockState) {
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pPos, @Nonnull BlockState pBlockState) {
         return ModBlocksEntity.DRYING_KIT_ENTITY.get().create(pPos, pBlockState);
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level pLevel, @NotNull BlockState pState,
-            @NotNull BlockEntityType<T> pBlockEntityType) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level pLevel, @Nonnull BlockState pState,
+            @Nonnull BlockEntityType<T> pBlockEntityType) {
+        if (!pState.getValue(STATE).equals(State.DRYING))
+            return null;
         return TickableBlockEntity.getTickerHelper(pLevel);
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> pBuilder) {
+    protected void createBlockStateDefinition(@Nonnull StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
         pBuilder.add(STATE);
     }
 
     @Override
-    public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevelR, BlockPos pPos) {
+    public boolean canSurvive(@Nonnull BlockState pState, @Nonnull LevelReader pLevelR, @Nonnull BlockPos pPos) {
         return pLevelR.getBlockState(pPos.below()).isSolidRender(pLevelR, pPos.below());
     }
 
     @Override
-    public @NotNull BlockState updateShape(BlockState pState, @NotNull Direction pDirection,
-            @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos,
-            @NotNull BlockPos pNeighborPos) {
+    public @Nonnull BlockState updateShape(@Nonnull BlockState pState, @Nonnull Direction pDirection,
+            @Nonnull BlockState pNeighborState, @Nonnull LevelAccessor pLevel, @Nonnull BlockPos pCurrentPos,
+            @Nonnull BlockPos pNeighborPos) {
         return !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState()
                 : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
     }
@@ -95,48 +99,53 @@ public class DryingKitBlock extends Block implements EntityBlock {
         }
 
         @Override
-        public @NotNull String getSerializedName() {
+        public @Nonnull String getSerializedName() {
             return this.name;
         }
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
-            Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected @Nonnull ItemInteractionResult useItemOn(@Nonnull ItemStack item, @Nonnull BlockState state, @Nonnull Level level,
+            @Nonnull BlockPos pos,
+            @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hitResult) {
         if (level.isClientSide() || hand != InteractionHand.MAIN_HAND) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
         if (state.getValue(STATE) == State.EMPTY) {
-            if (stack.is(ModItems.COCOA_BEANS_WET.get())) {
-                if (stack.getCount() >= 9 || player.isCreative()) {
+            if (item.is(ModItems.COCOA_BEANS_WET)) {
+                if (item.getCount() >= 9 || player.isCreative()) {
                     if (!player.isCreative()) {
-                        stack.shrink(9);
+                        item.shrink(9);
                     }
                     level.setBlockAndUpdate(pos,
                             ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING));
-                    DryingKitBlockEntity blockEntity = (DryingKitBlockEntity) level.getBlockEntity(pos);
-                    if (blockEntity != null) {
-                        blockEntity.setTickToDry();
-                        blockEntity.setTickerEnable();
-                    }
                     return ItemInteractionResult.SUCCESS;
+                } else {
+                    player.displayClientMessage(
+                            Component
+                                    .translatable("message.createchocolatefactory.dryingkit.need_more_cocoa_beans",
+                                            item.getCount())
+                                    .withStyle(ChatFormatting.RED),
+                            true);
+                    return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
                 }
+
             }
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
         if (state.getValue(STATE) == State.DRY) {
-            if (stack.isEmpty() || stack.is(ModItems.COCOA_BEANS_DIRTY.get())) {
-                if (stack.isEmpty()) {
+            if (item.isEmpty() || item.is(ModItems.COCOA_BEANS_DIRTY.get())) {
+                if (item.isEmpty()) {
                     ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9);
                     var itemsE = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, cocoas);
                     level.addFreshEntity(itemsE);
                 } else {
-                    if (stack.getCount() + 9 > stack.getMaxStackSize()) {
+                    if (item.getCount() + 9 > item.getMaxStackSize()) {
                         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
                     }
-                    stack.grow(9);
+                    item.grow(9);
                 }
                 level.setBlockAndUpdate(pos,
                         ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY));
@@ -149,8 +158,8 @@ public class DryingKitBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public void onRemove(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos,
-            @NotNull BlockState pNewState, boolean pIsMoving) {
+    public void onRemove(@Nonnull BlockState pState, @Nonnull Level pLevel, @Nonnull BlockPos pPos,
+            @Nonnull BlockState pNewState, boolean pIsMoving) {
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
         if (pLevel.isClientSide()
                 || pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY)

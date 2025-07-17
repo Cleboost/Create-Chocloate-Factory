@@ -1,46 +1,144 @@
 package fr.cleboost.createchocolatefactory.blockentity;
 
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+
+import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
+import fr.cleboost.createchocolatefactory.network.RequestSyncPacket;
 import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.network.PacketDistributor;
 
-public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEntity {
+public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEntity, IHaveGoggleInformation {
     private int tickCount = 0;
-    private boolean tickerEnable = false;
-    private int tickToDry = 3000;
+    private final int tickToDry = 3000;
+    private long lastSyncRequest = 0;
 
     public DryingKitBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlocksEntity.DRYING_KIT_ENTITY.get(), pPos, pBlockState);
     }
 
-    //Define time bonus/malus for the drying kit
-    public void setTickToDry() {
-        assert this.level != null;
-        float multyplier = 1F;
-        //TODO: Add biome check
-        this.tickToDry = Math.round(this.tickToDry / multyplier);
-    }
-
-    //Enable the ticker
-    public void setTickerEnable() {
-        this.tickerEnable = true;
-    }
-
-    //Add tick to block for change state
     @Override
     public void tick() {
-        if (this.level == null || this.level.isClientSide() || !this.tickerEnable) return;
-        if (!this.level.canSeeSky(worldPosition) || !this.level.isDay() || this.level.isRaining() || this.level.isThundering())
+        Level level = this.getLevel();
+        if (level == null) return;
+        if (level.isClientSide()) return;
+        
+        if (!level.canSeeSky(worldPosition) || !level.isDay() || level.isRaining() || level.isThundering())
             return;
+
         this.tickCount++;
+        
         if (tickCount >= tickToDry) {
             this.tickCount = 0;
-            this.tickerEnable = false;
-            BlockState blockState = this.level.getBlockState(this.worldPosition);
-            this.level.setBlockAndUpdate(this.worldPosition, blockState.setValue(DryingKitBlock.STATE, DryingKitBlock.State.DRY));
+            BlockState blockState = level.getBlockState(this.worldPosition);
+            level.setBlockAndUpdate(this.worldPosition, blockState.setValue(DryingKitBlock.STATE, DryingKitBlock.State.DRY));
+            syncToClient();
         }
     }
+
+    @Override
+    protected void saveAdditional(@Nonnull CompoundTag pTag, @Nonnull HolderLookup.Provider pRegistries) {
+        super.saveAdditional(pTag, pRegistries);
+        pTag.putInt("tickCount", this.tickCount);
+    }
+
+    @Override
+    protected void loadAdditional(@Nonnull CompoundTag pTag, @Nonnull HolderLookup.Provider pRegistries) {
+        super.loadAdditional(pTag, pRegistries);
+        this.tickCount = pTag.getInt("tickCount");
+    }
+
+    @Override
+    public @Nonnull CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider pRegistries) {
+        CompoundTag tag = super.getUpdateTag(pRegistries);
+        saveAdditional(tag, pRegistries);
+        return tag;
+    }
+
+    @Override
+    public void handleUpdateTag(@Nonnull CompoundTag tag, @Nonnull HolderLookup.Provider pRegistries) {
+        loadAdditional(tag, pRegistries);
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    public void syncToClient() {
+        if (this.level != null && !this.level.isClientSide) {
+            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
+            setChanged();
+        }
+    }
+
+    public void requestSync() {
+        if (this.level != null && !this.level.isClientSide) {
+            syncToClient();
+        }
+    }
+
+    @Override
+	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        Level level = this.getLevel();
+        if (level == null) return false;
+        if (level.isClientSide() && level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE).equals(DryingKitBlock.State.DRYING)) {
+            long currentTime = level.getGameTime();
+            if (currentTime - lastSyncRequest >= 20) {
+                PacketDistributor.sendToServer(new RequestSyncPacket(this.worldPosition));
+                lastSyncRequest = currentTime;
+            }
+        }
+
+		String spacing = "    ";
+		tooltip.add(Component.literal(spacing)
+				.append(Component.translatable(CreateChocolateFactory.MODID + ".tooltip.dryingkit.info").withStyle(ChatFormatting.WHITE)));
+        tooltip.add(Component.literal(spacing)
+                .append(Component.translatable(
+                    CreateChocolateFactory.MODID + ".tooltip.dryingkit.status",
+                    level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE) == DryingKitBlock.State.DRYING
+                        ? Component.translatable(CreateChocolateFactory.MODID + ".tooltip.dryingkit.drying").withStyle(ChatFormatting.AQUA)
+                        : (level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE) == DryingKitBlock.State.DRY
+                            ? Component.translatable(CreateChocolateFactory.MODID + ".tooltip.dryingkit.dry").withStyle(ChatFormatting.GREEN)
+                            : Component.translatable(CreateChocolateFactory.MODID + ".tooltip.dryingkit.empty").withStyle(ChatFormatting.AQUA)
+                        )
+                ).withStyle(ChatFormatting.GRAY)));
+                if (level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE) == DryingKitBlock.State.DRYING) {
+                    tooltip.add(Component.literal(spacing)
+                            .append(Component.translatable(
+                                CreateChocolateFactory.MODID + ".tooltip.dryingkit.progress",
+                                Component.literal(this.tickCount * 100 / this.tickToDry +"%").withStyle(ChatFormatting.AQUA)
+                            ).withStyle(ChatFormatting.GRAY)));
+                    int remainingTicks = this.tickToDry - this.tickCount;
+                    int remainingSeconds = remainingTicks / 20;
+                    int minutes = remainingSeconds / 60;
+                    int seconds = remainingSeconds % 60;
+                    
+                    String timeFormatted = String.format("%d:%02d", minutes, seconds);
+                    
+                    tooltip.add(Component.literal(spacing)
+                            .append(Component.translatable(
+                                CreateChocolateFactory.MODID + ".tooltip.dryingkit.time_remaining",
+                                Component.literal(timeFormatted).withStyle(ChatFormatting.AQUA)
+                            ).withStyle(ChatFormatting.GRAY)));
+                }
+
+		return IHaveGoggleInformation.super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+	}
 }

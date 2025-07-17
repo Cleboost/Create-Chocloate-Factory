@@ -6,7 +6,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.items.utils.ChocolateBaseItem;
+import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
 import fr.cleboost.createchocolatefactory.ponder.CreateChocolateFactoryPonderPlugin;
 import net.minecraft.world.item.ItemStack;
 import net.createmod.ponder.foundation.PonderIndex;

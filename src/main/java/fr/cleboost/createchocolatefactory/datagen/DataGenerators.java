@@ -8,9 +8,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-@EventBusSubscriber(modid = CreateChocolateFactory.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = CreateChocolateFactory.MODID)
 public class DataGenerators {
-
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();

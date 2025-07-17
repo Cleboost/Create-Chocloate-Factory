@@ -1,9 +1,9 @@
 package fr.cleboost.createchocolatefactory.utils;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.items.ChocolateBar;
-import fr.cleboost.createchocolatefactory.items.MacheteItem;
-import fr.cleboost.createchocolatefactory.items.utils.FuelItem;
+import fr.cleboost.createchocolatefactory.item.ChocolateBar;
+import fr.cleboost.createchocolatefactory.item.MacheteItem;
+import fr.cleboost.createchocolatefactory.item.utils.FuelItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;

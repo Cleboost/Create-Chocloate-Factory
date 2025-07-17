@@ -1,7 +1,7 @@
 package fr.cleboost.createchocolatefactory.ponder;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.registry.PonderRegister;
+import fr.cleboost.createchocolatefactory.core.PonderRegistry;
 import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import net.createmod.ponder.api.registration.PonderPlugin;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
@@ -13,13 +13,13 @@ import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 
 public class CreateChocolateFactoryPonderPlugin implements PonderPlugin {
     @Override
-    public String getModId() {
+    public @Nonnull String getModId() {
         return CreateChocolateFactory.MODID;
     }
 
     @Override
     public void registerScenes(@Nonnull PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        PonderRegister.register(helper);
+        PonderRegistry.register(helper);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.items.utils;
+package fr.cleboost.createchocolatefactory.item.utils;
 
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import fr.cleboost.createchocolatefactory.utils.ModDataComponents;
