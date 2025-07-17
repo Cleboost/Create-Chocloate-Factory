@@ -25,15 +25,11 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEntity, IHaveGoggleInformation {
     private int tickCount = 0;
-    private int tickToDry = 3000;
+    private final int tickToDry = 3000;
     private long lastSyncRequest = 0;
 
     public DryingKitBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlocksEntity.DRYING_KIT_ENTITY.get(), pPos, pBlockState);
-    }
-
-    public void setTickToDry() {
-        this.tickToDry = 3000;
     }
 
     @Override
@@ -58,14 +54,12 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
     protected void saveAdditional(@Nonnull CompoundTag pTag, @Nonnull HolderLookup.Provider pRegistries) {
         super.saveAdditional(pTag, pRegistries);
         pTag.putInt("tickCount", this.tickCount);
-        pTag.putInt("tickToDry", this.tickToDry);
     }
 
     @Override
     protected void loadAdditional(@Nonnull CompoundTag pTag, @Nonnull HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
         this.tickCount = pTag.getInt("tickCount");
-        this.tickToDry = pTag.getInt("tickToDry");
     }
 
     @Override

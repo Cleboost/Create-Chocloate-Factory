@@ -120,8 +120,6 @@ public class DryingKitBlock extends Block implements EntityBlock {
                     }
                     level.setBlockAndUpdate(pos,
                             ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING));
-                    DryingKitBlockEntity blockEntity = (DryingKitBlockEntity) level.getBlockEntity(pos);
-                    blockEntity.setTickToDry();
                     return ItemInteractionResult.SUCCESS;
                 }
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
