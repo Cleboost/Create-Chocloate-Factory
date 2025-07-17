@@ -9,6 +9,8 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
+import javax.annotation.Nonnull;
+
 public record RequestSyncPacket(BlockPos pos) implements CustomPacketPayload {
     public static final Type<RequestSyncPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(CreateChocolateFactory.MODID, "request_sync"));
     
@@ -18,7 +20,7 @@ public record RequestSyncPacket(BlockPos pos) implements CustomPacketPayload {
     );
 
     @Override
-    public Type<? extends CustomPacketPayload> type() {
+    public @Nonnull Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
 

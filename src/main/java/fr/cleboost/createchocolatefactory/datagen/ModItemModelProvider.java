@@ -7,7 +7,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -26,7 +25,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             if (ModBlocks.BLOCKS.getEntries().stream().anyMatch(block -> block.getId().equals(id))) {
                 if (ModBlocks.BLOCKS.getEntries().stream()
                         .filter(block -> block.getId().equals(id))
-                        .anyMatch(block -> ConfigDataGenerator.excludesBlocksGenerate.contains(block))) {
+                        .anyMatch(ConfigDataGenerator.excludesBlocksGenerate::contains)) {
                     continue;
                 }
                 blockItem(item);
@@ -36,18 +35,18 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
     }
 
-    private ItemModelBuilder simpleItem(Holder<Item> item) {
+    private void simpleItem(Holder<Item> item) {
         String path = item.unwrapKey().orElseThrow().location().getPath();
-        return withExistingParent(path,
+        withExistingParent(path,
                 ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated"))
                 .texture("layer0",
                         ResourceLocation.fromNamespaceAndPath(CreateChocolateFactory.MODID,
                                 "item/" + path));
     }
 
-    private ItemModelBuilder blockItem(Holder<Item> item) {
+    private void blockItem(Holder<Item> item) {
         String path = item.unwrapKey().orElseThrow().location().getPath();
-        return withExistingParent(path,
+        withExistingParent(path,
                 ResourceLocation.fromNamespaceAndPath(CreateChocolateFactory.MODID,
                         "block/" + path));
     }

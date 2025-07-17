@@ -13,7 +13,7 @@ import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 
 public class CreateChocolateFactoryPonderPlugin implements PonderPlugin {
     @Override
-    public String getModId() {
+    public @Nonnull String getModId() {
         return CreateChocolateFactory.MODID;
     }
 

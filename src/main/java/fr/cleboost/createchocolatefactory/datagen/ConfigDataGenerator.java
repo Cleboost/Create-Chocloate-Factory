@@ -23,6 +23,4 @@ public class ConfigDataGenerator {
         excludesItemsGenerate.add(ModItems.LOGO);
         excludesItemsGenerate.add(ModItems.CHOCOLATE_BAR);
     }
-
-    static final ArrayList<String> langIndex = new ArrayList<>();
 }

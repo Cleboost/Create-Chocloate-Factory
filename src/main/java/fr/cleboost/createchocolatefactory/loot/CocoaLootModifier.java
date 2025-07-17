@@ -27,12 +27,12 @@ public class CocoaLootModifier extends LootModifier {
     }
 
     @Override
-    public MapCodec<? extends IGlobalLootModifier> codec() {
+    public @Nonnull MapCodec<? extends IGlobalLootModifier> codec() {
         return CODEC;
     }
 
     @Override
-    protected ObjectArrayList<ItemStack> doApply(@Nonnull ObjectArrayList<ItemStack> generatedLoot, @Nonnull LootContext context) {
+    protected @Nonnull ObjectArrayList<ItemStack> doApply(@Nonnull ObjectArrayList<ItemStack> generatedLoot, @Nonnull LootContext context) {
         generatedLoot.clear();
         if (context.hasParam(LootContextParams.BLOCK_STATE)) {
             BlockState state = context.getParam(LootContextParams.BLOCK_STATE);

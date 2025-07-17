@@ -19,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -34,18 +35,19 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
 
     @Override
     public void tick() {
-        if (this.getLevel() == null) return;
-        if (this.getLevel().isClientSide()) return;
+        Level level = this.getLevel();
+        if (level == null) return;
+        if (level.isClientSide()) return;
         
-        if (!this.getLevel().canSeeSky(worldPosition) || !this.getLevel().isDay() || this.getLevel().isRaining() || this.getLevel().isThundering())
+        if (!level.canSeeSky(worldPosition) || !level.isDay() || level.isRaining() || level.isThundering())
             return;
 
         this.tickCount++;
         
         if (tickCount >= tickToDry) {
             this.tickCount = 0;
-            BlockState blockState = this.level.getBlockState(this.worldPosition);
-            this.level.setBlockAndUpdate(this.worldPosition, blockState.setValue(DryingKitBlock.STATE, DryingKitBlock.State.DRY));
+            BlockState blockState = level.getBlockState(this.worldPosition);
+            level.setBlockAndUpdate(this.worldPosition, blockState.setValue(DryingKitBlock.STATE, DryingKitBlock.State.DRY));
             syncToClient();
         }
     }
@@ -63,7 +65,7 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
     }
 
     @Override
-    public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider pRegistries) {
+    public @Nonnull CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider pRegistries) {
         CompoundTag tag = super.getUpdateTag(pRegistries);
         saveAdditional(tag, pRegistries);
         return tag;
@@ -92,18 +94,12 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
         }
     }
 
-    public int getTickCount() {
-        return this.tickCount;
-    }
-
-    public int getTickToDry() {
-        return this.tickToDry;
-    }
-
     @Override
 	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        if (this.level != null && this.level.isClientSide && this.level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE).equals(DryingKitBlock.State.DRYING)) {
-            long currentTime = this.level.getGameTime();
+        Level level = this.getLevel();
+        if (level == null) return false;
+        if (level.isClientSide() && level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE).equals(DryingKitBlock.State.DRYING)) {
+            long currentTime = level.getGameTime();
             if (currentTime - lastSyncRequest >= 20) {
                 PacketDistributor.sendToServer(new RequestSyncPacket(this.worldPosition));
                 lastSyncRequest = currentTime;
@@ -116,18 +112,18 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
         tooltip.add(Component.literal(spacing)
                 .append(Component.translatable(
                     CreateChocolateFactory.MODID + ".tooltip.dryingkit.status",
-                    this.level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE) == DryingKitBlock.State.DRYING
+                    level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE) == DryingKitBlock.State.DRYING
                         ? Component.translatable(CreateChocolateFactory.MODID + ".tooltip.dryingkit.drying").withStyle(ChatFormatting.AQUA)
-                        : (this.level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE) == DryingKitBlock.State.DRY
+                        : (level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE) == DryingKitBlock.State.DRY
                             ? Component.translatable(CreateChocolateFactory.MODID + ".tooltip.dryingkit.dry").withStyle(ChatFormatting.GREEN)
                             : Component.translatable(CreateChocolateFactory.MODID + ".tooltip.dryingkit.empty").withStyle(ChatFormatting.AQUA)
                         )
                 ).withStyle(ChatFormatting.GRAY)));
-                if (this.level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE) == DryingKitBlock.State.DRYING) {
+                if (level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE) == DryingKitBlock.State.DRYING) {
                     tooltip.add(Component.literal(spacing)
                             .append(Component.translatable(
                                 CreateChocolateFactory.MODID + ".tooltip.dryingkit.progress",
-                                Component.literal(String.valueOf(this.tickCount * 100 / this.tickToDry)+"%").withStyle(ChatFormatting.AQUA)
+                                Component.literal(this.tickCount * 100 / this.tickToDry +"%").withStyle(ChatFormatting.AQUA)
                             ).withStyle(ChatFormatting.GRAY)));
                     int remainingTicks = this.tickToDry - this.tickCount;
                     int remainingSeconds = remainingTicks / 20;
