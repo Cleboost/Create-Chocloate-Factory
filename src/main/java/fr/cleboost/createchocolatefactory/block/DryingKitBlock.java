@@ -6,8 +6,10 @@ import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
 import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
 import fr.cleboost.createchocolatefactory.utils.ModItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -121,8 +123,14 @@ public class DryingKitBlock extends Block implements EntityBlock {
                     level.setBlockAndUpdate(pos,
                             ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING));
                     return ItemInteractionResult.SUCCESS;
+                } else {
+                    player.displayClientMessage(
+                        Component.translatable("message.createchocolatefactory.dryingkit.need_more_cocoa_beans", item.getCount())
+                            .withStyle(ChatFormatting.RED), true
+                    );
+                    return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
                 }
-                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+                
             }
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }

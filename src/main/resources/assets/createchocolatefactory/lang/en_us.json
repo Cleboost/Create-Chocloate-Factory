@@ -29,5 +29,6 @@
     "createchocolatefactory.tooltip.dryingkit.time_remaining": "Time remaining: %s",
     "createchocolatefactory.tooltip.dryingkit.empty": "Empty",
     "createchocolatefactory.tooltip.dryingkit.drying": "Drying",
-    "createchocolatefactory.tooltip.dryingkit.dry": "Dry"
+    "createchocolatefactory.tooltip.dryingkit.dry": "Dry",
+    "message.createchocolatefactory.dryingkit.need_more_cocoa_beans": "You need more damp cocoa beans to dry them (%s/9)"
 }
