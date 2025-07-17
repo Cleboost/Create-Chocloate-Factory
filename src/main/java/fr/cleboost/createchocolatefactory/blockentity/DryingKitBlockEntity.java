@@ -21,7 +21,6 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
         super(ModBlocksEntity.DRYING_KIT_ENTITY.get(), pPos, pBlockState);
     }
 
-    //Define time bonus/malus for the drying kit
     public void setTickToDry() {
         assert this.level != null;
         float multyplier = 1F;
@@ -36,12 +35,10 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
         this.tickToDry = Math.round(this.tickToDry / multyplier);
     }
 
-    //Enable the ticker
     public void setTickerEnable() {
         this.tickerEnable = true;
     }
 
-    //Add tick to block for change state
     @Override
     public void tick() {
         if (this.level == null || this.level.isClientSide() || !this.tickerEnable) return;
