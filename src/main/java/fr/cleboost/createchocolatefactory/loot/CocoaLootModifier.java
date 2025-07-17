@@ -36,7 +36,7 @@ public class CocoaLootModifier extends LootModifier {
         generatedLoot.clear();
         if (context.hasParam(LootContextParams.BLOCK_STATE)) {
             BlockState state = context.getParam(LootContextParams.BLOCK_STATE);
-            if (state.getValue(CocoaBlock.AGE) == 2) {
+            if (state.getBlock() instanceof CocoaBlock && state.getValue(CocoaBlock.AGE) == 2) {
                 ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
                 if (tool != null && tool.getItem() == ModItems.MACHETE.get()) {
                     generatedLoot.add(new ItemStack(ModBlocks.COCOA_POD.get().asItem(), 1));
