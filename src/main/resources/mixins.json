@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "package": "fr.cleboost.createchocolatefactory.mixins",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+      "CocoaBlockMixin"
+    ],
+    "client": [],
+    "server": [],
+    "injectors": {
+      "defaultRequire": 1
+    }
+  }
