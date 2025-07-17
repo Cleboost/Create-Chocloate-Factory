@@ -2,11 +2,11 @@ package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
 
-import fr.cleboost.createchocolatefactory.registry.PonderRegister;
 import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
 import fr.cleboost.createchocolatefactory.utils.ModDataComponents;
 import fr.cleboost.createchocolatefactory.utils.ModItems;
+import fr.cleboost.createchocolatefactory.utils.ModLootModifiers;
 import fr.cleboost.createchocolatefactory.utils.ModTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -23,5 +23,6 @@ public class CreateChocolateFactory {
         ModBlocks.register(modEventBus);
         ModBlocksEntity.register(modEventBus);
         ModDataComponents.register(modEventBus);
+        ModLootModifiers.register(modEventBus);
     }
 }
