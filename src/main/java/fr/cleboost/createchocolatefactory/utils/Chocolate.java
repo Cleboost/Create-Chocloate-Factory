@@ -1,9 +1,10 @@
 package fr.cleboost.createchocolatefactory.utils;
 
-import fr.cleboost.createchocolatefactory.items.utils.ChocolateBaseItem;
 import net.minecraft.world.item.ItemStack;
 
 import java.nio.ByteBuffer;
+
+import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
 
 public class Chocolate {
     private final float strength;
