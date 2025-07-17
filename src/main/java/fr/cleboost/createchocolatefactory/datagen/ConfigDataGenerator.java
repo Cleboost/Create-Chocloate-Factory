@@ -1,7 +1,7 @@
 package fr.cleboost.createchocolatefactory.datagen;
 
-import fr.cleboost.createchocolatefactory.utils.ModBlocks;
-import fr.cleboost.createchocolatefactory.utils.ModItems;
+import fr.cleboost.createchocolatefactory.core.BlockRegistry;
+import fr.cleboost.createchocolatefactory.core.ItemRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -12,15 +12,15 @@ public class ConfigDataGenerator {
     static final ArrayList<Holder<Block>> excludesBlocksGenerate = new ArrayList<>();
 
     static {
-        excludesBlocksGenerate.add(ModBlocks.COCOA_POD);
-        excludesBlocksGenerate.add(ModBlocks.DRYING_KIT);
+        excludesBlocksGenerate.add(BlockRegistry.COCOA_POD);
+        excludesBlocksGenerate.add(BlockRegistry.DRYING_KIT);
     }
 
     static final ArrayList<Holder<Item>> excludesItemsGenerate = new ArrayList<>();
 
     static {
-        excludesItemsGenerate.add(ModItems.MACHETE);
-        excludesItemsGenerate.add(ModItems.LOGO);
-        excludesItemsGenerate.add(ModItems.CHOCOLATE_BAR);
+        excludesItemsGenerate.add(ItemRegistry.MACHETE);
+        excludesItemsGenerate.add(ItemRegistry.LOGO);
+        excludesItemsGenerate.add(ItemRegistry.CHOCOLATE_BAR);
     }
 }

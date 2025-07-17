@@ -1,8 +1,8 @@
 package fr.cleboost.createchocolatefactory.ponder;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.core.BlockRegistry;
 import fr.cleboost.createchocolatefactory.core.PonderRegistry;
-import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import net.createmod.ponder.api.registration.PonderPlugin;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
@@ -24,6 +24,6 @@ public class CreateChocolateFactoryPonderPlugin implements PonderPlugin {
 
     @Override
     public void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        helper.addToTag(AllCreatePonderTags.LOGISTICS, ModBlocks.DRYING_KIT.getId());
+        helper.addToTag(AllCreatePonderTags.LOGISTICS, BlockRegistry.DRYING_KIT.getId());
     }
 }

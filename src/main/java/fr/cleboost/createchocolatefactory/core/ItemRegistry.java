@@ -1,9 +1,10 @@
-package fr.cleboost.createchocolatefactory.utils;
+package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.item.ChocolateBar;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
 import fr.cleboost.createchocolatefactory.item.utils.FuelItem;
+import fr.cleboost.createchocolatefactory.utils.ModFoods;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -16,7 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.nbt.CompoundTag;
 
-public class ModItems {
+public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CreateChocolateFactory.MODID);
 
     //Items

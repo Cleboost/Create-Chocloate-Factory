@@ -1,7 +1,7 @@
 package fr.cleboost.createchocolatefactory.datagen;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.utils.ModBlocks;
+import fr.cleboost.createchocolatefactory.core.BlockRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
@@ -16,7 +16,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        for (DeferredHolder<Block, ? extends Block> blockHolder : ModBlocks.BLOCKS.getEntries()) {
+        for (DeferredHolder<Block, ? extends Block> blockHolder : BlockRegistry.BLOCKS.getEntries()) {
             if (ConfigDataGenerator.excludesBlocksGenerate.contains(blockHolder)) {
                 continue;
             }

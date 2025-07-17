@@ -2,12 +2,12 @@ package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
 
+import fr.cleboost.createchocolatefactory.core.BlockRegistry;
+import fr.cleboost.createchocolatefactory.core.BlocksEntityRegistry;
+import fr.cleboost.createchocolatefactory.core.DataComponentsRegistry;
+import fr.cleboost.createchocolatefactory.core.ItemRegistry;
+import fr.cleboost.createchocolatefactory.core.LootModifiersRegistry;
 import fr.cleboost.createchocolatefactory.core.TabRegistry;
-import fr.cleboost.createchocolatefactory.utils.ModBlocks;
-import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
-import fr.cleboost.createchocolatefactory.utils.ModDataComponents;
-import fr.cleboost.createchocolatefactory.utils.ModItems;
-import fr.cleboost.createchocolatefactory.utils.ModLootModifiers;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
@@ -19,10 +19,10 @@ public class CreateChocolateFactory {
 
     public CreateChocolateFactory(IEventBus modEventBus) {
         TabRegistry.register(modEventBus);
-        ModItems.register(modEventBus);
-        ModBlocks.register(modEventBus);
-        ModBlocksEntity.register(modEventBus);
-        ModDataComponents.register(modEventBus);
-        ModLootModifiers.register(modEventBus);
+        ItemRegistry.register(modEventBus);
+        BlockRegistry.register(modEventBus);
+        BlocksEntityRegistry.register(modEventBus);
+        DataComponentsRegistry.register(modEventBus);
+        LootModifiersRegistry.register(modEventBus);
     }
 }

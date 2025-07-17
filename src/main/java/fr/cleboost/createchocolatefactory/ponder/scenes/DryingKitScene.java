@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
 import fr.cleboost.createchocolatefactory.block.DryingKitBlock;
-import fr.cleboost.createchocolatefactory.utils.ModItems;
+import fr.cleboost.createchocolatefactory.core.ItemRegistry;
 import net.createmod.catnip.math.Pointing;
 
 public class DryingKitScene {
@@ -32,7 +32,7 @@ public class DryingKitScene {
 
         
         scene.overlay().showControls(centerVec, Pointing.DOWN, 40).rightClick()
-            .withItem(new ItemStack(ModItems.COCOA_BEANS_WET.get(), 9));
+            .withItem(new ItemStack(ItemRegistry.COCOA_BEANS_WET.get(), 9));
 
         scene.idle(20);
 
@@ -56,7 +56,7 @@ public class DryingKitScene {
         scene.idle(30);
 
         scene.world().modifyBlock(centerPos, (state) -> state.setValue(DryingKitBlock.STATE, DryingKitBlock.State.EMPTY), false);
-        scene.world().createItemEntity(centerVec, new Vec3(0,0,0), new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9));
+        scene.world().createItemEntity(centerVec, new Vec3(0,0,0), new ItemStack(ItemRegistry.COCOA_BEANS_DIRTY.get(), 9));
         scene.overlay().showText(70).text("Dryed").attachKeyFrame().placeNearTarget().pointAt(textVec);
 
         scene.markAsFinished();

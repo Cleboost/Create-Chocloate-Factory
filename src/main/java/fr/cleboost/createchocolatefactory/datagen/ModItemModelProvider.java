@@ -1,8 +1,8 @@
 package fr.cleboost.createchocolatefactory.datagen;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.utils.ModBlocks;
-import fr.cleboost.createchocolatefactory.utils.ModItems;
+import fr.cleboost.createchocolatefactory.core.BlockRegistry;
+import fr.cleboost.createchocolatefactory.core.ItemRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -17,13 +17,13 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        for (Holder<Item> item : ModItems.ITEMS.getEntries()) {
+        for (Holder<Item> item : ItemRegistry.ITEMS.getEntries()) {
             if (ConfigDataGenerator.excludesItemsGenerate.contains(item)) {
                 continue;
             }
             ResourceLocation id = item.unwrapKey().orElseThrow().location();
-            if (ModBlocks.BLOCKS.getEntries().stream().anyMatch(block -> block.getId().equals(id))) {
-                if (ModBlocks.BLOCKS.getEntries().stream()
+            if (BlockRegistry.BLOCKS.getEntries().stream().anyMatch(block -> block.getId().equals(id))) {
+                if (BlockRegistry.BLOCKS.getEntries().stream()
                         .filter(block -> block.getId().equals(id))
                         .anyMatch(ConfigDataGenerator.excludesBlocksGenerate::contains)) {
                     continue;

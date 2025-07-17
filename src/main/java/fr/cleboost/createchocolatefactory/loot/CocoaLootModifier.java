@@ -13,9 +13,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
-
-import fr.cleboost.createchocolatefactory.utils.ModBlocks;
-import fr.cleboost.createchocolatefactory.utils.ModItems;
+import fr.cleboost.createchocolatefactory.core.BlockRegistry;
+import fr.cleboost.createchocolatefactory.core.ItemRegistry;
 
 public class CocoaLootModifier extends LootModifier {
     public static final MapCodec<CocoaLootModifier> CODEC = RecordCodecBuilder.mapCodec(
@@ -38,8 +37,8 @@ public class CocoaLootModifier extends LootModifier {
             BlockState state = context.getParam(LootContextParams.BLOCK_STATE);
             if (state.getBlock() instanceof CocoaBlock && state.getValue(CocoaBlock.AGE) == 2) {
                 ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
-                if (tool != null && tool.getItem() == ModItems.MACHETE.get()) {
-                    generatedLoot.add(new ItemStack(ModBlocks.COCOA_POD.get().asItem(), 1));
+                if (tool != null && tool.getItem() == ItemRegistry.MACHETE.get()) {
+                    generatedLoot.add(new ItemStack(BlockRegistry.COCOA_POD.get().asItem(), 1));
                 }
             }
         }

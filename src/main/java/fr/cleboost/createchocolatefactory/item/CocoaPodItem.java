@@ -12,7 +12,7 @@ import java.util.List;
 public class CocoaPodItem extends BlockItem {
     
     public CocoaPodItem(Properties properties) {
-        super(fr.cleboost.createchocolatefactory.utils.ModBlocks.COCOA_POD.get(), properties);
+        super(fr.cleboost.createchocolatefactory.core.BlockRegistry.COCOA_POD.get(), properties);
     }
     
     @Override

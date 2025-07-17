@@ -9,8 +9,8 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
+import fr.cleboost.createchocolatefactory.core.BlocksEntityRegistry;
 import fr.cleboost.createchocolatefactory.network.RequestSyncPacket;
-import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -31,7 +31,7 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
     private long lastSyncRequest = 0;
 
     public DryingKitBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlocksEntity.DRYING_KIT_ENTITY.get(), pPos, pBlockState);
+        super(BlocksEntityRegistry.DRYING_KIT_ENTITY.get(), pPos, pBlockState);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package fr.cleboost.createchocolatefactory.block;
 
 import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
-import fr.cleboost.createchocolatefactory.utils.ModBlocks;
-import fr.cleboost.createchocolatefactory.utils.ModBlocksEntity;
-import fr.cleboost.createchocolatefactory.utils.ModItems;
+import fr.cleboost.createchocolatefactory.core.BlockRegistry;
+import fr.cleboost.createchocolatefactory.core.BlocksEntityRegistry;
+import fr.cleboost.createchocolatefactory.core.ItemRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -57,7 +57,7 @@ public class DryingKitBlock extends Block implements EntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(@Nonnull BlockPos pPos, @Nonnull BlockState pBlockState) {
-        return ModBlocksEntity.DRYING_KIT_ENTITY.get().create(pPos, pBlockState);
+        return BlocksEntityRegistry.DRYING_KIT_ENTITY.get().create(pPos, pBlockState);
     }
 
     @Override
@@ -113,13 +113,13 @@ public class DryingKitBlock extends Block implements EntityBlock {
         }
 
         if (state.getValue(STATE) == State.EMPTY) {
-            if (item.is(ModItems.COCOA_BEANS_WET)) {
+            if (item.is(ItemRegistry.COCOA_BEANS_WET)) {
                 if (item.getCount() >= 9 || player.isCreative()) {
                     if (!player.isCreative()) {
                         item.shrink(9);
                     }
                     level.setBlockAndUpdate(pos,
-                            ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING));
+                            BlockRegistry.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING));
                     return ItemInteractionResult.SUCCESS;
                 } else {
                     player.displayClientMessage(
@@ -136,9 +136,9 @@ public class DryingKitBlock extends Block implements EntityBlock {
         }
 
         if (state.getValue(STATE) == State.DRY) {
-            if (item.isEmpty() || item.is(ModItems.COCOA_BEANS_DIRTY.get())) {
+            if (item.isEmpty() || item.is(ItemRegistry.COCOA_BEANS_DIRTY.get())) {
                 if (item.isEmpty()) {
-                    ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9);
+                    ItemStack cocoas = new ItemStack(ItemRegistry.COCOA_BEANS_DIRTY.get(), 9);
                     var itemsE = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, cocoas);
                     level.addFreshEntity(itemsE);
                 } else {
@@ -148,7 +148,7 @@ public class DryingKitBlock extends Block implements EntityBlock {
                     item.grow(9);
                 }
                 level.setBlockAndUpdate(pos,
-                        ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY));
+                        BlockRegistry.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY));
                 return ItemInteractionResult.SUCCESS;
             }
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -162,16 +162,16 @@ public class DryingKitBlock extends Block implements EntityBlock {
             @Nonnull BlockState pNewState, boolean pIsMoving) {
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
         if (pLevel.isClientSide()
-                || pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY)
-                || pNewState.is(ModBlocks.DRYING_KIT.get()))
+                || pState == BlockRegistry.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY)
+                || pNewState.is(BlockRegistry.DRYING_KIT.get()))
             return;
-        if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING)) {
-            ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_WET.get(), 9);
+        if (pState == BlockRegistry.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING)) {
+            ItemStack cocoas = new ItemStack(ItemRegistry.COCOA_BEANS_WET.get(), 9);
             var itemsE = new ItemEntity(pLevel, pPos.getX() + 0.5D, pPos.getY() + 0.5D, pPos.getZ() + 0.5D, cocoas);
             pLevel.addFreshEntity(itemsE);
         }
-        if (pState == ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRY)) {
-            ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9);
+        if (pState == BlockRegistry.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRY)) {
+            ItemStack cocoas = new ItemStack(ItemRegistry.COCOA_BEANS_DIRTY.get(), 9);
             var itemsE = new ItemEntity(pLevel, pPos.getX() + 0.5D, pPos.getY() + 0.5D, pPos.getZ() + 0.5D, cocoas);
             pLevel.addFreshEntity(itemsE);
         }

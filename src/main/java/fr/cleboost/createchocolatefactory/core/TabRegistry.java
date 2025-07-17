@@ -1,7 +1,6 @@
 package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.utils.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -17,11 +16,11 @@ public class TabRegistry {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATE_CHOCOLATE_FACTORY_TAB = CREATIVE_MODE_TABS.register("createchocolatefactory_tab",
         () -> CreativeModeTab.builder()
-            .icon(() -> new ItemStack(ModItems.LOGO.get()))
+            .icon(() -> new ItemStack(ItemRegistry.LOGO.get()))
             .title(Component.translatable("itemGroup.createchocolatefactory.createchocolatefactory_tab"))
             .displayItems((pParameters, pOutput) -> {
-                pOutput.accept(ModItems.LOGO.get());
-                for (DeferredHolder<Item, ? extends Item> item : ModItems.ITEMS.getEntries()) {
+                pOutput.accept(ItemRegistry.LOGO.get());
+                for (DeferredHolder<Item, ? extends Item> item : ItemRegistry.ITEMS.getEntries()) {
                     pOutput.accept(item.get());
                 }
             })

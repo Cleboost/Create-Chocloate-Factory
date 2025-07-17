@@ -21,8 +21,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 
-import fr.cleboost.createchocolatefactory.utils.ModBlocks;
-import fr.cleboost.createchocolatefactory.utils.ModItems;
+import fr.cleboost.createchocolatefactory.core.BlockRegistry;
+import fr.cleboost.createchocolatefactory.core.ItemRegistry;
 
 public class CocoaPod extends Block {
     public static final BooleanProperty OPENED = BooleanProperty.create("opened");
@@ -55,10 +55,10 @@ public class CocoaPod extends Block {
     @Override
     protected @Nonnull ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos,
             @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hitResult) {
-        if (!level.isClientSide() && player.getItemInHand(hand).is(ModItems.MACHETE.get())) {
-            Block.popResource(level, pos, new ItemStack(ModItems.COCOA_BARK.get(), level.random.nextInt(1, 4)));
+        if (!level.isClientSide() && player.getItemInHand(hand).is(ItemRegistry.MACHETE.get())) {
+            Block.popResource(level, pos, new ItemStack(ItemRegistry.COCOA_BARK.get(), level.random.nextInt(1, 4)));
             if (state.getValue(OPENED)) {
-                Block.popResource(level, pos, new ItemStack(ModItems.COCOA_BEANS_WET.get(), 1));
+                Block.popResource(level, pos, new ItemStack(ItemRegistry.COCOA_BEANS_WET.get(), 1));
                 level.destroyBlock(pos, false);
             } else {
                 level.setBlockAndUpdate(pos, state.setValue(OPENED, true));
@@ -73,9 +73,9 @@ public class CocoaPod extends Block {
         super.onRemove(state, level, pos, newState, movedByPiston);
         if (!state.is(newState.getBlock())) {
             if (state.getValue(OPENED)) {
-                Block.popResource(level, pos, new ItemStack(ModItems.COCOA_BARK.get(), level.random.nextInt(1, 4)));
+                Block.popResource(level, pos, new ItemStack(ItemRegistry.COCOA_BARK.get(), level.random.nextInt(1, 4)));
             } else {
-                Block.popResource(level, pos, new ItemStack(ModBlocks.COCOA_POD.get(), 1));
+                Block.popResource(level, pos, new ItemStack(BlockRegistry.COCOA_POD.get(), 1));
             }
         }
     }

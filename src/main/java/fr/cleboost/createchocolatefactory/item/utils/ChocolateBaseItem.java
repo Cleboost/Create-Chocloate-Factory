@@ -1,7 +1,7 @@
 package fr.cleboost.createchocolatefactory.item.utils;
 
+import fr.cleboost.createchocolatefactory.core.DataComponentsRegistry;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
-import fr.cleboost.createchocolatefactory.utils.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screens.Screen;
@@ -27,7 +27,7 @@ public class ChocolateBaseItem extends Item {
     private final float amount; // in mB
 
     public ChocolateBaseItem(Properties properties, float amount) {
-        super(properties.component(ModDataComponents.STRENGTH, 0.7F).component(ModDataComponents.MILK, 0.1F).component(ModDataComponents.SUGAR, 0.1F).component(ModDataComponents.COCOA_BUTTER, 0.1F));
+        super(properties.component(DataComponentsRegistry.STRENGTH, 0.7F).component(DataComponentsRegistry.MILK, 0.1F).component(DataComponentsRegistry.SUGAR, 0.1F).component(DataComponentsRegistry.COCOA_BUTTER, 0.1F));
         this.amount = amount;
     }
 

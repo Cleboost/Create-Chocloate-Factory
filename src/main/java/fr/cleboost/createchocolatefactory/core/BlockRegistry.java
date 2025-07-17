@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.utils;
+package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.CocoaPod;
@@ -16,7 +16,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class ModBlocks {
+public class BlockRegistry {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(CreateChocolateFactory.MODID);
 
     // public static final RegistryObject<Block> COCOA_POD_OPENED = registerBlock("cocoa_pod_opened",
@@ -38,9 +38,9 @@ public class ModBlocks {
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<Block> block) {
         if (name.equals("cocoa_pod")) {
-            ModItems.ITEMS.register(name, () -> new CocoaPodItem(new Item.Properties()));
+            ItemRegistry.ITEMS.register(name, () -> new CocoaPodItem(new Item.Properties()));
         } else {
-            ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+            ItemRegistry.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
         }
     }
 
