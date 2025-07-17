@@ -1,7 +1,7 @@
 package fr.cleboost.createchocolatefactory.ponder;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.registry.PonderRegistry;
+import fr.cleboost.createchocolatefactory.core.PonderRegistry;
 import fr.cleboost.createchocolatefactory.utils.ModBlocks;
 import net.createmod.ponder.api.registration.PonderPlugin;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;

@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.registry;
+package fr.cleboost.createchocolatefactory.core;
 
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
