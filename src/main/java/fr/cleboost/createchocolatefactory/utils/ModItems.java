@@ -30,14 +30,14 @@ public class ModItems {
     //Tools
     public static final DeferredItem<Item> MACHETE = ITEMS.register("machete", () -> new MacheteItem(new Item.Properties()));
 
-    //Fruits/Foods
+    //Fruits & Foods
     public static final DeferredItem<Item> MINT_LEAF = ITEMS.register("mint_leaf", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> MINT_SEEDS = ITEMS.register("mint_seeds", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ORANGE = ITEMS.register("orange", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ORANGE_JUICE = ITEMS.register("orange_juice", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ORANGE_WEDGE = ITEMS.register("orange_wedge", () -> new Item(new Item.Properties()));
 
-    //Fuel/Other
+    //Fuel
     public static final DeferredItem<Item> COCOA_BARK = ITEMS.register("cocoa_bark", () -> new FuelItem(new Item.Properties(), 100));
 
     //Chocolate
@@ -45,20 +45,5 @@ public class ModItems {
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
-    }
-
-    @SuppressWarnings("null")
-    public static void registerItemProperties() {
-        ItemProperties.register(
-            ModItems.CHOCOLATE_BAR.get(),
-            ResourceLocation.tryParse(CreateChocolateFactory.MODID + ":eatprogress"),
-            (ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int seed) -> {
-                CompoundTag tag = stack.get(ModDataComponents.EAT_PROGRESS.get());
-                if (tag != null && tag.contains("eatProgress")) {
-                    return tag.getInt("eatProgress");
-                }
-                return 0;
-            }
-        );
     }
 }

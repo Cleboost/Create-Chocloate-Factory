@@ -18,7 +18,7 @@
     "tooltip.createchocolatefactory.machete": "Right click on a leaf block to break it and the block below it",
     "tooltip.createchocolatefactory.progress": "This food has been eat %s time",
     "tooltip.createchocolatefactory.chocolate.hold_shift": "Hold shift for more information about the chocolate",
-    "tooltip.createchocolatefactory.chocolate.composition": "Chocolate composition: %s% cocoa, %s% sugar, %s% cocoa butter, %s% milk",
+    "tooltip.createchocolatefactory.chocolate.composition": "Chocolate composition: %s cocoa, %s sugar, %s cocoa butter, %s milk",
     "createchocolatefactory.ponder.drying_kit.header": "Drying Kit",
     "createchocolatefactory.ponder.drying_kit": "Drying Kit",
     "createchocolatefactory.ponder.drying_kit.text_1": "Drying 9 damp cocoa beans",

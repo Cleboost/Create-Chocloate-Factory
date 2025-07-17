@@ -1,39 +1,89 @@
 package fr.cleboost.createchocolatefactory.utils;
 
+import fr.cleboost.createchocolatefactory.items.utils.ChocolateBaseItem;
+import net.minecraft.world.item.ItemStack;
+
+import java.nio.ByteBuffer;
+
 public class Chocolate {
-    private final int sugarCount;
-    private final int cocoaCount;
-    private final int milkCount;
+    private final float strength;
+    private final float sugar;
+    private final float cocoaButter;
+    private final float milk;
 
-    public Chocolate(int sugarCount, int cocoaCount, int milkCount) {
-        this.sugarCount = sugarCount;
-        this.cocoaCount = cocoaCount;
-        this.milkCount = milkCount;
+    public Chocolate(float strength, float sugar, float cocoaButter, float milk) {
+        float coef = (strength + sugar + cocoaButter + milk) / 4;
+        this.strength = strength * coef;
+        this.sugar = sugar * coef;
+        this.cocoaButter = cocoaButter * coef;
+        this.milk = milk * coef;
     }
 
-    public int getSugarCount() {
-        return sugarCount;
+    public Chocolate() {
+        this.strength = 1;
+        this.sugar = 0;
+        this.cocoaButter = 0;
+        this.milk = 0;
     }
 
-    public int getCocoaCount() {
-        return cocoaCount;
+    public Chocolate(ItemStack stack) {
+        if ((stack.getItem() instanceof ChocolateBaseItem)) {
+            this.strength = stack.get(ModDataComponents.STRENGTH).floatValue();
+            this.sugar = stack.get(ModDataComponents.SUGAR).floatValue();
+            this.cocoaButter = stack.get(ModDataComponents.COCOA_BUTTER).floatValue();
+            this.milk = stack.get(ModDataComponents.MILK).floatValue();
+        } else {
+            this.strength = 1;
+            this.sugar = 0;
+            this.cocoaButter = 0;
+            this.milk = 0;
+        }
     }
 
-    public int getMilkCount() {
-        return milkCount;
+    public float getStrength() {
+        return strength;
+    }
+
+    public float getSugar() {
+        return sugar;
+    }
+
+    public float getCocoaButter() {
+        return cocoaButter;
+    }
+
+    public float getMilk() {
+        return milk;
+    }
+
+    private byte castToByte(double x) {
+        int y = (int) Math.round(x);
+        return (byte) (Math.max(Math.min(y, 255), 0));
     }
 
     public int getColor() {
-        int red = (int) Math.max(0, Math.min(255,
-            0.9 * Math.pow(this.sugarCount + this.cocoaCount, 0.7) + 1.15 * Math.pow(this.milkCount + this.sugarCount, 1.11) * 1.4 - 7
-        ));
-        int green = (int) Math.max(0, Math.min(255,
-            0.405 * (this.sugarCount + this.cocoaCount) + 0.5 * Math.pow(this.milkCount + this.sugarCount, 1.5) * 0.5 - 13
-        ));
-        int blue = (int) Math.max(0, Math.min(255,
-            1.8 * (this.sugarCount + this.cocoaCount) + 1.1 * Math.pow(this.milkCount + this.sugarCount, 1.6) * 0.11 - 16
-        ));
-        int alpha = 255;
-        return (alpha << 24) | (red << 16) | (green << 8) | blue;
+        //alpha red green blue
+        byte[] bytes = {
+                castToByte(255),
+                castToByte((0.9 * Math.pow(this.strength + this.cocoaButter, 0.7) + 1.15 * Math.pow(this.milk + this.sugar, 1.11)) * 1.4 - 7),
+                castToByte((0.405 * (this.strength + this.cocoaButter) + 0.5 * Math.pow(this.milk + this.sugar, 1.5)) * 0.5 - 13),
+                castToByte((1.8 * (this.strength + this.cocoaButter) + 1.1 * Math.pow(this.milk + this.sugar, 1.6)) * 0.11 - 16)
+        }; //do not touch any of this calculation pls
+        return ByteBuffer.wrap(bytes).getInt();
+    }
+
+    public int getNutrition() {
+        return Math.round(this.cocoaButter / 10);
+    }
+
+    public float getSaturationModifier() {
+        return (1 + this.cocoaButter / 100) * (1 + this.sugar / 100);
+    }
+
+    public void save(ItemStack stack) {
+        stack.set(ModDataComponents.STRENGTH, this.strength);
+        stack.set(ModDataComponents.MILK, this.strength);
+        stack.set(ModDataComponents.COCOA_BUTTER, this.strength);
+        stack.set(ModDataComponents.SUGAR, this.strength);
     }
 }

@@ -15,7 +15,7 @@ import net.createmod.ponder.foundation.PonderIndex;
 public class ModClientEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        ModItems.registerItemProperties();
+        ModItemProperties.addCustomItemProperties();
         PonderIndex.addPlugin(new CreateChocolateFactoryPonderPlugin());
     }
 
@@ -24,7 +24,7 @@ public class ModClientEvents {
         event.register(
             (ItemStack stack, int tintIndex) -> {
                 if (tintIndex == 0 && stack.getItem() instanceof ChocolateBaseItem item) {
-                    return item.getChocolate().getColor();
+                    return (new Chocolate(stack)).getColor();
                 }
                 return 0xFFFFFFFF;
             },

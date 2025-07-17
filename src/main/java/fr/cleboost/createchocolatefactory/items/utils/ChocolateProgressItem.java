@@ -1,33 +1,31 @@
 package fr.cleboost.createchocolatefactory.items.utils;
 
-import org.jetbrains.annotations.NotNull;
-
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
+import fr.cleboost.createchocolatefactory.utils.ModDataComponents;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import fr.cleboost.createchocolatefactory.utils.ModDataComponents;
-
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 
 public class ChocolateProgressItem extends ChocolateBaseItem {
     public final int maxStage;
 
-    public ChocolateProgressItem(Properties properties, int progressStage, int sugarCount, int cocoaCount, int milkCount) {
-        super(properties, sugarCount, cocoaCount, milkCount);
+    public ChocolateProgressItem(Properties properties, int progressStage, float amount) {
+        super(properties.component(ModDataComponents.EAT_PROGRESS, 0), amount);
         this.maxStage = progressStage - 1;
     }
 
@@ -36,43 +34,38 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(@Nonnull ItemStack stack, @Nonnull Level level, @Nonnull LivingEntity entity) {
-        if (!(entity instanceof Player)) {
-            return stack;
-        }
-        Player player = (Player) entity;
-        Chocolate ch = getChocolate();
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
+    public @NotNull ItemStack finishUsingItem(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull LivingEntity pLivingEntity) {
+        if (!(pLivingEntity instanceof Player))
+            return pStack;
+        int eatProgress = getEatProgress(pStack);
+        Player player = (Player) (pLivingEntity);
+        Chocolate ch = new Chocolate(pStack);
+        //EAT :
+        player.getFoodData().eat(ch.getNutrition(), ch.getSaturationModifier());
+        player.awardStat(Stats.ITEM_USED.get(pStack.getItem()));
+        pLevel.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, pLevel.random.nextFloat() * 0.1F + 0.9F);
         player.gameEvent(GameEvent.EAT);
-        int eatProgress = getEatProgress(stack) + 1;
-        if (eatProgress > maxStage) {
+        if (eatProgress++ > this.getMaxStage()) {
             if (player instanceof ServerPlayer) {
-                CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
+                CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, pStack);
             }
             if (player.isCreative()) {
-                setEatProgress(stack, 0);
+                setEatProgress(pStack, 0);
             } else {
-                stack.shrink(1);
+                pStack.shrink(1);
             }
         } else {
-            setEatProgress(stack, eatProgress);
+            setEatProgress(pStack, eatProgress);
         }
-        return stack;
+        return pStack;
     }
 
-    public static int getEatProgress(ItemStack item) {
-        CompoundTag tag = item.get(ModDataComponents.EAT_PROGRESS.get());
-        if (tag != null && tag.contains("eatProgress")) {
-            return tag.getInt("eatProgress");
-        }
-        return 0;
+    public static int getEatProgress(ItemStack stack) {
+        return stack.get(ModDataComponents.EAT_PROGRESS).intValue();
     }
 
-    private static void setEatProgress(ItemStack item, int eatProgress) {
-        CompoundTag tag = item.get(ModDataComponents.EAT_PROGRESS.get());
-        if (tag == null) tag = new CompoundTag();
-        tag.putInt("eatProgress", eatProgress);
-        item.set(ModDataComponents.EAT_PROGRESS.get(), tag);
+    private static void setEatProgress(ItemStack stack, int eatProgress) {
+        stack.set(ModDataComponents.EAT_PROGRESS, eatProgress);
     }
 
     public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
