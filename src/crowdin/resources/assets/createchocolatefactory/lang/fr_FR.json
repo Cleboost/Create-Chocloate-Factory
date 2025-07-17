@@ -15,10 +15,19 @@
     "block.createchocolatefactory.cocoa_pod": "Fève de cacao",
     "block.createchocolatefactory.drying_kit": "Kit de séchage",
     "tooltip.createchocolatefactory.cocoa_pod": "Clique droit avec une machette pour ouvrir la fève de cacao et obtient de l'écorce de cacao et de la fève de cacao humide",
-    "tooltip.createchocolatefactory.machete": "Faites un clic droit sur un bloc de feuille pour le casser et le bloc au-dessous de lui",
+    "tooltip.createchocolatefactory.machete": "Right click on a leaf block to break it and the block below it",
     "tooltip.createchocolatefactory.progress": "This food has been eat %s time",
     "tooltip.createchocolatefactory.chocolate.hold_shift": "Hold shift for more information about the chocolate",
     "tooltip.createchocolatefactory.chocolate.composition": "Chocolate composition: %s sugar, %s cocoa, %s milk",
-    "createchocolatefactory.ponder.drying_kit.header": "Kit de séchage",
-    "createchocolatefactory.ponder.drying_kit": "Kit de séchage"
+    "createchocolatefactory.ponder.drying_kit.header": "Drying Kit",
+    "createchocolatefactory.ponder.drying_kit": "Drying Kit",
+    "createchocolatefactory.ponder.drying_kit.text_1": "Drying 9 damp cocoa beans",
+    "createchocolatefactory.ponder.drying_kit.text_2": "Get your dryed and dirty cocoa beans",
+    "createchocolatefactory.tooltip.dryingkit.info": "Drying Kit",
+    "createchocolatefactory.tooltip.dryingkit.status": "Status: %s",
+    "createchocolatefactory.tooltip.dryingkit.progress": "Progress: %s",
+    "createchocolatefactory.tooltip.dryingkit.time_remaining": "Time remaining: %s",
+    "createchocolatefactory.tooltip.dryingkit.empty": "Empty",
+    "createchocolatefactory.tooltip.dryingkit.drying": "Drying",
+    "createchocolatefactory.tooltip.dryingkit.dry": "Dry"
 }
