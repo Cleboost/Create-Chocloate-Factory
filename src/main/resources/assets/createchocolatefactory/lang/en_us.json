@@ -31,5 +31,10 @@
     "createchocolatefactory.tooltip.dryingkit.empty": "Empty",
     "createchocolatefactory.tooltip.dryingkit.drying": "Drying",
     "createchocolatefactory.tooltip.dryingkit.dry": "Dry",
+    "createchocolatefactory.tooltip.dryingkit.blocked_sky": "Sky is blocked - drying paused",
+    "createchocolatefactory.tooltip.dryingkit.night": "Drying paused during night",
+    "createchocolatefactory.tooltip.dryingkit.raining": "Drying reset due to rain or thunderstorm",
+    "createchocolatefactory.tooltip.dryingkit.bonus": "★ Bonus",
+    "createchocolatefactory.tooltip.dryingkit.bonus_text": "+100% drying speed in the nether",  
     "message.createchocolatefactory.dryingkit.need_more_cocoa_beans": "You need more damp cocoa beans to dry them (%s/9)"
 }
