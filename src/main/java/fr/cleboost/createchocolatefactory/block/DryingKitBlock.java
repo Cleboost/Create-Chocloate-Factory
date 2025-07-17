@@ -1,5 +1,6 @@
 package fr.cleboost.createchocolatefactory.block;
 
+import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.blockentity.DryingKitBlockEntity;
 import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
 import fr.cleboost.createchocolatefactory.utils.ModBlocks;
@@ -29,6 +30,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.ItemInteractionResult;
+
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NotNull;
 
 public class DryingKitBlock extends Block implements EntityBlock {
@@ -59,8 +63,9 @@ public class DryingKitBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level pLevel, @NotNull BlockState pState,
-            @NotNull BlockEntityType<T> pBlockEntityType) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level pLevel, @Nonnull BlockState pState,
+            @Nonnull BlockEntityType<T> pBlockEntityType) {
+        if (!pState.getValue(STATE).equals(State.DRYING)) return null;
         return TickableBlockEntity.getTickerHelper(pLevel);
     }
 
@@ -101,42 +106,40 @@ public class DryingKitBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+    protected ItemInteractionResult useItemOn(ItemStack item, BlockState state, Level level, BlockPos pos,
             Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (level.isClientSide() || hand != InteractionHand.MAIN_HAND) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
         if (state.getValue(STATE) == State.EMPTY) {
-            if (stack.is(ModItems.COCOA_BEANS_WET.get())) {
-                if (stack.getCount() >= 9 || player.isCreative()) {
+            if (item.is(ModItems.COCOA_BEANS_WET)) {
+                if (item.getCount() >= 9 || player.isCreative()) {
                     if (!player.isCreative()) {
-                        stack.shrink(9);
+                        item.shrink(9);
                     }
                     level.setBlockAndUpdate(pos,
                             ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.DRYING));
                     DryingKitBlockEntity blockEntity = (DryingKitBlockEntity) level.getBlockEntity(pos);
-                    if (blockEntity != null) {
-                        blockEntity.setTickToDry();
-                        blockEntity.setTickerEnable();
-                    }
+                    blockEntity.setTickToDry();
                     return ItemInteractionResult.SUCCESS;
                 }
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
         if (state.getValue(STATE) == State.DRY) {
-            if (stack.isEmpty() || stack.is(ModItems.COCOA_BEANS_DIRTY.get())) {
-                if (stack.isEmpty()) {
+            if (item.isEmpty() || item.is(ModItems.COCOA_BEANS_DIRTY.get())) {
+                if (item.isEmpty()) {
                     ItemStack cocoas = new ItemStack(ModItems.COCOA_BEANS_DIRTY.get(), 9);
                     var itemsE = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, cocoas);
                     level.addFreshEntity(itemsE);
                 } else {
-                    if (stack.getCount() + 9 > stack.getMaxStackSize()) {
+                    if (item.getCount() + 9 > item.getMaxStackSize()) {
                         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
                     }
-                    stack.grow(9);
+                    item.grow(9);
                 }
                 level.setBlockAndUpdate(pos,
                         ModBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY));

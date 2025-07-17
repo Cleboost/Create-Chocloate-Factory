@@ -22,5 +22,12 @@
     "createchocolatefactory.ponder.drying_kit.header": "Drying Kit",
     "createchocolatefactory.ponder.drying_kit": "Drying Kit",
     "createchocolatefactory.ponder.drying_kit.text_1": "Drying 9 damp cocoa beans",
-    "createchocolatefactory.ponder.drying_kit.text_2": "Get your dryed and dirty cocoa beans"
+    "createchocolatefactory.ponder.drying_kit.text_2": "Get your dryed and dirty cocoa beans",
+    "createchocolatefactory.tooltip.dryingkit.info": "Drying Kit",
+    "createchocolatefactory.tooltip.dryingkit.status": "Status: %s",
+    "createchocolatefactory.tooltip.dryingkit.progress": "Progress: %s",
+    "createchocolatefactory.tooltip.dryingkit.time_remaining": "Time remaining: %s",
+    "createchocolatefactory.tooltip.dryingkit.empty": "Empty",
+    "createchocolatefactory.tooltip.dryingkit.drying": "Drying",
+    "createchocolatefactory.tooltip.dryingkit.dry": "Dry"
 }

@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 @Mod(CreateChocolateFactory.MODID)
 public class CreateChocolateFactory {
     public static final String MODID = "createchocolatefactory";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public CreateChocolateFactory(IEventBus modEventBus) {
         ModTab.register(modEventBus);
