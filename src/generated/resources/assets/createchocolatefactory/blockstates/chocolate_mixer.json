@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "createchocolatefactory:block/chocolate_mixer/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createchocolatefactory:block/chocolate_mixer/block"
+    },
+    "facing=south": {
+      "model": "createchocolatefactory:block/chocolate_mixer/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "createchocolatefactory:block/chocolate_mixer/block",
+      "y": 270
+    }
+  }
+}

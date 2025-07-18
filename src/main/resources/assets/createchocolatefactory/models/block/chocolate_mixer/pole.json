@@ -1,5 +1,7 @@
 {
 	"format_version": "1.21.6",
+	"parent": "block/block",
+	"ambientocclusion": false,
 	"textures": {
 		"6": "create:waterwheel_metal",
 		"mechanical_press_pole": "create:block/mechanical_press_pole"

@@ -1,4 +1,7 @@
 {
+	"format_version": "1.21.6",
+	"parent": "block/block",
+	"ambientocclusion": false,
 	"textures": {
 		"6": "createchocolatefactory:block/chocolate_mixer/chocolate_mixer_head"
 	},

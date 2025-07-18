@@ -99,5 +99,8 @@ public class CCFItems {
         public static final ItemEntry<Item> MINT_SEEDS = REGISTRATE.item("mint_seeds", Item::new).register();
         public static final ItemEntry<Item> ORANGE = REGISTRATE.item("orange", Item::new).register();
 
+        // Brass Whisk
+        public static final ItemEntry<Item> BRASS_WHISK = REGISTRATE.item("brass_whisk", Item::new).register();
+
         public static void register() {}
 }

@@ -34,6 +34,7 @@ public class CCFBlockEntities {
         public static final BlockEntityEntry<ChocolateMixerBlockEntity> CHOCOLATE_MIXER = CreateChocolateFactory.REGISTRATE
                         .blockEntity("chocolate_mixer", ChocolateMixerBlockEntity::new)
                         .visual(() -> ChocolateMixerVisual::new)
+                        .renderer(() -> ChocolateMixerRender::new)
                         .validBlocks(CCFBlocks.CHOCOLATE_MIXER)
                         .register();
 

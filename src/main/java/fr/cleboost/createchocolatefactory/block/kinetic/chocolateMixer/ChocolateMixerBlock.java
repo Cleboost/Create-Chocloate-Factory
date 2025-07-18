@@ -1,29 +1,46 @@
 package fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer;
 
-import com.simibubi.create.content.kinetics.base.KineticBlock;
+import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.processing.basin.BasinBlock;
 import com.simibubi.create.foundation.block.IBE;
 import fr.cleboost.createchocolatefactory.core.CCFBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class ChocolateMixerBlock extends KineticBlock implements IBE<ChocolateMixerBlockEntity> {
-
+public class ChocolateMixerBlock extends HorizontalKineticBlock implements IBE<ChocolateMixerBlockEntity> {
     public ChocolateMixerBlock(Properties properties) {
         super(properties);
     }
 
+	@Override
+	public Axis getRotationAxis(BlockState state) {
+		return state.getValue(HORIZONTAL_FACING)
+			.getAxis();
+	}
+
     @Override
-    public Axis getRotationAxis(BlockState state) {
-        return Axis.Z;
-    }
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		Direction prefferedSide = getPreferredHorizontalFacing(context);
+		if (prefferedSide != null)
+			return defaultBlockState().setValue(HORIZONTAL_FACING, prefferedSide);
+		return super.getStateForPlacement(context);
+	}
+    
+	@Override
+	public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
+		return face.getAxis() == state.getValue(HORIZONTAL_FACING)
+			.getAxis();
+	}
+
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-        return BasinBlock.isBasin(worldIn, pos.below());
+        return !BasinBlock.isBasin(worldIn, pos.below());
     }
 
     @Override

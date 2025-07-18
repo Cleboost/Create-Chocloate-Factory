@@ -1,9 +1,11 @@
 package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.content.contraptions.minecart.capability.CapabilityMinecartController;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;
+import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerBlockEntity;
 import fr.cleboost.createchocolatefactory.core.CCFBlockEntities;
 import fr.cleboost.createchocolatefactory.core.DataComponentsRegistry;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
@@ -11,8 +13,12 @@ import fr.cleboost.createchocolatefactory.core.CCFLang;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 
 import org.slf4j.Logger;
 
@@ -37,6 +43,11 @@ public class CreateChocolateFactory {
         DataComponentsRegistry.register(modEventBus);
         // LootModifiersRegistry.register(modEventBus);
     }
+
+    // @SubscribeEvent
+    // public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+    //     ChocolateMixerBlockEntity.registerCapabilities(event);
+    // }
 
     public static CreateRegistrate registrate() {
         return REGISTRATE;

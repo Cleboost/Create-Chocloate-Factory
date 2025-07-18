@@ -12,6 +12,7 @@ import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 public class ModClientEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
+        ModPartialModel.init();
         // ModItemProperties.addCustomItemProperties();
         // PonderIndex.addPlugin(new CreateChocolateFactoryPonderPlugin());
     }

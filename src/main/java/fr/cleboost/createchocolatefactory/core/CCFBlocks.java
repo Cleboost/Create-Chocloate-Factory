@@ -1,15 +1,17 @@
 package fr.cleboost.createchocolatefactory.core;
 
-import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
-
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.CocoaPod;
 import fr.cleboost.createchocolatefactory.block.dryingKit.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerBlock;
 
+import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.infrastructure.config.CStress;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.client.renderer.RenderType;
 
 public class CCFBlocks {
     private static final CreateRegistrate REGISTRATE = CreateChocolateFactory.registrate();
@@ -36,7 +38,12 @@ public class CCFBlocks {
 
     public static final BlockEntry<ChocolateMixerBlock> CHOCOLATE_MIXER = REGISTRATE
         .block("chocolate_mixer", ChocolateMixerBlock::new)
-        .blockstate((ctx, prov) -> {})
+        .properties(p -> p.noOcclusion()
+            .mapColor(MapColor.STONE))
+        .addLayer(() -> RenderType::cutoutMipped)
+        // .transform(CStress.setImpact(4.0))
+        // .blockstate((ctx, prov) -> {})
+        .blockstate(BlockStateGen.horizontalBlockProvider(true))
         .item()
         .model((ctx, prov) -> {})
         .build()
