@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:item/generated",
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "scale": [
+        3,
+        3,
+        3
+      ],
+      "translation": [
+        0,
+        0,
+        0.75
+      ]
+    }
+  },
+  "textures": {
+    "layer0": "createchocolatefactory:item/logo"
+  }
+}

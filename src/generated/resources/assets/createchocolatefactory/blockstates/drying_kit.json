@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "state=dry": {
+      "model": "createchocolatefactory:block/drying_kit/drying_kit_dry"
+    },
+    "state=drying": {
+      "model": "createchocolatefactory:block/drying_kit/drying_kit_drying"
+    },
+    "state=empty": {
+      "model": "createchocolatefactory:block/drying_kit/drying_kit_empty"
+    }
+  }
+}
