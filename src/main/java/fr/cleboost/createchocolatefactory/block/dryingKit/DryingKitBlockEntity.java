@@ -41,7 +41,10 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
         if (level.isClientSide())
             return;
 
-        if (level.isRaining() || level.isThundering()) return;
+        if (level.isRaining() || level.isThundering()) {
+            this.tickCount = 0;
+            return;
+        }
         if (!level.canSeeSky(worldPosition) && !level.dimension().equals(Level.NETHER)) return;
         if (!level.isDay() && !level.dimension().equals(Level.NETHER)) return;
 
