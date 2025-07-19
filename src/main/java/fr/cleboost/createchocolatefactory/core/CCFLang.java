@@ -27,9 +27,17 @@ public class CCFLang {
         CreateChocolateFactory.REGISTRATE.addRawLang("message.createchocolatefactory.dryingkit.need_more_cocoa_beans", "You need more damp cocoa beans to dry them (%s/9)");
     }
 
+    public static void registerPonder() {
+        CreateChocolateFactory.REGISTRATE.addRawLang("createchocolatefactory.ponder.drying_kit.header", "Drying Kit");
+        CreateChocolateFactory.REGISTRATE.addRawLang("createchocolatefactory.ponder.drying_kit.text_1", "Drying 9 damp cocoa beans");
+        CreateChocolateFactory.REGISTRATE.addRawLang("createchocolatefactory.ponder.drying_kit.text_2", "Drying kit needs active light & work only during day");
+        CreateChocolateFactory.REGISTRATE.addRawLang("createchocolatefactory.ponder.drying_kit.text_3", "Get your dried but dirty cocoa beans");
+    }
+
     public static void register() {
         registerTooltips();
         registerGoggles();
         registerMessages();
+        registerPonder();
     }
 }

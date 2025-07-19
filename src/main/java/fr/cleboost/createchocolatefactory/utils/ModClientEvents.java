@@ -1,20 +1,19 @@
 package fr.cleboost.createchocolatefactory.utils;
 
+import net.createmod.ponder.foundation.PonderIndex;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-// import fr.cleboost.createchocolatefactory.ponder.CreateChocolateFactoryPonderPlugin;
-// import net.createmod.ponder.foundation.PonderIndex;
+import fr.cleboost.createchocolatefactory.ponder.CreateChocolateFactoryPonderPlugin;
 
 @EventBusSubscriber(modid = CreateChocolateFactory.MODID, value = Dist.CLIENT)
 public class ModClientEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         ModPartialModel.init();
-        // ModItemProperties.addCustomItemProperties();
-        // PonderIndex.addPlugin(new CreateChocolateFactoryPonderPlugin());
+        PonderIndex.addPlugin(new CreateChocolateFactoryPonderPlugin());
     }
 
     // @SubscribeEvent
