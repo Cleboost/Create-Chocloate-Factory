@@ -2,6 +2,7 @@ package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import fr.cleboost.createchocolatefactory.core.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
