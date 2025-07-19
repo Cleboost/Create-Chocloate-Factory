@@ -2,8 +2,10 @@ package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 
+import com.simibubi.create.AllTags.AllItemTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 
@@ -48,6 +50,12 @@ public class CCFItems {
 
         // Brass Whisk
         public static final ItemEntry<Item> BRASS_WHISK = REGISTRATE.item("brass_whisk", Item::new).register();
+
+        // Seau de chocolat avec un chemin de texture personnalisé
+        public static final ItemEntry<Item> CHOCOLATE_BUCKET = REGISTRATE.item("chocolate_bucket", Item::new)
+            .tag(AllItemTags.UPRIGHT_ON_BELT.tag)
+            .model((ctx, prov) -> prov.generated(ctx, prov.modLoc("item/chocolate_bucket/bucket"), prov.modLoc("item/chocolate_bucket/overlay")))
+            .register();
 
         public static void register() {}
 }
