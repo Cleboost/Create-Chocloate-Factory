@@ -7,11 +7,9 @@ import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.Chocolate
 
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.infrastructure.config.CStress;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.client.renderer.RenderType;
 
 public class CCFBlocks {
     private static final CreateRegistrate REGISTRATE = CreateChocolateFactory.registrate();
@@ -40,7 +38,6 @@ public class CCFBlocks {
         .block("chocolate_mixer", ChocolateMixerBlock::new)
         .properties(p -> p.noOcclusion()
             .mapColor(MapColor.STONE))
-        // .transform(CStress.setImpact(4.0))
         .blockstate(BlockStateGen.horizontalBlockProvider(true))
         .item()
         .model((ctx, prov) -> {})

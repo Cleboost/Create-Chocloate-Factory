@@ -6,7 +6,6 @@ import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.Chocolate
 import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerRender;
 import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerVisual;
 
-import com.simibubi.create.AllPartialModels;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
 public class CCFBlockEntities {

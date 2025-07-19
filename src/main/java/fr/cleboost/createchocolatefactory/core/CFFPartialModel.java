@@ -11,7 +11,5 @@ public class CFFPartialModel {
     return PartialModel.of(CreateChocolateFactory.asResource("block/" + path));
   }
 
-  public static void init() {
-		// init static fields
-	}
+  public static void init() {}
 }
