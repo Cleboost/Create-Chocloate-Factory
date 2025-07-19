@@ -1,29 +1,13 @@
 package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.item.ChocolateBar;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
-import fr.cleboost.createchocolatefactory.item.utils.FuelItem;
-import fr.cleboost.createchocolatefactory.utils.ModFoods;
 import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.world.entity.LivingEntity;
-import org.jetbrains.annotations.Nullable;
 
-import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 
 public class CCFItems {
         // public static final DeferredRegister.Items ITEMS =

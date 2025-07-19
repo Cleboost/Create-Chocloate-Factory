@@ -5,7 +5,7 @@ import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 
 import dev.engine_room.flywheel.api.visualization.VisualizationManager;
-import fr.cleboost.createchocolatefactory.utils.ModPartialModel;
+import fr.cleboost.createchocolatefactory.core.CFFPartialModel;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,7 +28,7 @@ public class ChocolateMixerRender extends KineticBlockEntityRenderer<ChocolateMi
 		BlockState blockState = blockEntity.getBlockState();
 		float renderedHeadOffset = blockEntity.getRenderedHeadOffset(partialTicks);
 
-		SuperByteBuffer headRender = CachedBuffers.partialFacing(ModPartialModel.CHOCOLATE_MIXER_HEAD, blockState,
+		SuperByteBuffer headRender = CachedBuffers.partialFacing(CFFPartialModel.CHOCOLATE_MIXER_HEAD, blockState,
 			blockState.getValue(HorizontalKineticBlock.HORIZONTAL_FACING));
 		headRender.translate(0, -renderedHeadOffset, 0)
 			.light(light)

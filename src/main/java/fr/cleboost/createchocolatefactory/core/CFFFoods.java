@@ -1,10 +1,10 @@
-package fr.cleboost.createchocolatefactory.utils;
+package fr.cleboost.createchocolatefactory.core;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 
-public class ModFoods {
+public class CFFFoods {
     public static final FoodProperties DARK_CHOCOLATE = new FoodProperties.Builder().nutrition(4)
             .saturationModifier(0.2f).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300), 0.3f).build();
     public static final FoodProperties BROWN_CHOCOLATE = new FoodProperties.Builder().nutrition(4)

@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.utils;
+package fr.cleboost.createchocolatefactory.core;
 
 import net.createmod.ponder.foundation.PonderIndex;
 import net.neoforged.api.distmarker.Dist;
@@ -9,10 +9,10 @@ import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.ponder.CreateChocolateFactoryPonderPlugin;
 
 @EventBusSubscriber(modid = CreateChocolateFactory.MODID, value = Dist.CLIENT)
-public class ModClientEvents {
+public class CFFClientEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        ModPartialModel.init();
+        CFFPartialModel.init();
         PonderIndex.addPlugin(new CreateChocolateFactoryPonderPlugin());
     }
 

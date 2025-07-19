@@ -2,19 +2,13 @@ package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-
-import fr.cleboost.createchocolatefactory.core.CCFBlocks;
-import fr.cleboost.createchocolatefactory.core.CCFBlockEntities;
-import fr.cleboost.createchocolatefactory.core.DataComponentsRegistry;
-import fr.cleboost.createchocolatefactory.core.LootModifiersRegistry;
-import fr.cleboost.createchocolatefactory.core.CCFItems;
-import fr.cleboost.createchocolatefactory.core.CCFLang;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.registries.DeferredHolder;
-
 import org.slf4j.Logger;
 
 @Mod(CreateChocolateFactory.MODID)
@@ -39,11 +33,12 @@ public class CreateChocolateFactory {
         LootModifiersRegistry.register(modEventBus);
     }
 
+    @SubscribeEvent
     public static CreateRegistrate registrate() {
         return REGISTRATE;
     }
 
     public static ResourceLocation asResource(String path) {
-		return ResourceLocation.fromNamespaceAndPath(MODID, path);
-	}
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    }
 }
