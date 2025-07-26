@@ -7,11 +7,12 @@
   ],
   "results": [
     {
-      "fluid": "createchocolatefactory:chocolate",
+      "id": "createchocolatefactory:chocolate",
       "amount": 250
     },
     {
-      "item": "minecraft:glass_bottle"
+      "id": "minecraft:glass_bottle",
+      "count": 1
     }
   ]
 }
