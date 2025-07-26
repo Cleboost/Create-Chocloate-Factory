@@ -1,0 +1,22 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:cocoa_powder"
+    },
+    {
+      "item": "createchocolatefactory:cocoa_powder"
+    },
+    {
+      "item": "createchocolatefactory:cocoa_powder"
+    },
+    {
+      "item": "createchocolatefactory:cocoa_powder"
+    }
+  ],
+  "results": [
+    {
+      "id": "createchocolatefactory:cocoa_cake"
+    }
+  ]
+} 
