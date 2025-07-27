@@ -18,25 +18,25 @@ public class ChocolateMixerBlock extends HorizontalKineticBlock implements IBE<C
         super(properties);
     }
 
-	@Override
-	public Axis getRotationAxis(BlockState state) {
-		return state.getValue(HORIZONTAL_FACING)
-			.getAxis();
-	}
+    @Override
+    public Axis getRotationAxis(BlockState state) {
+        return state.getValue(HORIZONTAL_FACING)
+                .getAxis();
+    }
 
     @Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		Direction prefferedSide = getPreferredHorizontalFacing(context);
-		if (prefferedSide != null)
-			return defaultBlockState().setValue(HORIZONTAL_FACING, prefferedSide);
-		return super.getStateForPlacement(context);
-	}
-    
-	@Override
-	public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-		return face.getAxis() == state.getValue(HORIZONTAL_FACING)
-			.getAxis();
-	}
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        //var obj = context.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, context.getClickedPos(), context.getNearestLookingDirection());
+        Direction prefferedSide = getPreferredHorizontalFacing(context);
+        if (prefferedSide != null)
+            return defaultBlockState().setValue(HORIZONTAL_FACING, prefferedSide);
+        return super.getStateForPlacement(context);
+    }
+
+    @Override
+    public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
+        return face.getAxis() == state.getValue(HORIZONTAL_FACING).getAxis();
+    }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
