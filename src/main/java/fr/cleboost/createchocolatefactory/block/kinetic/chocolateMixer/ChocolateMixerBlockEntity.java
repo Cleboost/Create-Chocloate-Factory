@@ -1,7 +1,8 @@
 package fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer;
 
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
-import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import fr.cleboost.createchocolatefactory.core.CCFBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -10,21 +11,22 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+
+import java.util.List;
 
 public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
+    private static final int TANK_SIZE = 500;
     public int runningTicks;
     public int processingTicks;
     public boolean running;
 
-    private FluidTank milkTank;
-    private FluidTank butterCocoaTank;
+    private SmartFluidTankBehaviour milkTank;
+    private SmartFluidTankBehaviour cocoaButterTank;
 
     // SmartFluidTankBehaviour milkTank;
-    // SmartFluidTankBehaviour butterCocoaTank;
+    // SmartFluidTankBehaviour cocoaButterTank;
     public ChocolateMixerBlockEntity(BlockEntityType<? extends ChocolateMixerBlockEntity> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         // inputInv = new ItemStackHandler(1);
@@ -37,7 +39,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         super.tick();
 
         boolean wasRunning = running;
-        running = Math.abs(getSpeed()) > 0.5f;
+        running = Math.abs(getSpeed()) > 0.5f && !this.milkTank.isEmpty() && !this.cocoaButterTank.isEmpty();
 
         if (running) {
             runningTicks++;
@@ -54,29 +56,6 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
             }
         }
     }
-
-    // public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-    // 	event.registerBlockEntity(
-    // 			Capabilities.FluidHandler.BLOCK,
-    // 			CCFBlockEntities.CHOCOLATE_MIXER.get(),
-    // 			(be, context) -> {
-    // 				if (context != Direction.DOWN)
-    // 					return be.milkTank.getCapability();
-    // 				return null;
-    // 			}
-    // 	);
-    // }
-
-    // @Override
-    // public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-    // 	milkTank = SmartFluidTankBehaviour.single(this, 1000);
-    // 	behaviours.add(milkTank);
-
-    //     // butterCocoaTank = SmartFluidTankBehaviour.single(this, 1000);
-    // 	// behaviours.add(butterCocoaTank);
-
-    // 	// registerAwardables(behaviours, AllAdvancements.SPOUT, AllAdvancements.FOODS);
-    // }
 
     public float getRenderedHeadOffset(float partialTicks) {
         int localTick;
@@ -123,25 +102,39 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        CreateChocolateFactory.LOGGER.info("capability called");
         event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
                 CCFBlockEntities.CHOCOLATE_MIXER.get(),
-                (be, context) -> {
-                    CreateChocolateFactory.LOGGER.info("capability for milk : " + context);
-                    if (context != Direction.DOWN)
-                        return be.milkTank;
+                (be, direction) -> {
+                    if (direction != Direction.DOWN && direction != Direction.UP)
+                        return be.milkTank.getCapability();
                     return null;
                 }
         );
         event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
                 CCFBlockEntities.CHOCOLATE_MIXER.get(),
-                (be, context) -> {
-                    if (context != Direction.DOWN)
-                        return be.butterCocoaTank;
+                (be, direction) -> {
+                    if (direction != Direction.DOWN && direction != Direction.UP)
+                        return be.cocoaButterTank.getCapability();
                     return null;
                 }
         );
+    }
+
+    @Override
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+        super.addBehaviours(behaviours);
+        behaviours.add(this.milkTank = SmartFluidTankBehaviour.single(this, TANK_SIZE)
+                .allowExtraction().allowInsertion());
+        behaviours.add(this.cocoaButterTank = SmartFluidTankBehaviour.single(this, TANK_SIZE)
+                .allowExtraction().allowInsertion());
+
+    }
+
+    @Override
+    public void invalidate() {
+        super.invalidate();
+        invalidateCapabilities();
     }
 }
