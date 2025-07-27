@@ -4,7 +4,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.nio.ByteBuffer;
 
-import fr.cleboost.createchocolatefactory.core.DataComponentsRegistry;
+import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
 
 public class Chocolate {
@@ -30,10 +30,10 @@ public class Chocolate {
 
     public Chocolate(ItemStack stack) {
         if ((stack.getItem() instanceof ChocolateBaseItem)) {
-            this.strength = stack.get(DataComponentsRegistry.STRENGTH).floatValue();
-            this.sugar = stack.get(DataComponentsRegistry.SUGAR).floatValue();
-            this.cocoaButter = stack.get(DataComponentsRegistry.COCOA_BUTTER).floatValue();
-            this.milk = stack.get(DataComponentsRegistry.MILK).floatValue();
+            this.strength = stack.get(CCFDataComponents.STRENGTH).floatValue();
+            this.sugar = stack.get(CCFDataComponents.SUGAR).floatValue();
+            this.cocoaButter = stack.get(CCFDataComponents.COCOA_BUTTER).floatValue();
+            this.milk = stack.get(CCFDataComponents.MILK).floatValue();
         } else {
             this.strength = 1;
             this.sugar = 0;
@@ -83,9 +83,9 @@ public class Chocolate {
     }
 
     public void save(ItemStack stack) {
-        stack.set(DataComponentsRegistry.STRENGTH, this.strength);
-        stack.set(DataComponentsRegistry.MILK, this.strength);
-        stack.set(DataComponentsRegistry.COCOA_BUTTER, this.strength);
-        stack.set(DataComponentsRegistry.SUGAR, this.strength);
+        stack.set(CCFDataComponents.STRENGTH, this.strength);
+        stack.set(CCFDataComponents.MILK, this.strength);
+        stack.set(CCFDataComponents.COCOA_BUTTER, this.strength);
+        stack.set(CCFDataComponents.SUGAR, this.strength);
     }
 }

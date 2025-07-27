@@ -1,6 +1,6 @@
 package fr.cleboost.createchocolatefactory.item.utils;
 
-import fr.cleboost.createchocolatefactory.core.DataComponentsRegistry;
+import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.network.chat.Component;
@@ -25,7 +25,7 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
     public final int maxStage;
 
     public ChocolateProgressItem(Properties properties, int progressStage, float amount) {
-        super(properties.component(DataComponentsRegistry.EAT_PROGRESS, 0), amount);
+        super(properties.component(CCFDataComponents.EAT_PROGRESS, 0), amount);
         this.maxStage = progressStage - 1;
     }
 
@@ -61,11 +61,11 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
     }
 
     public static int getEatProgress(ItemStack stack) {
-        return stack.get(DataComponentsRegistry.EAT_PROGRESS).intValue();
+        return stack.get(CCFDataComponents.EAT_PROGRESS).intValue();
     }
 
     private static void setEatProgress(ItemStack stack, int eatProgress) {
-        stack.set(DataComponentsRegistry.EAT_PROGRESS, eatProgress);
+        stack.set(CCFDataComponents.EAT_PROGRESS, eatProgress);
     }
 
     public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
