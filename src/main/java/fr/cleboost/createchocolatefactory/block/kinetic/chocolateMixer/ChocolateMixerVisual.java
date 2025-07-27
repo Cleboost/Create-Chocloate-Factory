@@ -11,7 +11,7 @@ import dev.engine_room.flywheel.api.visual.DynamicVisual;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import dev.engine_room.flywheel.lib.model.Models;
 import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
-import fr.cleboost.createchocolatefactory.core.CFFPartialModel;
+import fr.cleboost.createchocolatefactory.core.CCFPartialModel;
 import net.minecraft.core.Direction;
 import dev.engine_room.flywheel.lib.instance.InstanceTypes;
 import dev.engine_room.flywheel.lib.instance.OrientedInstance;
@@ -29,7 +29,7 @@ public class ChocolateMixerVisual extends ShaftVisual<ChocolateMixerBlockEntity>
 		mixerPole = instancerProvider().instancer(InstanceTypes.ORIENTED, Models.partial(AllPartialModels.MECHANICAL_MIXER_POLE))
 			.createInstance();
 
-		mixerHead = instancerProvider().instancer(AllInstanceTypes.ROTATING, Models.partial(CFFPartialModel.CHOCOLATE_MIXER_HEAD))
+		mixerHead = instancerProvider().instancer(AllInstanceTypes.ROTATING, Models.partial(CCFPartialModel.CHOCOLATE_MIXER_HEAD))
 			.createInstance();
 
 		mixerHead.setRotationAxis(Direction.Axis.Y);

@@ -4,7 +4,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 
-public class CFFFoods {
+public class CCFFoods {
     public static final FoodProperties DARK_CHOCOLATE = new FoodProperties.Builder().nutrition(4)
             .saturationModifier(0.2f).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300), 0.3f).build();
     public static final FoodProperties BROWN_CHOCOLATE = new FoodProperties.Builder().nutrition(4)

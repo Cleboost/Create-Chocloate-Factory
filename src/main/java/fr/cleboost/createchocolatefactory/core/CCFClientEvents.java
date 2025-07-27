@@ -9,10 +9,10 @@ import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.ponder.CreateChocolateFactoryPonderPlugin;
 
 @EventBusSubscriber(modid = CreateChocolateFactory.MODID, value = Dist.CLIENT)
-public class CFFClientEvents {
+public class CCFClientEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        CFFPartialModel.init();
+        CCFPartialModel.init();
         PonderIndex.addPlugin(new CreateChocolateFactoryPonderPlugin());
     }
 
