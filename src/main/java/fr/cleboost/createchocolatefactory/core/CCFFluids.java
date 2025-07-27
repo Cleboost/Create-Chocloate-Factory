@@ -5,8 +5,6 @@ import com.simibubi.create.content.fluids.VirtualFluid;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.fluid.chocolate.ChocolateFluid;
-import fr.cleboost.createchocolatefactory.fluid.chocolate.ChocolateFluid.ChocolateFluidType;
 
 public class CCFFluids {
     private static final CreateRegistrate REGISTRATE = CreateChocolateFactory.registrate();
@@ -20,6 +18,7 @@ public class CCFFluids {
 
     public static final FluidEntry<VirtualFluid> CHOCOLATE = REGISTRATE.virtualFluid("ccf_chocolate")
         .tag(AllTags.commonFluidTag("ccf_chocolate"))
+        .lang("Molten Chocolate")
         .register();
 
     public static void register() {}
