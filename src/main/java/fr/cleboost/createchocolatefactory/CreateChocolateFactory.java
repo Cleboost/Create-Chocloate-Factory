@@ -33,8 +33,8 @@ public class CreateChocolateFactory {
         CCFItems.register();
         CCFFluids.register();
 
-        DataComponentsRegistry.register(modEventBus);
-        LootModifiersRegistry.register(modEventBus);
+        CCFDataComponents.register(modEventBus);
+        CCFLootModifiers.register(modEventBus);
     }
 
     @SubscribeEvent
