@@ -1,0 +1,18 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:chocolate_bucket"
+    }
+  ],
+  "results": [
+    {
+      "id": "createchocolatefactory:chocolate",
+      "amount": 250
+    },
+    {
+      "id": "minecraft:glass_bottle",
+      "count": 1
+    }
+  ]
+}
