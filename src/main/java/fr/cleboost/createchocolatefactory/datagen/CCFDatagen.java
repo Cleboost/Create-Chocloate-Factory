@@ -3,6 +3,7 @@ package fr.cleboost.createchocolatefactory.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.datagen.recipes.CCFStandardRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -17,7 +18,7 @@ public class CCFDatagen {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 		//ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        // gen.addProvider(true, new CCFRecipeProvider(packOutput, lookupProvider, existingFileHelper));
+        gen.addProvider(true, new CCFStandardRecipeGen(packOutput, lookupProvider));
         
         if (event.includeServer()) {
             CCFRecipeProvider.registerAllProcessing(gen, packOutput, lookupProvider);
