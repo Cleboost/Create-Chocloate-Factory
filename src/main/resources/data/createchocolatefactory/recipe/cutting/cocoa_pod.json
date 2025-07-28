@@ -1,0 +1,19 @@
+{
+    "type": "create:cutting",
+    "ingredients": [
+      {
+        "item": "createchocolatefactory:cocoa_pod"
+      }
+    ],
+    "processing_time": 400,
+    "results": [
+      {
+        "count": 1,
+        "id": "createchocolatefactory:cocoa_beans_wet"
+      },
+      {
+        "count": 5,
+        "id": "createchocolatefactory:cocoa_bark"
+      }
+    ]
+}
