@@ -1,0 +1,14 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:caramel"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "id": "createchocolatefactory:caramel_nugget"
+    }
+  ]
+}
