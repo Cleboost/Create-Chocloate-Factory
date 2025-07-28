@@ -19,7 +19,7 @@ public class CCFCompactingRecipeGen extends CompactingRecipeGen {
         .require(CCFItems.COCOA_NIBS)
         .require(CCFItems.COCOA_NIBS)
         .duration(400)
-        .output(CCFItems.COCOA_CAKE.get())
+        .output(CCFItems.COCOA_CAKE)
         .output(CCFFluids.COCOA_BUTTER.get(), 250));
 
     public CCFCompactingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
