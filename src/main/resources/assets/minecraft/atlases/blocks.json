@@ -1,0 +1,12 @@
+{
+    "sources": [
+        {
+            "type": "single",
+            "resource": "createchocolatefactory:fluid/chocolate_flow"
+        },
+        {
+            "type": "single",
+            "resource": "createchocolatefactory:fluid/chocolate_still"
+        }
+    ]
+}
