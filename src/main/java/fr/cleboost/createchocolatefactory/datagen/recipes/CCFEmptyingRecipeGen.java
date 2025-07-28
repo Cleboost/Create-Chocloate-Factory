@@ -16,7 +16,6 @@ public class CCFEmptyingRecipeGen extends EmptyingRecipeGen {
     
     CHOCOLATE_BUCKET = create("chocolate_bucket", b -> b
         .require(CCFItems.CHOCOLATE_BUCKET)
-        .duration(400)
         .output(Items.GLASS_BOTTLE)
         .output(CCFFluids.CHOCOLATE.get(), 250));
 
