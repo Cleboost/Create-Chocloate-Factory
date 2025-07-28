@@ -21,7 +21,12 @@ public class CCFMillingRecipeGen extends MillingRecipeGen {
     COCOA_POWDER = create("cocoa_powder", b -> b
         .require(CCFItems.COCOA_CAKE)
         .duration(200)
-        .output(CCFItems.COCOA_POWDER,4));
+        .output(CCFItems.COCOA_POWDER, 4)),
+
+    CARAMEL_NUGGET = create("caramel_nugget", b -> b
+        .require(CCFItems.CARAMEL)
+        .duration(200)
+        .output(CCFItems.CARAMEL_NUGGET));
 
     public CCFMillingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, CreateChocolateFactory.MODID);
