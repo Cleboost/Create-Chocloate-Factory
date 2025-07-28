@@ -1,0 +1,15 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:cocoa_cake"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "count": 4,
+      "id": "createchocolatefactory:cocoa_powder"
+    }
+  ]
+}

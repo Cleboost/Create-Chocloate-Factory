@@ -44,11 +44,17 @@ public class CCFItems {
         public static final ItemEntry<Item> COCOA_BARK = REGISTRATE.item("cocoa_bark", Item::new).properties(p -> p.stacksTo(16)).register();
         public static final ItemEntry<Item> COCOA_POWDER = REGISTRATE.item("cocoa_powder", Item::new).register();
         public static final ItemEntry<Item> COCOA_CAKE = REGISTRATE.item("cocoa_cake", Item::new).properties(p -> p.stacksTo(1)).register();
+        public static final ItemEntry<Item> COCOA_NIBS = REGISTRATE.item("cocoa_nibs", Item::new).register();
+        public static final ItemEntry<Item> COCOA_HUSK = REGISTRATE.item("cocoa_husk", Item::new).lang("Cocoa Husk").register();
 
         // Fruits & Foods
         public static final ItemEntry<Item> MINT_LEAF = REGISTRATE.item("mint_leaf", Item::new).register();
         public static final ItemEntry<Item> MINT_SEEDS = REGISTRATE.item("mint_seeds", Item::new).register();
         public static final ItemEntry<Item> ORANGE = REGISTRATE.item("orange", Item::new).register();
+        public static final ItemEntry<Item> PEANUT = REGISTRATE.item("peanut", Item::new).lang("Peanut").register();
+        public static final ItemEntry<Item> HAZELNUT = REGISTRATE.item("hazelnut", Item::new).lang("Hazelnut").register();
+        public static final ItemEntry<Item> CARAMEL = REGISTRATE.item("caramel", Item::new).lang("Caramel").register();
+        public static final ItemEntry<Item> CARAMEL_NUGGET = REGISTRATE.item("caramel_nugget", Item::new).lang("Caramel Nugget").register();
 
         // Brass Whisk
         public static final ItemEntry<Item> BRASS_WHISK = REGISTRATE.item("brass_whisk", Item::new).register();

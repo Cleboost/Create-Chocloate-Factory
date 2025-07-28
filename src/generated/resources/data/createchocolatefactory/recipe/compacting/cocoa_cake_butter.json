@@ -1,0 +1,27 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:cocoa_nibs"
+    },
+    {
+      "item": "createchocolatefactory:cocoa_nibs"
+    },
+    {
+      "item": "createchocolatefactory:cocoa_nibs"
+    },
+    {
+      "item": "createchocolatefactory:cocoa_nibs"
+    }
+  ],
+  "processing_time": 400,
+  "results": [
+    {
+      "id": "createchocolatefactory:cocoa_cake"
+    },
+    {
+      "amount": 250,
+      "id": "createchocolatefactory:cocoa_butter"
+    }
+  ]
+}

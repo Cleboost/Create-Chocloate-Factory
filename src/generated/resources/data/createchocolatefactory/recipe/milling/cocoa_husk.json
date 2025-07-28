@@ -1,0 +1,17 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:cocoa_beans_roasted"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "id": "createchocolatefactory:cocoa_nibs"
+    },
+    {
+      "id": "createchocolatefactory:cocoa_husk"
+    }
+  ]
+}

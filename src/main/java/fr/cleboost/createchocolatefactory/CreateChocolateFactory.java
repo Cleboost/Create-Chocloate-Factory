@@ -5,12 +5,14 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 
 import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerBlockEntity;
 import fr.cleboost.createchocolatefactory.core.*;
+import fr.cleboost.createchocolatefactory.datagen.CCFDatagen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.slf4j.Logger;
 
@@ -37,6 +39,7 @@ public class CreateChocolateFactory {
         CCFLootModifiers.register(modEventBus);
 
         modEventBus.addListener(CreateChocolateFactory::registerCapabilities);
+        modEventBus.addListener(CCFDatagen::gatherData);
     }
 
     @SubscribeEvent
