@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import com.simibubi.create.api.data.recipe.ProcessingRecipeGen;
 
 import fr.cleboost.createchocolatefactory.datagen.recipes.CCFCompactingRecipeGen;
+import fr.cleboost.createchocolatefactory.datagen.recipes.CCFCuttingRecipeGen;
 import fr.cleboost.createchocolatefactory.datagen.recipes.CCFMillingRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
@@ -28,6 +29,7 @@ public final class CCFRecipeProvider extends RecipeProvider {
 	public static void registerAllProcessing(DataGenerator gen, PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
 		GENERATORS.add(new CCFMillingRecipeGen(output, registries));
 		GENERATORS.add(new CCFCompactingRecipeGen(output, registries));
+		GENERATORS.add(new CCFCuttingRecipeGen(output, registries));
 
 		gen.addProvider(true, new DataProvider() {
 			@Override
