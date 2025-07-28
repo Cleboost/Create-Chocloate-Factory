@@ -29,7 +29,7 @@ public class ChocolateFluid extends VirtualFluid {
 
         @Override
         public int getTintColor(FluidStack stack) {
-            return 0xFFFFFFFF;
+            return 0xFFFF00FF;
         }
 
         @Override
