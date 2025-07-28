@@ -4,10 +4,9 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
-
-import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFBlockEntities;
-import net.minecraft.ChatFormatting;
+import fr.cleboost.createchocolatefactory.core.CCFFluids;
+import fr.cleboost.createchocolatefactory.utils.TankSegmentHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -18,8 +17,11 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation {
     private static final int TANK_SIZE = 500;
@@ -29,6 +31,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
 
     private SmartFluidTankBehaviour milkTank;
     private SmartFluidTankBehaviour cocoaButterTank;
+    private SmartFluidTankBehaviour internalTanks;
 
     // SmartFluidTankBehaviour milkTank;
     // SmartFluidTankBehaviour cocoaButterTank;
@@ -44,7 +47,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
         super.tick();
 
         boolean wasRunning = running;
-        running = Math.abs(getSpeed()) > 0.5f && !this.milkTank.isEmpty() && !this.cocoaButterTank.isEmpty();
+        running = Math.abs(getSpeed()) > 0.5f && !this.internalTanks.isEmpty();
 
         if (running) {
             runningTicks++;
@@ -112,16 +115,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
                 CCFBlockEntities.CHOCOLATE_MIXER.get(),
                 (be, direction) -> {
                     if (direction != Direction.DOWN && direction != Direction.UP)
-                        return be.milkTank.getCapability();
-                    return null;
-                }
-        );
-        event.registerBlockEntity(
-                Capabilities.FluidHandler.BLOCK,
-                CCFBlockEntities.CHOCOLATE_MIXER.get(),
-                (be, direction) -> {
-                    if (direction != Direction.DOWN && direction != Direction.UP)
-                        return be.cocoaButterTank.getCapability();
+                        return be.internalTanks.getCapability();
                     return null;
                 }
         );
@@ -130,11 +124,22 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
-        behaviours.add(this.milkTank = SmartFluidTankBehaviour.single(this, TANK_SIZE)
-                .allowExtraction().allowInsertion());
-        behaviours.add(this.cocoaButterTank = SmartFluidTankBehaviour.single(this, TANK_SIZE)
-                .allowExtraction().allowInsertion());
 
+        this.internalTanks = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 2, TANK_SIZE, true);
+        ((TankSegmentHandler) this.internalTanks.getTanks()[0]).create_Chocloate_Factory$getHandler().setValidator(new Predicate<FluidStack>() {
+            @Override
+            public boolean test(FluidStack fluidStack) {
+                return fluidStack.is(Tags.Fluids.MILK);
+            }
+        });
+        ((TankSegmentHandler) this.internalTanks.getTanks()[0]).create_Chocloate_Factory$getHandler().setValidator(new Predicate<FluidStack>() {
+            @Override
+            public boolean test(FluidStack fluidStack) {
+                return fluidStack.is(CCFFluids.CHOCOLATE);
+            }
+        });
+
+        behaviours.add(this.internalTanks);
     }
 
     @Override
@@ -143,8 +148,8 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
         invalidateCapabilities();
     }
 
-    @Override
+    /*@Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         return containedFluidTooltip(tooltip, isPlayerSneaking, level.getCapability(Capabilities.FluidHandler.BLOCK, worldPosition, null));
-    }
+    }*/
 }

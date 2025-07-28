@@ -7,11 +7,11 @@
   ],
   "results": [
     {
-      "id": "createchocolatefactory:ccf_chocolate",
-      "amount": 250
+      "id": "minecraft:glass_bottle"
     },
     {
-      "id": "minecraft:glass_bottle"
+      "id": "createchocolatefactory:chocolate",
+      "amount": 250
     }
   ]
 }
