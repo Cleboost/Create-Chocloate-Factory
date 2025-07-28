@@ -1,0 +1,16 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:cocoa_beans_dirty"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:cocoa_beans"
+    },
+    {
+      "id": "minecraft:short_grass"
+    }
+  ]
+}

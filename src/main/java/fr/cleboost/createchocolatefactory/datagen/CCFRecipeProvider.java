@@ -11,6 +11,7 @@ import fr.cleboost.createchocolatefactory.datagen.recipes.CCFCompactingRecipeGen
 import fr.cleboost.createchocolatefactory.datagen.recipes.CCFEmptyingRecipeGen;
 import fr.cleboost.createchocolatefactory.datagen.recipes.CCFCuttingRecipeGen;
 import fr.cleboost.createchocolatefactory.datagen.recipes.CCFMillingRecipeGen;
+import fr.cleboost.createchocolatefactory.datagen.recipes.CCFWashingRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -32,6 +33,7 @@ public final class CCFRecipeProvider extends RecipeProvider {
 		GENERATORS.add(new CCFCompactingRecipeGen(output, registries));
 		GENERATORS.add(new CCFCuttingRecipeGen(output, registries));
 		GENERATORS.add(new CCFEmptyingRecipeGen(output, registries));
+		GENERATORS.add(new CCFWashingRecipeGen(output, registries));
 
 		gen.addProvider(true, new DataProvider() {
 			@Override

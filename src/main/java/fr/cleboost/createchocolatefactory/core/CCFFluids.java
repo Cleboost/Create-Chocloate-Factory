@@ -21,5 +21,10 @@ public class CCFFluids {
             .lang("Cocoa Butter")
             .register();
 
+    public static final FluidEntry<VirtualFluid> TEA = REGISTRATE.virtualFluid("tea")
+            .lang("Builder's Tea")
+            .tag(AllTags.commonFluidTag("teas"))
+            .register();
+
     public static void register() {}
 }

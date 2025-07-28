@@ -15,7 +15,6 @@ public class CCFWashingRecipeGen extends WashingRecipeGen {
     
     COCOA_BEANS = create("cocoa_beans", b -> b
         .require(CCFItems.COCOA_BEANS_DIRTY)
-        .duration(200)
         .output(Items.COCOA_BEANS)
         .output(Items.SHORT_GRASS));
 
