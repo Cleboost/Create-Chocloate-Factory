@@ -2,20 +2,24 @@ package fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer;
 
 import java.util.function.Consumer;
 
+import com.mojang.math.Axis;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.RotatingInstance;
 import com.simibubi.create.content.kinetics.base.ShaftVisual;
 
+import com.simibubi.create.content.kinetics.press.MechanicalPressBlock;
 import dev.engine_room.flywheel.api.instance.Instance;
 import dev.engine_room.flywheel.api.visual.DynamicVisual;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import dev.engine_room.flywheel.lib.model.Models;
 import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
 import fr.cleboost.createchocolatefactory.core.CCFPartialModel;
+import net.createmod.catnip.math.AngleHelper;
 import net.minecraft.core.Direction;
 import dev.engine_room.flywheel.lib.instance.InstanceTypes;
 import dev.engine_room.flywheel.lib.instance.OrientedInstance;
 import com.simibubi.create.foundation.render.AllInstanceTypes;
+import org.joml.Quaternionf;
 
 public class ChocolateMixerVisual extends ShaftVisual<ChocolateMixerBlockEntity> implements SimpleDynamicVisual {
 
@@ -28,9 +32,15 @@ public class ChocolateMixerVisual extends ShaftVisual<ChocolateMixerBlockEntity>
 
 		mixerPole = instancerProvider().instancer(InstanceTypes.ORIENTED, Models.partial(AllPartialModels.MECHANICAL_MIXER_POLE))
 			.createInstance();
+		//from package com.simibubi.create.content.kinetics.press.PressVisual
+		Quaternionf q = Axis.YP
+				.rotationDegrees(AngleHelper.horizontalAngle(blockState.getValue(MechanicalPressBlock.HORIZONTAL_FACING)));
+
+		mixerPole.rotation(q);
 
 		mixerHead = instancerProvider().instancer(AllInstanceTypes.ROTATING, Models.partial(CCFPartialModel.CHOCOLATE_MIXER_HEAD))
 			.createInstance();
+
 
 		mixerHead.setRotationAxis(Direction.Axis.Y);
 	}
