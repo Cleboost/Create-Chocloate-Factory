@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
+import fr.cleboost.createchocolatefactory.utils.TickableBlockEntity;
 import fr.cleboost.createchocolatefactory.network.RequestSyncPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;

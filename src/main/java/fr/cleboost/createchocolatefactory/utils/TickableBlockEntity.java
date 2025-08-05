@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.blockentity.utils;
+package fr.cleboost.createchocolatefactory.utils;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;

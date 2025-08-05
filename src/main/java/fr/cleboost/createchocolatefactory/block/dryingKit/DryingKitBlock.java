@@ -1,6 +1,6 @@
 package fr.cleboost.createchocolatefactory.block.dryingKit;
 
-import fr.cleboost.createchocolatefactory.blockentity.utils.TickableBlockEntity;
+import fr.cleboost.createchocolatefactory.utils.TickableBlockEntity;
 import fr.cleboost.createchocolatefactory.core.CCFBlockEntities;
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
