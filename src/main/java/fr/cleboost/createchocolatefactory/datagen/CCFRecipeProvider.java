@@ -7,11 +7,7 @@ import javax.annotation.Nonnull;
 
 import com.simibubi.create.api.data.recipe.ProcessingRecipeGen;
 
-import fr.cleboost.createchocolatefactory.datagen.recipes.CCFCompactingRecipeGen;
-import fr.cleboost.createchocolatefactory.datagen.recipes.CCFEmptyingRecipeGen;
-import fr.cleboost.createchocolatefactory.datagen.recipes.CCFCuttingRecipeGen;
-import fr.cleboost.createchocolatefactory.datagen.recipes.CCFMillingRecipeGen;
-import fr.cleboost.createchocolatefactory.datagen.recipes.CCFWashingRecipeGen;
+import fr.cleboost.createchocolatefactory.datagen.recipes.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -21,7 +17,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 
 public final class CCFRecipeProvider extends RecipeProvider {
 
-	static final List<ProcessingRecipeGen<?, ?, ?>> GENERATORS = new ArrayList<>();
+	static final List<RecipeProvider> GENERATORS = new ArrayList<>();
 
 	public CCFRecipeProvider(PackOutput output,CompletableFuture<HolderLookup.Provider> registries) {
 		super(output, registries);
@@ -34,6 +30,7 @@ public final class CCFRecipeProvider extends RecipeProvider {
 		GENERATORS.add(new CCFCuttingRecipeGen(output, registries));
 		GENERATORS.add(new CCFEmptyingRecipeGen(output, registries));
 		GENERATORS.add(new CCFWashingRecipeGen(output, registries));
+		GENERATORS.add(new CCFMechanicalCraftingRecipeGen(output, registries));
 
 		gen.addProvider(true, new DataProvider() {
 			@Override
