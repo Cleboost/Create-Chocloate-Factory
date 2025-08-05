@@ -37,7 +37,7 @@ public class CCFItems {
 
         // Tools
         public static final ItemEntry<MacheteItem> MACHETE = REGISTRATE.item("machete", MacheteItem::new).model((ctx, prov) -> prov.handheld(ctx)).register();
-        // Cocoa Stuuf
+        // Cocoa Stuff
         public static final ItemEntry<Item> COCOA_BEANS_WET = REGISTRATE.item("cocoa_beans_wet", Item::new).lang("Damp Cocoa Beans").register();
         public static final ItemEntry<Item> COCOA_BEANS_DIRTY = REGISTRATE.item("cocoa_beans_dirty", Item::new).lang("Dirty Cocoa Beans").register();
         public static final ItemEntry<Item> COCOA_BEANS_ROASTED = REGISTRATE.item("cocoa_beans_roasted", Item::new).lang("Roasted Cocoa Beans").register();
@@ -56,8 +56,9 @@ public class CCFItems {
         public static final ItemEntry<Item> CARAMEL = REGISTRATE.item("caramel", Item::new).lang("Caramel").register();
         public static final ItemEntry<Item> CARAMEL_NUGGET = REGISTRATE.item("caramel_nugget", Item::new).lang("Caramel Nugget").register();
 
-        // Brass Whisk
+        // Other
         public static final ItemEntry<Item> BRASS_WHISK = REGISTRATE.item("brass_whisk", Item::new).register();
+        public static final ItemEntry<Item> CHOCOLATE_FILTER = REGISTRATE.item("chocolate_filter", Item::new).lang("Chocolate Filter").register();
 
         // Seau de chocolat avec un chemin de texture personnalisé
         public static final ItemEntry<Item> CHOCOLATE_BUCKET = REGISTRATE.item("chocolate_bucket", Item::new)
