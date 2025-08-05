@@ -7,10 +7,10 @@
   ],
   "results": [
     {
-      "id": "minecraft:glass_bottle"
+      "id": "minecraft:bucket"
     },
     {
-      "amount": 250,
+      "amount": 1000,
       "id": "createchocolatefactory:chocolate"
     }
   ]

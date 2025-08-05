@@ -1,0 +1,41 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "create:brass_casing"
+    },
+    "C": {
+      "item": "create:cogwheel"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "F": {
+      "item": "create:mechanical_pump"
+    },
+    "P": {
+      "item": "create:precision_mechanism"
+    },
+    "S": {
+      "item": "create:shaft"
+    },
+    "T": {
+      "item": "create:fluid_tank"
+    },
+    "W": {
+      "item": "createchocolatefactory:brass_whisk"
+    }
+  },
+  "pattern": [
+    " E ",
+    "PCS",
+    "TBF",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "createchocolatefactory:chocolate_mixer"
+  }
+}

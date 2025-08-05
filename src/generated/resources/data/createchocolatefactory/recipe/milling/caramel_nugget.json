@@ -8,6 +8,11 @@
   "processing_time": 200,
   "results": [
     {
+      "count": 2,
+      "id": "createchocolatefactory:caramel_nugget"
+    },
+    {
+      "chance": 0.25,
       "id": "createchocolatefactory:caramel_nugget"
     }
   ]
