@@ -16,8 +16,8 @@ public class CCFEmptyingRecipeGen extends EmptyingRecipeGen {
     
     CHOCOLATE_BUCKET = create("chocolate_bucket", b -> b
         .require(CCFItems.CHOCOLATE_BUCKET)
-        .output(Items.GLASS_BOTTLE)
-        .output(CCFFluids.CHOCOLATE.get(), 250));
+        .output(Items.BUCKET)
+        .output(CCFFluids.CHOCOLATE.get(), 1000));
 
     public CCFEmptyingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, CreateChocolateFactory.MODID);
