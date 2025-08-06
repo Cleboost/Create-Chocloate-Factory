@@ -1,11 +1,23 @@
 package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class CCFLang {
+    public static void hold_shift_tooltips(@Nonnull List<Component> tooltip) {
+        tooltip.add(Component.translatable("tooltip.createchocolatefactory.chocolate.hold_shift")
+                .withStyle(ChatFormatting.DARK_GRAY));
+    }
 
     public static void registerTooltips() {
+        CreateChocolateFactory.REGISTRATE.addRawLang("tooltip.createchocolatefactory.chocolate.hold_shift", "[Hold Shift for information]");
         CreateChocolateFactory.REGISTRATE.addRawLang("tooltip.createchocolatefactory.machete", "Use to cut cocoa pods");
+        CreateChocolateFactory.REGISTRATE.addRawLang("tooltip.createchocolatefactory.progress", "%s/%s");
+        CreateChocolateFactory.REGISTRATE.addRawLang("tooltip.createchocolatefactory.chocolate.composition", "Strength : %s - Sugar : %s - Cocoa Butter : %s - Milk : %s");
     }
 
     public static void registerGoggles() {
