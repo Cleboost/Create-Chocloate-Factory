@@ -1,19 +1,16 @@
 package fr.cleboost.createchocolatefactory.item.utils;
 
+import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
-import fr.cleboost.createchocolatefactory.utils.Chocolate;
+import fr.cleboost.createchocolatefactory.core.CCFLang;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -25,9 +22,9 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
     public final int maxStage;
 
     //Note: the amount is for 1 stage
-    public ChocolateProgressItem(Properties properties, int progressStage, float amount) {
+    public ChocolateProgressItem(Properties properties, int stage, float amount) {
         super(properties.component(CCFDataComponents.EAT_PROGRESS, 0), amount);
-        this.maxStage = progressStage - 1;
+        this.maxStage = stage - 1;
     }
 
     public int getMaxStage() {
@@ -41,7 +38,8 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
         int eatProgress = getEatProgress(pStack);
         Player player = (Player) (pLivingEntity);
         applyEatEffects(pStack, pLevel, pLivingEntity);
-        if (eatProgress++ > this.getMaxStage()) {
+        eatProgress++;
+        if (eatProgress > this.getMaxStage()) {
             if (player instanceof ServerPlayer) {
                 CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, pStack);
             }
