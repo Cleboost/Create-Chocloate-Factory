@@ -1,13 +1,23 @@
 package fr.cleboost.createchocolatefactory.utils;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.item.ItemStack;
 
 import java.nio.ByteBuffer;
+import java.util.Objects;
 
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
 
 public class Chocolate {
+    public static final Codec<Chocolate> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.FLOAT.fieldOf("strength").forGetter(Chocolate::getStrength),
+            Codec.FLOAT.fieldOf("sugar").forGetter(Chocolate::getSugar),
+            Codec.FLOAT.fieldOf("cocoaButter").forGetter(Chocolate::getCocoaButter),
+            Codec.FLOAT.fieldOf("milk").forGetter(Chocolate::getMilk)
+    ).apply(instance, Chocolate::new));
+
     private final float strength;
     private final float sugar;
     private final float cocoaButter;
@@ -26,20 +36,6 @@ public class Chocolate {
         this.sugar = 0;
         this.cocoaButter = 0;
         this.milk = 0;
-    }
-
-    public Chocolate(ItemStack stack) {
-        if ((stack.getItem() instanceof ChocolateBaseItem)) {
-            this.strength = stack.get(CCFDataComponents.STRENGTH).floatValue();
-            this.sugar = stack.get(CCFDataComponents.SUGAR).floatValue();
-            this.cocoaButter = stack.get(CCFDataComponents.COCOA_BUTTER).floatValue();
-            this.milk = stack.get(CCFDataComponents.MILK).floatValue();
-        } else {
-            this.strength = 1;
-            this.sugar = 0;
-            this.cocoaButter = 0;
-            this.milk = 0;
-        }
     }
 
     public float getStrength() {
@@ -82,10 +78,15 @@ public class Chocolate {
         return (1 + this.cocoaButter / 100) * (1 + this.sugar / 100);
     }
 
-    public void save(ItemStack stack) {
-        stack.set(CCFDataComponents.STRENGTH, this.strength);
-        stack.set(CCFDataComponents.MILK, this.strength);
-        stack.set(CCFDataComponents.COCOA_BUTTER, this.strength);
-        stack.set(CCFDataComponents.SUGAR, this.strength);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Chocolate chocolate)) return false;
+        return Float.compare(strength, chocolate.strength) == 0 && Float.compare(sugar, chocolate.sugar) == 0 && Float.compare(cocoaButter, chocolate.cocoaButter) == 0 && Float.compare(milk, chocolate.milk) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(strength, sugar, cocoaButter, milk);
     }
 }

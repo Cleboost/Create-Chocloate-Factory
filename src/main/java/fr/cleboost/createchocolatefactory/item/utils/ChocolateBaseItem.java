@@ -27,7 +27,7 @@ public class ChocolateBaseItem extends Item {
     private final float amount; // in mB
 
     public ChocolateBaseItem(Properties properties, float amount) {
-        super(properties.component(CCFDataComponents.STRENGTH, 0.7F).component(CCFDataComponents.MILK, 0.1F).component(CCFDataComponents.SUGAR, 0.1F).component(CCFDataComponents.COCOA_BUTTER, 0.1F));
+        super(properties.component(CCFDataComponents.CHOCOLATE, new Chocolate(0.6f,0.15f,0.2f,0.05f)));
         this.amount = amount;
     }
 
@@ -37,7 +37,7 @@ public class ChocolateBaseItem extends Item {
 
     @Override
     public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
-        Chocolate chocolate = new Chocolate(pStack);
+        Chocolate chocolate = pStack.get(CCFDataComponents.CHOCOLATE);
         if (Screen.hasShiftDown()) {
             tooltip.add(Component.translatable("tooltip.createchocolatefactory.chocolate.composition",
                             chocolate.getStrength(), chocolate.getSugar(), chocolate.getCocoaButter(), chocolate.getMilk())
@@ -53,7 +53,7 @@ public class ChocolateBaseItem extends Item {
         if (!(pLivingEntity instanceof Player))
             return pStack;
         Player player = (Player) (pLivingEntity);
-        Chocolate ch = new Chocolate(pStack);
+        Chocolate ch = pStack.get(CCFDataComponents.CHOCOLATE);
         //EAT :
         player.getFoodData().eat(ch.getNutrition(), ch.getSaturationModifier());
         player.awardStat(Stats.ITEM_USED.get(pStack.getItem()));

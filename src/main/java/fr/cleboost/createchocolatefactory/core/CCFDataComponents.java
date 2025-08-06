@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -18,25 +19,11 @@ public class CCFDataComponents {
                     "eat_progress",
                     dataComponentType -> dataComponentType.persistent(ExtraCodecs.POSITIVE_INT).networkSynchronized(ByteBufCodecs.VAR_INT)
             );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> STRENGTH =
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Chocolate>> CHOCOLATE =
             DATA_COMPONENTS.registerComponentType(
-                    "strength",
-                    dataComponentType -> dataComponentType.persistent(ExtraCodecs.POSITIVE_FLOAT).networkSynchronized(ByteBufCodecs.FLOAT)
-            );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> SUGAR =
-            DATA_COMPONENTS.registerComponentType(
-                    "sugar",
-                    dataComponentType -> dataComponentType.persistent(ExtraCodecs.POSITIVE_FLOAT).networkSynchronized(ByteBufCodecs.FLOAT)
-            );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> COCOA_BUTTER =
-            DATA_COMPONENTS.registerComponentType(
-                    "cocoa_butter",
-                    dataComponentType -> dataComponentType.persistent(ExtraCodecs.POSITIVE_FLOAT).networkSynchronized(ByteBufCodecs.FLOAT)
-            );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> MILK =
-            DATA_COMPONENTS.registerComponentType(
-                    "milk",
-                    dataComponentType -> dataComponentType.persistent(ExtraCodecs.POSITIVE_FLOAT).networkSynchronized(ByteBufCodecs.FLOAT)
+                    "chocolate",
+                    dataComponentType -> dataComponentType.persistent(Chocolate.CODEC)
             );
 
     public static void register(IEventBus bus) {
