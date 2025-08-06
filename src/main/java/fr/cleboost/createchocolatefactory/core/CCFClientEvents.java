@@ -24,7 +24,6 @@ public class CCFClientEvents {
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.register(
             (ItemStack stack, int tintIndex) -> {
-                CreateChocolateFactory.LOGGER.info(String.valueOf(tintIndex));
                 if (tintIndex == 0 && stack.has(CCFDataComponents.CHOCOLATE)) {
                     return stack.get(CCFDataComponents.CHOCOLATE).getColor();
                 }
