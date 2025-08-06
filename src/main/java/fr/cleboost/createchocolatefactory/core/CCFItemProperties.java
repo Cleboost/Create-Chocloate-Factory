@@ -1,5 +1,6 @@
-package fr.cleboost.createchocolatefactory.utils;
+package fr.cleboost.createchocolatefactory.core;
 
+import com.ibm.icu.impl.duration.impl.DataRecord;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
@@ -7,14 +8,16 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
-public class ModItemProperties {
+public class CCFItemProperties {
+    public static final String EAT_PROGRESS = "eat_progress";
+
     public static void addCustomItemProperties() {
         makeChocolateProgressItem(CCFItems.CHOCOLATE_BAR.get());
     }
 
     private static void makeChocolateProgressItem(Item item) {
-        ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(CreateChocolateFactory.MODID, "eatprogress"), (pItemStack, pClientLevel, pEntity, pInt) -> {
-            return pEntity != null && pItemStack.is(CCFItems.CHOCOLATE_BAR.get()) ? ChocolateProgressItem.getEatProgress(pItemStack) : 0;
+        ItemProperties.register(item, CreateChocolateFactory.asResource(EAT_PROGRESS), (pItemStack, pClientLevel, pEntity, pInt) -> {
+            return pEntity != null && pItemStack.is(CCFItems.CHOCOLATE_BAR) ? ChocolateProgressItem.getEatProgress(pItemStack) : 0;
         });
     }
 }
