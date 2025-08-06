@@ -1,12 +1,16 @@
 package fr.cleboost.createchocolatefactory.core;
 
+import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
+import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.createmod.ponder.foundation.PonderIndex;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.ponder.CreateChocolateFactoryPonderPlugin;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 @EventBusSubscriber(modid = CreateChocolateFactory.MODID, value = Dist.CLIENT)
 public class CCFClientEvents {
@@ -16,16 +20,17 @@ public class CCFClientEvents {
         PonderIndex.addPlugin(new CreateChocolateFactoryPonderPlugin());
     }
 
-    // @SubscribeEvent
-    // public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
-    //     event.register(
-    //         (ItemStack stack, int tintIndex) -> {
-    //             if (tintIndex == 0 && stack.getItem() instanceof ChocolateBaseItem item) {
-    //                 return (new Chocolate(stack)).getColor();
-    //             }
-    //             return 0xFFFFFFFF;
-    //         },
-    //         CCFItems.CHOCOLATE_BAR.get()
-    //     );
-    // }
+    @SubscribeEvent
+    public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
+        event.register(
+            (ItemStack stack, int tintIndex) -> {
+                CreateChocolateFactory.LOGGER.info(String.valueOf(tintIndex));
+                if (tintIndex == 0 && stack.has(CCFDataComponents.CHOCOLATE)) {
+                    return stack.get(CCFDataComponents.CHOCOLATE).getColor();
+                }
+                return 0xFFFFFFFF;
+            },
+            CCFItems.CHOCOLATE_EGG.get()
+        );
+    }
 }

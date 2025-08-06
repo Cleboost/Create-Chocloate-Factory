@@ -39,7 +39,7 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
             return pStack;
         int eatProgress = getEatProgress(pStack);
         Player player = (Player) (pLivingEntity);
-        Chocolate ch = new Chocolate(pStack);
+        Chocolate ch = pStack.get(CCFDataComponents.CHOCOLATE);
         //EAT :
         player.getFoodData().eat(ch.getNutrition(), ch.getSaturationModifier());
         player.awardStat(Stats.ITEM_USED.get(pStack.getItem()));
