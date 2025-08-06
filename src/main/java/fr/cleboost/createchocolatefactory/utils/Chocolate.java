@@ -2,13 +2,9 @@ package fr.cleboost.createchocolatefactory.utils;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.world.item.ItemStack;
 
 import java.nio.ByteBuffer;
 import java.util.Objects;
-
-import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
-import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
 
 public class Chocolate {
     public static final Codec<Chocolate> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -63,9 +59,9 @@ public class Chocolate {
         //alpha red green blue
         byte[] bytes = {
                 castToByte(255),
-                castToByte((0.9 * Math.pow(this.strength + this.cocoaButter, 0.7) + 1.15 * Math.pow(this.milk + this.sugar, 1.11)) * 1.4 - 7),
-                castToByte((0.405 * (this.strength + this.cocoaButter) + 0.5 * Math.pow(this.milk + this.sugar, 1.5)) * 0.5 - 13),
-                castToByte((1.8 * (this.strength + this.cocoaButter) + 1.1 * Math.pow(this.milk + this.sugar, 1.6)) * 0.11 - 16)
+                castToByte((0.9 * Math.pow((this.strength + this.cocoaButter) * 100, 0.7) + 1.15 * Math.pow((this.milk + this.sugar) * 100, 1.11)) * 1.4 - 7),
+                castToByte((0.405 * (this.strength + this.cocoaButter) * 100 + 0.5 * Math.pow((this.milk + this.sugar) * 100, 1.5)) * 0.5 - 13),
+                castToByte((1.8 * (this.strength + this.cocoaButter) * 100 + 1.1 * Math.pow((this.milk + this.sugar) * 100, 1.6)) * 0.11 - 16)
         }; //do not touch any of this calculation pls
         return ByteBuffer.wrap(bytes).getInt();
     }
