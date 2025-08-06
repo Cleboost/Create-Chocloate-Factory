@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory.item.utils;
 
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
+import fr.cleboost.createchocolatefactory.core.CCFLang;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -43,8 +44,7 @@ public class ChocolateBaseItem extends Item {
                             chocolate.getStrength(), chocolate.getSugar(), chocolate.getCocoaButter(), chocolate.getMilk())
                     .withStyle(ChatFormatting.GRAY));
         } else {
-            tooltip.add(Component.translatable("tooltip.createchocolatefactory.chocolate.hold_shift")
-                    .withStyle(ChatFormatting.DARK_GRAY));
+            CCFLang.hold_shift_tooltips(tooltip);
         }
     }
 
@@ -53,12 +53,8 @@ public class ChocolateBaseItem extends Item {
         if (!(pLivingEntity instanceof Player))
             return pStack;
         Player player = (Player) (pLivingEntity);
-        Chocolate ch = pStack.get(CCFDataComponents.CHOCOLATE);
         //EAT :
-        player.getFoodData().eat(ch.getNutrition(), ch.getSaturationModifier());
-        player.awardStat(Stats.ITEM_USED.get(pStack.getItem()));
-        pLevel.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, pLevel.random.nextFloat() * 0.1F + 0.9F);
-        player.gameEvent(GameEvent.EAT);
+        applyEatEffects(pStack, pLevel, pLivingEntity);
         if (player instanceof ServerPlayer) {
             CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, pStack);
         }
@@ -66,5 +62,14 @@ public class ChocolateBaseItem extends Item {
             pStack.shrink(1);
         }
         return pStack;
+    }
+
+    protected void applyEatEffects(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
+        Player player = (Player) (pLivingEntity);
+        Chocolate ch = pStack.get(CCFDataComponents.CHOCOLATE);
+        player.getFoodData().eat(ch.getNutrition(), ch.getSaturationModifier());
+        player.awardStat(Stats.ITEM_USED.get(pStack.getItem()));
+        pLevel.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, pLevel.random.nextFloat() * 0.1F + 0.9F);
+        player.gameEvent(GameEvent.EAT);
     }
 }

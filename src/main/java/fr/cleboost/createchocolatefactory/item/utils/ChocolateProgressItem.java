@@ -24,6 +24,7 @@ import java.util.List;
 public class ChocolateProgressItem extends ChocolateBaseItem {
     public final int maxStage;
 
+    //Note: the amount is for 1 stage
     public ChocolateProgressItem(Properties properties, int progressStage, float amount) {
         super(properties.component(CCFDataComponents.EAT_PROGRESS, 0), amount);
         this.maxStage = progressStage - 1;
@@ -39,12 +40,7 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
             return pStack;
         int eatProgress = getEatProgress(pStack);
         Player player = (Player) (pLivingEntity);
-        Chocolate ch = pStack.get(CCFDataComponents.CHOCOLATE);
-        //EAT :
-        player.getFoodData().eat(ch.getNutrition(), ch.getSaturationModifier());
-        player.awardStat(Stats.ITEM_USED.get(pStack.getItem()));
-        pLevel.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, pLevel.random.nextFloat() * 0.1F + 0.9F);
-        player.gameEvent(GameEvent.EAT);
+        applyEatEffects(pStack, pLevel, pLivingEntity);
         if (eatProgress++ > this.getMaxStage()) {
             if (player instanceof ServerPlayer) {
                 CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, pStack);
@@ -69,7 +65,7 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
     }
 
     public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("tooltip.createchocolatefactory.progress", getEatProgress(pStack)));
+        tooltip.add(Component.translatable("tooltip.createchocolatefactory.progress", getEatProgress(pStack), getMaxStage()));
         super.appendHoverText(pStack, pContext, tooltip, pIsAdvanced);
     }
 }
