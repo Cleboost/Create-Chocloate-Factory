@@ -43,5 +43,8 @@
   "item.createchocolatefactory.peanut": "ʇnuɐǝԀ",
   "itemGroup.createchocolatefactory.create_chocolate_factory": "ʎɹoʇɔɐℲ ǝʇɐןoɔoɥƆ ǝʇɐǝɹƆ",
   "message.createchocolatefactory.dryingkit.need_more_cocoa_beans": ")6/%s( ɯǝɥʇ ʎɹp oʇ suɐǝq ɐoɔoɔ dɯɐp ǝɹoɯ pǝǝu noʎ",
-  "tooltip.createchocolatefactory.machete": "spod ɐoɔoɔ ʇnɔ oʇ ǝs∩"
+  "tooltip.createchocolatefactory.chocolate.composition": "%s : ʞןıW - %s : ɹǝʇʇnᗺ ɐoɔoƆ - %s : ɹɐbnS - %s : ɥʇbuǝɹʇS",
+  "tooltip.createchocolatefactory.chocolate.hold_shift": "]uoıʇɐɯɹoɟuı ɹoɟ ʇɟıɥS pןoH[",
+  "tooltip.createchocolatefactory.machete": "spod ɐoɔoɔ ʇnɔ oʇ ǝs∩",
+  "tooltip.createchocolatefactory.progress": "%s/%s"
 }

@@ -43,5 +43,8 @@
   "item.createchocolatefactory.peanut": "Peanut",
   "itemGroup.createchocolatefactory.create_chocolate_factory": "Create Chocolate Factory",
   "message.createchocolatefactory.dryingkit.need_more_cocoa_beans": "You need more damp cocoa beans to dry them (%s/9)",
-  "tooltip.createchocolatefactory.machete": "Use to cut cocoa pods"
+  "tooltip.createchocolatefactory.chocolate.composition": "Strength : %s - Sugar : %s - Cocoa Butter : %s - Milk : %s",
+  "tooltip.createchocolatefactory.chocolate.hold_shift": "[Hold Shift for information]",
+  "tooltip.createchocolatefactory.machete": "Use to cut cocoa pods",
+  "tooltip.createchocolatefactory.progress": "%s/%s"
 }
