@@ -10,14 +10,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 
 public class CCFItems {
-    // //Fruits & Foods
-    // public static final DeferredItem<Item> MINT_LEAF =
-    // ITEMS.register("mint_leaf", () -> new Item(new Item.Properties()));
-    // public static final DeferredItem<Item> MINT_SEEDS =
-    // ITEMS.register("mint_seeds", () -> new Item(new Item.Properties()));
-    // public static final DeferredItem<Item> ORANGE = ITEMS.register("orange", ()
-    // -> new Item(new Item.Properties()));
-
     private static final CreateRegistrate REGISTRATE = CreateChocolateFactory.registrate();
 
     // Logo
@@ -35,6 +27,7 @@ public class CCFItems {
 
     // Tools
     public static final ItemEntry<MacheteItem> MACHETE = REGISTRATE.item("machete", MacheteItem::new).model((ctx, prov) -> prov.handheld(ctx)).register();
+
     // Cocoa Stuff
     public static final ItemEntry<Item> COCOA_BEANS_WET = REGISTRATE.item("cocoa_beans_wet", Item::new).lang("Damp Cocoa Beans").register();
     public static final ItemEntry<Item> COCOA_BEANS_DIRTY = REGISTRATE.item("cocoa_beans_dirty", Item::new).lang("Dirty Cocoa Beans").register();
@@ -46,10 +39,11 @@ public class CCFItems {
     public static final ItemEntry<Item> COCOA_HUSK = REGISTRATE.item("cocoa_husk", Item::new).lang("Cocoa Husk").register();
 
     //Chocolate Items
-    public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_EGG = REGISTRATE.item("chocolate_egg", (properties) -> new ChocolateBaseItem(properties, 400)).lang("Chocolate Item").register();
+    public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_EGG = REGISTRATE.item("chocolate_egg", (properties) ->
+            new ChocolateBaseItem(properties.food(CCFFoods.CHOCOLATE_SLOW).stacksTo(16), 400)).lang("Chocolate Item").register();
 
     // Fruits & Foods
-    public static final ItemEntry<Item> MINT_LEAF = REGISTRATE.item("mint_leaf", Item::new).register();
+    public static final ItemEntry<Item> MINT_LEAF = REGISTRATE.item("mint_leaf", Item::new).properties(p -> p.food(CCFFoods.MINT)).register();
     public static final ItemEntry<Item> MINT_SEEDS = REGISTRATE.item("mint_seeds", Item::new).register();
     public static final ItemEntry<Item> ORANGE = REGISTRATE.item("orange", Item::new).register();
     public static final ItemEntry<Item> PEANUT = REGISTRATE.item("peanut", Item::new).lang("Peanut").register();
