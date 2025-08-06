@@ -17,7 +17,7 @@ public class Chocolate {
             Codec.FLOAT.fieldOf("milk").forGetter(Chocolate::getMilk)
     ).apply(instance, Chocolate::new));
 
-    public static final StreamCodec<ByteBuf,Chocolate> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<ByteBuf, Chocolate> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT, Chocolate::getStrength,
             ByteBufCodecs.FLOAT, Chocolate::getSugar,
             ByteBufCodecs.FLOAT, Chocolate::getCocoaButter,
@@ -31,7 +31,7 @@ public class Chocolate {
     private final float milk;
 
     public Chocolate(float strength, float sugar, float cocoaButter, float milk) {
-        float coef = (strength + sugar + cocoaButter + milk) / 4;
+        float coef = 1 / (strength + sugar + cocoaButter + milk);
         this.strength = strength * coef;
         this.sugar = sugar * coef;
         this.cocoaButter = cocoaButter * coef;
@@ -77,10 +77,12 @@ public class Chocolate {
         return ByteBuffer.wrap(bytes).getInt();
     }
 
+    //will need balancing
     public int getNutrition() {
         return Math.round(this.cocoaButter / 10);
     }
 
+    //will need balancing
     public float getSaturationModifier() {
         return (1 + this.cocoaButter / 100) * (1 + this.sugar / 100);
     }
