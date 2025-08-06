@@ -6,6 +6,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
+import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 
@@ -41,6 +42,28 @@ public class CCFItems {
     //Chocolate Items
     public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_EGG = REGISTRATE.item("chocolate_egg", (properties) ->
             new ChocolateBaseItem(properties.food(CCFFoods.CHOCOLATE_SLOW).stacksTo(16), 400)).lang("Chocolate Item").register();
+    public static final ItemEntry<ChocolateProgressItem> CHOCOLATE_BAR = REGISTRATE.item("chocolate_bar", (properties) ->
+                    new ChocolateProgressItem(properties.stacksTo(1).food(CCFFoods.CHOCOLATE_FAST), 3, 100f)).lang("Chocolate Bar")
+            .model((ctx, prov) -> {
+                prov.generated(ctx, prov.modLoc("item/" + ctx.getName() + "/bar0"), prov.modLoc("item/" + ctx.getName() + "/bar_paper"))
+                        //.texture("layer0", prov.modLoc("item/" + ctx.getName() + "/bar_paper"))
+                        //.texture("layer1", prov.modLoc("item/" + ctx.getName() + "/" + ctx.getName() + "0"))
+                        .override()
+                        .predicate(prov.modLoc(CCFItemProperties.EAT_PROGRESS), 1f)
+                        .model(
+                                prov.withExistingParent("item/" + ctx.getName() + "/" + ctx.getName() + "1", prov.modLoc("item/" + ctx.getName()))
+                                        .texture("layer1", prov.modLoc("item/" + ctx.getName() + "/bar_paper"))
+                                        .texture("layer0", prov.modLoc("item/" + ctx.getName() + "/bar1"))
+                        )
+                        .end()
+                        .override()
+                        .predicate(prov.modLoc(CCFItemProperties.EAT_PROGRESS), 2f)
+                        .model(
+                                prov.withExistingParent("item/" + ctx.getName() + "/" + ctx.getName() + "2", prov.modLoc("item/" + ctx.getName()))
+                                        .texture("layer1", prov.modLoc("item/" + ctx.getName() + "/bar_paper"))
+                                        .texture("layer0", prov.modLoc("item/" + ctx.getName() + "/bar2"))
+                        ).end();
+            }).register();
 
     // Fruits & Foods
     public static final ItemEntry<Item> MINT_LEAF = REGISTRATE.item("mint_leaf", Item::new).properties(p -> p.food(CCFFoods.MINT)).register();
