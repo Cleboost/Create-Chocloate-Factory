@@ -2,6 +2,9 @@ package fr.cleboost.createchocolatefactory.utils;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 import java.nio.ByteBuffer;
 import java.util.Objects;
@@ -13,6 +16,14 @@ public class Chocolate {
             Codec.FLOAT.fieldOf("cocoaButter").forGetter(Chocolate::getCocoaButter),
             Codec.FLOAT.fieldOf("milk").forGetter(Chocolate::getMilk)
     ).apply(instance, Chocolate::new));
+
+    public static final StreamCodec<ByteBuf,Chocolate> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.FLOAT, Chocolate::getStrength,
+            ByteBufCodecs.FLOAT, Chocolate::getSugar,
+            ByteBufCodecs.FLOAT, Chocolate::getCocoaButter,
+            ByteBufCodecs.FLOAT, Chocolate::getMilk,
+            Chocolate::new
+    );
 
     private final float strength;
     private final float sugar;

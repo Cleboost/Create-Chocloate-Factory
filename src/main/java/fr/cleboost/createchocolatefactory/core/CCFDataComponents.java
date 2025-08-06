@@ -23,7 +23,7 @@ public class CCFDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Chocolate>> CHOCOLATE =
             DATA_COMPONENTS.registerComponentType(
                     "chocolate",
-                    dataComponentType -> dataComponentType.persistent(Chocolate.CODEC)
+                    dataComponentType -> dataComponentType.persistent(Chocolate.CODEC).networkSynchronized(Chocolate.STREAM_CODEC)
             );
 
     public static void register(IEventBus bus) {
