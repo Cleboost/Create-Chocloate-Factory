@@ -2,10 +2,13 @@ package fr.cleboost.createchocolatefactory.utils;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.RegistryFixedCodec;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 
@@ -53,6 +56,14 @@ public class Taste {
     @Override
     public int hashCode() {
         return Objects.hash(item, effects);
+    }
+
+    public static ResourceLocation getFromItem(Item item) {
+        return CreateChocolateFactory.asResource(name(item));
+    }
+
+    private static String name(Item item) {
+        return item.getDescriptionId().split("\\.")[2];
     }
 
     public static class ChocolateEffect {

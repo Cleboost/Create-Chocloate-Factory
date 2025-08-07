@@ -44,7 +44,7 @@ public class TasteProvider {
         for (Taste taste : TasteProvider.getTastes()) {
             context.register(ResourceKey.create(
                     CCFRegistryKeys.TASTE_REGISTRY_KEY,
-                    CreateChocolateFactory.asResource(name(taste.getItem().value()))
+                    Taste.getFromItem(taste.getItem().value())
             ), taste);
         }
     }
@@ -71,9 +71,5 @@ public class TasteProvider {
             return Taste.create(this.item, this.effects.toArray(new Taste.ChocolateEffect[0]));
         }
 
-    }
-
-    private static String name(Item item) {
-        return item.getDescriptionId().split("\\.")[2];
     }
 }
