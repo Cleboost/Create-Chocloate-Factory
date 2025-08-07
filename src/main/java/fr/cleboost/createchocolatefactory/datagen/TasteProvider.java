@@ -7,6 +7,7 @@ import fr.cleboost.createchocolatefactory.utils.Taste;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
@@ -44,7 +45,7 @@ public class TasteProvider {
         for (Taste taste : TasteProvider.getTastes()) {
             context.register(ResourceKey.create(
                     CCFRegistryKeys.TASTE_REGISTRY_KEY,
-                    CreateChocolateFactory.asResource(name(taste.getItem().value()))
+                    ResourceLocation.fromNamespaceAndPath("", name(taste.getItem().value()))
             ), taste);
         }
     }
@@ -74,6 +75,8 @@ public class TasteProvider {
     }
 
     private static String name(Item item) {
-        return item.getDescriptionId().split("\\.")[2];
+        String descriptionId = item.getDescriptionId();
+        String[] parts = descriptionId.split("\\.");
+        return parts[parts.length - 1]; // Prend le dernier élément
     }
 }
