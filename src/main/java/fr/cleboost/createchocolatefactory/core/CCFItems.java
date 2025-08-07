@@ -38,6 +38,7 @@ public class CCFItems {
     public static final ItemEntry<Item> COCOA_CAKE = REGISTRATE.item("cocoa_cake", Item::new).properties(p -> p.stacksTo(1)).register();
     public static final ItemEntry<Item> COCOA_NIBS = REGISTRATE.item("cocoa_nibs", Item::new).register();
     public static final ItemEntry<Item> COCOA_HUSK = REGISTRATE.item("cocoa_husk", Item::new).lang("Cocoa Husk").register();
+    public static final ItemEntry<Item> CHOCOLATE_LIQUOR = REGISTRATE.item("chocolate_liquor", Item::new).lang("Chocolate Liquor").register();
 
     //Chocolate Items
     public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_EGG = REGISTRATE.item("chocolate_egg", (properties) ->
