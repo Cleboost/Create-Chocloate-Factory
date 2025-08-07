@@ -75,8 +75,6 @@ public class TasteProvider {
     }
 
     private static String name(Item item) {
-        String descriptionId = item.getDescriptionId();
-        String[] parts = descriptionId.split("\\.");
-        return parts[parts.length - 1]; // Prend le dernier élément
+        return item.getDescriptionId().split("\\.")[2];
     }
 }
