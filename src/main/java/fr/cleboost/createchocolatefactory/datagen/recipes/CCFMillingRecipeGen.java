@@ -12,7 +12,7 @@ import net.minecraft.data.PackOutput;
 public class CCFMillingRecipeGen extends MillingRecipeGen {
     GeneratedRecipe 
     
-    COCOA_HUSK = create("cocoa_husk", b -> b
+    COCOA_NIBS = create("cocoa_nibs", b -> b
         .require(CCFItems.COCOA_BEANS_ROASTED)
         .duration(200)
         .output(CCFItems.COCOA_NIBS)

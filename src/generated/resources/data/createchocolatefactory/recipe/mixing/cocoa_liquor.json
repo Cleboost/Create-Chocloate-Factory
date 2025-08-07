@@ -1,5 +1,6 @@
 {
-  "type": "create:compacting",
+  "type": "create:mixing",
+  "heat_requirement": "heated",
   "ingredients": [
     {
       "item": "createchocolatefactory:cocoa_nibs"
@@ -12,16 +13,16 @@
     },
     {
       "item": "createchocolatefactory:cocoa_nibs"
-    }
-  ],
-  "processing_time": 400,
-  "results": [
-    {
-      "id": "createchocolatefactory:cocoa_cake"
     },
     {
-      "amount": 250,
-      "id": "createchocolatefactory:cocoa_butter"
+      "type": "fluid_tag",
+      "amount": 20,
+      "fluid_tag": "c:water"
+    }
+  ],
+  "results": [
+    {
+      "id": "createchocolatefactory:chocolate_liquor"
     }
   ]
 }

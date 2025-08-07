@@ -1,0 +1,18 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:chocolate_liquor"
+    }
+  ],
+  "processing_time": 400,
+  "results": [
+    {
+      "id": "createchocolatefactory:cocoa_cake"
+    },
+    {
+      "amount": 100,
+      "id": "createchocolatefactory:cocoa_butter"
+    }
+  ]
+}
