@@ -9,7 +9,7 @@
   "fluid.createchocolatefactory.chocolate": "Chocolat Fondu",
   "fluid.createchocolatefactory.cocoa_butter": "Beurre de cacao",
   "goggle.createchocolatefactory.dryingkit.blocked_sky": "Le ciel est bloqué - le séchage est suspendu",
-  "goggle.createchocolatefactory.dryingkit.bonus": "★ Bonus",
+  "goggle.createchocolatefactory.dryingkit.bonus": "â˜… Bonus",
   "goggle.createchocolatefactory.dryingkit.bonus_text": "+100% de la vitesse de séchage dans le Nether",
   "goggle.createchocolatefactory.dryingkit.dry": "Sec",
   "goggle.createchocolatefactory.dryingkit.drying": "Séchage",
@@ -23,9 +23,11 @@
   "item.createchocolatefactory.brass_whisk": "Fouet en laiton",
   "item.createchocolatefactory.caramel": "Caramel",
   "item.createchocolatefactory.caramel_nugget": "Pépites de caramel",
+  "item.createchocolatefactory.chocolate_bar": "Barre de chocolat",
   "item.createchocolatefactory.chocolate_bucket": "Seau de chocolat",
   "item.createchocolatefactory.chocolate_egg": "Chocolate Item",
   "item.createchocolatefactory.chocolate_filter": "Chocolate Filter",
+  "item.createchocolatefactory.chocolate_liquor": "Chocolate Liquor",
   "item.createchocolatefactory.cocoa_bark": "Écorce de cabosse",
   "item.createchocolatefactory.cocoa_beans_dirty": "Fève de cacao sale",
   "item.createchocolatefactory.cocoa_beans_roasted": "Fève de cacao torréfié",
@@ -43,5 +45,8 @@
   "item.createchocolatefactory.peanut": "Cacahuète",
   "itemGroup.createchocolatefactory.create_chocolate_factory": "Create Chocolate Factory",
   "message.createchocolatefactory.dryingkit.need_more_cocoa_beans": "Vous avez besoin de plus de fèves de cacao humides pour les sécher (%s/9)",
-  "tooltip.createchocolatefactory.machete": "Utiliser pour couper les cabosses de cacao"
+  "tooltip.createchocolatefactory.chocolate.composition": "Strength : %s - Sugar : %s - Cocoa Butter : %s - Milk : %s",
+  "tooltip.createchocolatefactory.chocolate.hold_shift": "[Hold Shift for information]",
+  "tooltip.createchocolatefactory.machete": "Utiliser pour couper les cabosses de cacao",
+  "tooltip.createchocolatefactory.progress": "%s/%s"
 }
