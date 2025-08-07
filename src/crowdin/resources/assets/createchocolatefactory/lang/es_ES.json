@@ -9,7 +9,7 @@
   "fluid.createchocolatefactory.chocolate": "Molten Chocolate",
   "fluid.createchocolatefactory.cocoa_butter": "Cocoa Butter",
   "goggle.createchocolatefactory.dryingkit.blocked_sky": "Sky is blocked - drying is paused",
-  "goggle.createchocolatefactory.dryingkit.bonus": "★ Bonus",
+  "goggle.createchocolatefactory.dryingkit.bonus": "â˜… Bonus",
   "goggle.createchocolatefactory.dryingkit.bonus_text": "+100% of drying speed in the Nether",
   "goggle.createchocolatefactory.dryingkit.dry": "Dry",
   "goggle.createchocolatefactory.dryingkit.drying": "Drying",
@@ -23,9 +23,11 @@
   "item.createchocolatefactory.brass_whisk": "Brass Whisk",
   "item.createchocolatefactory.caramel": "Caramel",
   "item.createchocolatefactory.caramel_nugget": "Caramel Nugget",
+  "item.createchocolatefactory.chocolate_bar": "Chocolate Bar",
   "item.createchocolatefactory.chocolate_bucket": "Chocolate Bucket",
   "item.createchocolatefactory.chocolate_egg": "Chocolate Item",
   "item.createchocolatefactory.chocolate_filter": "Chocolate Filter",
+  "item.createchocolatefactory.chocolate_liquor": "Chocolate Liquor",
   "item.createchocolatefactory.cocoa_bark": "Corteza de cacao",
   "item.createchocolatefactory.cocoa_beans_dirty": "Granos de cacao sucios",
   "item.createchocolatefactory.cocoa_beans_roasted": "Granos de cacao tostados",
@@ -43,5 +45,8 @@
   "item.createchocolatefactory.peanut": "Peanut",
   "itemGroup.createchocolatefactory.create_chocolate_factory": "Create Chocolate Factory",
   "message.createchocolatefactory.dryingkit.need_more_cocoa_beans": "You need more damp cocoa beans to dry them (%s/9)",
-  "tooltip.createchocolatefactory.machete": "Use to cut cocoa pods"
+  "tooltip.createchocolatefactory.chocolate.composition": "Strength : %s - Sugar : %s - Cocoa Butter : %s - Milk : %s",
+  "tooltip.createchocolatefactory.chocolate.hold_shift": "[Hold Shift for information]",
+  "tooltip.createchocolatefactory.machete": "Use to cut cocoa pods",
+  "tooltip.createchocolatefactory.progress": "%s/%s"
 }
