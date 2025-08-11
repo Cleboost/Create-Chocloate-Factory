@@ -138,15 +138,19 @@ public class Chocolate {
     }
 
     public int getAmplifier(int min, int max) {
-        return (int) (Math.sin(this.strength * (Math.PI / 2 - 0.3)) / Math.sin((Math.PI / 2 - 0.3))) * (max - min) + min;
+        return (int) Math.round((Math.sin(this.strength * (Math.PI / 2 - 0.3)) / Math.sin((Math.PI / 2 - 0.3))) * (max - min) + min);
     }
 
     public int getDuration(int min, int max) {
-        return (int) ((max - min) * (1 - 1 / (4 * this.milk + 1)) / 0.8 + min);
+        return (int) Math.round((max - min) * (1 - 1 / (4 * this.milk + 1)) / 0.8 + min);
     }
 
     public boolean isBad() {
         return this.strength > 0.99 || this.sugar > 0.8;
+    }
+
+    public String getTasteText() {
+        return this.hasTaste() ? this.getTasteItem().getDescription().getString() : "x";
     }
 
     @Override
