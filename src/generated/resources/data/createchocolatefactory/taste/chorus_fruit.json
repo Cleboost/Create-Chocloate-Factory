@@ -1,15 +1,15 @@
 {
   "effects": [
     {
-      "amplifier_max": 6,
-      "amplifier_min": 3,
+      "amplifier_max": 5,
+      "amplifier_min": 2,
       "duration_max": 400,
       "duration_min": 100,
       "effect": "minecraft:slow_falling"
     },
     {
-      "amplifier_max": 4,
-      "amplifier_min": 1,
+      "amplifier_max": 3,
+      "amplifier_min": 0,
       "duration_max": 300,
       "duration_min": 100,
       "effect": "minecraft:slowness"

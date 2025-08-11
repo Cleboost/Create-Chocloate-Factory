@@ -1,8 +1,8 @@
 {
   "effects": [
     {
-      "amplifier_max": 10,
-      "amplifier_min": 2,
+      "amplifier_max": 9,
+      "amplifier_min": 1,
       "duration_max": 100,
       "duration_min": 20,
       "effect": "minecraft:instant_health"

@@ -1,8 +1,8 @@
 {
   "effects": [
     {
-      "amplifier_max": 4,
-      "amplifier_min": 1,
+      "amplifier_max": 3,
+      "amplifier_min": 0,
       "duration_max": 200,
       "duration_min": 40,
       "effect": "minecraft:regeneration"

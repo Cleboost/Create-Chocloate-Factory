@@ -1,8 +1,8 @@
 {
   "effects": [
     {
-      "amplifier_max": 2,
-      "amplifier_min": 1,
+      "amplifier_max": 1,
+      "amplifier_min": 0,
       "duration_max": 2000,
       "duration_min": 100,
       "effect": "minecraft:glowing"
