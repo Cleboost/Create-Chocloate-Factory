@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "amplifier_max": 4,
+      "amplifier_min": 1,
+      "duration_max": 200,
+      "duration_min": 20,
+      "effect": "minecraft:regeneration"
+    }
+  ],
+  "item": "minecraft:sweet_berries"
+}
