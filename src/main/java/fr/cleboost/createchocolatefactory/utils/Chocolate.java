@@ -3,8 +3,14 @@ package fr.cleboost.createchocolatefactory.utils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.RegistryFixedCodec;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.nio.ByteBuffer;
 import java.util.Objects;
@@ -14,7 +20,8 @@ public class Chocolate {
             Codec.FLOAT.fieldOf("strength").forGetter(Chocolate::getStrength),
             Codec.FLOAT.fieldOf("sugar").forGetter(Chocolate::getSugar),
             Codec.FLOAT.fieldOf("cocoaButter").forGetter(Chocolate::getCocoaButter),
-            Codec.FLOAT.fieldOf("milk").forGetter(Chocolate::getMilk)
+            Codec.FLOAT.fieldOf("milk").forGetter(Chocolate::getMilk),
+            RegistryFixedCodec.create(Registries.ITEM).fieldOf("taste").forGetter(Chocolate::getTasteItemHolder)
     ).apply(instance, Chocolate::new));
 
     public static final StreamCodec<ByteBuf, Chocolate> STREAM_CODEC = StreamCodec.composite(
@@ -22,15 +29,37 @@ public class Chocolate {
             ByteBufCodecs.FLOAT, Chocolate::getSugar,
             ByteBufCodecs.FLOAT, Chocolate::getCocoaButter,
             ByteBufCodecs.FLOAT, Chocolate::getMilk,
+            ByteBufCodecs.fromCodec(BuiltInRegistries.ITEM.byNameCodec()), Chocolate::getTasteItem,
             Chocolate::new
     );
+
 
     private final float strength;
     private final float sugar;
     private final float cocoaButter;
     private final float milk;
+    private final Holder<Item> taste;
+
+    public Chocolate(float strength, float sugar, float cocoaButter, float milk, Item taste) {
+        this.taste = BuiltInRegistries.ITEM.wrapAsHolder(taste);
+        float coef = 1 / (strength + sugar + cocoaButter + milk);
+        this.strength = strength * coef;
+        this.sugar = sugar * coef;
+        this.cocoaButter = cocoaButter * coef;
+        this.milk = milk * coef;
+    }
+
+    public Chocolate(float strength, float sugar, float cocoaButter, float milk, Holder<Item> taste) {
+        this.taste = taste;
+        float coef = 1 / (strength + sugar + cocoaButter + milk);
+        this.strength = strength * coef;
+        this.sugar = sugar * coef;
+        this.cocoaButter = cocoaButter * coef;
+        this.milk = milk * coef;
+    }
 
     public Chocolate(float strength, float sugar, float cocoaButter, float milk) {
+        this.taste = null;
         float coef = 1 / (strength + sugar + cocoaButter + milk);
         this.strength = strength * coef;
         this.sugar = sugar * coef;
@@ -39,6 +68,7 @@ public class Chocolate {
     }
 
     public Chocolate() {
+        this.taste = BuiltInRegistries.ITEM.wrapAsHolder(Items.SWEET_BERRIES);
         this.strength = 1;
         this.sugar = 0;
         this.cocoaButter = 0;
@@ -59,6 +89,26 @@ public class Chocolate {
 
     public float getMilk() {
         return milk;
+    }
+
+    public Item getTasteItem() {
+        return taste.value();
+    }
+
+    public Holder<Item> getTasteItemHolder() {
+        return taste;
+    }
+
+    public boolean hasTaste() {
+        return taste != null;
+    }
+
+    /*public Taste getTaste() {
+
+    }*/
+
+    public Chocolate addTaste(Item item) {
+        return new Chocolate(strength, sugar, cocoaButter, milk, BuiltInRegistries.ITEM.wrapAsHolder(item));
     }
 
     private byte castToByte(double x) {
@@ -87,15 +137,38 @@ public class Chocolate {
         return (1 + this.cocoaButter / 100) * (1 + this.sugar / 100);
     }
 
+    public int getAmplifier(int min, int max) {
+        return (int) (Math.sin(this.strength * (Math.PI / 2 - 0.3)) / Math.sin((Math.PI / 2 - 0.3))) * (max - min) + min;
+    }
+
+    public int getDuration(int min, int max) {
+        return (int) ((max - min) * (1 - 1 / (4 * this.milk + 1)) / 0.8 + min);
+    }
+
+    public boolean isBad() {
+        return this.strength > 0.99 || this.sugar > 0.8;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Chocolate chocolate)) return false;
-        return Float.compare(strength, chocolate.strength) == 0 && Float.compare(sugar, chocolate.sugar) == 0 && Float.compare(cocoaButter, chocolate.cocoaButter) == 0 && Float.compare(milk, chocolate.milk) == 0;
+        return Float.compare(strength, chocolate.strength) == 0 && Float.compare(sugar, chocolate.sugar) == 0 && Float.compare(cocoaButter, chocolate.cocoaButter) == 0 && Float.compare(milk, chocolate.milk) == 0 && taste.equals(chocolate.taste);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(strength, sugar, cocoaButter, milk);
+        return Objects.hash(strength, sugar, cocoaButter, milk, taste);
+    }
+
+    @Override
+    public String toString() {
+        return "Chocolate{" +
+                "strength=" + strength +
+                ", sugar=" + sugar +
+                ", cocoaButter=" + cocoaButter +
+                ", milk=" + milk +
+                ", taste=" + taste +
+                '}';
     }
 }
