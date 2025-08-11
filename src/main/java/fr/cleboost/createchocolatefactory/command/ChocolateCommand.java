@@ -24,6 +24,7 @@ public class ChocolateCommand {
                     return get(commandSource.getSource());
                 }))
                 .then(Commands.literal("set")
+                        .then(Commands.literal("chocolate")
                         .then(Commands.argument("strength", FloatArgumentType.floatArg(0f, 1f))
                                 .then(Commands.argument("sugar", FloatArgumentType.floatArg(0f, 1f))
                                         .then(Commands.argument("cocoaButter", FloatArgumentType.floatArg(0f, 1f))
@@ -36,11 +37,12 @@ public class ChocolateCommand {
                                                                     FloatArgumentType.getFloat(commandSource, "cocoaButter"),
                                                                     FloatArgumentType.getFloat(commandSource, "milk")
                                                             );
-                                                        })))))
-                        .then(Commands.argument("taste", ItemArgument.item(context))
+                                                        }))))))
+                        .then(Commands.literal("taste")
+                        .then(Commands.argument("item", ItemArgument.item(context))
                                 .executes((commandSource) -> {
                                     return setTaste(commandSource.getSource(), ItemArgument.getItem(commandSource, "taste").getItem());
-                                }))
+                                })))
                 )
         );
     }
