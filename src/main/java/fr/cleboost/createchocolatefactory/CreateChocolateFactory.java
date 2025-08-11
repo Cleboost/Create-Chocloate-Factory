@@ -28,7 +28,7 @@ public class CreateChocolateFactory {
 
 
     public CreateChocolateFactory(IEventBus modEventBus) {
-        CCFLang.register();
+        CCFLangs.register();
         REGISTRATE.registerEventListeners(modEventBus);
         CCFBlocks.register();
         CCFBlockEntities.register();
