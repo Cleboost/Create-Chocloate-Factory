@@ -20,7 +20,7 @@ public class CCFDatagen {
 
         gen.addProvider(event.includeServer(), new CCFStandardRecipeGen(packOutput, lookupProvider));
         gen.addProvider(event.includeServer(), new CCFDatapackProvider(packOutput, lookupProvider));
-        gen.addProvider(event.includeServer(), new TasteDataProvider(packOutput));
+        //gen.addProvider(event.includeServer(), new TasteDataProvider(packOutput));
 
         if (event.includeServer()) {
             CCFRecipeProvider.registerAllProcessing(gen, packOutput, lookupProvider);

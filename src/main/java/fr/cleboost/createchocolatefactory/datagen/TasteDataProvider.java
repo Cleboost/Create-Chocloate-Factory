@@ -38,8 +38,8 @@ public class TasteDataProvider implements DataProvider {
     public static Taste register(TasteBuilder taste) {
         Taste built = taste.build();
         for (Taste t : TasteDataProvider.getTastes()) {
-            if (t.getItem().equals(built.getItem())) {
-                throw new IllegalStateException("Taste " + built.getItem().getRegisteredName() + " already exists");
+            if (t.getItemHolder().equals(built.getItemHolder())) {
+                throw new IllegalStateException("Taste " + built.getItemHolder().getRegisteredName() + " already exists");
             }
         }
         tastes.add(built);
@@ -53,7 +53,7 @@ public class TasteDataProvider implements DataProvider {
     @Override
     public CompletableFuture<?> run(CachedOutput cachedOutput) {
         for (Taste taste : getTastes()) {
-            String name = name(taste.getItem().value());
+            String name = name(taste.getItemHolder().value());
             ResourceLocation location = CreateChocolateFactory.asResource("taste/" + name);
             
             // Convertir le Taste en JSON
@@ -74,7 +74,7 @@ public class TasteDataProvider implements DataProvider {
     private String convertTasteToJson(Taste taste) {
         StringBuilder json = new StringBuilder();
         json.append("{\n");
-        json.append("  \"item\": \"").append(taste.getItem().unwrapKey().orElseThrow().location()).append("\",\n");
+        json.append("  \"item\": \"").append(taste.getItemHolder().unwrapKey().orElseThrow().location()).append("\",\n");
         
         if (!taste.getEffects().isEmpty()) {
             json.append("  \"effects\": [\n");
