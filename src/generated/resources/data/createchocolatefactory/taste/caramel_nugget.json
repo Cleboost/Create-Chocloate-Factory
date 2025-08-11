@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "amplifier_max": 5,
+      "amplifier_min": 2,
+      "duration_max": 1000,
+      "duration_min": 200,
+      "effect": "minecraft:absorption"
+    }
+  ],
+  "item": "createchocolatefactory:caramel_nugget"
+}

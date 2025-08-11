@@ -1,0 +1,19 @@
+{
+  "effects": [
+    {
+      "amplifier_max": 6,
+      "amplifier_min": 3,
+      "duration_max": 400,
+      "duration_min": 100,
+      "effect": "minecraft:slow_falling"
+    },
+    {
+      "amplifier_max": 4,
+      "amplifier_min": 1,
+      "duration_max": 300,
+      "duration_min": 100,
+      "effect": "minecraft:slowness"
+    }
+  ],
+  "item": "minecraft:chorus_fruit"
+}

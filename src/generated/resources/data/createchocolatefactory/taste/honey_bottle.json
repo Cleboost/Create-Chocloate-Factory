@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "amplifier_max": 10,
+      "amplifier_min": 2,
+      "duration_max": 100,
+      "duration_min": 20,
+      "effect": "minecraft:instant_health"
+    }
+  ],
+  "item": "minecraft:honey_bottle"
+}

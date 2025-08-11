@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "amplifier_max": 2,
+      "amplifier_min": 1,
+      "duration_max": 2000,
+      "duration_min": 100,
+      "effect": "minecraft:glowing"
+    }
+  ],
+  "item": "minecraft:glow_berries"
+}

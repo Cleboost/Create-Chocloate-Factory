@@ -10,7 +10,7 @@
   "fluid.createchocolatefactory.cocoa_butter": "Cocoa Butter",
   "goggle.createchocolatefactory.dryingkit.blocked_sky": "Sky is blocked - drying is paused",
   "goggle.createchocolatefactory.dryingkit.bonus": "★ Bonus",
-  "goggle.createchocolatefactory.dryingkit.bonus_text": "+100% of drying speed in the Nether",
+  "goggle.createchocolatefactory.dryingkit.bonus_text": "+100% drying speed in the Nether",
   "goggle.createchocolatefactory.dryingkit.dry": "Dry",
   "goggle.createchocolatefactory.dryingkit.drying": "Drying",
   "goggle.createchocolatefactory.dryingkit.empty": "Empty",
@@ -45,7 +45,7 @@
   "item.createchocolatefactory.peanut": "Peanut",
   "itemGroup.createchocolatefactory.create_chocolate_factory": "Create Chocolate Factory",
   "message.createchocolatefactory.dryingkit.need_more_cocoa_beans": "You need more damp cocoa beans to dry them (%s/9)",
-  "tooltip.createchocolatefactory.chocolate.composition": "Strength : %s - Sugar : %s - Cocoa Butter : %s - Milk : %s",
+  "tooltip.createchocolatefactory.chocolate.composition": "Chocolate composition :\nStrength : %s\nSugar : %s\nCocoa Butter : %s\nMilk : %s\nTaste : %s",
   "tooltip.createchocolatefactory.chocolate.hold_shift": "[Hold Shift for information]",
   "tooltip.createchocolatefactory.machete": "Use to cut cocoa pods",
   "tooltip.createchocolatefactory.progress": "%s/%s"
