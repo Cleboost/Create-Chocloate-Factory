@@ -3,22 +3,24 @@ package fr.cleboost.createchocolatefactory.utils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.core.CCFRegistryKeys;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.RegistryFixedCodec;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Taste {
     public static final Codec<Taste> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            RegistryFixedCodec.create(Registries.ITEM).fieldOf("item").forGetter(Taste::getItem),
+            RegistryFixedCodec.create(Registries.ITEM).fieldOf("item").forGetter(Taste::getItemHolder),
             Codec.list(ChocolateEffect.CODEC).optionalFieldOf("effects", List.of()).forGetter(Taste::getEffects)
     ).apply(instance, Taste::new));
 
@@ -34,8 +36,11 @@ public class Taste {
         return new Taste(BuiltInRegistries.ITEM.wrapAsHolder(item), List.of(effects));
     }
 
-    public Holder<Item> getItem() {
+    public Holder<Item> getItemHolder() {
         return item;
+    }
+    public Item getItem() {
+        return item.value();
     }
 
     public List<ChocolateEffect> getEffects() {
@@ -58,12 +63,25 @@ public class Taste {
         return Objects.hash(item, effects);
     }
 
-    public static ResourceLocation getFromItem(Item item) {
+    public static ResourceLocation getAssetName(Item item) {
         return CreateChocolateFactory.asResource(name(item));
+    }
+    public static Optional<Taste> get(Level pLevel, Item item){
+        if (pLevel.registryAccess().registry(CCFRegistryKeys.TASTE_REGISTRY_KEY).isEmpty()) return Optional.empty();
+        Registry<Taste> registry = pLevel.registryAccess().registry(CCFRegistryKeys.TASTE_REGISTRY_KEY).get();
+        return registry.getOptional(Taste.getAssetName(item));
     }
 
     private static String name(Item item) {
         return item.getDescriptionId().split("\\.")[2];
+    }
+
+    @Override
+    public String toString() {
+        return "Taste{" +
+                "item=" + item +
+                ", effects=" + effects +
+                '}';
     }
 
     public static class ChocolateEffect {
@@ -127,6 +145,17 @@ public class Taste {
         @Override
         public int hashCode() {
             return Objects.hash(duration_max, duration_min, amplifier_max, amplifier_min, effect);
+        }
+
+        @Override
+        public String toString() {
+            return "ChocolateEffect{" +
+                    "effect=" + effect +
+                    ", duration_min=" + duration_min +
+                    ", duration_max=" + duration_max +
+                    ", amplifier_min=" + amplifier_min +
+                    ", amplifier_max=" + amplifier_max +
+                    '}';
         }
     }
 }
