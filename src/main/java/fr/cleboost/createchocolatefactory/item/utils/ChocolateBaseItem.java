@@ -47,8 +47,9 @@ public class ChocolateBaseItem extends Item {
         Chocolate chocolate = pStack.get(CCFDataComponents.CHOCOLATE);
         if (chocolate == null) return;
         if (Screen.hasShiftDown()) {
+
             tooltip.add(Component.translatable("tooltip.createchocolatefactory.chocolate.composition",
-                            chocolate.getStrength(), chocolate.getSugar(), chocolate.getCocoaButter(), chocolate.getMilk())
+                            chocolate.getStrength(), chocolate.getSugar(), chocolate.getCocoaButter(), chocolate.getMilk(), chocolate.getTasteText())
                     .withStyle(ChatFormatting.GRAY));
         } else {
             CCFLang.hold_shift_tooltips(tooltip);
@@ -76,7 +77,7 @@ public class ChocolateBaseItem extends Item {
         Chocolate ch = pStack.get(CCFDataComponents.CHOCOLATE);
         if (ch == null) return;
         if (ch.isBad()) {
-            pLivingEntity.addEffect(new MobEffectInstance(MobEffects.OOZING, pLevel.random.nextInt(400, 1000), 2));
+            pLivingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, pLevel.random.nextInt(400, 1000), 2));
             pLivingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, pLevel.random.nextInt(200, 500), 2));
         } else {
             if (ch.hasTaste()) {
