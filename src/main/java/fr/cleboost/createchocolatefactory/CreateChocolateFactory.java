@@ -5,11 +5,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerBlockEntity;
 import fr.cleboost.createchocolatefactory.core.*;
 import fr.cleboost.createchocolatefactory.datagen.CCFDatagen;
-import fr.cleboost.createchocolatefactory.datagen.CCFDatapackProvider;
 import fr.cleboost.createchocolatefactory.utils.Taste;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistrySetBuilder;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
@@ -19,8 +15,6 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.slf4j.Logger;
-
-import java.util.Set;
 
 @Mod(CreateChocolateFactory.MODID)
 public class CreateChocolateFactory {
@@ -53,6 +47,7 @@ public class CreateChocolateFactory {
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         ChocolateMixerBlockEntity.registerCapabilities(event);
     }
+
 
     @SubscribeEvent
     public static void registerDatapackRegistries(DataPackRegistryEvent.NewRegistry event) {
