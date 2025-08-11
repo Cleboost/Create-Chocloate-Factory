@@ -2,6 +2,9 @@
   "block.createchocolatefactory.chocolate_mixer": "Chocolate Mixer",
   "block.createchocolatefactory.cocoa_pod": "Cocoa Pod",
   "block.createchocolatefactory.drying_kit": "Drying Kit",
+  "commands.createchocolatefactory.fail.no_chocolate": "This item is not made from chocolate",
+  "commands.createchocolatefactory.set.chocolate_success": "The new chocolate values have been set successfully",
+  "commands.createchocolatefactory.set.taste_success": "The new taste item has been set successfully",
   "createchocolatefactory.ponder.drying_kit.header": "Drying Kit",
   "createchocolatefactory.ponder.drying_kit.text_1": "Drying 9 damp cocoa beans",
   "createchocolatefactory.ponder.drying_kit.text_2": "Drying kit needs active light & work only during day",
@@ -14,7 +17,6 @@
   "goggle.createchocolatefactory.dryingkit.dry": "Dry",
   "goggle.createchocolatefactory.dryingkit.drying": "Drying",
   "goggle.createchocolatefactory.dryingkit.empty": "Empty",
-  "goggle.createchocolatefactory.dryingkit.info": "Drying Kit",
   "goggle.createchocolatefactory.dryingkit.night": "Drying is paused during the night",
   "goggle.createchocolatefactory.dryingkit.progress": "Progress : %s",
   "goggle.createchocolatefactory.dryingkit.raining": "Drying is reset due to rain or thunderstorm",
@@ -46,7 +48,7 @@
   "itemGroup.createchocolatefactory.create_chocolate_factory": "Create Chocolate Factory",
   "message.createchocolatefactory.dryingkit.need_more_cocoa_beans": "You need more damp cocoa beans to dry them (%s/9)",
   "tooltip.createchocolatefactory.chocolate.composition": "Chocolate composition :\nStrength : %s\nSugar : %s\nCocoa Butter : %s\nMilk : %s\nTaste : %s",
-  "tooltip.createchocolatefactory.chocolate.hold_shift": "[Hold Shift for information]",
+  "tooltip.createchocolatefactory.hold_shift": "Hold [Shift] for information",
   "tooltip.createchocolatefactory.machete": "Use to cut cocoa pods",
   "tooltip.createchocolatefactory.progress": "%s/%s"
 }

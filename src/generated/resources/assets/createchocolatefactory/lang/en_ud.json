@@ -2,6 +2,9 @@
   "block.createchocolatefactory.chocolate_mixer": "ɹǝxıW ǝʇɐןoɔoɥƆ",
   "block.createchocolatefactory.cocoa_pod": "poԀ ɐoɔoƆ",
   "block.createchocolatefactory.drying_kit": "ʇıʞ buıʎɹᗡ",
+  "commands.createchocolatefactory.fail.no_chocolate": "ǝʇɐןoɔoɥɔ ɯoɹɟ ǝpɐɯ ʇou sı ɯǝʇı sıɥ⟘",
+  "commands.createchocolatefactory.set.chocolate_success": "ʎןןnɟssǝɔɔns ʇǝs uǝǝq ǝʌɐɥ sǝnןɐʌ ǝʇɐןoɔoɥɔ ʍǝu ǝɥ⟘",
+  "commands.createchocolatefactory.set.taste_success": "ʎןןnɟssǝɔɔns ʇǝs uǝǝq sɐɥ ɯǝʇı ǝʇsɐʇ ʍǝu ǝɥ⟘",
   "createchocolatefactory.ponder.drying_kit.header": "ʇıʞ buıʎɹᗡ",
   "createchocolatefactory.ponder.drying_kit.text_1": "suɐǝq ɐoɔoɔ dɯɐp 6 buıʎɹᗡ",
   "createchocolatefactory.ponder.drying_kit.text_2": "ʎɐp buıɹnp ʎןuo ʞɹoʍ & ʇɥbıן ǝʌıʇɔɐ spǝǝu ʇıʞ buıʎɹᗡ",
@@ -14,7 +17,6 @@
   "goggle.createchocolatefactory.dryingkit.dry": "ʎɹᗡ",
   "goggle.createchocolatefactory.dryingkit.drying": "buıʎɹᗡ",
   "goggle.createchocolatefactory.dryingkit.empty": "ʎʇdɯƎ",
-  "goggle.createchocolatefactory.dryingkit.info": "ʇıʞ buıʎɹᗡ",
   "goggle.createchocolatefactory.dryingkit.night": "ʇɥbıu ǝɥʇ buıɹnp pǝsnɐd sı buıʎɹᗡ",
   "goggle.createchocolatefactory.dryingkit.progress": "%s : ssǝɹboɹԀ",
   "goggle.createchocolatefactory.dryingkit.raining": "ɯɹoʇsɹǝpunɥʇ ɹo uıɐɹ oʇ ǝnp ʇǝsǝɹ sı buıʎɹᗡ",
@@ -46,7 +48,7 @@
   "itemGroup.createchocolatefactory.create_chocolate_factory": "ʎɹoʇɔɐℲ ǝʇɐןoɔoɥƆ ǝʇɐǝɹƆ",
   "message.createchocolatefactory.dryingkit.need_more_cocoa_beans": ")6/%s( ɯǝɥʇ ʎɹp oʇ suɐǝq ɐoɔoɔ dɯɐp ǝɹoɯ pǝǝu noʎ",
   "tooltip.createchocolatefactory.chocolate.composition": "%s : ǝʇsɐ⟘\n%s : ʞןıW\n%s : ɹǝʇʇnᗺ ɐoɔoƆ\n%s : ɹɐbnS\n%s : ɥʇbuǝɹʇS\n: uoıʇısodɯoɔ ǝʇɐןoɔoɥƆ",
-  "tooltip.createchocolatefactory.chocolate.hold_shift": "]uoıʇɐɯɹoɟuı ɹoɟ ʇɟıɥS pןoH[",
+  "tooltip.createchocolatefactory.hold_shift": "uoıʇɐɯɹoɟuı ɹoɟ ]ʇɟıɥS[ pןoH",
   "tooltip.createchocolatefactory.machete": "spod ɐoɔoɔ ʇnɔ oʇ ǝs∩",
   "tooltip.createchocolatefactory.progress": "%s/%s"
 }
