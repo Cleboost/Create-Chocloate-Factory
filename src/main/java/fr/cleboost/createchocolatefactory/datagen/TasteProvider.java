@@ -4,7 +4,6 @@ import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
 import fr.cleboost.createchocolatefactory.core.CCFRegistryKeys;
 import fr.cleboost.createchocolatefactory.utils.Taste;
-import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -20,24 +19,26 @@ public class TasteProvider /*implements DataProvider*/ {
     private static final ArrayList<Taste> tastes = new ArrayList<>();
 
     static {
+        //the amplifier begin at 0
         register(TasteBuilder.from(Items.SWEET_BERRIES)
-                .addEffect(MobEffects.REGENERATION, 40, 200, 1, 4));
+                .addEffect(MobEffects.REGENERATION, 40, 200, 0, 3));
         register(TasteBuilder.from(CCFItems.MINT_LEAF.get())
-                .addEffect(MobEffects.DIG_SPEED, 40, 400, 2, 6));
+                .addEffect(MobEffects.DIG_SPEED, 40, 400, 1, 5));
         register(TasteBuilder.from(CCFItems.CARAMEL_NUGGET.get())
-                .addEffect(MobEffects.ABSORPTION, 200, 1000, 2, 5));
+                .addEffect(MobEffects.ABSORPTION, 200, 1000, 1, 4));
         register(TasteBuilder.from(Items.GLOW_BERRIES)
-                .addEffect(MobEffects.GLOWING, 100, 2000, 1, 2));
+                .addEffect(MobEffects.GLOWING, 100, 2000, 0, 1));
         register(TasteBuilder.from(Items.HONEY_BOTTLE)
-                .addEffect(MobEffects.HEAL, 20, 100, 2, 10));
+                .addEffect(MobEffects.HEAL, 20, 100, 1, 9));
         register(TasteBuilder.from(Items.CORNFLOWER)
-                .addEffect(MobEffects.SATURATION, 1000, 5000, 1, 3));
+                .addEffect(MobEffects.SATURATION, 1000, 5000, 0, 2));
         register(TasteBuilder.from(CCFItems.HAZELNUT.get())
-                .addEffect(MobEffects.JUMP, 200, 600, 1, 4));
+                .addEffect(MobEffects.JUMP, 200, 600, 0, 3));
         register(TasteBuilder.from(Items.CHORUS_FRUIT)
-                .addEffect(MobEffects.SLOW_FALLING, 100, 400, 3, 6)
-                .addEffect(MobEffects.MOVEMENT_SLOWDOWN, 100, 300, 1, 4));
+                .addEffect(MobEffects.SLOW_FALLING, 100, 400, 2, 5)
+                .addEffect(MobEffects.MOVEMENT_SLOWDOWN, 100, 300, 0, 3));
     }
+
     public static Taste register(TasteBuilder taste) {
         Taste built = taste.build();
         for (Taste t : TasteProvider.getTastes()) {
