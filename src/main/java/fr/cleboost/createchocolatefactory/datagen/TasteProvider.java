@@ -1,13 +1,11 @@
 package fr.cleboost.createchocolatefactory.datagen;
 
-import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
 import fr.cleboost.createchocolatefactory.core.CCFRegistryKeys;
 import fr.cleboost.createchocolatefactory.utils.Taste;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
@@ -29,8 +27,8 @@ public class TasteProvider {
     public static Taste register(TasteBuilder taste) {
         Taste built = taste.build();
         for (Taste t : TasteProvider.getTastes()) {
-            if (t.getItem().equals(built.getItem())) {
-                throw new IllegalStateException("Taste " + built.getItem().getRegisteredName() + " already exists");
+            if (t.getItemHolder().equals(built.getItemHolder())) {
+                throw new IllegalStateException("Taste " + built.getItemHolder().getRegisteredName() + " already exists");
             }
         }
         tastes.add(built);
@@ -45,7 +43,7 @@ public class TasteProvider {
         for (Taste taste : TasteProvider.getTastes()) {
             context.register(ResourceKey.create(
                     CCFRegistryKeys.TASTE_REGISTRY_KEY,
-                    ResourceLocation.fromNamespaceAndPath("", name(taste.getItem().value()))
+                    Taste.getAssetName(taste.getItem())
             ), taste);
         }
     }
