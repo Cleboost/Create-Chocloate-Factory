@@ -1,14 +1,10 @@
 package fr.cleboost.createchocolatefactory.block.dryingKit;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
-
-import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.utils.TickableBlockEntity;
+import fr.cleboost.createchocolatefactory.core.CCFBlocks;
+import fr.cleboost.createchocolatefactory.core.CCFLangs;
 import fr.cleboost.createchocolatefactory.network.RequestSyncPacket;
+import fr.cleboost.createchocolatefactory.utils.TickableBlockEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -23,6 +19,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEntity, IHaveGoggleInformation {
     private int tickCount = 0;
@@ -54,7 +53,7 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
 
         if (tickCount >= tickToDry) {
             this.tickCount = 0;
-            
+
             if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
                 for (int i = 0; i < 25; i++) {
                     double x = this.worldPosition.getX() + 0.5 + (level.random.nextDouble() - 0.5) * 0.8;
@@ -63,7 +62,7 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
                     double motionY = 0.02 + level.random.nextDouble() * 0.08;
                     serverLevel.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, x, y, z, 1, 0.0, motionY, 0.0, 0.01);
                 }
-                
+
                 for (int i = 0; i < 15; i++) {
                     double x = this.worldPosition.getX() + 0.5 + (level.random.nextDouble() - 0.5) * 0.6;
                     double y = this.worldPosition.getY() + 1.0 + level.random.nextDouble() * 0.3;
@@ -71,14 +70,14 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
                     serverLevel.sendParticles(ParticleTypes.WHITE_ASH, x, y, z, 2, 0.1, 0.1, 0.1, 0.02);
                 }
             }
-  
+
             level.playSound(
-                null, 
-                this.worldPosition,
-                net.minecraft.sounds.SoundEvents.WET_SPONGE_DRIES,
-                net.minecraft.sounds.SoundSource.BLOCKS,
-                1.0F, // volume
-                1.0F  // pitch
+                    null,
+                    this.worldPosition,
+                    net.minecraft.sounds.SoundEvents.WET_SPONGE_DRIES,
+                    net.minecraft.sounds.SoundSource.BLOCKS,
+                    1.0F, // volume
+                    1.0F  // pitch
             );
 
             BlockState blockState = level.getBlockState(this.worldPosition);
@@ -146,69 +145,59 @@ public class DryingKitBlockEntity extends BlockEntity implements TickableBlockEn
 
         String spacing = "    ";
         tooltip.add(Component.literal(spacing)
-            .append(Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.info")
-                    .withStyle(ChatFormatting.WHITE)));
+                .append(CCFBlocks.DRYING_KIT.asItem().getDescription()));
+                //.append(Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.info").withStyle(ChatFormatting.WHITE));
+                //);
 
         if (level.dimension().equals(Level.NETHER)) {
             tooltip.add(Component.literal(spacing + "  ")
-                .append(Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.bonus")
-                    .withStyle(ChatFormatting.GOLD)));
+                    .append(CCFLangs.DRYING_KIT_BONUS.getComponent().withStyle(ChatFormatting.GOLD)));
             tooltip.add(Component.literal(spacing + "    ")
-                .append(Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.bonus_text")
-                    .withStyle(ChatFormatting.GREEN)));
+                    .append(CCFLangs.DRYING_KIT_BONUS_TEXT.getComponent().withStyle(ChatFormatting.GREEN)));
         }
 
         DryingKitBlock.State state = level.getBlockState(this.worldPosition).getValue(DryingKitBlock.STATE);
         Component stateComponent;
         switch (state) {
             case DRYING:
-                stateComponent = Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.drying")
-                    .withStyle(ChatFormatting.AQUA);
+                stateComponent = CCFLangs.DRYING_KIT_DRYING.getComponent().withStyle(ChatFormatting.AQUA);
                 break;
             case DRY:
-                stateComponent = Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.dry")
-                    .withStyle(ChatFormatting.GREEN);
+                stateComponent = CCFLangs.DRYING_KIT_DRY.getComponent().withStyle(ChatFormatting.GREEN);
                 break;
             default:
-                stateComponent = Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.empty")
-                    .withStyle(ChatFormatting.AQUA);
+                stateComponent = CCFLangs.DRYING_KIT_EMPTY.getComponent().withStyle(ChatFormatting.AQUA);
                 break;
         }
         tooltip.add(Component.literal(spacing)
-                .append(Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.status",stateComponent)
-                .withStyle(ChatFormatting.GRAY)));
+                .append(CCFLangs.DRYING_KIT_STATUS.getComponent(stateComponent).withStyle(ChatFormatting.GRAY)));
 
         if (state == DryingKitBlock.State.DRYING) {
             tooltip.add(Component.literal(spacing)
-                    .append(Component.translatable(
-                            "goggle."+CreateChocolateFactory.MODID + ".dryingkit.progress",
-                            Component.literal(this.tickCount * 100 / this.tickToDry + "%")
-                                    .withStyle(ChatFormatting.AQUA))
-                            .withStyle(ChatFormatting.GRAY)));
+                    .append(CCFLangs.DRYING_KIT_PROGRESS.getComponent(
+                            Component.literal(this.tickCount * 100 / this.tickToDry + "%").withStyle(ChatFormatting.AQUA)
+                    ).withStyle(ChatFormatting.GRAY)));
             int remainingTicks = this.tickToDry - this.tickCount;
+            if (level.dimension().equals(Level.NETHER)) remainingTicks /= 2;
             int remainingSeconds = remainingTicks / 20;
             int minutes = remainingSeconds / 60;
             int seconds = remainingSeconds % 60;
 
             String timeFormatted = String.format("%d:%02d", minutes, seconds);
             tooltip.add(Component.literal(spacing)
-                    .append(Component.translatable(
-                            "goggle."+CreateChocolateFactory.MODID + ".dryingkit.time_remaining",
-                            Component.literal(timeFormatted).withStyle(ChatFormatting.AQUA))
-                            .withStyle(ChatFormatting.GRAY)));
+                    .append(CCFLangs.DRYING_KIT_TIME_REMAINING.getComponent(
+                            Component.literal(timeFormatted).withStyle(ChatFormatting.AQUA)
+                    ).withStyle(ChatFormatting.GRAY)));
 
             if (!level.canSeeSky(worldPosition) && !level.dimension().equals(Level.NETHER)) {
                 tooltip.add(Component.literal(spacing)
-                        .append(Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.blocked_sky")
-                                .withStyle(ChatFormatting.RED)));
+                        .append(CCFLangs.DRYING_KIT_SKY_BLOCKED.getComponent().withStyle(ChatFormatting.RED)));
             } else if (!level.isDay() && !level.dimension().equals(Level.NETHER)) {
                 tooltip.add(Component.literal(spacing)
-                        .append(Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.night")
-                                .withStyle(ChatFormatting.DARK_GRAY)));
+                        .append(CCFLangs.DRYING_KIT_NIGHT.getComponent().withStyle(ChatFormatting.DARK_GRAY)));
             } else if (level.isRaining() || level.isThundering()) {
                 tooltip.add(Component.literal(spacing)
-                        .append(Component.translatable("goggle."+CreateChocolateFactory.MODID + ".dryingkit.raining")
-                                .withStyle(ChatFormatting.DARK_GRAY)));
+                        .append(CCFLangs.DRYING_KIT_RAINING.getComponent().withStyle(ChatFormatting.DARK_GRAY)));
             }
         }
 

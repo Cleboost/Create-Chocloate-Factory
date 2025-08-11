@@ -1,15 +1,16 @@
 package fr.cleboost.createchocolatefactory.block.dryingKit;
 
-import fr.cleboost.createchocolatefactory.utils.TickableBlockEntity;
 import fr.cleboost.createchocolatefactory.core.CCFBlockEntities;
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
+import fr.cleboost.createchocolatefactory.core.CCFLangs;
+import fr.cleboost.createchocolatefactory.utils.TickableBlockEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +30,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.ItemInteractionResult;
 
 import javax.annotation.Nonnull;
 
@@ -45,13 +45,13 @@ public class DryingKitBlock extends Block implements EntityBlock {
 
     @Override
     public @Nonnull VoxelShape getShape(@Nonnull BlockState pState, @Nonnull BlockGetter pLevel,
-            @Nonnull BlockPos p_154348_, @Nonnull CollisionContext pContext) {
+                                        @Nonnull BlockPos p_154348_, @Nonnull CollisionContext pContext) {
         return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
     }
 
     @Override
     public @Nonnull VoxelShape getCollisionShape(@Nonnull BlockState pState, @Nonnull BlockGetter pLevel,
-            @Nonnull BlockPos pPos, @Nonnull CollisionContext pContext) {
+                                                 @Nonnull BlockPos pPos, @Nonnull CollisionContext pContext) {
         return Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
     }
 
@@ -62,7 +62,7 @@ public class DryingKitBlock extends Block implements EntityBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level pLevel, @Nonnull BlockState pState,
-            @Nonnull BlockEntityType<T> pBlockEntityType) {
+                                                                  @Nonnull BlockEntityType<T> pBlockEntityType) {
         if (!pState.getValue(STATE).equals(State.DRYING))
             return null;
         return TickableBlockEntity.getTickerHelper(pLevel);
@@ -81,8 +81,8 @@ public class DryingKitBlock extends Block implements EntityBlock {
 
     @Override
     public @Nonnull BlockState updateShape(@Nonnull BlockState pState, @Nonnull Direction pDirection,
-            @Nonnull BlockState pNeighborState, @Nonnull LevelAccessor pLevel, @Nonnull BlockPos pCurrentPos,
-            @Nonnull BlockPos pNeighborPos) {
+                                           @Nonnull BlockState pNeighborState, @Nonnull LevelAccessor pLevel, @Nonnull BlockPos pCurrentPos,
+                                           @Nonnull BlockPos pNeighborPos) {
         return !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState()
                 : super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
     }
@@ -106,8 +106,8 @@ public class DryingKitBlock extends Block implements EntityBlock {
 
     @Override
     protected @Nonnull ItemInteractionResult useItemOn(@Nonnull ItemStack item, @Nonnull BlockState state, @Nonnull Level level,
-            @Nonnull BlockPos pos,
-            @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hitResult) {
+                                                       @Nonnull BlockPos pos,
+                                                       @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hitResult) {
         if (level.isClientSide() || hand != InteractionHand.MAIN_HAND) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
@@ -123,9 +123,7 @@ public class DryingKitBlock extends Block implements EntityBlock {
                     return ItemInteractionResult.SUCCESS;
                 } else {
                     player.displayClientMessage(
-                            Component
-                                    .translatable("message.createchocolatefactory.dryingkit.need_more_cocoa_beans",
-                                            item.getCount())
+                            CCFLangs.MESSAGE_NEED_MORE_COCOA_BEANS.getComponent(item.getCount())
                                     .withStyle(ChatFormatting.RED),
                             true);
                     return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -159,7 +157,7 @@ public class DryingKitBlock extends Block implements EntityBlock {
 
     @Override
     public void onRemove(@Nonnull BlockState pState, @Nonnull Level pLevel, @Nonnull BlockPos pPos,
-            @Nonnull BlockState pNewState, boolean pIsMoving) {
+                         @Nonnull BlockState pNewState, boolean pIsMoving) {
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
         if (pLevel.isClientSide()
                 || pState == CCFBlocks.DRYING_KIT.get().defaultBlockState().setValue(STATE, State.EMPTY)

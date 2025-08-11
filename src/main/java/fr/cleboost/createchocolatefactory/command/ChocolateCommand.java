@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
+import fr.cleboost.createchocolatefactory.core.CCFLangs;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -48,13 +49,11 @@ public class ChocolateCommand {
         if (commandSource.isPlayer() && commandSource.getPlayer().getMainHandItem().has(CCFDataComponents.CHOCOLATE)) {
             Chocolate chocolate = commandSource.getPlayer().getMainHandItem().get(CCFDataComponents.CHOCOLATE);
             commandSource.sendSuccess(() -> {
-                return Component.translatable(/*"commands." + CreateChocolateFactory.MODID + "get.composition"*/"tooltip.createchocolatefactory.chocolate.composition", chocolate.getStrength(), chocolate.getSugar(), chocolate.getCocoaButter(), chocolate.getMilk(), chocolate.getTasteText());
+                return CCFLangs.CHOCOLATE_COMPOSITION.getComponent(chocolate.getStrength(), chocolate.getSugar(), chocolate.getCocoaButter(), chocolate.getMilk(), chocolate.getTasteText());
             }, true);
             return 1;
         } else {
-            commandSource.sendFailure(
-                    Component.translatable("commands." + CreateChocolateFactory.MODID + "fail.no_chocolate")
-            );
+            commandSource.sendFailure(CCFLangs.COMMAND_FAIL_NO_CHOCOLATE.getComponent());
             return 0;
         }
     }
@@ -64,14 +63,10 @@ public class ChocolateCommand {
             Chocolate oldChocolate = commandSource.getPlayer().getMainHandItem().get(CCFDataComponents.CHOCOLATE);
             Chocolate newChocolate = new Chocolate(strength, sugar, cocoaButter, milk, oldChocolate.getTasteItemHolder());
             commandSource.getPlayer().getMainHandItem().set(CCFDataComponents.CHOCOLATE, newChocolate);
-            commandSource.sendSuccess(() -> {
-                return Component.translatable("commands." + CreateChocolateFactory.MODID + "set.basic_success");
-            }, true);
+            commandSource.sendSuccess(CCFLangs.COMMAND_SET_CHOCOLATE::getComponent, true);
             return 1;
         } else {
-            commandSource.sendFailure(
-                    Component.translatable("commands." + CreateChocolateFactory.MODID + "fail.no_chocolate")
-            );
+            commandSource.sendFailure(CCFLangs.COMMAND_FAIL_NO_CHOCOLATE.getComponent());
             return 0;
         }
     }
@@ -81,14 +76,10 @@ public class ChocolateCommand {
             Chocolate oldChocolate = commandSource.getPlayer().getMainHandItem().get(CCFDataComponents.CHOCOLATE);
             Chocolate newChocolate = oldChocolate.addTaste(item);
             commandSource.getPlayer().getMainHandItem().set(CCFDataComponents.CHOCOLATE, newChocolate);
-            commandSource.sendSuccess(() -> {
-                return Component.translatable("commands." + CreateChocolateFactory.MODID + "set.taste_success");
-            }, true);
+            commandSource.sendSuccess(CCFLangs.COMMAND_SET_TASTE::getComponent, true);
             return 1;
         } else {
-            commandSource.sendFailure(
-                    Component.translatable("commands." + CreateChocolateFactory.MODID + "fail.no_chocolate")
-            );
+            commandSource.sendFailure(CCFLangs.COMMAND_FAIL_NO_CHOCOLATE.getComponent());
             return 0;
         }
     }

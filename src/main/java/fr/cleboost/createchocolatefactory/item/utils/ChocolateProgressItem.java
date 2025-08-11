@@ -1,8 +1,7 @@
 package fr.cleboost.createchocolatefactory.item.utils;
 
-import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
-import fr.cleboost.createchocolatefactory.core.CCFLang;
+import fr.cleboost.createchocolatefactory.core.CCFLangs;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -63,7 +62,7 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
     }
 
     public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
-        tooltip.add(Component.translatable("tooltip.createchocolatefactory.progress", getEatProgress(pStack), getMaxStage()));
+        tooltip.add(CCFLangs.PROGRESS.getComponent(getEatProgress(pStack), getMaxStage()));
         super.appendHoverText(pStack, pContext, tooltip, pIsAdvanced);
     }
 }

@@ -1,9 +1,8 @@
 package fr.cleboost.createchocolatefactory.item.utils;
 
-import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
-import fr.cleboost.createchocolatefactory.core.CCFLang;
+import fr.cleboost.createchocolatefactory.core.CCFLangs;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import fr.cleboost.createchocolatefactory.utils.Taste;
 import net.minecraft.ChatFormatting;
@@ -48,11 +47,15 @@ public class ChocolateBaseItem extends Item {
         if (chocolate == null) return;
         if (Screen.hasShiftDown()) {
 
-            tooltip.add(Component.translatable("tooltip.createchocolatefactory.chocolate.composition",
-                            chocolate.getStrength(), chocolate.getSugar(), chocolate.getCocoaButter(), chocolate.getMilk(), chocolate.getTasteText())
-                    .withStyle(ChatFormatting.GRAY));
+            tooltip.add(CCFLangs.CHOCOLATE_COMPOSITION.getComponent(
+                    chocolate.getStrength(),
+                    chocolate.getSugar(),
+                    chocolate.getCocoaButter(),
+                    chocolate.getMilk(),
+                    chocolate.getTasteText()
+            ).withStyle(ChatFormatting.GRAY));
         } else {
-            CCFLang.hold_shift_tooltips(tooltip);
+            CCFLangs.holdShiftTooltips(tooltip);
         }
     }
 

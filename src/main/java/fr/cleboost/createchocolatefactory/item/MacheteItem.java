@@ -1,5 +1,6 @@
 package fr.cleboost.createchocolatefactory.item;
 
+import fr.cleboost.createchocolatefactory.core.CCFLangs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -29,7 +30,7 @@ public class MacheteItem extends Item {
 
     @Override
     public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, List<Component> pTooltipComponents, @Nonnull TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.translatable("tooltip.createchocolatefactory.machete"));
+        pTooltipComponents.add(CCFLangs.MACHETE.getComponent());
         super.appendHoverText(pStack, pContext, pTooltipComponents, pIsAdvanced);
     }
 
@@ -37,27 +38,27 @@ public class MacheteItem extends Item {
     public @Nonnull InteractionResult useOn(UseOnContext pContext) {
         Level level = pContext.getLevel();
         if (level.isClientSide()) return super.useOn(pContext);
-        
+
         BlockPos blockpos = pContext.getClickedPos();
         BlockState bs = level.getBlockState(blockpos);
-        
+
         if (bs.getBlock() instanceof LeavesBlock) {
             Player player = pContext.getPlayer();
             if (player != null) {
                 level.destroyBlock(blockpos, true);
-                
+
                 BlockState bsBelow = level.getBlockState(blockpos.below());
                 if (!bsBelow.isAir() && bsBelow.getDestroySpeed(level, blockpos.below()) >= 0) {
                     level.destroyBlock(blockpos.below(), true);
                     pContext.getItemInHand().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
-                
+
                 pContext.getItemInHand().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-                
+
                 return InteractionResult.SUCCESS;
             }
         }
-        
+
         return super.useOn(pContext);
     }
 }
