@@ -7,6 +7,7 @@ import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
+import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 
@@ -77,7 +78,7 @@ public class CCFItems {
 
     // Other
     public static final ItemEntry<Item> BRASS_WHISK = REGISTRATE.item("brass_whisk", Item::new).register();
-    public static final ItemEntry<Item> CHOCOLATE_FILTER = REGISTRATE.item("chocolate_filter", Item::new).lang("Chocolate Filter").register();
+    public static final ItemEntry<Item> CHOCOLATE_FILTER = REGISTRATE.item("chocolate_filter", Item::new).properties(p -> p.component(CCFDataComponents.CHOCOLATE, new Chocolate())).lang("Chocolate Filter").register();
 
     // Seau de chocolat avec un chemin de texture personnalisé
     public static final ItemEntry<Item> CHOCOLATE_BUCKET = REGISTRATE.item("chocolate_bucket", Item::new)
