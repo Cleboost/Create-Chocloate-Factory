@@ -84,7 +84,7 @@ public class ChocolateBaseItem extends Item {
             pLivingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, pLevel.random.nextInt(200, 500), 2));
         } else {
             if (ch.hasTaste()) {
-                Optional<Taste> optionalTaste = Taste.get(pLevel, ch.getTasteItem());
+                Optional<Taste> optionalTaste = Taste.get(pLevel, ch.getTasteItem().get());
                 if (optionalTaste.isPresent()) {
                     Taste taste = optionalTaste.get();
                     for (Taste.ChocolateEffect effect : taste.getEffects()) {
