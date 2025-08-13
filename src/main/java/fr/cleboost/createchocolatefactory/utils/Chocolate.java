@@ -14,6 +14,7 @@ import net.minecraft.world.item.Items;
 
 import java.nio.ByteBuffer;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Chocolate {
     public static final Codec<Chocolate> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -21,7 +22,7 @@ public class Chocolate {
             Codec.FLOAT.fieldOf("sugar").forGetter(Chocolate::getSugar),
             Codec.FLOAT.fieldOf("cocoaButter").forGetter(Chocolate::getCocoaButter),
             Codec.FLOAT.fieldOf("milk").forGetter(Chocolate::getMilk),
-            RegistryFixedCodec.create(Registries.ITEM).fieldOf("taste").forGetter(Chocolate::getTasteItemHolder)
+            RegistryFixedCodec.create(Registries.ITEM).optionalFieldOf("taste").forGetter(Chocolate::getTasteItemHolder)
     ).apply(instance, Chocolate::new));
 
     public static final StreamCodec<ByteBuf, Chocolate> STREAM_CODEC = StreamCodec.composite(
@@ -29,7 +30,7 @@ public class Chocolate {
             ByteBufCodecs.FLOAT, Chocolate::getSugar,
             ByteBufCodecs.FLOAT, Chocolate::getCocoaButter,
             ByteBufCodecs.FLOAT, Chocolate::getMilk,
-            ByteBufCodecs.fromCodec(BuiltInRegistries.ITEM.byNameCodec()), Chocolate::getTasteItem,
+            ByteBufCodecs.optional(ByteBufCodecs.fromCodec(BuiltInRegistries.ITEM.holderByNameCodec())), Chocolate::getTasteItemHolder,
             Chocolate::new
     );
 
@@ -38,10 +39,10 @@ public class Chocolate {
     private final float sugar;
     private final float cocoaButter;
     private final float milk;
-    private final Holder<Item> taste;
+    private final Optional<Holder<Item>> taste;
 
-    public Chocolate(float strength, float sugar, float cocoaButter, float milk, Item taste) {
-        this.taste = BuiltInRegistries.ITEM.wrapAsHolder(taste);
+    public Chocolate(float strength, float sugar, float cocoaButter, float milk, Holder<Item> taste) {
+        this.taste = Optional.of(taste);
         float coef = 1 / (strength + sugar + cocoaButter + milk);
         this.strength = strength * coef;
         this.sugar = sugar * coef;
@@ -49,7 +50,7 @@ public class Chocolate {
         this.milk = milk * coef;
     }
 
-    public Chocolate(float strength, float sugar, float cocoaButter, float milk, Holder<Item> taste) {
+    public Chocolate(float strength, float sugar, float cocoaButter, float milk, Optional<Holder<Item>> taste) {
         this.taste = taste;
         float coef = 1 / (strength + sugar + cocoaButter + milk);
         this.strength = strength * coef;
@@ -58,8 +59,9 @@ public class Chocolate {
         this.milk = milk * coef;
     }
 
+
     public Chocolate(float strength, float sugar, float cocoaButter, float milk) {
-        this.taste = null;
+        this.taste = Optional.empty();
         float coef = 1 / (strength + sugar + cocoaButter + milk);
         this.strength = strength * coef;
         this.sugar = sugar * coef;
@@ -68,7 +70,7 @@ public class Chocolate {
     }
 
     public Chocolate() {
-        this.taste = BuiltInRegistries.ITEM.wrapAsHolder(Items.SWEET_BERRIES);
+        this.taste = Optional.of(BuiltInRegistries.ITEM.wrapAsHolder(Items.SWEET_BERRIES));
         this.strength = 1;
         this.sugar = 0;
         this.cocoaButter = 0;
@@ -91,16 +93,16 @@ public class Chocolate {
         return milk;
     }
 
-    public Item getTasteItem() {
-        return taste.value();
+    public Optional<Item> getTasteItem() {
+        return taste.map(Holder::value);
     }
 
-    public Holder<Item> getTasteItemHolder() {
-        return taste;
+    public Optional<Holder<Item>> getTasteItemHolder() {
+        return this.taste;
     }
 
     public boolean hasTaste() {
-        return taste != null;
+        return taste.isPresent();
     }
 
     /*public Taste getTaste() {
@@ -150,7 +152,7 @@ public class Chocolate {
     }
 
     public String getTasteText() {
-        return this.hasTaste() ? this.getTasteItem().getDescription().getString() : "x";
+        return this.hasTaste() ? this.getTasteItem().get().getDescription().getString() : "x";
     }
 
     @Override
