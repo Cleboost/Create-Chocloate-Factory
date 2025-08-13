@@ -98,7 +98,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
                 float num = (localTick + partialTicks) / 20f;
                 num = ((2 - Mth.cos((float) (num * Math.PI))) / 2);
                 offset = num - .5f;
-            } else if (runningTicks <= 20) {
+            } else if (runningTicks <= 40) {
                 offset = 1;
             } else {
                 localTick = 40 - runningTicks;
@@ -210,7 +210,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
         milk.shrink((int) Math.floor(outputAmount * chocolate.getMilk()));
         //create ouput
         FluidStack output = new FluidStack(CCFFluids.CHOCOLATE.get(), outputAmount);
-        //output.set(CCFDataComponents.CHOCOLATE.get(), chocolate);
+        output.set(CCFDataComponents.CHOCOLATE, chocolate);
         return output;
     }
 
