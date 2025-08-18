@@ -57,4 +57,9 @@ public class ChocolateMixerBlock extends HorizontalKineticBlock implements IBE<C
     public BlockEntityType<? extends ChocolateMixerBlockEntity> getBlockEntityType() {
         return CCFBlockEntities.CHOCOLATE_MIXER.get();
     }
+
+    @Override
+    public SpeedLevel getMinimumRequiredSpeedLevel() {
+        return SpeedLevel.FAST;
+    }
 }
