@@ -1,4 +1,5 @@
 {
+  "block.createchocolatefactory.chocolate": "Chocolate",
   "block.createchocolatefactory.chocolate_mixer": "Chocolate Mixer",
   "block.createchocolatefactory.cocoa_pod": "Cocoa Pod",
   "block.createchocolatefactory.drying_kit": "Drying Kit",
@@ -26,7 +27,7 @@
   "item.createchocolatefactory.caramel": "Caramel",
   "item.createchocolatefactory.caramel_nugget": "Caramel Nugget",
   "item.createchocolatefactory.chocolate_bar": "Chocolate Bar",
-  "item.createchocolatefactory.chocolate_bucket": "Chocolate Bucket",
+  "item.createchocolatefactory.chocolate_bucket": "Bucket of Molten Chocolate",
   "item.createchocolatefactory.chocolate_egg": "Chocolate Item",
   "item.createchocolatefactory.chocolate_filter": "Chocolate Filter",
   "item.createchocolatefactory.chocolate_liquor": "Chocolate Liquor",
