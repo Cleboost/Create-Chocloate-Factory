@@ -73,6 +73,16 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
                 CreateChocolateFactory.LOGGER.info(String.valueOf(processingTicks));
                 CreateChocolateFactory.LOGGER.info(String.valueOf(runningTicks));
                 BasinBlockEntity basin = getBasin().get();
+                
+                if (!hasEnoughOutputSpace()) {
+                    isRunning = false;
+                    runningTicks = 0;
+                    processingTicks = -1;
+                    setChanged();
+                    sendData();
+                    return;
+                }
+                
                 if (processingTicks < 0) {
                     //startProcessingBasin();
                     updateBasin();
@@ -127,7 +137,17 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
     }
 
     protected boolean canRun() {
-        return Math.abs(getSpeed()) >= IRotate.SpeedLevel.FAST.getSpeedValue() && getHeatLevel() == BlazeBurnerBlock.HeatLevel.KINDLED;
+        return Math.abs(getSpeed()) >= IRotate.SpeedLevel.FAST.getSpeedValue() && getHeatLevel() == BlazeBurnerBlock.HeatLevel.KINDLED && hasEnoughOutputSpace();
+    }
+
+    protected boolean hasEnoughOutputSpace() {
+        if (getBasin().isEmpty()) return false;
+        BasinBlockEntity basin = getBasin().get();
+        IFluidHandler outputTank = basin.getTanks().get(true).getCapability();
+        if (outputTank == null) return false;
+        
+        FluidStack currentOutput = outputTank.getFluidInTank(0);
+        return currentOutput.getAmount() < 1000;
     }
 
     protected boolean hasIngredients() {
@@ -211,6 +231,17 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
             chocolate = new Chocolate(liquor.getCount(), sugar.getCount(), cocoaButter.getAmount(), milk.getAmount());
         }
         int outputAmount = (int) Math.floor(computeMaxAmount(liquor.getCount(), sugar.getCount(), cocoaButter.getAmount(), milk.getAmount(), chocolate));
+        
+        IFluidHandler outputTank = basin.getTanks().get(true).getCapability();
+        if (outputTank != null) {
+            FluidStack currentOutput = outputTank.getFluidInTank(0);
+            int availableSpace = 1000 - currentOutput.getAmount();
+            if (availableSpace <= 0) {
+                return FluidStack.EMPTY;
+            }
+            outputAmount = Math.min(outputAmount, availableSpace);
+        }
+        
         //remove from input
         //liquor.shrink((int) Math.floor(outputAmount * chocolate.getStrength() / LIQUOR));
         // sugar.shrink((int) Math.floor(outputAmount * chocolate.getSugar() / SUGAR));
