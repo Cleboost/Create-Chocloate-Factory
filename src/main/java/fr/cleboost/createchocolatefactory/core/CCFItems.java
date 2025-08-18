@@ -1,6 +1,5 @@
 package fr.cleboost.createchocolatefactory.core;
 
-import com.simibubi.create.AllTags.AllItemTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
@@ -81,10 +80,11 @@ public class CCFItems {
     public static final ItemEntry<Item> CHOCOLATE_FILTER = REGISTRATE.item("chocolate_filter", Item::new).properties(p -> p.component(CCFDataComponents.CHOCOLATE, new Chocolate())).lang("Chocolate Filter").register();
 
     // Seau de chocolat avec un chemin de texture personnalisé
-    public static final ItemEntry<Item> CHOCOLATE_BUCKET = REGISTRATE.item("chocolate_bucket", Item::new)
+    //public static final Item CHOCOLATE_BUCKET = CCFFluids.CHOCOLATE.get().getBucket();
+            /*REGISTRATE.item("chocolate_bucket", Item::new)
             .tag(AllItemTags.UPRIGHT_ON_BELT.tag)
             .model((ctx, prov) -> prov.generated(ctx, prov.modLoc("item/chocolate_bucket/bucket"), prov.modLoc("item/chocolate_bucket/overlay")))
-            .register();
+            .register();*/
 
     public static void register() {
     }
