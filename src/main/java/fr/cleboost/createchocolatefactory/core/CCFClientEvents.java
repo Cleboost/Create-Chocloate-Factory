@@ -3,6 +3,7 @@ package fr.cleboost.createchocolatefactory.core;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.ponder.CreateChocolateFactoryPonderPlugin;
 import net.createmod.ponder.foundation.PonderIndex;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -29,7 +30,8 @@ public class CCFClientEvents {
                     return 0xFFFFFFFF;
                 },
                 CCFItems.CHOCOLATE_EGG.get(),
-                CCFItems.CHOCOLATE_BAR.get()
+                CCFItems.CHOCOLATE_BAR.get()//,
+                //CCFFluids.CHOCOLATE.get().getBucket()
         );
     }
 }
