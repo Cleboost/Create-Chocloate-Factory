@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "createchocolatefactory:item/chocolate_bucket/bucket",
-    "layer1": "createchocolatefactory:item/chocolate_bucket/overlay"
+    "layer0": "createchocolatefactory:item/chocolate_bucket/overlay",
+    "layer1": "createchocolatefactory:item/chocolate_bucket/bucket"
   }
 }
