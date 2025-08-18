@@ -2,6 +2,7 @@ package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.CocoaPod;
+import fr.cleboost.createchocolatefactory.block.chocolate_analyser.ChocolateAnalyserBlock;
 import fr.cleboost.createchocolatefactory.block.dryingKit.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerBlock;
 
@@ -65,6 +66,14 @@ public class CCFBlocks {
             prov.getBuilder(ctx.getName())
                 .parent(prov.getExistingFile(prov.modLoc("block/drying_kit/drying_kit_empty")));
         })
+        .build()
+        .register();
+
+    public static final BlockEntry<ChocolateAnalyserBlock> CHOCOLATE_ANALYSER = REGISTRATE
+        .block("chocolate_analyser", ChocolateAnalyserBlock::new)
+        .blockstate(BlockStateGen.horizontalBlockProvider(true))
+        .item()
+        .model((ctx, prov) -> {})
         .build()
         .register();
 
