@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer;
 
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
@@ -56,6 +57,14 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
 
         boolean wasRunning = isRunning;
         isRunning = canRun() && hasIngredients();
+
+        if (runningTicks >= 40) {
+            isRunning = false;
+            runningTicks = 0;
+            basinChecker.scheduleUpdate();
+            return;
+        }
+
         if (isRunning && level != null) {
             /*if (level.isClientSide && runningTicks == 20)
                 renderParticles();*/
@@ -65,6 +74,8 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
                 CreateChocolateFactory.LOGGER.info(String.valueOf(runningTicks));
                 BasinBlockEntity basin = getBasin().get();
                 if (processingTicks < 0) {
+                    //startProcessingBasin();
+                    updateBasin();
                     processingTicks = 20;
                 } else {
                     processingTicks--;
@@ -77,7 +88,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
                         CreateChocolateFactory.LOGGER.info(String.valueOf(output.get(CCFDataComponents.CHOCOLATE)));
                         //basin.getTanks().get(true).getCapability().fill(output, IFluidHandler.FluidAction.EXECUTE);
                         CreateChocolateFactory.LOGGER.info(String.valueOf(basin.acceptOutputs(List.of(), List.of(output), false)));
-                        sendData();
+                        updateBasin();
                     }
                 }
                 runningTicks++;
@@ -116,7 +127,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
     }
 
     protected boolean canRun() {
-        return Math.abs(getSpeed()) >= 64 && getHeatLevel() == BlazeBurnerBlock.HeatLevel.KINDLED;
+        return Math.abs(getSpeed()) >= IRotate.SpeedLevel.FAST.getSpeedValue() && getHeatLevel() == BlazeBurnerBlock.HeatLevel.KINDLED;
     }
 
     protected boolean hasIngredients() {
