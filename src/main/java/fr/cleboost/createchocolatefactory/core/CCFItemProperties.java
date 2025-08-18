@@ -1,11 +1,8 @@
 package fr.cleboost.createchocolatefactory.core;
 
-import com.ibm.icu.impl.duration.impl.DataRecord;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.core.CCFItems;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 public class CCFItemProperties {
