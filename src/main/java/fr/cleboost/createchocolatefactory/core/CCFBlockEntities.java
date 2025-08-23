@@ -1,11 +1,11 @@
 package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.chocolate_analyser.ChocolateAnalyserBlockEntity;
+import fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserBlockEntity;
 import fr.cleboost.createchocolatefactory.block.dryingKit.DryingKitBlockEntity;
-import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerBlockEntity;
-import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerRender;
-import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerVisual;
+import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerBlockEntity;
+import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerRender;
+import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerVisual;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
@@ -23,10 +23,10 @@ public class CCFBlockEntities {
                         .validBlocks(CCFBlocks.DRYING_KIT)
                         .register();
 
-        public static final BlockEntityEntry<ChocolateAnalyserBlockEntity> CHOCOLATE_ANALYSER = CreateChocolateFactory.REGISTRATE
+        /*public static final BlockEntityEntry<ChocolateAnalyserBlockEntity> CHOCOLATE_ANALYSER = CreateChocolateFactory.REGISTRATE
                         .blockEntity("chocolate_analyser", ChocolateAnalyserBlockEntity::new)
                         .validBlocks(CCFBlocks.CHOCOLATE_ANALYSER)
-                        .register();
+                        .register();*/
 
         public static void register() {}
 }

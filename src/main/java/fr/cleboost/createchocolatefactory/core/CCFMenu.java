@@ -1,7 +1,7 @@
 package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.chocolate_analyser.ChocolateAnalyserMenu;
+import fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserMenu;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.neoforge.registries.DeferredHolder;

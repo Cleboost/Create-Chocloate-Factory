@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.chocolate_analyser;
+package fr.cleboost.createchocolatefactory.block.chocolateAnalyser;
 
 import javax.annotation.Nullable;
 

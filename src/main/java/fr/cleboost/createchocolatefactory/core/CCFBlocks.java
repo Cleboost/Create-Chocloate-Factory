@@ -2,9 +2,9 @@ package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.CocoaPod;
-import fr.cleboost.createchocolatefactory.block.chocolate_analyser.ChocolateAnalyserBlock;
+import fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserBlock;
 import fr.cleboost.createchocolatefactory.block.dryingKit.DryingKitBlock;
-import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerBlock;
+import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerBlock;
 
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -69,13 +69,13 @@ public class CCFBlocks {
         .build()
         .register();
 
-    public static final BlockEntry<ChocolateAnalyserBlock> CHOCOLATE_ANALYSER = REGISTRATE
+    /*public static final BlockEntry<ChocolateAnalyserBlock> CHOCOLATE_ANALYSER = REGISTRATE
         .block("chocolate_analyser", ChocolateAnalyserBlock::new)
         .blockstate(BlockStateGen.horizontalBlockProvider(true))
         .item()
         .model((ctx, prov) -> {})
         .build()
-        .register();
+        .register();*/
 
     // public static final RegistryObject<Block> MINT_CROP =
     // BLOCKS.register("mint_crop",

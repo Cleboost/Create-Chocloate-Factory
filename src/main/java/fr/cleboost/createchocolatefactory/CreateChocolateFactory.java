@@ -2,14 +2,13 @@ package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer.ChocolateMixerBlockEntity;
+import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerBlockEntity;
 import fr.cleboost.createchocolatefactory.core.*;
 import fr.cleboost.createchocolatefactory.datagen.CCFDatagen;
 import fr.cleboost.createchocolatefactory.utils.Taste;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -70,9 +69,9 @@ public class CreateChocolateFactory {
 
     @SubscribeEvent
     public static void registerMenuScreens(net.neoforged.neoforge.client.event.RegisterMenuScreensEvent event) {
-        event.<fr.cleboost.createchocolatefactory.block.chocolate_analyser.ChocolateAnalyserMenu, net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<fr.cleboost.createchocolatefactory.block.chocolate_analyser.ChocolateAnalyserMenu>>register(
+        event.<fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserMenu, net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserMenu>>register(
             CCFMenu.CHOCOLATE_ANALYSER.get(), 
-            (menu, inventory, title) -> new net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<fr.cleboost.createchocolatefactory.block.chocolate_analyser.ChocolateAnalyserMenu>(menu, inventory, title) {
+            (menu, inventory, title) -> new net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserMenu>(menu, inventory, title) {
                 @Override
                 protected void renderBg(net.minecraft.client.gui.GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
                 }
