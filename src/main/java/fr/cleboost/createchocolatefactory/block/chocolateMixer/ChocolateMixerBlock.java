@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer;
+package fr.cleboost.createchocolatefactory.block.chocolateMixer;
 
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.processing.basin.BasinBlock;

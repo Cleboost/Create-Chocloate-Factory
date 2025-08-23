@@ -1,5 +1,6 @@
-package fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer;
+package fr.cleboost.createchocolatefactory.block.chocolateMixer;
 
+import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
@@ -14,9 +15,14 @@ import fr.cleboost.createchocolatefactory.core.CCFFluids;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import fr.cleboost.createchocolatefactory.utils.TankSegmentHandler;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -24,6 +30,8 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.Tags;
@@ -55,8 +63,8 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
     public void tick() {
         super.tick();
 
-        boolean wasRunning = isRunning;
-        isRunning = canRun() && hasIngredients();
+        /*boolean wasRunning = isRunning;
+        isRunning = canRun() && hasIngredients();*/
 
         if (runningTicks >= 40) {
             isRunning = false;
@@ -64,33 +72,38 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
             basinChecker.scheduleUpdate();
             return;
         }
-
         if (isRunning && level != null) {
+            CreateChocolateFactory.LOGGER.info("rt : " + runningTicks);
+            CreateChocolateFactory.LOGGER.info("pt : " + processingTicks);
+            CreateChocolateFactory.LOGGER.info("run : " + isRunning);
             /*if (level.isClientSide && runningTicks == 20)
                 renderParticles();*/
-            if ((!level.isClientSide || isVirtual())) {
-                CreateChocolateFactory.LOGGER.info(String.valueOf(isRunning));
-                CreateChocolateFactory.LOGGER.info(String.valueOf(processingTicks));
-                CreateChocolateFactory.LOGGER.info(String.valueOf(runningTicks));
+            if ((!level.isClientSide || isVirtual()) && runningTicks == 20) {
+                //CreateChocolateFactory.LOGGER.info(String.valueOf(isRunning));
+                //CreateChocolateFactory.LOGGER.info(String.valueOf(processingTicks));
+                //CreateChocolateFactory.LOGGER.info(String.valueOf(runningTicks));
                 BasinBlockEntity basin = getBasin().get();
+                //updateBasin();
                 
-                if (!hasEnoughOutputSpace()) {
+                /*if (!hasEnoughOutputSpace()) {
                     isRunning = false;
                     runningTicks = 0;
                     processingTicks = -1;
                     setChanged();
                     sendData();
                     return;
-                }
-                
+                }*/
+
                 if (processingTicks < 0) {
                     //startProcessingBasin();
-                    updateBasin();
-                    processingTicks = 20;
+                    processingTicks = 60;
+                    CreateChocolateFactory.LOGGER.info("Start making chocolate " + processingTicks);
+                    level.playSound(null, worldPosition, SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT,
+                            SoundSource.BLOCKS, .75f, speed < 65 ? .75f : 1.5f);
                 } else {
                     processingTicks--;
                     if (processingTicks == 0) {
-                        runningTicks = 0;
+                        runningTicks++;
                         processingTicks = -1;
                         CreateChocolateFactory.LOGGER.info("RESULT :");
                         FluidStack output = makeChocolate();
@@ -98,15 +111,15 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
                         CreateChocolateFactory.LOGGER.info(String.valueOf(output.get(CCFDataComponents.CHOCOLATE)));
                         //basin.getTanks().get(true).getCapability().fill(output, IFluidHandler.FluidAction.EXECUTE);
                         CreateChocolateFactory.LOGGER.info(String.valueOf(basin.acceptOutputs(List.of(), List.of(output), false)));
-                        updateBasin();
+                        internalTanks.sendDataImmediately();
+                        sendData();
+                        //updateBasin();
+                        basin.notifyChangeOfContents();
                     }
                 }
-                runningTicks++;
-                if (!wasRunning) {
-                    setChanged();
-                    sendData();
-                }
             }
+            if (runningTicks != 20)
+                runningTicks++;
         }
     }
 
@@ -119,7 +132,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
                 float num = (localTick + partialTicks) / 20f;
                 num = ((2 - Mth.cos((float) (num * Math.PI))) / 2);
                 offset = num - .5f;
-            } else if (runningTicks <= 40) {
+            } else if (runningTicks <= 20) {
                 offset = 1;
             } else {
                 localTick = 40 - runningTicks;
@@ -143,11 +156,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
     protected boolean hasEnoughOutputSpace() {
         if (getBasin().isEmpty()) return false;
         BasinBlockEntity basin = getBasin().get();
-        IFluidHandler outputTank = basin.getTanks().get(true).getCapability();
-        if (outputTank == null) return false;
-        
-        FluidStack currentOutput = outputTank.getFluidInTank(0);
-        return currentOutput.getAmount() < 1000;
+        return basin.getTanks().both(SmartFluidTankBehaviour::isEmpty);
     }
 
     protected boolean hasIngredients() {
@@ -231,7 +240,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
             chocolate = new Chocolate(liquor.getCount(), sugar.getCount(), cocoaButter.getAmount(), milk.getAmount());
         }
         int outputAmount = (int) Math.floor(computeMaxAmount(liquor.getCount(), sugar.getCount(), cocoaButter.getAmount(), milk.getAmount(), chocolate));
-        
+
         IFluidHandler outputTank = basin.getTanks().get(true).getCapability();
         if (outputTank != null) {
             FluidStack currentOutput = outputTank.getFluidInTank(0);
@@ -241,7 +250,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
             }
             outputAmount = Math.min(outputAmount, availableSpace);
         }
-        
+
         //remove from input
         //liquor.shrink((int) Math.floor(outputAmount * chocolate.getStrength() / LIQUOR));
         // sugar.shrink((int) Math.floor(outputAmount * chocolate.getSugar() / SUGAR));
@@ -260,7 +269,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
     public void startProcessingBasin() {
         if (isRunning && runningTicks <= 20)
             return;
-        super.startProcessingBasin();
+        CreateChocolateFactory.LOGGER.info("starting basin block entity");
         this.runningTicks = 0;
         this.isRunning = true;
     }
@@ -274,6 +283,12 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
     }
 
     @Override
+    public boolean continueWithPreviousRecipe() {
+        runningTicks = 20;
+        return true;
+    }
+
+    /*@Override
     protected List<Recipe<?>> getMatchingRecipes() {
         List<Recipe<?>> matchingRecipes = super.getMatchingRecipes();
         Optional<BasinBlockEntity> basin = getBasin();
@@ -285,7 +300,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
             return matchingRecipes;
         ItemStack chocolateFilter = basinBlockEntity.getFilter().getFilter();
         return super.getMatchingRecipes();
-    }
+    }*/
 
     @Override
     protected boolean matchStaticFilters(RecipeHolder<? extends Recipe<?>> recipe) {
@@ -355,5 +370,58 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
         if (empty) return false;
         return containedFluidTooltip(tooltip, isPlayerSneaking, fluidHandler);
         //return false;
+    }
+
+    @Override
+    protected boolean updateBasin() {
+        CreateChocolateFactory.LOGGER.info("updateBasin");
+        if (!isSpeedRequirementFulfilled())
+            return true;
+        if (getSpeed() == 0)
+            return true;
+        if (isRunning())
+            return true;
+        if (level == null || level.isClientSide)
+            return true;
+        Optional<BasinBlockEntity> basin = getBasin();
+        if (!basin.filter(BasinBlockEntity::canContinueProcessing)
+                .isPresent())
+            return true;
+        CreateChocolateFactory.LOGGER.info(String.valueOf(canRun()));
+        CreateChocolateFactory.LOGGER.info(String.valueOf(hasIngredients()));
+        if (!canRun() || !hasIngredients()) return true;
+        startProcessingBasin();
+        sendData();
+        return true;
+    }
+
+    @Override
+    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        isRunning = compound.getBoolean("Running");
+        runningTicks = compound.getInt("Ticks");
+        super.read(compound, registries, clientPacket);
+
+        if (clientPacket && hasLevel())
+            getBasin().ifPresent(bte -> bte.setAreFluidsMoving(isRunning && runningTicks <= 20));
+    }
+
+    @Override
+    protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        compound.putBoolean("Running", isRunning);
+        compound.putInt("Ticks", runningTicks);
+        super.write(compound, registries, clientPacket);
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void tickAudio() {
+        super.tickAudio();
+
+        // SoundEvents.BLOCK_STONE_BREAK
+        boolean slow = Math.abs(getSpeed()) < 65;
+        if (slow && AnimationTickHolder.getTicks() % 2 == 0)
+            return;
+        if (runningTicks == 20)
+            AllSoundEvents.MIXING.playAt(level, worldPosition, .75f, 1, true);
     }
 }

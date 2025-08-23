@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer;
+package fr.cleboost.createchocolatefactory.block.chocolateMixer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;

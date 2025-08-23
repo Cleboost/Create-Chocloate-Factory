@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.kinetic.chocolateMixer;
+package fr.cleboost.createchocolatefactory.block.chocolateMixer;
 
 import java.util.function.Consumer;
 
@@ -34,7 +34,7 @@ public class ChocolateMixerVisual extends ShaftVisual<ChocolateMixerBlockEntity>
 			.createInstance();
 		//from package com.simibubi.create.content.kinetics.press.PressVisual
 		Quaternionf q = Axis.YP
-				.rotationDegrees(AngleHelper.horizontalAngle(blockState.getValue(MechanicalPressBlock.HORIZONTAL_FACING)));
+				.rotationDegrees(AngleHelper.horizontalAngle(blockState.getValue(ChocolateMixerBlock.HORIZONTAL_FACING)));
 
 		mixerPole.rotation(q);
 
@@ -43,6 +43,8 @@ public class ChocolateMixerVisual extends ShaftVisual<ChocolateMixerBlockEntity>
 
 
 		mixerHead.setRotationAxis(Direction.Axis.Y);
+
+        animate(partialTick);
 	}
 
 	@Override
