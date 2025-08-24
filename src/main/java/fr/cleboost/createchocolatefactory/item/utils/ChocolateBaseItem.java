@@ -30,14 +30,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class ChocolateBaseItem extends Item {
-    private final float amount; // in mB
+    private final int amount; // in mB
 
-    public ChocolateBaseItem(Properties properties, float amount) {
+    public ChocolateBaseItem(Properties properties, int amount) {
         super(properties.component(CCFDataComponents.CHOCOLATE, new Chocolate(0.55f, 0.05f, 0.2f, 0.2f, CCFItems.MINT_LEAF)));
         this.amount = amount;
     }
 
-    public float getAmount() {
+    public int getAmount() {
         return this.amount;
     }
 

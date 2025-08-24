@@ -21,7 +21,7 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
     public final int maxStage;
 
     //Note: the amount is for 1 stage
-    public ChocolateProgressItem(Properties properties, int stage, float amount) {
+    public ChocolateProgressItem(Properties properties, int stage, int amount) {
         super(properties.component(CCFDataComponents.EAT_PROGRESS, 0), amount);
         this.maxStage = stage - 1;
     }
