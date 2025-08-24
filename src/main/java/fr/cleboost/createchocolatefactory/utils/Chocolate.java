@@ -159,7 +159,10 @@ public class Chocolate {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Chocolate chocolate)) return false;
-        return Float.compare(strength, chocolate.strength) == 0 && Float.compare(sugar, chocolate.sugar) == 0 && Float.compare(cocoaButter, chocolate.cocoaButter) == 0 && Float.compare(milk, chocolate.milk) == 0 && taste.equals(chocolate.taste);
+        boolean taste = false;
+        if (this.hasTaste() && (chocolate.hasTaste())) taste = this.taste.get().equals(chocolate.taste.get());
+        else if (!this.hasTaste() && !chocolate.hasTaste()) taste = true;
+        return Float.compare(strength, chocolate.strength) == 0 && Float.compare(sugar, chocolate.sugar) == 0 && Float.compare(cocoaButter, chocolate.cocoaButter) == 0 && Float.compare(milk, chocolate.milk) == 0 && taste;
     }
 
     @Override
