@@ -66,19 +66,15 @@ public abstract class BasinRecipeMixin {
         chocolateFluid.shrink(amount);
         FluidStack fluidOutput = new FluidStack(CCFFluids.CHOCOLATE, amount);
         fluidOutput.set(CCFDataComponents.CHOCOLATE, chocolate.addTaste(availableItems.getStackInSlot(itemSlot).getItem()));
-
-        ItemStack outputStack = availableItems.extractItem(itemSlot, 1, false);
-
         basin.getBehaviour(SmartFluidTankBehaviour.INPUT)
                 .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
         basin.getBehaviour(SmartFluidTankBehaviour.OUTPUT)
                 .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
 
-        if (!basin.acceptOutputs(List.of(), List.of(fluidOutput), test)) {
-            cir.setReturnValue(false);
-        } else {
-            cir.setReturnValue(true);
-        }
+        availableItems.extractItem(itemSlot, 1, false);
+
+
+        cir.setReturnValue(basin.acceptOutputs(List.of(), List.of(fluidOutput), test));
     }
 
     @Inject(method = "match", at = @At("HEAD"), cancellable = true)
@@ -87,7 +83,6 @@ public abstract class BasinRecipeMixin {
         IItemHandler availableItems = basin.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, basin.getBlockPos(), null);
         if (availableItems == null || availableFluids == null)
             return;
-        CreateChocolateFactory.LOGGER.info("go");
         int fluidSlot = 0;
         while (fluidSlot < availableFluids.getTanks()) {
             if (availableFluids.getFluidInTank(fluidSlot).is(CCFFluids.CHOCOLATE.get())) break;
@@ -100,12 +95,10 @@ public abstract class BasinRecipeMixin {
                 .getBlockState(basin.getBlockPos()
                         .below(1)));
         if (heat != BlazeBurnerBlock.HeatLevel.NONE) {
-            CreateChocolateFactory.LOGGER.info("blaze");
             return;
         }
         Chocolate chocolate = chocolateFluid.get(CCFDataComponents.CHOCOLATE);
         if (chocolateFluid.get(CCFDataComponents.CHOCOLATE) == null) {
-            CreateChocolateFactory.LOGGER.info("no chocolate");
             return;
 
         }
@@ -120,7 +113,6 @@ public abstract class BasinRecipeMixin {
         }
         if (slotID == availableItems.getSlots()) {
             cir.setReturnValue(false);
-            CreateChocolateFactory.LOGGER.info("no item");
             return;
         }
         cir.setReturnValue(true);
