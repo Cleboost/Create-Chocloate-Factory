@@ -1,4 +1,5 @@
 {
+  "block.createchocolatefactory.chocolate": "Chocolate",
   "block.createchocolatefactory.chocolate_mixer": "Mélangeur de chocolat",
   "block.createchocolatefactory.cocoa_pod": "Fève de cacao",
   "block.createchocolatefactory.drying_kit": "Kit de séchage",
@@ -12,7 +13,7 @@
   "fluid.createchocolatefactory.chocolate": "Chocolat Fondu",
   "fluid.createchocolatefactory.cocoa_butter": "Beurre de cacao",
   "goggle.createchocolatefactory.dryingkit.blocked_sky": "Le ciel est bloqué - le séchage est suspendu",
-  "goggle.createchocolatefactory.dryingkit.bonus": "★ Bonus",
+  "goggle.createchocolatefactory.dryingkit.bonus": "â ̃… Bonus",
   "goggle.createchocolatefactory.dryingkit.bonus_text": "+100% drying speed in the Nether",
   "goggle.createchocolatefactory.dryingkit.dry": "Sec",
   "goggle.createchocolatefactory.dryingkit.drying": "Séchage",
@@ -26,7 +27,7 @@
   "item.createchocolatefactory.caramel": "Caramel",
   "item.createchocolatefactory.caramel_nugget": "Pépites de caramel",
   "item.createchocolatefactory.chocolate_bar": "Barre de chocolat",
-  "item.createchocolatefactory.chocolate_bucket": "Seau de chocolat",
+  "item.createchocolatefactory.chocolate_bucket": "Bucket of Molten Chocolate",
   "item.createchocolatefactory.chocolate_egg": "Chocolate Item",
   "item.createchocolatefactory.chocolate_filter": "Chocolate Filter",
   "item.createchocolatefactory.chocolate_liquor": "Chocolate Liquor",
