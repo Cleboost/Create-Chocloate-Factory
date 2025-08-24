@@ -3,6 +3,7 @@ package fr.cleboost.createchocolatefactory.core;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.CocoaPod;
 import fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserBlock;
+import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerItem;
 import fr.cleboost.createchocolatefactory.block.dryingKit.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerBlock;
 
@@ -40,7 +41,7 @@ public class CCFBlocks {
         .properties(p -> p.noOcclusion()
             .mapColor(MapColor.STONE))
         .blockstate(BlockStateGen.horizontalBlockProvider(true))
-        .item()
+        .item(ChocolateMixerItem::new)
         .model((ctx, prov) -> {})
         .build()
         .register();
