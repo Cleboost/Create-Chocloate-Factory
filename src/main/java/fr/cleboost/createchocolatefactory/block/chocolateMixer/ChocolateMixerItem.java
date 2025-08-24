@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -38,8 +39,8 @@ public class ChocolateMixerItem extends BlockItem {
                 
                 UseOnContext newContext = new UseOnContext(level, context.getPlayer(), context.getHand(), 
                     context.getItemInHand(), newHitResult);
-                
-                BlockState blockToPlace = this.getBlock().defaultBlockState();
+                BlockPlaceContext bContext = new BlockPlaceContext(newContext);
+                BlockState blockToPlace = this.getBlock().getStateForPlacement(bContext);
                 if (level.setBlock(targetPos, blockToPlace, 3)) {
                     assert context.getPlayer() != null;
                     if (!context.getPlayer().getAbilities().instabuild) {
