@@ -7,12 +7,14 @@ import fr.cleboost.createchocolatefactory.item.MacheteItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateMouldItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
+import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
+import fr.cleboost.createchocolatefactory.utils.ChocolateFoodPack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 
 public class CCFItems {
-    private static final CreateRegistrate REGISTRATE = CreateChocolateFactory.registrate();
+    private static final CCFRegistrate REGISTRATE = CreateChocolateFactory.registrate();
 
     // Logo
     public static final ItemEntry<Item> LOGO = REGISTRATE.item("logo", Item::new).lang("Logo")
@@ -42,8 +44,6 @@ public class CCFItems {
     public static final ItemEntry<Item> CHOCOLATE_LIQUOR = REGISTRATE.item("chocolate_liquor", Item::new).lang("Chocolate Liquor").register();
 
     //Chocolate Items
-    public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_EGG = REGISTRATE.item("chocolate_egg", (properties) ->
-            new ChocolateBaseItem(properties.food(CCFFoods.CHOCOLATE_SLOW).stacksTo(16), 400)).lang("Chocolate Item").register();
     public static final ItemEntry<ChocolateProgressItem> CHOCOLATE_BAR = REGISTRATE.item("chocolate_bar", (properties) ->
                     new ChocolateProgressItem(properties.stacksTo(1).food(CCFFoods.CHOCOLATE_FAST), 3, 100)).lang("Chocolate Bar")
             .model((ctx, prov) -> {
@@ -67,8 +67,7 @@ public class CCFItems {
                         ).end();
             }).register();
 
-    //chocolate mould
-    public static final ItemEntry<ChocolateMouldItem> EGG_MOULD = REGISTRATE.item("egg_mould", (p) -> new ChocolateMouldItem(p, CHOCOLATE_EGG.get())).lang("Egg Mould").register();
+    public static final ChocolateFoodPack CHOCOLATE_EGG_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_egg");
 
     // Fruits & Foods
     public static final ItemEntry<Item> MINT_LEAF = REGISTRATE.item("mint_leaf", Item::new).properties(p -> p.food(CCFFoods.MINT)).register();
