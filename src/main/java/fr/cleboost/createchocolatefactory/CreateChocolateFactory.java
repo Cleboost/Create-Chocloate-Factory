@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerBlockEntity;
 import fr.cleboost.createchocolatefactory.core.*;
 import fr.cleboost.createchocolatefactory.datagen.CCFDatagen;
+import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;
 import fr.cleboost.createchocolatefactory.utils.Taste;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -23,7 +24,7 @@ public class CreateChocolateFactory {
     public static final String MODID = "createchocolatefactory";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
+    public static final CCFRegistrate REGISTRATE = CCFRegistrate.create(MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(net.minecraft.core.registries.Registries.MENU, MODID);
     
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CCFTab = REGISTRATE.object("create_chocolate_factory")
@@ -77,9 +78,9 @@ public class CreateChocolateFactory {
                 }
             });
     }
-
+    
     @SubscribeEvent
-    public static CreateRegistrate registrate() {
+    public static CCFRegistrate registrate() {
         return REGISTRATE;
     }
 
