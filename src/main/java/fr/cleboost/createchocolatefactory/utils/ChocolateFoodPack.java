@@ -6,7 +6,6 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.core.CCFFoods;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateMouldItem;
-import net.minecraft.network.chat.Component;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -26,7 +25,7 @@ public class ChocolateFoodPack {
         chocolateItem = builderChocolate.register();
 
 
-        ItemBuilder<ChocolateMouldItem, CreateRegistrate> builderMould = registrate.chocolateMouldItem("chocolate_egg_mould", (p) -> new ChocolateMouldItem(p, chocolateItem.get()));
+        ItemBuilder<ChocolateMouldItem, CreateRegistrate> builderMould = registrate.chocolateMouldItem(name+"_mould", (p) -> new ChocolateMouldItem(p, chocolateItem.get()));
         if (!lang.isEmpty()) {
             builderMould.lang(lang+" Mould");
         } else {
