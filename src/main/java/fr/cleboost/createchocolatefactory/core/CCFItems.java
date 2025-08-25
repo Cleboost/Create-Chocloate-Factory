@@ -9,6 +9,7 @@ import fr.cleboost.createchocolatefactory.item.utils.ChocolateMouldItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
+import fr.cleboost.createchocolatefactory.utils.ChocolateFoodPack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 
@@ -65,11 +66,8 @@ public class CCFItems {
                                         .texture("layer0", prov.modLoc("item/" + ctx.getName() + "/bar2"))
                         ).end();
             }).register();
-    public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_EGG = REGISTRATE.chocolateItem("chocolate_egg", (properties) ->
-            new ChocolateBaseItem(properties.food(CCFFoods.CHOCOLATE_SLOW).stacksTo(16), 400)).lang("Chocolate Item").register();
 
-    //chocolate mould
-    public static final ItemEntry<ChocolateMouldItem> EGG_MOULD = REGISTRATE.chocolateMouldItem("chocolate_egg_mould", (p) -> new ChocolateMouldItem(p, CHOCOLATE_EGG.get())).lang("Egg Mould").register();
+    public static final ChocolateFoodPack CHOCOLATE_EGG_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_egg");
 
     // Fruits & Foods
     public static final ItemEntry<Item> MINT_LEAF = REGISTRATE.item("mint_leaf", Item::new).properties(p -> p.food(CCFFoods.MINT)).register();
