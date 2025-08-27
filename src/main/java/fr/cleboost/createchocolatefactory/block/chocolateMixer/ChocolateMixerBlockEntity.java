@@ -168,7 +168,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
         for (int i = 0; i < availableItems.getSlots(); i++) {
             ItemStack stack = availableItems.getStackInSlot(i);
             if (stack.isEmpty()) continue;
-            if (stack.is(CCFItems.CHOCOLATE_LIQUOR)) hasLiquor = true;
+            if (stack.is(CCFItems.COCOA_POWDER)) hasLiquor = true;
             if (stack.is(Items.SUGAR)) hasSugar = true;
             if (hasLiquor && hasSugar) break;
         }
@@ -210,25 +210,25 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
         BasinBlockEntity basin = getBasin().get();
         IItemHandler availableItems = basin.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, basin.getBlockPos(), null);
         if (availableItems == null) return FluidStack.EMPTY;
-        ItemStack liquor = null, sugar = null;
-        int liquor_slot = -1, sugar_slot = -1;
+        ItemStack cocoa = null, sugar = null;
+        int cocoa_slot = -1, sugar_slot = -1;
 
         for (int i = 0; i < availableItems.getSlots(); i++) {
             ItemStack stack = availableItems.getStackInSlot(i);
             if (stack.isEmpty()) continue;
-            if (stack.is(CCFItems.CHOCOLATE_LIQUOR)) {
-                liquor = stack;
-                liquor_slot = i;
+            if (stack.is(CCFItems.COCOA_POWDER)) {
+                cocoa = stack;
+                cocoa_slot = i;
             }
             if (stack.is(Items.SUGAR)) {
                 sugar = stack;
                 sugar_slot = i;
             }
-            if (liquor != null && sugar != null) break;
+            if (cocoa != null && sugar != null) break;
         }
-        CreateChocolateFactory.LOGGER.info("items :" + liquor);
+        CreateChocolateFactory.LOGGER.info("items :" + cocoa);
         CreateChocolateFactory.LOGGER.info("items :" + sugar);
-        if (liquor == null || sugar == null) return FluidStack.EMPTY;
+        if (cocoa == null || sugar == null) return FluidStack.EMPTY;
 
         FluidStack cocoaButter = internalTanks.getCapability().getFluidInTank(COCOA_BUTTER_TANK), milk = internalTanks.getCapability().getFluidInTank(MILK_TANK);
 
@@ -237,9 +237,9 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
             Chocolate old = getFilter().get();
             chocolate = new Chocolate(old.getStrength(), old.getSugar(), old.getCocoaButter(), old.getMilk());
         } else {
-            chocolate = new Chocolate(liquor.getCount(), sugar.getCount(), cocoaButter.getAmount(), milk.getAmount());
+            chocolate = new Chocolate(cocoa.getCount(), sugar.getCount(), cocoaButter.getAmount(), milk.getAmount());
         }
-        int outputAmount = (int) Math.floor(computeMaxAmount(liquor.getCount(), sugar.getCount(), cocoaButter.getAmount(), milk.getAmount(), chocolate));
+        int outputAmount = (int) Math.floor(computeMaxAmount(cocoa.getCount(), sugar.getCount(), cocoaButter.getAmount(), milk.getAmount(), chocolate));
 
         IFluidHandler outputTank = basin.getTanks().get(true).getCapability();
         if (outputTank != null) {
@@ -252,9 +252,9 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
         }
 
         //remove from input
-        //liquor.shrink((int) Math.floor(outputAmount * chocolate.getStrength() / LIQUOR));
+        //cocoa.shrink((int) Math.floor(outputAmount * chocolate.getStrength() / LIQUOR));
         // sugar.shrink((int) Math.floor(outputAmount * chocolate.getSugar() / SUGAR));
-        availableItems.extractItem(liquor_slot, (int) Math.floor(outputAmount * chocolate.getStrength() / LIQUOR), false);
+        availableItems.extractItem(cocoa_slot, (int) Math.floor(outputAmount * chocolate.getStrength() / LIQUOR), false);
         availableItems.extractItem(sugar_slot, (int) Math.floor(outputAmount * chocolate.getSugar() / SUGAR), false);
 
         cocoaButter.shrink((int) Math.floor(outputAmount * chocolate.getCocoaButter()));
