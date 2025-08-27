@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "createchocolatefactory:block/cocoa_slab"
+    },
+    "type=double": {
+      "model": "createchocolatefactory:block/cocoa_planks"
+    },
+    "type=top": {
+      "model": "createchocolatefactory:block/cocoa_slab_top"
+    }
+  }
+}

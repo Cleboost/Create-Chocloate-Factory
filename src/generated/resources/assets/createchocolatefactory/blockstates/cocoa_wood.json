@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "createchocolatefactory:block/cocoa_wood_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "createchocolatefactory:block/cocoa_wood"
+    },
+    "axis=z": {
+      "model": "createchocolatefactory:block/cocoa_wood_horizontal",
+      "x": 90
+    }
+  }
+}

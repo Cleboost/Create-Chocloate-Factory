@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "createchocolatefactory:block/cocoa_planks",
+    "side": "createchocolatefactory:block/cocoa_planks",
+    "top": "createchocolatefactory:block/cocoa_planks"
+  }
+}

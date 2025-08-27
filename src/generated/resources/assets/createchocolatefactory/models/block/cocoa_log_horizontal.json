@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "createchocolatefactory:block/cocoa_log_end",
+    "side": "createchocolatefactory:block/cocoa_log_side"
+  }
+}

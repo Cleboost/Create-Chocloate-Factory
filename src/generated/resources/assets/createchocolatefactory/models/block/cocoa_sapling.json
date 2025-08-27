@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "createchocolatefactory:block/cocoa_sapling"
+  }
+}
