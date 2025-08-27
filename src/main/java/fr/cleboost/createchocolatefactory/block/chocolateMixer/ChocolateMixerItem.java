@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory.block.chocolateMixer;
 
 import com.simibubi.create.content.processing.basin.BasinBlock;
+import javax.annotation.Nonnull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -12,7 +13,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 
 public class ChocolateMixerItem extends BlockItem {
     public ChocolateMixerItem(Block block, Properties properties) {
@@ -20,7 +20,7 @@ public class ChocolateMixerItem extends BlockItem {
     }
     
     @Override
-    public @NotNull InteractionResult useOn(UseOnContext context) {
+    public InteractionResult useOn(@Nonnull UseOnContext context) {
         Level level = context.getLevel();
         BlockPos clickedPos = context.getClickedPos();
         
@@ -41,9 +41,8 @@ public class ChocolateMixerItem extends BlockItem {
                     context.getItemInHand(), newHitResult);
                 BlockPlaceContext bContext = new BlockPlaceContext(newContext);
                 BlockState blockToPlace = this.getBlock().getStateForPlacement(bContext);
-                if (level.setBlock(targetPos, blockToPlace, 3)) {
-                    assert context.getPlayer() != null;
-                    if (!context.getPlayer().getAbilities().instabuild) {
+                if (blockToPlace != null && level.setBlock(targetPos, blockToPlace, 3)) {
+                    if (context.getPlayer() != null && !context.getPlayer().getAbilities().instabuild) {
                         context.getItemInHand().shrink(1);
                     }
                     return InteractionResult.SUCCESS;

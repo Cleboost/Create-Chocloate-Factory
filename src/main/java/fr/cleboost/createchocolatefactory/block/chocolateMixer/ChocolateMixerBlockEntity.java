@@ -58,12 +58,10 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         super(type, pos, state);
     }
 
+    @SuppressWarnings("null")
     @Override
     public void tick() {
         super.tick();
-
-        /*boolean wasRunning = isRunning;
-        isRunning = canRun() && hasIngredients();*/
 
         if (runningTicks >= 40) {
             isRunning = false;
@@ -72,47 +70,28 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
             return;
         }
         if (isRunning && level != null) {
-            CreateChocolateFactory.LOGGER.info("rt : " + runningTicks);
-            CreateChocolateFactory.LOGGER.info("pt : " + processingTicks);
-            CreateChocolateFactory.LOGGER.info("run : " + isRunning);
-            /*if (level.isClientSide && runningTicks == 20)
-                renderParticles();*/
             if ((!level.isClientSide || isVirtual()) && runningTicks == 20) {
-                //CreateChocolateFactory.LOGGER.info(String.valueOf(isRunning));
-                //CreateChocolateFactory.LOGGER.info(String.valueOf(processingTicks));
-                //CreateChocolateFactory.LOGGER.info(String.valueOf(runningTicks));
                 BasinBlockEntity basin = getBasin().get();
-                //updateBasin();
-                
-                /*if (!hasEnoughOutputSpace()) {
-                    isRunning = false;
-                    runningTicks = 0;
-                    processingTicks = -1;
-                    setChanged();
-                    sendData();
-                    return;
-                }*/
 
                 if (processingTicks < 0) {
-                    //startProcessingBasin();
                     processingTicks = 60;
                     CreateChocolateFactory.LOGGER.info("Start making chocolate " + processingTicks);
-                    level.playSound(null, worldPosition, SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT,
-                            SoundSource.BLOCKS, .75f, speed < 65 ? .75f : 1.5f);
+                    if (level != null) {
+                        level.playSound(null, worldPosition, SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT,
+                                SoundSource.BLOCKS, .75f, speed < 65 ? .75f : 1.5f);
+                    }
                 } else {
                     processingTicks--;
-                    if (processingTicks == 0) {
+                    if (processingTicks == 0 && level != null) {
                         runningTicks++;
                         processingTicks = -1;
                         CreateChocolateFactory.LOGGER.info("RESULT :");
                         FluidStack output = makeChocolate();
                         CreateChocolateFactory.LOGGER.info(String.valueOf(output));
                         CreateChocolateFactory.LOGGER.info(String.valueOf(output.get(CCFDataComponents.CHOCOLATE)));
-                        //basin.getTanks().get(true).getCapability().fill(output, IFluidHandler.FluidAction.EXECUTE);
                         CreateChocolateFactory.LOGGER.info(String.valueOf(basin.acceptOutputs(List.of(), List.of(output), false)));
                         internalTanks.sendDataImmediately();
                         sendData();
-                        //updateBasin();
                         basin.notifyChangeOfContents();
                     }
                 }
@@ -158,6 +137,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         return basin.getTanks().both(SmartFluidTankBehaviour::isEmpty);
     }
 
+    @SuppressWarnings("null")
     protected boolean hasIngredients() {
         if (getBasin().isEmpty()) return false;
         BasinBlockEntity basin = getBasin().get();
@@ -199,14 +179,19 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         return Optional.of(basinBlockEntity.getFilter().getFilter().get(CCFDataComponents.CHOCOLATE));
     }
 
+    @SuppressWarnings("null")
     public BlazeBurnerBlock.HeatLevel getHeatLevel() {
         if (getBasin().isEmpty()) return BlazeBurnerBlock.HeatLevel.NONE;
-        return BasinBlockEntity.getHeatLevelOf(getBasin().get().getLevel()
-                .getBlockState(getBasin().get().getBlockPos().below(1)));
+        BasinBlockEntity basin = getBasin().get();
+        if (basin.getLevel() == null) return BlazeBurnerBlock.HeatLevel.NONE;
+        return BasinBlockEntity.getHeatLevelOf(basin.getLevel()
+                .getBlockState(basin.getBlockPos().below(1)));
     }
 
+    @SuppressWarnings("null")
     protected FluidStack makeChocolate() {
         BasinBlockEntity basin = getBasin().get();
+        if (basin.getLevel() == null) return FluidStack.EMPTY;
         IItemHandler availableItems = basin.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, basin.getBlockPos(), null);
         if (availableItems == null) return FluidStack.EMPTY;
         ItemStack cocoa = null, sugar = null;
@@ -225,8 +210,6 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
             }
             if (cocoa != null && sugar != null) break;
         }
-        CreateChocolateFactory.LOGGER.info("items :" + cocoa);
-        CreateChocolateFactory.LOGGER.info("items :" + sugar);
         if (cocoa == null || sugar == null) return FluidStack.EMPTY;
 
         FluidStack cocoaButter = internalTanks.getCapability().getFluidInTank(COCOA_BUTTER_TANK), milk = internalTanks.getCapability().getFluidInTank(MILK_TANK);
@@ -250,15 +233,12 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
             outputAmount = Math.min(outputAmount, availableSpace);
         }
 
-        //remove from input
-        //cocoa.shrink((int) Math.floor(outputAmount * chocolate.getStrength() / LIQUOR));
-        // sugar.shrink((int) Math.floor(outputAmount * chocolate.getSugar() / SUGAR));
         availableItems.extractItem(cocoa_slot, (int) Math.floor(outputAmount * chocolate.getStrength() / LIQUOR), false);
         availableItems.extractItem(sugar_slot, (int) Math.floor(outputAmount * chocolate.getSugar() / SUGAR), false);
 
         cocoaButter.shrink((int) Math.floor(outputAmount * chocolate.getCocoaButter()));
         milk.shrink((int) Math.floor(outputAmount * chocolate.getMilk()));
-        //create ouput
+  
         FluidStack output = new FluidStack(CCFFluids.CHOCOLATE.get(), outputAmount);
         output.set(CCFDataComponents.CHOCOLATE, chocolate);
         return output;
@@ -287,20 +267,6 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         return true;
     }
 
-    /*@Override
-    protected List<Recipe<?>> getMatchingRecipes() {
-        List<Recipe<?>> matchingRecipes = super.getMatchingRecipes();
-        Optional<BasinBlockEntity> basin = getBasin();
-        if (!basin.isPresent())
-            return matchingRecipes;
-        BasinBlockEntity basinBlockEntity = basin.get();
-        CreateChocolateFactory.LOGGER.info(String.valueOf(basinBlockEntity.getFilter().getFilter()));
-        if (basinBlockEntity.isEmpty() || !basinBlockEntity.getFilter().getFilter().is(CCFItems.CHOCOLATE_FILTER.get()))
-            return matchingRecipes;
-        ItemStack chocolateFilter = basinBlockEntity.getFilter().getFilter();
-        return super.getMatchingRecipes();
-    }*/
-
     @Override
     protected boolean matchStaticFilters(RecipeHolder<? extends Recipe<?>> recipe) {
         return true;
@@ -327,9 +293,6 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
 
-        /*this.internalTanks.whenFluidUpdates(()->{
-
-        });*/
         this.internalTanks = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 2, TANK_SIZE, false);
         ((TankSegmentHandler) this.internalTanks.getTanks()[MILK_TANK]).create_Chocloate_Factory$getHandler().setValidator(new Predicate<FluidStack>() {
             @Override
@@ -353,34 +316,30 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         invalidateCapabilities();
     }
 
+    @SuppressWarnings("null")
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        IFluidHandler fluidHandler = level.getCapability(Capabilities.FluidHandler.BLOCK, worldPosition, null);
+        if (level == null) return false;
+        IFluidHandler fluidHandler = level.getCapability(Capabilities.FluidHandler.BLOCK, worldPosition, Direction.NORTH);
         if (fluidHandler == null) return false;
         boolean empty = true;
-        CreateChocolateFactory.LOGGER.info("#####");
-        CreateChocolateFactory.LOGGER.info(String.valueOf(fluidHandler.getTanks()));
         for (int i = 0; i < fluidHandler.getTanks(); i++) {
             empty &= fluidHandler.getFluidInTank(i).isEmpty();
-            CreateChocolateFactory.LOGGER.info(String.valueOf(i));
-            CreateChocolateFactory.LOGGER.info(String.valueOf(fluidHandler.getFluidInTank(i)));
-            CreateChocolateFactory.LOGGER.info(String.valueOf(fluidHandler.getTankCapacity(i)));
         }
         if (empty) return false;
         return containedFluidTooltip(tooltip, isPlayerSneaking, fluidHandler);
-        //return false;
     }
 
+    @SuppressWarnings("null")
     @Override
     protected boolean updateBasin() {
-        CreateChocolateFactory.LOGGER.info("updateBasin");
         if (!isSpeedRequirementFulfilled())
             return true;
         if (getSpeed() == 0)
             return true;
         if (isRunning())
             return true;
-        if (level == null || level.isClientSide)
+        if (level == null || (level != null && level.isClientSide))
             return true;
         Optional<BasinBlockEntity> basin = getBasin();
         if (!basin.filter(BasinBlockEntity::canContinueProcessing)
@@ -415,8 +374,6 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
     @OnlyIn(Dist.CLIENT)
     public void tickAudio() {
         super.tickAudio();
-
-        // SoundEvents.BLOCK_STONE_BREAK
         boolean slow = Math.abs(getSpeed()) < 65;
         if (slow && AnimationTickHolder.getTicks() % 2 == 0)
             return;
