@@ -1,7 +1,6 @@
 package fr.cleboost.createchocolatefactory.block.chocolateMixer;
 
 import com.simibubi.create.AllSoundEvents;
-import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
@@ -43,7 +42,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation {
+public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
     private static final int TANK_SIZE = 500;
     protected static final float LIQUOR = 250;
     protected static final float SUGAR = 100;
