@@ -23,10 +23,10 @@ public class CCFBlockEntities {
                         .validBlocks(CCFBlocks.DRYING_KIT)
                         .register();
 
-        /*public static final BlockEntityEntry<ChocolateAnalyserBlockEntity> CHOCOLATE_ANALYSER = CreateChocolateFactory.REGISTRATE
+        public static final BlockEntityEntry<ChocolateAnalyserBlockEntity> CHOCOLATE_ANALYSER = CreateChocolateFactory.REGISTRATE
                         .blockEntity("chocolate_analyser", ChocolateAnalyserBlockEntity::new)
                         .validBlocks(CCFBlocks.CHOCOLATE_ANALYSER)
-                        .register();*/
+                        .register();
 
         public static void register() {}
 }

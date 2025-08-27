@@ -1,5 +1,6 @@
 package fr.cleboost.createchocolatefactory.block.chocolateAnalyser;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -12,10 +13,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import fr.cleboost.createchocolatefactory.core.CCFMenu;
 
 public class ChocolateAnalyserBlockEntity extends BlockEntity implements MenuProvider {
-    private final ItemStackHandler inventory = new ItemStackHandler(1); // 1 slot
+    public final ChocolateAnalyserInventory inventory = new ChocolateAnalyserInventory(this);
     
     public ChocolateAnalyserBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -32,7 +32,7 @@ public class ChocolateAnalyserBlockEntity extends BlockEntity implements MenuPro
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
-        return new ChocolateAnalyserMenu(CCFMenu.CHOCOLATE_ANALYSER.get(), id, playerInventory, this.getBlockPos());
-    }
+	public AbstractContainerMenu createMenu(int id, @Nonnull Inventory inv, @Nonnull Player player) {
+		return ChocolateAnalyserMenu.create(id, inv, this);
+	}
 }

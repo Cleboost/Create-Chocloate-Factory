@@ -70,13 +70,13 @@ public class CCFBlocks {
         .build()
         .register();
 
-    /*public static final BlockEntry<ChocolateAnalyserBlock> CHOCOLATE_ANALYSER = REGISTRATE
+    public static final BlockEntry<ChocolateAnalyserBlock> CHOCOLATE_ANALYSER = REGISTRATE
         .block("chocolate_analyser", ChocolateAnalyserBlock::new)
         .blockstate(BlockStateGen.horizontalBlockProvider(true))
         .item()
         .model((ctx, prov) -> {})
         .build()
-        .register();*/
+        .register();
 
     // public static final RegistryObject<Block> MINT_CROP =
     // BLOCKS.register("mint_crop",

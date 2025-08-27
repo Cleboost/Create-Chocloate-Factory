@@ -48,7 +48,6 @@ public class CreateChocolateFactory {
         modEventBus.addListener(CreateChocolateFactory::registerCapabilities);
         modEventBus.addListener(CreateChocolateFactory::registerDatapackRegistries);
         modEventBus.addListener(CCFDatagen::gatherData);
-        modEventBus.addListener(CreateChocolateFactory::registerMenuScreens);
     }
 
     @SubscribeEvent
@@ -66,17 +65,6 @@ public class CreateChocolateFactory {
                 Taste.CODEC,
                 tasteRegistryBuilder -> tasteRegistryBuilder.maxId(256)
         );
-    }
-
-    @SubscribeEvent
-    public static void registerMenuScreens(net.neoforged.neoforge.client.event.RegisterMenuScreensEvent event) {
-        event.<fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserMenu, net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserMenu>>register(
-            CCFMenu.CHOCOLATE_ANALYSER.get(), 
-            (menu, inventory, title) -> new net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserMenu>(menu, inventory, title) {
-                @Override
-                protected void renderBg(net.minecraft.client.gui.GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-                }
-            });
     }
     
     @SubscribeEvent
