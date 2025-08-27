@@ -5,11 +5,7 @@ import com.simibubi.create.content.fluids.VirtualFluid;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.MoltenChocolateBlock;
-import fr.cleboost.createchocolatefactory.fluid.ChocolateFluidType;
 import fr.cleboost.createchocolatefactory.fluid.VirtualChocolateFluid;
-import fr.cleboost.createchocolatefactory.item.ChocolateBucketItem;
-import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
 public class CCFFluids {
     private static final CreateRegistrate REGISTRATE = CreateChocolateFactory.registrate();
