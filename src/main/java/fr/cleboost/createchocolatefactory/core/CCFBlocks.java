@@ -72,7 +72,8 @@ public class CCFBlocks {
 
     public static final BlockEntry<ChocolateAnalyserBlock> CHOCOLATE_ANALYSER = REGISTRATE
         .block("chocolate_analyser", ChocolateAnalyserBlock::new)
-        .blockstate(BlockStateGen.horizontalBlockProvider(true))
+        //.blockstate(BlockStateGen.horizontalBlockProvider(true))
+        .blockstate((ctx, prov) -> {})
         .item()
         .model((ctx, prov) -> {})
         .build()
