@@ -1,4 +1,5 @@
 {
+  "block.createchocolatefactory.chocolate_analyser": "Chocolate Analyser",
   "block.createchocolatefactory.chocolate_mixer": "Chocolate Mixer",
   "block.createchocolatefactory.cocoa_pod": "Cocoa Pod",
   "block.createchocolatefactory.drying_kit": "Drying Kit",
@@ -34,6 +35,7 @@
   "item.createchocolatefactory.cocoa_beans_dirty": "Dirty Cocoa Beans",
   "item.createchocolatefactory.cocoa_beans_roasted": "Roasted Cocoa Beans",
   "item.createchocolatefactory.cocoa_beans_wet": "Damp Cocoa Beans",
+  "item.createchocolatefactory.cocoa_butter_bowl": "Cocoa Butter Bowl",
   "item.createchocolatefactory.cocoa_cake": "Cocoa Cake",
   "item.createchocolatefactory.cocoa_husk": "Cocoa Husk",
   "item.createchocolatefactory.cocoa_nibs": "Cocoa Nibs",
