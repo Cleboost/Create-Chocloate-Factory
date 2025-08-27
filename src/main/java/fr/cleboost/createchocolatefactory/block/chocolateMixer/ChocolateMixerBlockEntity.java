@@ -341,7 +341,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity impleme
         ((TankSegmentHandler) this.internalTanks.getTanks()[COCOA_BUTTER_TANK]).create_Chocloate_Factory$getHandler().setValidator(new Predicate<FluidStack>() {
             @Override
             public boolean test(FluidStack fluidStack) {
-                return fluidStack.is(Tags.Fluids.WATER);
+                return fluidStack.is(CCFFluids.COCOA_BUTTER.get());
             }
         });
         this.internalTanks.allowExtraction().allowInsertion();
