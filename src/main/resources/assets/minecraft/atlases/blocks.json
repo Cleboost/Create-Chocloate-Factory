@@ -7,6 +7,14 @@
         {
             "type": "single",
             "resource": "createchocolatefactory:fluid/chocolate_still"
+        },
+        {
+            "type": "single",
+            "resource": "createchocolatefactory:fluid/cocoa_butter_still"
+        },
+        {
+            "type": "single",
+            "resource": "createchocolatefactory:fluid/cocoa_butter_flow"
         }
     ]
 }
