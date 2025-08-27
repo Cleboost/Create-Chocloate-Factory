@@ -1,11 +1,8 @@
 package fr.cleboost.createchocolatefactory.core;
 
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
-import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
-import fr.cleboost.createchocolatefactory.item.utils.ChocolateMouldItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
@@ -48,8 +45,6 @@ public class CCFItems {
                     new ChocolateProgressItem(properties.stacksTo(1).food(CCFFoods.CHOCOLATE_FAST), 3, 100)).lang("Chocolate Bar")
             .model((ctx, prov) -> {
                 prov.generated(ctx, prov.modLoc("item/" + ctx.getName() + "/bar0"), prov.modLoc("item/" + ctx.getName() + "/bar_paper"))
-                        //.texture("layer0", prov.modLoc("item/" + ctx.getName() + "/bar_paper"))
-                        //.texture("layer1", prov.modLoc("item/" + ctx.getName() + "/" + ctx.getName() + "0"))
                         .override()
                         .predicate(prov.modLoc(CCFItemProperties.EAT_PROGRESS), 1f)
                         .model(
@@ -80,7 +75,8 @@ public class CCFItems {
 
     // Other
     public static final ItemEntry<Item> BRASS_WHISK = REGISTRATE.item("brass_whisk", Item::new).register();
-    public static final ItemEntry<Item> CHOCOLATE_FILTER = REGISTRATE.item("chocolate_filter", Item::new).properties(p -> p.component(CCFDataComponents.CHOCOLATE, new Chocolate())).lang("Chocolate Filter").register();
+    public static final ItemEntry<Item> CHOCOLATE_FILTER = REGISTRATE.item("chocolate_filter", Item::new)
+    .model((ctx, prov) -> prov.generated(ctx, prov.modLoc("item/chocolate_filter/layer0"),prov.modLoc("item/chocolate_filter/layer1"))).properties(p -> p.component(CCFDataComponents.CHOCOLATE, new Chocolate())).lang("Chocolate Filter").register();
 
     // Seau de chocolat avec un chemin de texture personnalisé
     //public static final Item CHOCOLATE_BUCKET = CCFFluids.CHOCOLATE.get().getBucket();
