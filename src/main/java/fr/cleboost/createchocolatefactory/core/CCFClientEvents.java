@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 import fr.cleboost.createchocolatefactory.ponder.CreateChocolateFactoryPonderPlugin;
 import fr.cleboost.createchocolatefactory.utils.ChocolateFoodPack;
 import net.createmod.ponder.foundation.PonderIndex;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.api.distmarker.Dist;

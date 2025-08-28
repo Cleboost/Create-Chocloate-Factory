@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javax.annotation.Nonnull;
 
-import com.simibubi.create.api.data.recipe.ProcessingRecipeGen;
-
 import fr.cleboost.createchocolatefactory.datagen.recipes.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
