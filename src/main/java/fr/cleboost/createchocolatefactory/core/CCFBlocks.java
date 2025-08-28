@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 
 public class CCFBlocks {
     private static final CreateRegistrate REGISTRATE = CreateChocolateFactory.registrate();
@@ -142,12 +143,18 @@ public class CCFBlocks {
             //bz ca register pas ...
             //.loot((prov, ctx) -> prov.createOakLeavesDrops(ctx, CCFBlocks.COCOA_SAPLING.get(),))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES))
-            .blockstate((ctx, prov) -> prov.models().leaves(ctx.getName(), ctx.getId().withPrefix("block/")))
+            .blockstate((ctx, prov) -> {
+                ConfiguredModel model = new ConfiguredModel(prov.models().leaves(ctx.getName(), ctx.getId().withPrefix("block/")));
+                prov.getVariantBuilder(ctx.get()).partialState().addModels(model);
+            })
             .simpleItem().defaultLang().register();
 
     public static final BlockEntry<SaplingBlock> COCOA_SAPLING = REGISTRATE.block("cocoa_sapling", (p) -> new SaplingBlock(CCFTreeGrower.COCOA_GROWER, p))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING))
-            .blockstate((ctx, prov) -> prov.models().cross(ctx.getName(), ctx.getId().withPrefix("block/")))
+            .blockstate((ctx, prov) -> {
+                ConfiguredModel model = new ConfiguredModel(prov.models().cross(ctx.getName(), ctx.getId().withPrefix("block/")));
+                prov.getVariantBuilder(ctx.get()).partialState().addModels(model);
+            })
             .item().defaultModel().build()//.model((ctx, prov)->prov.)
             .register();
     public static final BlockEntry<? extends StairBlock> COCOA_STAIRS = REGISTRATE.block("cocoa_stairs", (p) -> {
@@ -237,15 +244,16 @@ public class CCFBlocks {
             .simpleItem().defaultLang().register();
 
 
-
     public static final BlockEntry<ChocolateAnalyserBlock> CHOCOLATE_ANALYSER = REGISTRATE
-        .block("chocolate_analyser", ChocolateAnalyserBlock::new)
-        //.blockstate(BlockStateGen.horizontalBlockProvider(true))
-        .blockstate((ctx, prov) -> {})
-        .item()
-        .model((ctx, prov) -> {})
-        .build()
-        .register();
+            .block("chocolate_analyser", ChocolateAnalyserBlock::new)
+            //.blockstate(BlockStateGen.horizontalBlockProvider(true))
+            .blockstate((ctx, prov) -> {
+            })
+            .item()
+            .model((ctx, prov) -> {
+            })
+            .build()
+            .register();
 
     // public static final RegistryObject<Block> MINT_CROP =
     // BLOCKS.register("mint_crop",
