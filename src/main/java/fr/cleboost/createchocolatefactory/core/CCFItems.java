@@ -70,7 +70,8 @@ public class CCFItems {
         prov.modLoc("item/chocolate/" + ctx.getName() + "/layer1"));
     }).register();
 
-    public static final ChocolateFoodPack CHOCOLATE_EGG_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_egg", 400);
+    public static final ChocolateFoodPack CHOCOLATE_EGG_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_egg", 300);
+    public static final ChocolateFoodPack CHOCOLATE_BUNNY_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_bunny", 600);
 
     // Fruits & Foods
     public static final ItemEntry<Item> MINT_LEAF = REGISTRATE.item("mint_leaf", Item::new).properties(p -> p.food(CCFFoods.MINT)).register();
