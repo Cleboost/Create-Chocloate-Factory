@@ -5,7 +5,6 @@ import java.util.List;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
-import fr.cleboost.createchocolatefactory.item.utils.ChocolateMouldItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
@@ -104,6 +103,4 @@ public class CCFItems {
 
     public static void register() {
     }
-
-
 }
