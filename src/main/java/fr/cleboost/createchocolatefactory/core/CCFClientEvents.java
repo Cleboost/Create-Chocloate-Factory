@@ -31,7 +31,8 @@ public class CCFClientEvents {
                 },
                 CCFItems.CHOCOLATE_EGG_PACK.getChocolateItems().get(),
                 CCFItems.CHOCOLATE_BAR.get(),
-                CCFItems.CHOCOLATE_FILTER.get()
+                CCFItems.CHOCOLATE_FILTER.get(),
+                CCFItems.COOKIE.get()
                 //CCFFluids.CHOCOLATE.get().getBucket()
         );
     }

@@ -7,13 +7,10 @@ import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import fr.cleboost.createchocolatefactory.utils.ChocolateFoodPack;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.Tiers;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-
 public class CCFItems {
     private static final CCFRegistrate REGISTRATE = CreateChocolateFactory.registrate();
 
@@ -67,6 +64,11 @@ public class CCFItems {
                                         .texture("layer0", prov.modLoc("item/" + ctx.getName() + "/bar2"))
                         ).end();
             }).register();
+
+    public static final ItemEntry<Item> COOKIE = REGISTRATE.item("cookie", Item::new).model((ctx, prov) -> {
+        prov.generated(ctx, prov.modLoc("item/chocolate/" + ctx.getName() + "/layer0"),
+        prov.modLoc("item/chocolate/" + ctx.getName() + "/layer1"));
+    }).register();
 
     public static final ChocolateFoodPack CHOCOLATE_EGG_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_egg", 400);
 
