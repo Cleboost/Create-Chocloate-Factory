@@ -14,13 +14,13 @@ public class ChocolateFoodPack {
     private final ItemEntry<ChocolateBaseItem> chocolateItem;
     private final ItemEntry<ChocolateMouldItem> mouldItem;
 
-    public ChocolateFoodPack(CCFRegistrate registrate, String name) {
-        this(registrate, name, "");
+    public ChocolateFoodPack(CCFRegistrate registrate, String name, int amount) {
+        this(registrate, name, "", amount);
     }
 
-    public ChocolateFoodPack(CCFRegistrate registrate, String name, String lang) {
+    public ChocolateFoodPack(CCFRegistrate registrate, String name, String lang, int amount) {
         ItemBuilder<ChocolateBaseItem, CreateRegistrate> builderChocolate = registrate.chocolateItem(name, (properties) ->
-                new ChocolateBaseItem(properties.food(CCFFoods.CHOCOLATE_SLOW).stacksTo(16), 400));
+                new ChocolateBaseItem(properties.food(CCFFoods.CHOCOLATE_SLOW).stacksTo(16), amount));
         if (!lang.isEmpty()) builderChocolate.lang(lang);
         chocolateItem = builderChocolate.register();
 
