@@ -30,6 +30,7 @@ public class CCFClientEvents {
                     return 0xFFFFFFFF;
                 },
                 CCFItems.CHOCOLATE_EGG_PACK.getChocolateItems().get(),
+                CCFItems.CHOCOLATE_BUNNY_PACK.getChocolateItems().get(),
                 CCFItems.CHOCOLATE_BAR.get(),
                 CCFItems.CHOCOLATE_FILTER.get(),
                 CCFItems.COOKIE.get()

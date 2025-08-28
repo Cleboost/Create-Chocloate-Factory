@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "create:brass_sheet"
+            "items": "#c:plates/brass"
           }
         ]
       },

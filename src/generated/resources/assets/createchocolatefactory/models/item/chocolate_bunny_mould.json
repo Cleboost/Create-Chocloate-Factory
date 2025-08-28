@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createchocolatefactory:item/chocolate/chocolate_bunny/mould"
+  }
+}

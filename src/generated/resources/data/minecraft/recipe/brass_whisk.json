@@ -6,7 +6,7 @@
       "item": "create:andesite_alloy"
     },
     "B": {
-      "item": "create:brass_sheet"
+      "tag": "c:plates/brass"
     }
   },
   "pattern": [

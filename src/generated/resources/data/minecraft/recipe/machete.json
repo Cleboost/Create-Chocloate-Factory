@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "I": {
-      "item": "create:iron_sheet"
+      "tag": "c:plates/iron"
     },
     "S": {
       "item": "minecraft:stick"
