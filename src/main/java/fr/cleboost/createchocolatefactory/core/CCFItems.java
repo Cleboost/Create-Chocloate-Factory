@@ -7,8 +7,12 @@ import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import fr.cleboost.createchocolatefactory.utils.ChocolateFoodPack;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class CCFItems {
     private static final CCFRegistrate REGISTRATE = CreateChocolateFactory.registrate();
@@ -27,7 +31,9 @@ public class CCFItems {
             .register();
 
     // Tools
-    public static final ItemEntry<MacheteItem> MACHETE = REGISTRATE.item("machete", MacheteItem::new).model((ctx, prov) -> prov.handheld(ctx)).register();
+    public static final ItemEntry<MacheteItem> MACHETE = REGISTRATE.item("machete", MacheteItem::new)
+            .properties(p->p.stacksTo(1).attributes(AxeItem.createAttributes(Tiers.IRON,4f, -2.6f)))
+            .model((ctx, prov) -> prov.handheld(ctx)).register();
 
     // Cocoa Stuff
     public static final ItemEntry<Item> COCOA_BEANS_WET = REGISTRATE.item("cocoa_beans_wet", Item::new).lang("Damp Cocoa Beans").register();
