@@ -59,7 +59,7 @@ public class ChocolateMixerVisual extends ShaftVisual<ChocolateMixerBlockEntity>
 			.setChanged();
 		mixerHead.setPosition(getVisualPosition())
 			.nudge(0, -renderedHeadOffset, 0)
-			.setRotationalSpeed(blockEntity.getSpeed() * 2 * RotatingInstance.SPEED_MULTIPLIER)
+			.setRotationalSpeed(blockEntity.getSpeed() * 0.5f * RotatingInstance.SPEED_MULTIPLIER)
 			.setChanged();
 
 		// rotatingModel.setRotationalSpeed(20);
