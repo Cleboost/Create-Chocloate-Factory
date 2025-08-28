@@ -4,6 +4,7 @@ import com.simibubi.create.content.fluids.spout.FillingBySpout;
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.core.CCFFluids;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateMouldItem;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -33,6 +34,8 @@ public class FillingBySpoutMixin {
         if (availableFluid.is(CCFFluids.CHOCOLATE.get()) && stack.getItem() instanceof ChocolateMouldItem mould) {
             if (availableFluid.getAmount() < requiredAmount) cir.setReturnValue(stack);
             availableFluid.shrink(requiredAmount);
+            stack.hurtAndBreak(1, (ServerLevel) world, null, item -> {
+            });
             cir.setReturnValue(mould.getResult(availableFluid.get(CCFDataComponents.CHOCOLATE.get())));
         }
     }

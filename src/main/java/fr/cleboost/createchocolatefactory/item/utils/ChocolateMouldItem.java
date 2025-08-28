@@ -9,7 +9,7 @@ public class ChocolateMouldItem extends Item {
     private final ChocolateBaseItem result;
 
     public ChocolateMouldItem(Properties properties, ChocolateBaseItem result) {
-        super(properties.stacksTo(1));
+        super(properties.stacksTo(1).durability(16));
         this.result = result;
     }
 
