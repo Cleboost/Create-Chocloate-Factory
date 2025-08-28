@@ -2,13 +2,11 @@ package fr.cleboost.createchocolatefactory.block;
 
 import javax.annotation.Nonnull;
 
-import fr.cleboost.createchocolatefactory.core.CCFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,12 +23,12 @@ public class CocoaLogBlock extends FlammableRotatedPillarBlock {
     }
 
     @Override
-    protected boolean isRandomlyTicking(BlockState state) {
+    protected boolean isRandomlyTicking(@Nonnull BlockState state) {
         return true;
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void randomTick(@Nonnull BlockState state, @Nonnull ServerLevel level, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             if (!level.getBlockState(pos.relative(direction)).isAir()) continue;
             BlockState cocoaState = Blocks.COCOA.defaultBlockState()
