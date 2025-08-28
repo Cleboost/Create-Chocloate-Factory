@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createchocolatefactory:item/chocolate/cookie/layer0",
+    "layer1": "createchocolatefactory:item/chocolate/cookie/layer1"
+  }
+}
