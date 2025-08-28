@@ -27,9 +27,9 @@ public class CCFConfiguredFeatures {
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?,?>> context) {
         register(context,COCOA_TREE_KEY,Feature.TREE,new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(CCFBlocks.COCOA_LOG.get()),
-                new ForkingTrunkPlacer(4, 2, 2),
+                new ForkingTrunkPlacer(3, 1, 2),
                 BlockStateProvider.simple(CCFBlocks.COCOA_LEAVES.get()),
-                new AcaciaFoliagePlacer(ConstantInt.of(2),ConstantInt.of(0)),
+                new AcaciaFoliagePlacer(ConstantInt.of(1),ConstantInt.of(1)),
                 new TwoLayersFeatureSize(1, 0, 2)
         )//.decorators(List.of(TreeDecorator.))
                 .build());
