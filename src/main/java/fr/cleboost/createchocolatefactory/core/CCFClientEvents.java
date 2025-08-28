@@ -38,8 +38,7 @@ public class CCFClientEvents {
                     Stream.of(
                         CCFItems.CHOCOLATE_BAR.get(),
                         CCFItems.CHOCOLATE_FILTER.get(),
-                        CCFItems.COOKIE.get(),
-                        CCFItems.COCOA_BUTTER_BOWL.get()
+                        CCFItems.COOKIE.get()
                     ),
                     CCFItems.getAllChocolatePack().stream().map(ChocolateFoodPack::getChocolateItems).map(ItemEntry::get)
                 ).toArray(ItemLike[]::new)
