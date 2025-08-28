@@ -1,10 +1,15 @@
 package fr.cleboost.createchocolatefactory.core;
 
+import com.tterrag.registrate.util.entry.ItemEntry;
+
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import java.util.stream.Stream;
 import fr.cleboost.createchocolatefactory.ponder.CreateChocolateFactoryPonderPlugin;
+import fr.cleboost.createchocolatefactory.utils.ChocolateFoodPack;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -29,12 +34,15 @@ public class CCFClientEvents {
                     }
                     return 0xFFFFFFFF;
                 },
-                CCFItems.CHOCOLATE_EGG_PACK.getChocolateItems().get(),
-                CCFItems.CHOCOLATE_BUNNY_PACK.getChocolateItems().get(),
-                CCFItems.CHOCOLATE_BAR.get(),
-                CCFItems.CHOCOLATE_FILTER.get(),
-                CCFItems.COOKIE.get()
-                //CCFFluids.CHOCOLATE.get().getBucket()
+                Stream.concat(
+                    Stream.of(
+                        CCFItems.CHOCOLATE_BAR.get(),
+                        CCFItems.CHOCOLATE_FILTER.get(),
+                        CCFItems.COOKIE.get(),
+                        CCFItems.COCOA_BUTTER_BOWL.get()
+                    ),
+                    CCFItems.getAllChocolatePack().stream().map(ChocolateFoodPack::getChocolateItems).map(ItemEntry::get)
+                ).toArray(ItemLike[]::new)
         );
     }
 }

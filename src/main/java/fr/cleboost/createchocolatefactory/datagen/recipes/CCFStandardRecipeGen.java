@@ -2,10 +2,9 @@ package fr.cleboost.createchocolatefactory.datagen.recipes;
 
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
-import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
-import fr.cleboost.createchocolatefactory.item.utils.ChocolateMouldItem;
+import fr.cleboost.createchocolatefactory.utils.ChocolateFoodPack;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -15,18 +14,12 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class CCFStandardRecipeGen extends RecipeProvider {
     public CCFStandardRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
     }
-
-    static List<ItemEntry<ChocolateMouldItem>> allChocolateMouldItems = List.of(
-            CCFItems.CHOCOLATE_EGG_PACK.getMouldItems(),
-            CCFItems.CHOCOLATE_BUNNY_PACK.getMouldItems()
-    );
 
     @Override
     public void buildRecipes(@Nonnull RecipeOutput consumer) {
@@ -69,8 +62,8 @@ public class CCFStandardRecipeGen extends RecipeProvider {
                 .unlockedBy("has_copper", has(Tags.Items.INGOTS_COPPER))
                 .save(consumer, "chocolate_filter");
 
-        for (ItemEntry<ChocolateMouldItem> item : allChocolateMouldItems) {
-            stonecutterResultFromBase(consumer, RecipeCategory.MISC, item, AllItems.COPPER_SHEET);
+        for (ChocolateFoodPack item : CCFItems.getAllChocolatePack()) {
+            stonecutterResultFromBase(consumer, RecipeCategory.MISC, item.getMouldItems(), AllItems.COPPER_SHEET);
         }
     }
 }

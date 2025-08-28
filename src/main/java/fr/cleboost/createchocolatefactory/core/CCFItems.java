@@ -1,8 +1,11 @@
 package fr.cleboost.createchocolatefactory.core;
 
+import java.util.List;
+
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
+import fr.cleboost.createchocolatefactory.item.utils.ChocolateMouldItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
@@ -95,6 +98,12 @@ public class CCFItems {
             .model((ctx, prov) -> prov.generated(ctx, prov.modLoc("item/chocolate_bucket/bucket"), prov.modLoc("item/chocolate_bucket/overlay")))
             .register();*/
 
+    public static List<ChocolateFoodPack> getAllChocolatePack() {
+        return List.of(CHOCOLATE_EGG_PACK, CHOCOLATE_BUNNY_PACK);
+    }
+
     public static void register() {
     }
+
+
 }
