@@ -303,7 +303,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         ((TankSegmentHandler) this.internalTanks.getTanks()[COCOA_BUTTER_TANK]).create_Chocloate_Factory$getHandler().setValidator(new Predicate<FluidStack>() {
             @Override
             public boolean test(FluidStack fluidStack) {
-                return fluidStack.is(CCFFluids.COCOA_BUTTER.get());
+                return fluidStack.getFluid().isSame(CCFFluids.COCOA_BUTTER.get());
             }
         });
         this.internalTanks.allowExtraction().allowInsertion();
