@@ -3,7 +3,9 @@ package fr.cleboost.createchocolatefactory.core;
 import com.tterrag.registrate.util.entry.ItemEntry;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+
 import java.util.stream.Stream;
+
 import fr.cleboost.createchocolatefactory.ponder.CreateChocolateFactoryPonderPlugin;
 import fr.cleboost.createchocolatefactory.utils.ChocolateFoodPack;
 import net.createmod.ponder.foundation.PonderIndex;
@@ -34,12 +36,13 @@ public class CCFClientEvents {
                     return 0xFFFFFFFF;
                 },
                 Stream.concat(
-                    Stream.of(
-                        CCFItems.CHOCOLATE_BAR.get(),
-                        CCFItems.CHOCOLATE_FILTER.get(),
-                        CCFItems.COOKIE.get()
-                    ),
-                    CCFItems.getAllChocolatePack().stream().map(ChocolateFoodPack::getChocolateItems).map(ItemEntry::get)
+                        Stream.of(
+                                CCFItems.CHOCOLATE_BAR.get(),
+                                CCFItems.CHOCOLATE_FILTER.get(),
+                                CCFItems.COOKIE.get(),
+                                CCFItems.CHOCOLATE_STICK.get()
+                        ),
+                        CCFItems.getAllChocolatePack().stream().map(ChocolateFoodPack::getChocolateItems).map(ItemEntry::get)
                 ).toArray(ItemLike[]::new)
         );
     }

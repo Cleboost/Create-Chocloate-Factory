@@ -5,6 +5,7 @@ import java.util.List;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
+import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
 import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
@@ -74,6 +75,7 @@ public class CCFItems {
 
     public static final ChocolateFoodPack CHOCOLATE_EGG_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_egg", 300);
     public static final ChocolateFoodPack CHOCOLATE_BUNNY_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_bunny", 600);
+    public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_STICK = REGISTRATE.item("chocolate_stick", (p) -> new ChocolateBaseItem(p, 100)).register();
 
     // Fruits & Foods
     public static final ItemEntry<Item> MINT_LEAF = REGISTRATE.item("mint_leaf", Item::new).properties(p -> p.food(CCFFoods.MINT)).register();
