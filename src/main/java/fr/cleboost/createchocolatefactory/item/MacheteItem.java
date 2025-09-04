@@ -1,15 +1,17 @@
 package fr.cleboost.createchocolatefactory.item;
 
 import fr.cleboost.createchocolatefactory.core.CCFLangs;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tiers;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -46,6 +48,7 @@ public class MacheteItem extends AxeItem {
         if (bs.getBlock() instanceof LeavesBlock) {
             Player player = pContext.getPlayer();
             if (player != null) {
+                player.startUsingItem(pContext.getHand());
                 level.destroyBlock(blockpos, true);
 
                 BlockState bsBelow = level.getBlockState(blockpos.below());
@@ -62,4 +65,26 @@ public class MacheteItem extends AxeItem {
 
         return super.useOn(pContext);
     }
+
+    /*@Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+        if (level instanceof ClientLevel cl) {
+            ItemStack stack = player.getItemInHand(usedHand);
+            var model = Minecraft.getInstance().getItemRenderer().getModel(stack, level, null, 0);
+            var tx = model.getOverrides().resolve(model, stack, cl, null, 0).getParticleIcon(net.neoforged.neoforge.client.model.data.ModelData.EMPTY);
+            tx.contents().getOriginalImage().
+        }
+        return super.use(level, player, usedHand);
+    }*/
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.BRUSH;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+        return 10;
+    }
+
 }
