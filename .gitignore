@@ -5,3 +5,8 @@ run/
 .vscode
 .idea/
 .idea/*
+.eclipse/*
+bin/
+.settings/
+.classpath
+.project
