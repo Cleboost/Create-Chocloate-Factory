@@ -1,5 +1,6 @@
 package fr.cleboost.createchocolatefactory.core;
 
+import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -246,12 +247,15 @@ public class CCFBlocks {
 
     public static final BlockEntry<ChocolateAnalyserBlock> CHOCOLATE_ANALYSER = REGISTRATE
             .block("chocolate_analyser", ChocolateAnalyserBlock::new)
-            //.blockstate(BlockStateGen.horizontalBlockProvider(true))
             .blockstate((ctx, prov) -> {
+                prov.simpleBlock(ctx.getEntry(), prov.models().cubeBottomTop(
+                        ctx.getName(),
+                        CreateChocolateFactory.asResource("block/chocolate_analyser/chocolate_analyser_side"),
+                        CreateChocolateFactory.asResource("block/chocolate_analyser/chocolate_analyser_bottom"),
+                        CreateChocolateFactory.asResource("block/chocolate_analyser/chocolate_analyzer_top")
+                ));
             })
             .item()
-            .model((ctx, prov) -> {
-            })
             .build()
             .register();
 
