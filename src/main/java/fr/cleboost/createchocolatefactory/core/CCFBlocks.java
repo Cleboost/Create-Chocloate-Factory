@@ -259,6 +259,20 @@ public class CCFBlocks {
             .build()
             .register();
 
+    public static final BlockEntry<Block> CHOCOLATE_PREPARER = REGISTRATE
+            .block("chocolate_preparer", Block::new)
+            .blockstate((ctx, prov) -> {
+                prov.simpleBlock(ctx.getEntry(), prov.models().cubeBottomTop(
+                        ctx.getName(),
+                        CreateChocolateFactory.asResource("block/chocolate_analyser/chocolate_analyser_side"),
+                        CreateChocolateFactory.asResource("block/chocolate_analyser/chocolate_analyser_bottom"),
+                        CreateChocolateFactory.asResource("block/chocolate_analyser/chocolate_preparer_top")
+                ));
+            })
+            .item()
+            .build()
+            .register();
+
     // public static final RegistryObject<Block> MINT_CROP =
     // BLOCKS.register("mint_crop",
     // () -> new
