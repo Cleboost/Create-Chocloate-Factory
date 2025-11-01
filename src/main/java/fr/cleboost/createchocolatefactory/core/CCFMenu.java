@@ -14,7 +14,9 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 
 public class CCFMenu {
     public static final MenuEntry<ChocolateAnalyserMenu> CHOCOLATE_ANALYSER =
-        register("chocolate_analyser", ChocolateAnalyserMenu::new, () -> ChocolateAnalyserScreen::new);
+        register("chocolate_analyser", 
+            (type, id, inv, buffer) -> new ChocolateAnalyserMenu(type, id, inv, buffer),
+            () -> ChocolateAnalyserScreen::new);
 
     private static <C extends AbstractContainerMenu, S extends Screen & MenuAccess<C>> MenuEntry<C> register(
         String name, ForgeMenuFactory<C> factory, NonNullSupplier<ScreenFactory<C, S>> screenFactory) {

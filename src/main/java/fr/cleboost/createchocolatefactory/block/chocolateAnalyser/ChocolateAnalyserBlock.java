@@ -1,11 +1,14 @@
 package fr.cleboost.createchocolatefactory.block.chocolateAnalyser;
 
 import fr.cleboost.createchocolatefactory.core.CCFBlockEntities;
+import fr.cleboost.createchocolatefactory.utils.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -36,5 +39,10 @@ public class ChocolateAnalyserBlock extends Block implements IBE<ChocolateAnalys
 	@Override
 	public BlockEntityType<? extends ChocolateAnalyserBlockEntity> getBlockEntityType() {
 		return CCFBlockEntities.CHOCOLATE_ANALYSER.get();
+	}
+
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+		return TickableBlockEntity.getTickerHelper(pLevel);
 	}
 }
