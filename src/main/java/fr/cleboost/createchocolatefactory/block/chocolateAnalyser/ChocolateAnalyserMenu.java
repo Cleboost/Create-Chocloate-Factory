@@ -3,6 +3,7 @@ package fr.cleboost.createchocolatefactory.block.chocolateAnalyser;
 import javax.annotation.Nonnull;
 
 import fr.cleboost.createchocolatefactory.core.CCFMenu;
+import fr.cleboost.createchocolatefactory.utils.OutputOnlySlot;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;

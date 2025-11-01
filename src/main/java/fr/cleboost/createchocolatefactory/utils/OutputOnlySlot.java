@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.chocolateAnalyser;
+package fr.cleboost.createchocolatefactory.utils;
 
 import javax.annotation.Nonnull;
 import net.minecraft.world.Container;
