@@ -16,6 +16,10 @@ public class CCFLangs {
     public static final LangEntry MACHETE = new LangEntry(LangCategory.TOOLTIP, "machete", "Use to cut cocoa pods");
     public static final LangEntry PROGRESS = new LangEntry(LangCategory.TOOLTIP, "progress", "%s/%s");
     public static final LangEntry CHOCOLATE_COMPOSITION = new LangEntry(LangCategory.TOOLTIP, "chocolate.composition", "Chocolate composition :\nStrength : %s\nSugar : %s\nCocoa Butter : %s\nMilk : %s\nTaste : %s");
+    public static final LangEntry FILTER_STRENGTH = new LangEntry(LangCategory.TOOLTIP, "filter.strength", "Strength: %s");
+    public static final LangEntry FILTER_MILK = new LangEntry(LangCategory.TOOLTIP, "filter.milk", "Milk: %s");
+    public static final LangEntry FILTER_SUGAR = new LangEntry(LangCategory.TOOLTIP, "filter.sugar", "Sugar: %s");
+    public static final LangEntry FILTER_COCOA_BUTTER = new LangEntry(LangCategory.TOOLTIP, "filter.cocoa_butter", "Cocoa Butter: %s");
 
     public static final LangEntry DRYING_KIT_STATUS = new LangEntry(LangCategory.GOGGLE, "dryingkit.status", "Status : %s");
     public static final LangEntry DRYING_KIT_BONUS = new LangEntry(LangCategory.GOGGLE, "dryingkit.bonus", "★ Bonus");

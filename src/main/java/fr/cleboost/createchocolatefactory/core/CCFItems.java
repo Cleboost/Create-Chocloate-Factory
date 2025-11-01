@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.item.ChocolateFilterItem;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateProgressItem;
@@ -88,7 +89,7 @@ public class CCFItems {
 
     // Other
     public static final ItemEntry<Item> BRASS_WHISK = REGISTRATE.item("brass_whisk", Item::new).register();
-    public static final ItemEntry<Item> CHOCOLATE_FILTER = REGISTRATE.item("chocolate_filter", Item::new)
+    public static final ItemEntry<ChocolateFilterItem> CHOCOLATE_FILTER = REGISTRATE.item("chocolate_filter", ChocolateFilterItem::new)
     .model((ctx, prov) -> prov.generated(ctx, prov.modLoc("item/chocolate_filter/layer0"),prov.modLoc("item/chocolate_filter/layer1"))).properties(p -> p.component(CCFDataComponents.CHOCOLATE, new Chocolate())).lang("Chocolate Filter").register();
     public static final ItemEntry<Item> COCOA_BUTTER_BOWL = REGISTRATE.item("cocoa_butter_bowl", Item::new).lang("Cocoa Butter Bowl").register();
 
