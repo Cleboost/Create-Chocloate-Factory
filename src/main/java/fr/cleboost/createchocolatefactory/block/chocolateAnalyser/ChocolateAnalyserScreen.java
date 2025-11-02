@@ -7,7 +7,6 @@ import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 
 import fr.cleboost.createchocolatefactory.core.CCFGuiTextures;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 

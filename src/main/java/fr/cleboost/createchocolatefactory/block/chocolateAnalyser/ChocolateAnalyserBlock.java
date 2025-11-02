@@ -27,7 +27,7 @@ public class ChocolateAnalyserBlock extends Block implements IBE<ChocolateAnalys
 		if (level.isClientSide)
 			return InteractionResult.SUCCESS;
 		withBlockEntityDo(level, pos,
-				be -> player.openMenu(be));
+				be -> player.openMenu(be, be::sendToMenu));
 		return InteractionResult.SUCCESS;
 	}
 
