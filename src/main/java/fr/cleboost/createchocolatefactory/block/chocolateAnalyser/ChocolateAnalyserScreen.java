@@ -34,7 +34,6 @@ public class ChocolateAnalyserScreen extends AbstractSimiContainerScreen<Chocola
     public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 
 		super.render(guiGraphics, mouseX, mouseY, partialTick);
-//		this.renderTooltip(guiGraphics, mouseX, mouseY);
 	}
 }
 

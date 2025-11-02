@@ -12,10 +12,7 @@ import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import fr.cleboost.createchocolatefactory.utils.TickableBlockEntity;
-import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -60,27 +57,17 @@ public class ChocolateAnalyserBlockEntity extends SmartBlockEntity implements Me
             return;
         }
 
-        CreateChocolateFactory.LOGGER.debug("ChocolateAnalyser tick() appelé à {}", this.worldPosition);
-        
         ItemStack chocolateStack = inventory.getStackInSlot(ChocolateAnalyserInventory.SLOT_CHOCOLATE);
         ItemStack filterStack = inventory.getStackInSlot(ChocolateAnalyserInventory.SLOT_FILTER);
         ItemStack fuelStack = inventory.getStackInSlot(ChocolateAnalyserInventory.SLOT_FUEL);
         ItemStack outputStack = inventory.getStackInSlot(ChocolateAnalyserInventory.SLOT_OUTPUT);
         
-        CreateChocolateFactory.LOGGER.debug("Inventaire - Chocolate: {}, Filter: {}, Fuel: {}, Output: {}", 
-            chocolateStack.isEmpty() ? "empty" : chocolateStack.getItem().toString(),
-            filterStack.isEmpty() ? "empty" : filterStack.getItem().toString(),
-            fuelStack.isEmpty() ? "empty" : fuelStack.getItem().toString(),
-            outputStack.isEmpty() ? "empty" : outputStack.getItem().toString());
-
         boolean canProcess = canProcess(chocolateStack, filterStack, fuelStack, outputStack);
 
         if (canProcess) {
             processingTicks++;
-            CreateChocolateFactory.LOGGER.debug("Processing: ticks = {}/{}", processingTicks, TICKS_PER_PROCESS);
             
             if (processingTicks >= TICKS_PER_PROCESS) {
-                CreateChocolateFactory.LOGGER.info("Processing complete! Creating filter with chocolate.");
                 processChocolate();
                 processingTicks = 0;
                 notifyUpdate();
@@ -89,7 +76,6 @@ public class ChocolateAnalyserBlockEntity extends SmartBlockEntity implements Me
             }
         } else {
             if (processingTicks > 0) {
-                CreateChocolateFactory.LOGGER.debug("Processing stopped, resetting ticks");
                 processingTicks = 0;
                 notifyUpdate();
             }

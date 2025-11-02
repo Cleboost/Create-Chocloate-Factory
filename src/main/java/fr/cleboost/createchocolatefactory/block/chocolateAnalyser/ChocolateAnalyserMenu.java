@@ -5,8 +5,6 @@ import javax.annotation.Nonnull;
 import com.simibubi.create.foundation.gui.menu.MenuBase;
 
 import fr.cleboost.createchocolatefactory.core.CCFMenu;
-import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
-import fr.cleboost.createchocolatefactory.core.CCFItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -41,13 +39,12 @@ public class ChocolateAnalyserMenu extends MenuBase<ChocolateAnalyserBlockEntity
             ItemStack stackInSlot = slot.getItem();
             itemstack = stackInSlot.copy();
 
-            int containerSlots = 4; // 4 slots de conteneur
+            int containerSlots = 4;
             if (index < containerSlots) {
                 if (!this.moveItemStackTo(stackInSlot, containerSlots, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             } else {
-                // Essayer d'ajouter aux slots de conteneur
                 int chocolateSlot = ChocolateAnalyserInventory.SLOT_CHOCOLATE;
                 int filterSlot = ChocolateAnalyserInventory.SLOT_FILTER;
                 int fuelSlot = ChocolateAnalyserInventory.SLOT_FUEL;
