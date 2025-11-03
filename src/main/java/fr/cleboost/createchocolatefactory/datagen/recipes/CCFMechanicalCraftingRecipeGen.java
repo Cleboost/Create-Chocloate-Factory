@@ -2,16 +2,12 @@ package fr.cleboost.createchocolatefactory.datagen.recipes;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.api.data.recipe.EmptyingRecipeGen;
 import com.simibubi.create.api.data.recipe.MechanicalCraftingRecipeGen;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;
-import fr.cleboost.createchocolatefactory.core.CCFFluids;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.concurrent.CompletableFuture;
 

@@ -22,10 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +40,7 @@ public class ChocolateBaseItem extends Item {
     }
 
     @Override
-    public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
+    public void appendHoverText(@Nonnull ItemStack pStack, @Nonnull TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
         Chocolate chocolate = pStack.get(CCFDataComponents.CHOCOLATE);
         if (chocolate == null) return;
         if (Screen.hasShiftDown()) {
@@ -60,7 +58,7 @@ public class ChocolateBaseItem extends Item {
     }
 
     @Override
-    public @NotNull ItemStack finishUsingItem(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull LivingEntity pLivingEntity) {
+    public ItemStack finishUsingItem(@Nonnull ItemStack pStack, @Nonnull Level pLevel, @Nonnull LivingEntity pLivingEntity) {
         //EAT :
         applyEatEffects(pStack, pLevel, pLivingEntity);
         if (pLivingEntity instanceof Player player) {
@@ -76,7 +74,7 @@ public class ChocolateBaseItem extends Item {
         return pStack;
     }
 
-    protected void applyEatEffects(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
+    protected void applyEatEffects(@Nonnull ItemStack pStack, @Nonnull Level pLevel, @Nonnull LivingEntity pLivingEntity) {
         Chocolate ch = pStack.get(CCFDataComponents.CHOCOLATE);
         if (ch == null) return;
         if (ch.isBad()) {
