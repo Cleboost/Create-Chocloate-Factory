@@ -1,6 +1,5 @@
 package fr.cleboost.createchocolatefactory.core;
 
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 
 public class CCFBlocks {
     private static final CreateRegistrate REGISTRATE = CreateChocolateFactory.registrate();
@@ -141,7 +139,6 @@ public class CCFBlocks {
                     }
                 };
             })
-            //bz ca register pas ...
             //.loot((prov, ctx) -> prov.createOakLeavesDrops(ctx, CCFBlocks.COCOA_SAPLING.get(),))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES))
             .blockstate((ctx, prov) -> {
@@ -155,11 +152,6 @@ public class CCFBlocks {
             .item()
             .build()
             .register();
-            // .blockstate((ctx, prov) -> {
-            //     ConfiguredModel model = new ConfiguredModel(prov.models().leaves(ctx.getName(), ctx.getId().withPrefix("block/")));
-            //     prov.getVariantBuilder(ctx.get()).partialState().addModels(model);
-            // })
-            // .simpleItem().defaultLang().register();
 
     public static final BlockEntry<SaplingBlock> COCOA_SAPLING = REGISTRATE.block("cocoa_sapling", (p) -> new SaplingBlock(CCFTreeGrower.COCOA_GROWER, p))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING))
