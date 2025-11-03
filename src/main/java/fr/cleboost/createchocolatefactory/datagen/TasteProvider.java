@@ -97,6 +97,7 @@ public class TasteProvider /*implements DataProvider*/ {
 
     }
 
+    @SuppressWarnings("unused")
     private static String name(Item item) {
         return item.getDescriptionId().split("\\.")[2];
     }

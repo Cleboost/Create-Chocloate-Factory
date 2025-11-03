@@ -1,5 +1,7 @@
 package fr.cleboost.createchocolatefactory.core;
 
+import javax.annotation.Nonnull;
+
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -104,17 +106,17 @@ public class CCFBlocks {
     public static final BlockEntry<? extends Block> COCOA_PLANKS = REGISTRATE.block("cocoa_planks", (p) -> {
                 return new Block(p) {
                     @Override
-                    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return true;
                     }
 
                     @Override
-                    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 20;
                     }
 
                     @Override
-                    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 5;
                     }
                 };
@@ -124,17 +126,17 @@ public class CCFBlocks {
     public static final BlockEntry<? extends LeavesBlock> COCOA_LEAVES = REGISTRATE.block("cocoa_leaves", (p) -> {
                 return new LeavesBlock(p) {
                     @Override
-                    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return true;
                     }
 
                     @Override
-                    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 60;
                     }
 
                     @Override
-                    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 30;
                     }
                 };
@@ -174,17 +176,17 @@ public class CCFBlocks {
     public static final BlockEntry<? extends StairBlock> COCOA_STAIRS = REGISTRATE.block("cocoa_stairs", (p) -> {
                 return new StairBlock(CCFBlocks.COCOA_PLANKS.get().defaultBlockState(), p) {
                     @Override
-                    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return true;
                     }
 
                     @Override
-                    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull    Direction direction) {
                         return 20;
                     }
 
                     @Override
-                    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 5;
                     }
                 };
@@ -195,17 +197,17 @@ public class CCFBlocks {
     public static final BlockEntry<? extends SlabBlock> COCOA_SLAB = REGISTRATE.block("cocoa_slab", (p) -> {
                 return new SlabBlock(p) {
                     @Override
-                    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return true;
                     }
 
                     @Override
-                    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 20;
                     }
 
                     @Override
-                    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 5;
                     }
                 };
@@ -217,17 +219,17 @@ public class CCFBlocks {
     public static final BlockEntry<? extends FenceBlock> COCOA_FENCE = REGISTRATE.block("cocoa_fence", (p) -> {
                 return new FenceBlock(p) {
                     @Override
-                    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return true;
                     }
 
                     @Override
-                    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 20;
                     }
 
                     @Override
-                    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 5;
                     }
                 };
@@ -238,17 +240,17 @@ public class CCFBlocks {
     public static final BlockEntry<? extends FenceGateBlock> COCOA_FENCE_GATE = REGISTRATE.block("cocoa_fence", (p) -> {
                 return new FenceGateBlock(CCFWoodType.COCOA_TYPE, p) {
                     @Override
-                    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return true;
                     }
 
                     @Override
-                    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 20;
                     }
 
                     @Override
-                    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
                         return 5;
                     }
                 };

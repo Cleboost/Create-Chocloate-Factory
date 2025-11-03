@@ -1,13 +1,9 @@
 package fr.cleboost.createchocolatefactory.item;
 
 import fr.cleboost.createchocolatefactory.core.CCFLangs;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +14,6 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class MacheteItem extends AxeItem {
@@ -32,13 +27,13 @@ public class MacheteItem extends AxeItem {
     }
 
     @Override
-    public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, List<Component> pTooltipComponents, @Nonnull TooltipFlag pIsAdvanced) {
+    public void appendHoverText(@Nonnull ItemStack pStack, @Nonnull TooltipContext pContext, @Nonnull List<Component> pTooltipComponents, @Nonnull TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(CCFLangs.MACHETE.getComponent());
         super.appendHoverText(pStack, pContext, pTooltipComponents, pIsAdvanced);
     }
 
     @Override
-    public @Nonnull InteractionResult useOn(UseOnContext pContext) {
+    public @Nonnull InteractionResult useOn(@Nonnull UseOnContext pContext) {
         Level level = pContext.getLevel();
         if (level.isClientSide()) return super.useOn(pContext);
 
@@ -78,12 +73,12 @@ public class MacheteItem extends AxeItem {
     }*/
 
     @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
+    public UseAnim getUseAnimation(@Nonnull ItemStack stack) {
         return UseAnim.BRUSH;
     }
 
     @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+    public int getUseDuration(@Nonnull ItemStack stack, @Nonnull LivingEntity entity) {
         return 10;
     }
 
