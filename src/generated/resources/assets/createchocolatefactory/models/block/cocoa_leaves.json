@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
+  "render_type": "minecraft:cutout",
   "textures": {
     "all": "createchocolatefactory:block/cocoa_leaves"
   }

@@ -145,18 +145,39 @@ public class CCFBlocks {
             //.loot((prov, ctx) -> prov.createOakLeavesDrops(ctx, CCFBlocks.COCOA_SAPLING.get(),))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES))
             .blockstate((ctx, prov) -> {
-                ConfiguredModel model = new ConfiguredModel(prov.models().leaves(ctx.getName(), ctx.getId().withPrefix("block/")));
-                prov.getVariantBuilder(ctx.get()).partialState().addModels(model);
+                prov.simpleBlock(ctx.getEntry(), 
+                    prov.models().getBuilder(ctx.getName())
+                        .parent(prov.models().getExistingFile(prov.mcLoc("block/leaves")))
+                        .texture("all", ctx.getId().withPrefix("block/"))
+                        .renderType("cutout")
+                );
             })
-            .simpleItem().defaultLang().register();
+            .item()
+            .build()
+            .register();
+            // .blockstate((ctx, prov) -> {
+            //     ConfiguredModel model = new ConfiguredModel(prov.models().leaves(ctx.getName(), ctx.getId().withPrefix("block/")));
+            //     prov.getVariantBuilder(ctx.get()).partialState().addModels(model);
+            // })
+            // .simpleItem().defaultLang().register();
 
     public static final BlockEntry<SaplingBlock> COCOA_SAPLING = REGISTRATE.block("cocoa_sapling", (p) -> new SaplingBlock(CCFTreeGrower.COCOA_GROWER, p))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING))
             .blockstate((ctx, prov) -> {
-                ConfiguredModel model = new ConfiguredModel(prov.models().cross(ctx.getName(), ctx.getId().withPrefix("block/")));
-                prov.getVariantBuilder(ctx.get()).partialState().addModels(model);
+                prov.simpleBlock(ctx.getEntry(), 
+                    prov.models().getBuilder(ctx.getName())
+                        .parent(prov.models().getExistingFile(prov.mcLoc("block/cross")))
+                        .texture("cross", ctx.getId().withPrefix("block/"))
+                        .renderType("cutout")
+                );
             })
-            .item().defaultModel().build()//.model((ctx, prov)->prov.)
+            .item()
+            .model((ctx, prov) -> {
+                prov.getBuilder(ctx.getName())
+                        .parent(prov.getExistingFile(prov.mcLoc("item/generated")))
+                        .texture("layer0", prov.modLoc("block/cocoa_sapling"));
+            })
+            .build()
             .register();
     public static final BlockEntry<? extends StairBlock> COCOA_STAIRS = REGISTRATE.block("cocoa_stairs", (p) -> {
                 return new StairBlock(CCFBlocks.COCOA_PLANKS.get().defaultBlockState(), p) {
