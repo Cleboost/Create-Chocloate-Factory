@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.dryingKit;
+package fr.cleboost.createchocolatefactory.block.dryingkit;
 
 import fr.cleboost.createchocolatefactory.core.CCFBlockEntities;
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;

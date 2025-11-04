@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.dryingKit;
+package fr.cleboost.createchocolatefactory.block.dryingkit;
 
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;

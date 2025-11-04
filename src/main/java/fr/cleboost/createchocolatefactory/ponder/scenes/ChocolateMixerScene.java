@@ -2,7 +2,8 @@ package fr.cleboost.createchocolatefactory.ponder.scenes;
 
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
-import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerBlockEntity;
+
+import fr.cleboost.createchocolatefactory.block.chocolatemixer.ChocolateMixerBlockEntity;
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
 import net.createmod.ponder.api.PonderPalette;

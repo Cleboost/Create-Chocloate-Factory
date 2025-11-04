@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.chocolateMixer;
+package fr.cleboost.createchocolatefactory.block.chocolatemixer;
 
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.kinetics.base.IRotate;

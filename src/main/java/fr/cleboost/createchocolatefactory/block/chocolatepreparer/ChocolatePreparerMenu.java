@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.chocolateAnalyser;
+package fr.cleboost.createchocolatefactory.block.chocolatepreparer;
 
 import javax.annotation.Nonnull;
 
@@ -16,18 +16,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class ChocolateAnalyserMenu extends MenuBase<ChocolateAnalyserBlockEntity> {
+public class ChocolatePreparerMenu extends MenuBase<ChocolatePreparerBlockEntity> {
 	
-	public ChocolateAnalyserMenu(MenuType<?> type, int id, Inventory inv, RegistryFriendlyByteBuf extraData) {
+	public ChocolatePreparerMenu(MenuType<?> type, int id, Inventory inv, RegistryFriendlyByteBuf extraData) {
 		super(type, id, inv, extraData);
 	}
 
-	public ChocolateAnalyserMenu(MenuType<?> type, int id, Inventory inv, ChocolateAnalyserBlockEntity be) {
+	public ChocolatePreparerMenu(MenuType<?> type, int id, Inventory inv, ChocolatePreparerBlockEntity be) {
 		super(type, id, inv, be);
 	}
 	
-	public static ChocolateAnalyserMenu create(int id, Inventory inv, ChocolateAnalyserBlockEntity be) {
-		return new ChocolateAnalyserMenu(CCFMenu.CHOCOLATE_ANALYSER.get(), id, inv, be);
+	public static ChocolatePreparerMenu create(int id, Inventory inv, ChocolatePreparerBlockEntity be) {
+		return new ChocolatePreparerMenu(CCFMenu.CHOCOLATE_PREPARER.get(), id, inv, be);
 	}
 
     @Override
@@ -39,21 +39,15 @@ public class ChocolateAnalyserMenu extends MenuBase<ChocolateAnalyserBlockEntity
             ItemStack stackInSlot = slot.getItem();
             itemstack = stackInSlot.copy();
 
-            int containerSlots = 4;
+            int containerSlots = 1; // Un seul slot maintenant
             if (index < containerSlots) {
                 if (!this.moveItemStackTo(stackInSlot, containerSlots, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             } else {
-                int chocolateSlot = ChocolateAnalyserInventory.SLOT_CHOCOLATE;
-                int filterSlot = ChocolateAnalyserInventory.SLOT_FILTER;
-                int fuelSlot = ChocolateAnalyserInventory.SLOT_FUEL;
-                if (!this.moveItemStackTo(stackInSlot, chocolateSlot, chocolateSlot + 1, false)) {
-                    if (!this.moveItemStackTo(stackInSlot, filterSlot, filterSlot + 1, false)) {
-                        if (!this.moveItemStackTo(stackInSlot, fuelSlot, fuelSlot + 1, false)) {
-                            return ItemStack.EMPTY;
-                        }
-                    }
+                int filterSlot = ChocolatePreparerInventory.SLOT_FILTER;
+                if (!this.moveItemStackTo(stackInSlot, filterSlot, filterSlot + 1, false)) {
+                    return ItemStack.EMPTY;
                 }
             }
 
@@ -77,11 +71,11 @@ public class ChocolateAnalyserMenu extends MenuBase<ChocolateAnalyserBlockEntity
 	}
 
 	@Override
-	protected ChocolateAnalyserBlockEntity createOnClient(RegistryFriendlyByteBuf extraData) {
+	protected ChocolatePreparerBlockEntity createOnClient(RegistryFriendlyByteBuf extraData) {
 		ClientLevel world = Minecraft.getInstance().level;
 		BlockEntity blockEntity = world.getBlockEntity(extraData.readBlockPos());
-		if (blockEntity instanceof ChocolateAnalyserBlockEntity chocolateAnalyser) {
-			return chocolateAnalyser;
+		if (blockEntity instanceof ChocolatePreparerBlockEntity chocolatePreparer) {
+			return chocolatePreparer;
 		}
 		return null;
 	}
@@ -95,19 +89,17 @@ public class ChocolateAnalyserMenu extends MenuBase<ChocolateAnalyserBlockEntity
 		int x = 4;
         int y = -52;
 
-		addSlot(new SlotItemHandler(contentHolder.inventory, ChocolateAnalyserInventory.SLOT_CHOCOLATE, x+39, y+66));
-		addSlot(new SlotItemHandler(contentHolder.inventory, ChocolateAnalyserInventory.SLOT_FILTER, x+78, y+27));
-		addSlot(new SlotItemHandler(contentHolder.inventory, ChocolateAnalyserInventory.SLOT_FUEL, x+78, y+105));
-		addSlot(new SlotItemHandler(contentHolder.inventory, ChocolateAnalyserInventory.SLOT_OUTPUT, x+117, y+66));
+		// Un seul slot pour le filter
+		addSlot(new SlotItemHandler(contentHolder.inventory, ChocolatePreparerInventory.SLOT_FILTER, x+39, y+66));
 
 		addPlayerSlots(10, 108);
 	}
 
 	@Override
-	protected void saveData(ChocolateAnalyserBlockEntity contentHolder) {}
+	protected void saveData(ChocolatePreparerBlockEntity contentHolder) {}
 
 	@Override
-	protected void initAndReadInventory(ChocolateAnalyserBlockEntity contentHolder) {}
+	protected void initAndReadInventory(ChocolatePreparerBlockEntity contentHolder) {}
 	
 	public int getProcessingProgress() {
 		return contentHolder.getProcessingProgress();

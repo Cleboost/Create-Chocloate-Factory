@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.chocolatePreparer;
+package fr.cleboost.createchocolatefactory.block.chocolatepreparer;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;

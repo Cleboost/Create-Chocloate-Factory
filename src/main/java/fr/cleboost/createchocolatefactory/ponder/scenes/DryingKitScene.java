@@ -1,6 +1,6 @@
 package fr.cleboost.createchocolatefactory.ponder.scenes;
 
-import fr.cleboost.createchocolatefactory.block.dryingKit.DryingKitBlock;
+import fr.cleboost.createchocolatefactory.block.dryingkit.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
 import net.createmod.catnip.math.Pointing;

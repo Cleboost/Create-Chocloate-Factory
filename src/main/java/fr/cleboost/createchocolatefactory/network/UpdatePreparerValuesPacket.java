@@ -1,7 +1,7 @@
 package fr.cleboost.createchocolatefactory.network;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.chocolatePreparer.ChocolatePreparerBlockEntity;
+import fr.cleboost.createchocolatefactory.block.chocolatepreparer.ChocolatePreparerBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

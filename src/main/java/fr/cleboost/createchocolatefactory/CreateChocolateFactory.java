@@ -1,7 +1,8 @@
 package fr.cleboost.createchocolatefactory;
 
 import com.mojang.logging.LogUtils;
-import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerBlockEntity;
+
+import fr.cleboost.createchocolatefactory.block.chocolatemixer.ChocolateMixerBlockEntity;
 import fr.cleboost.createchocolatefactory.core.*;
 import fr.cleboost.createchocolatefactory.datagen.CCFDatagen;
 import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;

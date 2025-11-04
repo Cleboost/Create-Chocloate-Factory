@@ -6,10 +6,10 @@ import com.tterrag.registrate.util.entry.MenuEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserMenu;
-import fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserScreen;
-import fr.cleboost.createchocolatefactory.block.chocolatePreparer.ChocolatePreparerMenu;
-import fr.cleboost.createchocolatefactory.block.chocolatePreparer.ChocolatePreparerScreen;
+import fr.cleboost.createchocolatefactory.block.chocolateanalyser.ChocolateAnalyserMenu;
+import fr.cleboost.createchocolatefactory.block.chocolateanalyser.ChocolateAnalyserScreen;
+import fr.cleboost.createchocolatefactory.block.chocolatepreparer.ChocolatePreparerMenu;
+import fr.cleboost.createchocolatefactory.block.chocolatepreparer.ChocolatePreparerScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.world.inventory.AbstractContainerMenu;

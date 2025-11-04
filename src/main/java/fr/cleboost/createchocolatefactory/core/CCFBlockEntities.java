@@ -1,12 +1,12 @@
 package fr.cleboost.createchocolatefactory.core;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserBlockEntity;
-import fr.cleboost.createchocolatefactory.block.dryingKit.DryingKitBlockEntity;
-import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerBlockEntity;
-import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerRender;
-import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerVisual;
-import fr.cleboost.createchocolatefactory.block.chocolatePreparer.ChocolatePreparerBlockEntity;
+import fr.cleboost.createchocolatefactory.block.chocolateanalyser.ChocolateAnalyserBlockEntity;
+import fr.cleboost.createchocolatefactory.block.chocolatemixer.ChocolateMixerBlockEntity;
+import fr.cleboost.createchocolatefactory.block.chocolatemixer.ChocolateMixerRender;
+import fr.cleboost.createchocolatefactory.block.chocolatemixer.ChocolateMixerVisual;
+import fr.cleboost.createchocolatefactory.block.chocolatepreparer.ChocolatePreparerBlockEntity;
+import fr.cleboost.createchocolatefactory.block.dryingkit.DryingKitBlockEntity;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 

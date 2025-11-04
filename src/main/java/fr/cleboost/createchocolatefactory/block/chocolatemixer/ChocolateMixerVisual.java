@@ -1,4 +1,4 @@
-package fr.cleboost.createchocolatefactory.block.chocolateMixer;
+package fr.cleboost.createchocolatefactory.block.chocolatemixer;
 
 import java.util.function.Consumer;
 

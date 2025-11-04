@@ -1,7 +1,7 @@
 package fr.cleboost.createchocolatefactory.network;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.dryingKit.DryingKitBlockEntity;
+import fr.cleboost.createchocolatefactory.block.dryingkit.DryingKitBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
