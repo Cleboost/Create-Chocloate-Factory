@@ -12,6 +12,7 @@ import fr.cleboost.createchocolatefactory.block.FlammableRotatedPillarBlock;
 import fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserBlock;
 import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerBlock;
 import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerItem;
+import fr.cleboost.createchocolatefactory.block.chocolatePreparer.ChocolatePreparerBlock;
 import fr.cleboost.createchocolatefactory.block.dryingKit.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.worldgen.tree.CCFTreeGrower;
 import fr.cleboost.createchocolatefactory.worldgen.tree.CCFWoodType;
@@ -274,8 +275,8 @@ public class CCFBlocks {
             .build()
             .register();
 
-    public static final BlockEntry<Block> CHOCOLATE_PREPARER = REGISTRATE
-            .block("chocolate_preparer", Block::new)
+    public static final BlockEntry<ChocolatePreparerBlock> CHOCOLATE_PREPARER = REGISTRATE
+            .block("chocolate_preparer", ChocolatePreparerBlock::new)
             .blockstate((ctx, prov) -> {
                 prov.simpleBlock(ctx.getEntry(), prov.models().cubeBottomTop(
                         ctx.getName(),

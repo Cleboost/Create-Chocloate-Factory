@@ -6,6 +6,7 @@ import fr.cleboost.createchocolatefactory.block.dryingKit.DryingKitBlockEntity;
 import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerBlockEntity;
 import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerRender;
 import fr.cleboost.createchocolatefactory.block.chocolateMixer.ChocolateMixerVisual;
+import fr.cleboost.createchocolatefactory.block.chocolatePreparer.ChocolatePreparerBlockEntity;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
@@ -26,6 +27,11 @@ public class CCFBlockEntities {
         public static final BlockEntityEntry<ChocolateAnalyserBlockEntity> CHOCOLATE_ANALYSER = CreateChocolateFactory.REGISTRATE
                         .blockEntity("chocolate_analyser", ChocolateAnalyserBlockEntity::new)
                         .validBlocks(CCFBlocks.CHOCOLATE_ANALYSER)
+                        .register();
+
+        public static final BlockEntityEntry<ChocolatePreparerBlockEntity> CHOCOLATE_PREPARER = CreateChocolateFactory.REGISTRATE
+                        .blockEntity("chocolate_preparer", ChocolatePreparerBlockEntity::new)
+                        .validBlocks(CCFBlocks.CHOCOLATE_PREPARER)
                         .register();
 
         public static void register() {}

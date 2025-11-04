@@ -8,6 +8,8 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserMenu;
 import fr.cleboost.createchocolatefactory.block.chocolateAnalyser.ChocolateAnalyserScreen;
+import fr.cleboost.createchocolatefactory.block.chocolatePreparer.ChocolatePreparerMenu;
+import fr.cleboost.createchocolatefactory.block.chocolatePreparer.ChocolatePreparerScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -15,6 +17,9 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 public class CCFMenu {
     public static final MenuEntry<ChocolateAnalyserMenu> CHOCOLATE_ANALYSER =
 		register("chocolate_analyser", ChocolateAnalyserMenu::new, () -> ChocolateAnalyserScreen::new);
+
+    public static final MenuEntry<ChocolatePreparerMenu> CHOCOLATE_PREPARER =
+		register("chocolate_preparer", ChocolatePreparerMenu::new, () -> ChocolatePreparerScreen::new);
 
     private static <C extends AbstractContainerMenu, S extends Screen & MenuAccess<C>> MenuEntry<C> register(
 		String name, ForgeMenuFactory<C> factory, NonNullSupplier<ScreenFactory<C, S>> screenFactory) {

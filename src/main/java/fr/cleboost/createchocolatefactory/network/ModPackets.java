@@ -17,5 +17,11 @@ public class ModPackets {
             RequestSyncPacket.STREAM_CODEC,
             RequestSyncPacket::handle
         );
+        
+        registrar.playToServer(
+            UpdatePreparerValuesPacket.TYPE,
+            UpdatePreparerValuesPacket.STREAM_CODEC,
+            UpdatePreparerValuesPacket::handle
+        );
     }
 } 

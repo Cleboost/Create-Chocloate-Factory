@@ -5,4 +5,5 @@ import net.minecraft.resources.ResourceLocation;
 
 public class CCFGuiTextures {
     public static final ResourceLocation CHOCOLATE_ANALYSER = CreateChocolateFactory.asResource("textures/gui/chocolate_analyser.png");
+    public static final ResourceLocation CHOCOLATE_PREPARER = CreateChocolateFactory.asResource("textures/gui/chocolate_preparer.png");
 }
