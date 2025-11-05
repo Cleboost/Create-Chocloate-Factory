@@ -7,7 +7,6 @@ import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.RotatingInstance;
 import com.simibubi.create.content.kinetics.base.ShaftVisual;
 
-import com.simibubi.create.content.kinetics.press.MechanicalPressBlock;
 import dev.engine_room.flywheel.api.instance.Instance;
 import dev.engine_room.flywheel.api.visual.DynamicVisual;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
@@ -25,7 +24,6 @@ public class ChocolateMixerVisual extends ShaftVisual<ChocolateMixerBlockEntity>
 
 	private final OrientedInstance mixerPole;
 	private final RotatingInstance mixerHead;
-	// private final ChocolateMixerBlockEntity mixer;
 
 	public ChocolateMixerVisual(VisualizationContext context, ChocolateMixerBlockEntity blockEntity, float partialTick) {
 		super(context, blockEntity, partialTick);

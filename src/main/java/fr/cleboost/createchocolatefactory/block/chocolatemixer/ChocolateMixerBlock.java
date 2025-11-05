@@ -1,5 +1,7 @@
 package fr.cleboost.createchocolatefactory.block.chocolatemixer;
 
+import javax.annotation.Nonnull;
+
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.processing.basin.BasinBlock;
 import com.simibubi.create.foundation.block.IBE;
@@ -38,7 +40,7 @@ public class ChocolateMixerBlock extends HorizontalKineticBlock implements IBE<C
     }
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
+    public boolean canSurvive(@Nonnull BlockState state, @Nonnull LevelReader worldIn, @Nonnull BlockPos pos) {
         return !BasinBlock.isBasin(worldIn, pos.below());
     }
 

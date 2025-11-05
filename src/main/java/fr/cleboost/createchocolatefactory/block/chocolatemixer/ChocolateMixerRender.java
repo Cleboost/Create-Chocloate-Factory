@@ -1,5 +1,7 @@
 package fr.cleboost.createchocolatefactory.block.chocolatemixer;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
@@ -41,7 +43,7 @@ public class ChocolateMixerRender extends KineticBlockEntityRenderer<ChocolateMi
 	}
 
     @Override
-	public boolean shouldRenderOffScreen(ChocolateMixerBlockEntity be) {
+	public boolean shouldRenderOffScreen(@Nonnull ChocolateMixerBlockEntity be) {
 		return true;
 	}
 }

@@ -42,7 +42,8 @@ public class ChocolateMixerItem extends BlockItem {
                 BlockPlaceContext bContext = new BlockPlaceContext(newContext);
                 BlockState blockToPlace = this.getBlock().getStateForPlacement(bContext);
                 if (blockToPlace != null && level.setBlock(targetPos, blockToPlace, 3)) {
-                    if (context.getPlayer() != null && !context.getPlayer().getAbilities().instabuild) {
+                    var player = context.getPlayer();
+                    if (player != null && !player.getAbilities().instabuild) {
                         context.getItemInHand().shrink(1);
                     }
                     return InteractionResult.SUCCESS;

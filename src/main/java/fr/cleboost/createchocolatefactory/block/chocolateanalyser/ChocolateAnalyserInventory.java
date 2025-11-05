@@ -9,8 +9,6 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class ChocolateAnalyserInventory extends ItemStackHandler {
-    private final ChocolateAnalyserBlockEntity blockEntity;
-    
     public static final int SLOT_CHOCOLATE = 0;
     public static final int SLOT_FILTER = 1;
     public static final int SLOT_FUEL = 2;
@@ -18,7 +16,6 @@ public class ChocolateAnalyserInventory extends ItemStackHandler {
     
     public ChocolateAnalyserInventory(ChocolateAnalyserBlockEntity blockEntity) {
         super(4);
-        this.blockEntity = blockEntity;
     }
 
     @Override

@@ -69,8 +69,10 @@ public class ChocolateAnalyserMenu extends MenuBase<ChocolateAnalyserBlockEntity
 
 	@Override
 	public boolean stillValid(Player player) {
-		return contentHolder != null && contentHolder.getLevel() != null 
-			&& contentHolder.getLevel().getBlockEntity(contentHolder.getBlockPos()) == contentHolder
+		if (contentHolder == null) return false;
+		var level = contentHolder.getLevel();
+		if (level == null) return false;
+		return level.getBlockEntity(contentHolder.getBlockPos()) == contentHolder
 			&& player.distanceToSqr(contentHolder.getBlockPos().getX() + 0.5, 
 				contentHolder.getBlockPos().getY() + 0.5, 
 				contentHolder.getBlockPos().getZ() + 0.5) <= 64.0;
@@ -79,6 +81,7 @@ public class ChocolateAnalyserMenu extends MenuBase<ChocolateAnalyserBlockEntity
 	@Override
 	protected ChocolateAnalyserBlockEntity createOnClient(RegistryFriendlyByteBuf extraData) {
 		ClientLevel world = Minecraft.getInstance().level;
+		if (world == null) return null;
 		BlockEntity blockEntity = world.getBlockEntity(extraData.readBlockPos());
 		if (blockEntity instanceof ChocolateAnalyserBlockEntity chocolateAnalyser) {
 			return chocolateAnalyser;
