@@ -70,7 +70,7 @@ public class Chocolate {
     }
 
     public Chocolate() {
-        this.taste = Optional.of(BuiltInRegistries.ITEM.wrapAsHolder(Items.SWEET_BERRIES));
+        this.taste = Optional.empty();
         this.strength = 1;
         this.sugar = 0;
         this.cocoaButter = 0;
