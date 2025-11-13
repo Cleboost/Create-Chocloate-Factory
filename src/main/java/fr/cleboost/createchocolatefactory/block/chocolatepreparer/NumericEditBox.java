@@ -18,9 +18,7 @@ public class NumericEditBox extends EditBox {
     }
 
     private boolean isNumeric(String text) {
-        if (text.isEmpty()) {
-            return true;
-        }
+        if (text.isEmpty()) return true;
         try {
             int value = Integer.parseInt(text);
             return value >= minValue && value <= maxValue;

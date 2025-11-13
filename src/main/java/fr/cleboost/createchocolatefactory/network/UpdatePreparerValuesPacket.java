@@ -2,6 +2,7 @@ package fr.cleboost.createchocolatefactory.network;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.chocolatepreparer.ChocolatePreparerBlockEntity;
+import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -12,17 +13,14 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import javax.annotation.Nonnull;
 
-public record UpdatePreparerValuesPacket(BlockPos pos, int strength, int sugar, int cocoaButter, int milk) implements CustomPacketPayload {
+public record UpdatePreparerValuesPacket(BlockPos pos, Chocolate chocolate) implements CustomPacketPayload {
     public static final Type<UpdatePreparerValuesPacket> TYPE = new Type<>(
         ResourceLocation.fromNamespaceAndPath(CreateChocolateFactory.MODID, "update_preparer_values")
     );
     
     public static final StreamCodec<FriendlyByteBuf, UpdatePreparerValuesPacket> STREAM_CODEC = StreamCodec.composite(
         BlockPos.STREAM_CODEC, UpdatePreparerValuesPacket::pos,
-        ByteBufCodecs.VAR_INT, UpdatePreparerValuesPacket::strength,
-        ByteBufCodecs.VAR_INT, UpdatePreparerValuesPacket::sugar,
-        ByteBufCodecs.VAR_INT, UpdatePreparerValuesPacket::cocoaButter,
-        ByteBufCodecs.VAR_INT, UpdatePreparerValuesPacket::milk,
+        Chocolate.STREAM_CODEC, UpdatePreparerValuesPacket::chocolate,
         UpdatePreparerValuesPacket::new
     );
 
@@ -34,7 +32,8 @@ public record UpdatePreparerValuesPacket(BlockPos pos, int strength, int sugar, 
     public static void handle(UpdatePreparerValuesPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player().level().getBlockEntity(packet.pos) instanceof ChocolatePreparerBlockEntity preparer) {
-                preparer.setValues(packet.strength, packet.sugar, packet.cocoaButter, packet.milk);
+                CreateChocolateFactory.LOGGER.info(packet.chocolate.toString());
+                preparer.setValue(packet.chocolate);
             }
         });
     }

@@ -1,13 +1,7 @@
 package fr.cleboost.createchocolatefactory.block.chocolatepreparer;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.core.CCFItems;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
@@ -23,78 +17,44 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+
 public class ChocolatePreparerBlockEntity extends SmartBlockEntity implements MenuProvider, TickableBlockEntity {
     public final ChocolatePreparerInventory inventory = new ChocolatePreparerInventory(this);
-    private int processingTicks = 0;
-    private static final int TICKS_PER_PROCESS = 100;
-    
-    private int strength = 0;
-    private int sugar = 0;
-    private int cocoaButter = 0;
-    private int milk = 0;
+
+    private Chocolate chocolate = new Chocolate();
 
     public ChocolatePreparerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
-    
-    public int getStrength() {
-        return strength;
+
+    public Chocolate getChocolate() {
+        return this.chocolate;
     }
-    
-    public int getSugar() {
-        return sugar;
-    }
-    
-    public int getCocoaButter() {
-        return cocoaButter;
-    }
-    
-    public int getMilk() {
-        return milk;
-    }
-    
-    public void setValues(int strength, int sugar, int cocoaButter, int milk) {
-        this.strength = strength;
-        this.sugar = sugar;
-        this.cocoaButter = cocoaButter;
-        this.milk = milk;
+
+    public void setValue(Chocolate chocolate) {
+        this.chocolate = chocolate;
         this.updateFilterFromValues();
-        this.setChanged();
         this.notifyUpdate();
     }
-    
+
     public void loadValuesFromFilter() {
         ItemStack filterStack = inventory.getStackInSlot(ChocolatePreparerInventory.SLOT_FILTER);
-        if (filterStack.isEmpty() || filterStack.getItem() != CCFItems.CHOCOLATE_FILTER.get()) {
-            return;
-        }
-        
+        if (!filterStack.is(CCFItems.CHOCOLATE_FILTER.get())) return;
+
         Chocolate chocolate = filterStack.get(CCFDataComponents.CHOCOLATE);
         if (chocolate != null) {
-            this.strength = (int) (chocolate.getStrength() * 100);
-            this.sugar = (int) (chocolate.getSugar() * 100);
-            this.cocoaButter = (int) (chocolate.getCocoaButter() * 100);
-            this.milk = (int) (chocolate.getMilk() * 100);
-            setChanged();
-            notifyUpdate();
+            setValue(chocolate);
         }
     }
-    
+
     public void updateFilterFromValues() {
         ItemStack filterStack = inventory.getStackInSlot(ChocolatePreparerInventory.SLOT_FILTER);
-        if (filterStack.isEmpty() || filterStack.getItem() != CCFItems.CHOCOLATE_FILTER.get()) {
-            return;
-        }
-        
-        Chocolate newChocolate = new Chocolate(
-            (float) strength,
-            (float) sugar,
-            (float) cocoaButter,
-            (float) milk
-        );
-        
-        filterStack.set(CCFDataComponents.CHOCOLATE, newChocolate);
-        setChanged();
+        if (!filterStack.is(CCFItems.CHOCOLATE_FILTER.get())) return;
+        filterStack.set(CCFDataComponents.CHOCOLATE, this.chocolate);
+        notifyUpdate();
     }
 
     public ItemStackHandler getInventory() {
@@ -108,23 +68,16 @@ public class ChocolatePreparerBlockEntity extends SmartBlockEntity implements Me
 
     @Nullable
     @Override
-	public AbstractContainerMenu createMenu(int id, @Nonnull Inventory inv, @Nonnull Player player) {
-		return ChocolatePreparerMenu.create(id, inv, this);
-	}
+    public AbstractContainerMenu createMenu(int id, @Nonnull Inventory inv, @Nonnull Player player) {
+        return ChocolatePreparerMenu.create(id, inv, this);
+    }
 
     @Override
     public void tick() {
         super.tick();
     }
 
-    public int getMaxProcessingTicks() {
-        return TICKS_PER_PROCESS;
-    }
-    
-    public int getProcessingProgress() {
-        return processingTicks;
-    }
-
     @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {}
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+    }
 }
