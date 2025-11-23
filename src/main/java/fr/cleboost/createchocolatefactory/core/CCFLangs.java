@@ -20,7 +20,6 @@ public class CCFLangs {
     public static final LangEntry FILTER_MILK = new LangEntry(LangCategory.TOOLTIP, "filter.milk", "Milk: %s");
     public static final LangEntry FILTER_SUGAR = new LangEntry(LangCategory.TOOLTIP, "filter.sugar", "Sugar: %s");
     public static final LangEntry FILTER_COCOA_BUTTER = new LangEntry(LangCategory.TOOLTIP, "filter.cocoa_butter", "Cocoa Butter: %s");
-    public static final LangEntry MOULD_CHOCOLATE_AMOUNT = new LangEntry(LangCategory.TOOLTIP, "mould.chocolate_amount", "Chocolate required: %s mB");
 
     public static final LangEntry DRYING_KIT_STATUS = new LangEntry(LangCategory.GOGGLE, "dryingkit.status", "Status : %s");
     public static final LangEntry DRYING_KIT_BONUS = new LangEntry(LangCategory.GOGGLE, "dryingkit.bonus", "★ Bonus");

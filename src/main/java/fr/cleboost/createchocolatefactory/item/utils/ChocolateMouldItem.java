@@ -4,7 +4,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
-import fr.cleboost.createchocolatefactory.core.CCFLangs;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -33,6 +32,6 @@ public class ChocolateMouldItem extends Item {
     @Override
     public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
         int amount = result.getAmount();
-        tooltip.add(CCFLangs.MOULD_CHOCOLATE_AMOUNT.getComponent(amount).withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal(amount + "mB").withStyle(ChatFormatting.GOLD));
     }
 }

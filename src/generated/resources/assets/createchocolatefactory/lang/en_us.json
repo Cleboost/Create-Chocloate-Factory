@@ -71,6 +71,5 @@
   "tooltip.createchocolatefactory.filter.sugar": "Sugar: %s",
   "tooltip.createchocolatefactory.hold_shift": "Hold [Shift] for information",
   "tooltip.createchocolatefactory.machete": "Use to cut cocoa pods",
-  "tooltip.createchocolatefactory.mould.chocolate_amount": "Chocolate required: %s mB",
   "tooltip.createchocolatefactory.progress": "%s/%s"
 }
