@@ -1,9 +1,16 @@
 package fr.cleboost.createchocolatefactory.item.utils;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
+import fr.cleboost.createchocolatefactory.core.CCFLangs;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.*;
+
+import java.util.List;
 
 public class ChocolateMouldItem extends Item {
     private final ChocolateBaseItem result;
@@ -21,5 +28,11 @@ public class ChocolateMouldItem extends Item {
         ItemStack itemStack = new ItemStack(this.result);
         itemStack.set(CCFDataComponents.CHOCOLATE.get(), chocolate);
         return itemStack;
+    }
+
+    @Override
+    public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
+        int amount = result.getAmount();
+        tooltip.add(CCFLangs.MOULD_CHOCOLATE_AMOUNT.getComponent(amount).withStyle(ChatFormatting.GRAY));
     }
 }
