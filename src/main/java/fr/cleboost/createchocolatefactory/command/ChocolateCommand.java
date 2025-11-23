@@ -41,7 +41,7 @@ public class ChocolateCommand {
                         .then(Commands.literal("taste")
                         .then(Commands.argument("item", ItemArgument.item(context))
                                 .executes((commandSource) -> {
-                                    return setTaste(commandSource.getSource(), ItemArgument.getItem(commandSource, "taste").getItem());
+                                    return setTaste(commandSource.getSource(), ItemArgument.getItem(commandSource, "item").getItem());
                                 })))
                 )
         );
