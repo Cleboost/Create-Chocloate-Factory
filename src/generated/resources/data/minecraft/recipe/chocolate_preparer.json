@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bamboo"
+    },
+    "C": {
+      "tag": "c:plates/copper"
+    },
+    "M": {
+      "item": "minecraft:compass"
+    }
+  },
+  "pattern": [
+    " C ",
+    "CMC",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "createchocolatefactory:chocolate_preparer"
+  }
+}

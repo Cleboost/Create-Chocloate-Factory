@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "create:wheat_flour"
+    },
+    {
+      "item": "create:wheat_flour"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 50,
+      "fluid": "createchocolatefactory:chocolate"
+    }
+  ],
+  "results": [
+    {
+      "count": 8,
+      "id": "createchocolatefactory:cookie"
+    }
+  ]
+}
