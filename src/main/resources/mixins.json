@@ -6,6 +6,7 @@
     "BasinRecipeMixin",
     "CocoaBlockMixin",
     "FillingBySpoutMixin",
+    "FilteringBehaviourMixin",
     "TankSegmentMixin"
   ],
   "client": [
