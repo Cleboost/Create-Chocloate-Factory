@@ -32,7 +32,6 @@ public record UpdatePreparerValuesPacket(BlockPos pos, Chocolate chocolate) impl
     public static void handle(UpdatePreparerValuesPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player().level().getBlockEntity(packet.pos) instanceof ChocolatePreparerBlockEntity preparer) {
-                CreateChocolateFactory.LOGGER.info(packet.chocolate.toString());
                 preparer.setValue(packet.chocolate);
             }
         });

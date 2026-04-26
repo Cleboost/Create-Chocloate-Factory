@@ -83,7 +83,6 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
 
                 if (processingTicks < 0) {
                     processingTicks = 60;
-                    CreateChocolateFactory.LOGGER.info("Start making chocolate " + processingTicks);
                     if (level != null) {
                         level.playSound(null, worldPosition, SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT,
                                 SoundSource.BLOCKS, .75f, speed < 65 ? .75f : 1.5f);
@@ -93,11 +92,8 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
                     if (processingTicks == 0 && level != null) {
                         runningTicks++;
                         processingTicks = -1;
-                        CreateChocolateFactory.LOGGER.info("RESULT :");
                         FluidStack output = makeChocolate();
-                        CreateChocolateFactory.LOGGER.info(String.valueOf(output));
-                        CreateChocolateFactory.LOGGER.info(String.valueOf(output.get(CCFDataComponents.CHOCOLATE)));
-                        CreateChocolateFactory.LOGGER.info(String.valueOf(basin.acceptOutputs(List.of(), List.of(output), false)));
+                        basin.acceptOutputs(List.of(), List.of(output), false);
                         internalTanks.sendDataImmediately();
                         sendData();
                         basin.notifyChangeOfContents();
@@ -256,7 +252,6 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
     public void startProcessingBasin() {
         if (isRunning && runningTicks <= 20)
             return;
-        CreateChocolateFactory.LOGGER.info("starting basin block entity");
         this.runningTicks = 0;
         this.isRunning = true;
     }
@@ -353,8 +348,6 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         if (!basin.filter(BasinBlockEntity::canContinueProcessing)
                 .isPresent())
             return true;
-        CreateChocolateFactory.LOGGER.info(String.valueOf(canRun()));
-        CreateChocolateFactory.LOGGER.info(String.valueOf(hasIngredients()));
         if (!canRun() || !hasIngredients()) return true;
         startProcessingBasin();
         sendData();
