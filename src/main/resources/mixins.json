@@ -8,7 +8,9 @@
     "FillingBySpoutMixin",
     "TankSegmentMixin"
   ],
-  "client": [],
+  "client": [
+    "client.BreakingItemParticleMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1
