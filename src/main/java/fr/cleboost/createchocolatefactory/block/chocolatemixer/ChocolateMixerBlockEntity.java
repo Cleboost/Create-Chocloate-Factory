@@ -42,6 +42,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+
 public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
     private static final int TANK_SIZE = 500;
     protected static final float LIQUOR = 250;
@@ -70,6 +74,10 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
             return;
         }
         if (isRunning && level != null) {
+            if (level.isClientSide && runningTicks == 20) {
+                renderParticles();
+            }
+
             if ((!level.isClientSide || isVirtual()) && runningTicks == 20) {
                 BasinBlockEntity basin = getBasin().get();
 
@@ -368,6 +376,48 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         compound.putBoolean("Running", isRunning);
         compound.putInt("Ticks", runningTicks);
         super.write(compound, registries, clientPacket);
+    }
+
+    public void renderParticles() {
+        Optional<BasinBlockEntity> basin = getBasin();
+        if (!basin.isPresent() || level == null || !level.isClientSide)
+            return;
+
+        BasinBlockEntity basinBe = basin.get();
+        basinBe.getBehaviour(SmartFluidTankBehaviour.INPUT).forEach(tank -> {
+            FluidStack fluid = tank.getRenderedFluid();
+            if (!fluid.isEmpty() && level.random.nextFloat() < 0.2f) {
+                spillParticle(com.simibubi.create.content.fluids.FluidFX.getFluidParticle(fluid));
+            }
+        });
+
+        IItemHandler inventory = level.getCapability(Capabilities.ItemHandler.BLOCK, basinBe.getBlockPos(), null);
+        if (inventory != null) {
+            for (int i = 0; i < inventory.getSlots(); i++) {
+                ItemStack stack = inventory.getStackInSlot(i);
+                if (!stack.isEmpty() && level.random.nextFloat() < 0.2f) {
+                    spillParticle(new ItemParticleOption(ParticleTypes.ITEM, stack));
+                }
+            }
+        }
+    }
+
+    protected void spillParticle(net.minecraft.core.particles.ParticleOptions data) {
+        if (level == null || !level.isClientSide) return;
+        
+        float angle = level.random.nextFloat() * 360;
+        Vec3 offset = new Vec3(0, 0, 0.25f);
+        offset = net.createmod.catnip.math.VecHelper.rotate(offset, angle, Direction.Axis.Y);
+        
+        Vec3 target = Vec3.atCenterOf(worldPosition).subtract(0, 0.5f, 0);
+        
+        Vec3 motion = offset.normalize()
+            .add(0, 0.5f, 0)
+            .scale(0.15f + level.random.nextFloat() * 0.1f);
+            
+        Vec3 particlePos = target.add(offset);
+        
+        level.addParticle(data, particlePos.x, particlePos.y, particlePos.z, motion.x, motion.y, motion.z);
     }
 
     @Override
