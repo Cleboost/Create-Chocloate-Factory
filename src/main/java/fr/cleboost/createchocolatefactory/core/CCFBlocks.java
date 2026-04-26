@@ -6,9 +6,7 @@ import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.block.CocoaLogBlock;
-import fr.cleboost.createchocolatefactory.block.CocoaPod;
-import fr.cleboost.createchocolatefactory.block.FlammableRotatedPillarBlock;
+import fr.cleboost.createchocolatefactory.block.*;
 import fr.cleboost.createchocolatefactory.block.chocolateanalyser.ChocolateAnalyserBlock;
 import fr.cleboost.createchocolatefactory.block.chocolatemixer.ChocolateMixerBlock;
 import fr.cleboost.createchocolatefactory.block.chocolatemixer.ChocolateMixerItem;
@@ -16,12 +14,8 @@ import fr.cleboost.createchocolatefactory.block.chocolatepreparer.ChocolatePrepa
 import fr.cleboost.createchocolatefactory.block.dryingkit.DryingKitBlock;
 import fr.cleboost.createchocolatefactory.worldgen.tree.CCFTreeGrower;
 import fr.cleboost.createchocolatefactory.worldgen.tree.CCFWoodType;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
 public class CCFBlocks {
@@ -104,45 +98,10 @@ public class CCFBlocks {
                     CreateChocolateFactory.asResource("block/cocoa_stripped_log_side")
             ))
             .simpleItem().defaultLang().register();
-    public static final BlockEntry<? extends Block> COCOA_PLANKS = REGISTRATE.block("cocoa_planks", (p) -> {
-                return new Block(p) {
-                    @Override
-                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return true;
-                    }
-
-                    @Override
-                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 20;
-                    }
-
-                    @Override
-                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 5;
-                    }
-                };
-            })
+    public static final BlockEntry<? extends Block> COCOA_PLANKS = REGISTRATE.block("cocoa_planks", (p) -> new CCFFlammableBlock(p, 20, 5))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS))
             .simpleItem().defaultLang().register();
-    public static final BlockEntry<? extends LeavesBlock> COCOA_LEAVES = REGISTRATE.block("cocoa_leaves", (p) -> {
-                return new LeavesBlock(p) {
-                    @Override
-                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return true;
-                    }
-
-                    @Override
-                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 60;
-                    }
-
-                    @Override
-                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 30;
-                    }
-                };
-            })
-            //.loot((prov, ctx) -> prov.createOakLeavesDrops(ctx, CCFBlocks.COCOA_SAPLING.get(),))
+    public static final BlockEntry<? extends LeavesBlock> COCOA_LEAVES = REGISTRATE.block("cocoa_leaves", (p) -> new CCFFlammableLeavesBlock(p, 60, 30))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES))
             .blockstate((ctx, prov) -> {
                 prov.simpleBlock(ctx.getEntry(), 
@@ -174,88 +133,20 @@ public class CCFBlocks {
             })
             .build()
             .register();
-    public static final BlockEntry<? extends StairBlock> COCOA_STAIRS = REGISTRATE.block("cocoa_stairs", (p) -> {
-                return new StairBlock(CCFBlocks.COCOA_PLANKS.get().defaultBlockState(), p) {
-                    @Override
-                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return true;
-                    }
-
-                    @Override
-                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull    Direction direction) {
-                        return 20;
-                    }
-
-                    @Override
-                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 5;
-                    }
-                };
-            })
+    public static final BlockEntry<? extends StairBlock> COCOA_STAIRS = REGISTRATE.block("cocoa_stairs", (p) -> new CCFFlammableStairBlock(COCOA_PLANKS.get()::defaultBlockState, p, 20, 5))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS))
             .blockstate((ctx, prov) -> prov.stairsBlock(ctx.get(), CCFBlocks.COCOA_PLANKS.getId().withPrefix("block/")))
             .simpleItem().defaultLang().register();
-    public static final BlockEntry<? extends SlabBlock> COCOA_SLAB = REGISTRATE.block("cocoa_slab", (p) -> {
-                return new SlabBlock(p) {
-                    @Override
-                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return true;
-                    }
-
-                    @Override
-                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 20;
-                    }
-
-                    @Override
-                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 5;
-                    }
-                };
-            })
+    public static final BlockEntry<? extends SlabBlock> COCOA_SLAB = REGISTRATE.block("cocoa_slab", (p) -> new CCFFlammableSlabBlock(p, 20, 5))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB))
             .blockstate((ctx, prov) -> prov.slabBlock(ctx.get(), CCFBlocks.COCOA_PLANKS.getId(), CCFBlocks.COCOA_PLANKS.getId().withPrefix("block/")))
             .simpleItem().defaultLang().register();
 
-    public static final BlockEntry<? extends FenceBlock> COCOA_FENCE = REGISTRATE.block("cocoa_fence", (p) -> {
-                return new FenceBlock(p) {
-                    @Override
-                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return true;
-                    }
-
-                    @Override
-                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 20;
-                    }
-
-                    @Override
-                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 5;
-                    }
-                };
-            })
+    public static final BlockEntry<? extends FenceBlock> COCOA_FENCE = REGISTRATE.block("cocoa_fence", (p) -> new CCFFlammableFenceBlock(p, 20, 5))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE))
             .blockstate((ctx, prov) -> prov.fenceBlock(ctx.get(), CCFBlocks.COCOA_PLANKS.getId().withPrefix("block/")))
             .simpleItem().defaultLang().register();
-    public static final BlockEntry<? extends FenceGateBlock> COCOA_FENCE_GATE = REGISTRATE.block("cocoa_fence", (p) -> {
-                return new FenceGateBlock(CCFWoodType.COCOA_TYPE, p) {
-                    @Override
-                    public boolean isFlammable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return true;
-                    }
-
-                    @Override
-                    public int getFlammability(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 20;
-                    }
-
-                    @Override
-                    public int getFireSpreadSpeed(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull Direction direction) {
-                        return 5;
-                    }
-                };
-            })
+    public static final BlockEntry<? extends FenceGateBlock> COCOA_FENCE_GATE = REGISTRATE.block("cocoa_fence_gate", (p) -> new CCFFlammableFenceGateBlock(CCFWoodType.COCOA_TYPE, p, 20, 5))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE))
             .blockstate((ctx, prov) -> prov.fenceGateBlock(ctx.get(), CCFBlocks.COCOA_PLANKS.getId().withPrefix("block/")))
             .simpleItem().defaultLang().register();
