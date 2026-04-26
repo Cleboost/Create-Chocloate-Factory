@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.core.CCFGuiTextures;
+import fr.cleboost.createchocolatefactory.core.CCFItems;
 import fr.cleboost.createchocolatefactory.network.UpdatePreparerValuesPacket;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,11 +24,12 @@ public class ChocolatePreparerScreen extends AbstractSimiContainerScreen<Chocola
     private Chocolate lastSentChocolate;
 
     public ChocolatePreparerScreen(ChocolatePreparerMenu menu, Inventory inventory, Component title) {
-        super(menu, inventory, title);
+        super(menu, inventory, Component.translatable("block.createchocolatefactory.chocolate_preparer"));
         this.imageWidth = 179;
         this.imageHeight = 141;
         this.inventoryLabelY = this.imageHeight - 94;
-        this.titleLabelY = 6;
+        this.titleLabelX = 8;
+        this.titleLabelY = -52;
     }
 
     @Override
@@ -37,41 +39,15 @@ public class ChocolatePreparerScreen extends AbstractSimiContainerScreen<Chocola
         int guiLeft = (this.width - this.imageWidth) / 2;
         int guiTop = (this.height - (this.imageHeight + 5 + AllGuiTextures.PLAYER_INVENTORY.getHeight())) / 2;
 
-        this.strengthField = new NumericEditBox(
-                this.font,
-                guiLeft + 10, guiTop + 20,
-                60, 20,
-                Component.literal("Strength"),
-                0, 100,
-                this::onValueChanged
-        );
+        int xIcon = guiLeft + 15;
+        int xInput = guiLeft + 40;
+        int yStart = guiTop + 35;
+        int yStep = 22;
 
-        this.sugarField = new NumericEditBox(
-                this.font,
-                guiLeft + 80, guiTop + 20,
-                60, 20,
-                Component.literal("Sugar"),
-                0, 100,
-                this::onValueChanged
-        );
-
-        this.cocoaButterField = new NumericEditBox(
-                this.font,
-                guiLeft + 10, guiTop + 45,
-                60, 20,
-                Component.literal("Cocoa Butter"),
-                0, 100,
-                this::onValueChanged
-        );
-
-        this.milkField = new NumericEditBox(
-                this.font,
-                guiLeft + 80, guiTop + 45,
-                60, 20,
-                Component.literal("Milk"),
-                0, 100,
-                this::onValueChanged
-        );
+        this.strengthField = new NumericEditBox(this.font, xInput, yStart, 60, 18, Component.literal("Strength"), 0, 100, this::onValueChanged);
+        this.sugarField = new NumericEditBox(this.font, xInput, yStart + yStep, 60, 18, Component.literal("Sugar"), 0, 100, this::onValueChanged);
+        this.cocoaButterField = new NumericEditBox(this.font, xInput, yStart + yStep * 2, 60, 18, Component.literal("Cocoa Butter"), 0, 100, this::onValueChanged);
+        this.milkField = new NumericEditBox(this.font, xInput, yStart + yStep * 3, 60, 18, Component.literal("Milk"), 0, 100, this::onValueChanged);
 
         this.addRenderableWidget(this.strengthField);
         this.addRenderableWidget(this.sugarField);
@@ -92,7 +68,7 @@ public class ChocolatePreparerScreen extends AbstractSimiContainerScreen<Chocola
             this.sugarField.setNumericValue(0);
             this.cocoaButterField.setNumericValue(0);
             this.milkField.setNumericValue(0);
-            this.lastSentChocolate=new Chocolate();
+            this.lastSentChocolate = new Chocolate();
         }
     }
 
@@ -111,6 +87,12 @@ public class ChocolatePreparerScreen extends AbstractSimiContainerScreen<Chocola
     }
 
     @Override
+    protected void renderLabels(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        super.renderLabels(guiGraphics, mouseX, mouseY);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0x404040, false);
+    }
+
+    @Override
     protected void renderBg(@Nonnull GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = (this.width - this.imageWidth) / 2;
         int h = (this.width - AllGuiTextures.PLAYER_INVENTORY.getWidth()) / 2;
@@ -118,6 +100,15 @@ public class ChocolatePreparerScreen extends AbstractSimiContainerScreen<Chocola
 
         guiGraphics.blit(CCFGuiTextures.CHOCOLATE_PREPARER, i, j, 0, 0, this.imageWidth, this.imageHeight);
         renderPlayerInventory(guiGraphics, h, j + this.imageHeight + 5);
+
+        int xIcon = i + 15;
+        int yStart = j + 36;
+        int yStep = 22;
+
+        guiGraphics.renderItem(new ItemStack(CCFItems.COCOA_POWDER.get()), xIcon, yStart);
+        guiGraphics.renderItem(new ItemStack(net.minecraft.world.item.Items.SUGAR), xIcon, yStart + yStep);
+        guiGraphics.renderItem(new ItemStack(CCFItems.COCOA_BUTTER_BOWL.get()), xIcon, yStart + yStep * 2);
+        guiGraphics.renderItem(new ItemStack(net.minecraft.world.item.Items.MILK_BUCKET), xIcon, yStart + yStep * 3);
     }
 
     @Override

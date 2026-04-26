@@ -39,7 +39,7 @@ public class ChocolateAnalyserBlockEntity extends SmartBlockEntity implements Me
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Info Block");
+        return Component.translatable(this.getBlockState().getBlock().getDescriptionId());
     }
 
     @Nullable

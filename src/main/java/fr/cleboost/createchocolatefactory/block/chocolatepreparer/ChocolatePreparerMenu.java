@@ -85,11 +85,8 @@ public class ChocolatePreparerMenu extends MenuBase<ChocolatePreparerBlockEntity
         if (contentHolder == null) {
             return;
         }
-        int x = 4;
-        int y = -52;
 
-        // Un seul slot pour le filter
-        addSlot(new SlotItemHandler(contentHolder.inventory, ChocolatePreparerInventory.SLOT_FILTER, x + 39, y + 66));
+        addSlot(new SlotItemHandler(contentHolder.inventory, ChocolatePreparerInventory.SLOT_FILTER, 131, 15));
 
         addPlayerSlots(10, 108);
     }

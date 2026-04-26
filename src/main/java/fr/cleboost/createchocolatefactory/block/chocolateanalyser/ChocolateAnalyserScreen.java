@@ -13,12 +13,19 @@ import net.minecraft.world.entity.player.Inventory;
 public class ChocolateAnalyserScreen extends AbstractSimiContainerScreen<ChocolateAnalyserMenu> {
 
     public ChocolateAnalyserScreen(ChocolateAnalyserMenu menu, Inventory inventory, Component title) {
-		super(menu, inventory, title);
+		super(menu, inventory, Component.translatable("block.createchocolatefactory.chocolate_analyser"));
 		this.imageWidth = 179;
 		this.imageHeight = 141;
 		this.inventoryLabelY = this.imageHeight - 94;
-		this.titleLabelY = 6;
+		this.titleLabelX = 8;
+		this.titleLabelY = -52;
 	}
+
+    @Override
+    protected void renderLabels(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        super.renderLabels(guiGraphics, mouseX, mouseY);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0x404040, false);
+    }
 
     @Override
     protected void renderBg(@Nonnull GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
