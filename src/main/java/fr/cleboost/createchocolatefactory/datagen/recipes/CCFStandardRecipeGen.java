@@ -62,6 +62,26 @@ public class CCFStandardRecipeGen extends RecipeProvider {
                 .unlockedBy("has_copper", has(Tags.Items.INGOTS_COPPER))
                 .save(consumer, "chocolate_filter");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, CCFBlocks.CHOCOLATE_ANALYSER)
+                .define('B', AllTags.commonItemTag("plates/brass"))
+                .define('S', Items.SPYGLASS)
+                .define('Q', Items.QUARTZ)
+                .pattern(" B ")
+                .pattern("BSB")
+                .pattern(" Q ")
+                .unlockedBy("has_spyglass", has(Items.SPYGLASS))
+                .save(consumer, "chocolate_analyser");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, CCFBlocks.CHOCOLATE_PREPARER)
+                .define('C', AllTags.commonItemTag("plates/copper"))
+                .define('M', Items.COMPASS)
+                .define('B', Items.BAMBOO)
+                .pattern(" C ")
+                .pattern("CMC")
+                .pattern(" B ")
+                .unlockedBy("has_compass", has(Items.COMPASS))
+                .save(consumer, "chocolate_preparer");
+
         for (ChocolateFoodPack item : CCFItems.getAllChocolatePack()) {
             stonecutterResultFromBase(consumer, RecipeCategory.MISC, item.getMouldItems(), AllItems.COPPER_SHEET);
         }
