@@ -69,10 +69,11 @@ public class CCFItems {
                         ).end();
             }).register();
 
-    public static final ItemEntry<Item> COOKIE = REGISTRATE.item("cookie", Item::new).model((ctx, prov) -> {
-        prov.generated(ctx, prov.modLoc("item/chocolate/" + ctx.getName() + "/layer0"),
-        prov.modLoc("item/chocolate/" + ctx.getName() + "/layer1"));
-    }).register();
+    public static final ItemEntry<ChocolateBaseItem> COOKIE = REGISTRATE.item("cookie", (p) -> new ChocolateBaseItem(p.food(CCFFoods.CHOCOLATE_FAST), 50))
+            .model((ctx, prov) -> {
+                prov.generated(ctx, prov.modLoc("item/chocolate/" + ctx.getName() + "/layer0"),
+                        prov.modLoc("item/chocolate/" + ctx.getName() + "/layer1"));
+            }).register();
 
     public static final ChocolateFoodPack CHOCOLATE_EGG_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_egg", 300);
     public static final ChocolateFoodPack CHOCOLATE_BUNNY_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_bunny", 600);
