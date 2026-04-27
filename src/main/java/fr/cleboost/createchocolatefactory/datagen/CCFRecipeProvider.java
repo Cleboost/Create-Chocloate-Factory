@@ -27,6 +27,7 @@ public final class CCFRecipeProvider extends RecipeProvider {
 		GENERATORS.add(new CCFCompactingRecipeGen(output, registries));
 		GENERATORS.add(new CCFCuttingRecipeGen(output, registries));
 		GENERATORS.add(new CCFEmptyingRecipeGen(output, registries));
+		GENERATORS.add(new CCFFillingRecipeGen(output, registries));
 		GENERATORS.add(new CCFWashingRecipeGen(output, registries));
 		GENERATORS.add(new CCFMechanicalCraftingRecipeGen(output, registries));
 		GENERATORS.add(new CCFMixingRecipeGen(output, registries));

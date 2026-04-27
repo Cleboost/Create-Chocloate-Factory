@@ -145,7 +145,10 @@ public class CCFBlocks {
     public static final BlockEntry<? extends FenceBlock> COCOA_FENCE = REGISTRATE.block("cocoa_fence", (p) -> new CCFFlammableFenceBlock(p, 20, 5))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE))
             .blockstate((ctx, prov) -> prov.fenceBlock(ctx.get(), CCFBlocks.COCOA_PLANKS.getId().withPrefix("block/")))
-            .simpleItem().defaultLang().register();
+            .item()
+            .model((ctx, prov) -> prov.fenceInventory(ctx.getName(), CCFBlocks.COCOA_PLANKS.getId().withPrefix("block/")))
+            .build()
+            .defaultLang().register();
     public static final BlockEntry<? extends FenceGateBlock> COCOA_FENCE_GATE = REGISTRATE.block("cocoa_fence_gate", (p) -> new CCFFlammableFenceGateBlock(CCFWoodType.COCOA_TYPE, p, 20, 5))
             .properties(p -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE))
             .blockstate((ctx, prov) -> prov.fenceGateBlock(ctx.get(), CCFBlocks.COCOA_PLANKS.getId().withPrefix("block/")))
