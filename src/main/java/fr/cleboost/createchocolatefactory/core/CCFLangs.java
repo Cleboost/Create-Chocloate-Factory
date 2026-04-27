@@ -44,6 +44,8 @@ public class CCFLangs {
     public static final LangEntry COMMAND_SET_CHOCOLATE = new LangEntry(LangCategory.COMMANDS,"set.chocolate_success","The new chocolate values have been set successfully");
     public static final LangEntry COMMAND_SET_TASTE = new LangEntry(LangCategory.COMMANDS,"set.taste_success","The new taste item has been set successfully");
 
+    public static final LangEntry RECIPE_CHOCOLATE_MOULDING = new LangEntry(LangCategory.RECIPE, "chocolate_moulding", "Chocolate Moulding");
+
 
     public static void holdShiftTooltips(@Nonnull List<Component> tooltip) {
         tooltip.add(TOOLTIPS_HOLD_SHIFT);
@@ -66,6 +68,7 @@ public class CCFLangs {
         GOGGLE("goggle"),
         MESSAGE("message"),
         COMMANDS("commands"),
+        RECIPE("recipe"),
         PONDER("ponder", true);
 
         private final String name;
