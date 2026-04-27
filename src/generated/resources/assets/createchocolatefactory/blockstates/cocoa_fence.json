@@ -1,80 +1,48 @@
 {
-  "variants": {
-    "facing=east,in_wall=false,open=false": {
-      "model": "createchocolatefactory:block/cocoa_fence",
-      "uvlock": true,
-      "y": 270
+  "multipart": [
+    {
+      "apply": {
+        "model": "createchocolatefactory:block/cocoa_fence_post"
+      }
     },
-    "facing=east,in_wall=false,open=true": {
-      "model": "createchocolatefactory:block/cocoa_fence_open",
-      "uvlock": true,
-      "y": 270
+    {
+      "apply": {
+        "model": "createchocolatefactory:block/cocoa_fence_side",
+        "uvlock": true
+      },
+      "when": {
+        "north": "true"
+      }
     },
-    "facing=east,in_wall=true,open=false": {
-      "model": "createchocolatefactory:block/cocoa_fence_wall",
-      "uvlock": true,
-      "y": 270
+    {
+      "apply": {
+        "model": "createchocolatefactory:block/cocoa_fence_side",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true"
+      }
     },
-    "facing=east,in_wall=true,open=true": {
-      "model": "createchocolatefactory:block/cocoa_fence_wall_open",
-      "uvlock": true,
-      "y": 270
+    {
+      "apply": {
+        "model": "createchocolatefactory:block/cocoa_fence_side",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west": "true"
+      }
     },
-    "facing=north,in_wall=false,open=false": {
-      "model": "createchocolatefactory:block/cocoa_fence",
-      "uvlock": true,
-      "y": 180
-    },
-    "facing=north,in_wall=false,open=true": {
-      "model": "createchocolatefactory:block/cocoa_fence_open",
-      "uvlock": true,
-      "y": 180
-    },
-    "facing=north,in_wall=true,open=false": {
-      "model": "createchocolatefactory:block/cocoa_fence_wall",
-      "uvlock": true,
-      "y": 180
-    },
-    "facing=north,in_wall=true,open=true": {
-      "model": "createchocolatefactory:block/cocoa_fence_wall_open",
-      "uvlock": true,
-      "y": 180
-    },
-    "facing=south,in_wall=false,open=false": {
-      "model": "createchocolatefactory:block/cocoa_fence",
-      "uvlock": true
-    },
-    "facing=south,in_wall=false,open=true": {
-      "model": "createchocolatefactory:block/cocoa_fence_open",
-      "uvlock": true
-    },
-    "facing=south,in_wall=true,open=false": {
-      "model": "createchocolatefactory:block/cocoa_fence_wall",
-      "uvlock": true
-    },
-    "facing=south,in_wall=true,open=true": {
-      "model": "createchocolatefactory:block/cocoa_fence_wall_open",
-      "uvlock": true
-    },
-    "facing=west,in_wall=false,open=false": {
-      "model": "createchocolatefactory:block/cocoa_fence",
-      "uvlock": true,
-      "y": 90
-    },
-    "facing=west,in_wall=false,open=true": {
-      "model": "createchocolatefactory:block/cocoa_fence_open",
-      "uvlock": true,
-      "y": 90
-    },
-    "facing=west,in_wall=true,open=false": {
-      "model": "createchocolatefactory:block/cocoa_fence_wall",
-      "uvlock": true,
-      "y": 90
-    },
-    "facing=west,in_wall=true,open=true": {
-      "model": "createchocolatefactory:block/cocoa_fence_wall_open",
-      "uvlock": true,
-      "y": 90
+    {
+      "apply": {
+        "model": "createchocolatefactory:block/cocoa_fence_side",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
     }
-  }
+  ]
 }
