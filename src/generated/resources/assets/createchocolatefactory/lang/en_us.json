@@ -65,6 +65,7 @@
   "item.createchocolatefactory.peanut": "Peanut",
   "itemGroup.createchocolatefactory.create_chocolate_factory": "Create Chocolate Factory",
   "message.createchocolatefactory.dryingkit.need_more_cocoa_beans": "You need more damp cocoa beans to dry them (%s/9)",
+  "recipe.createchocolatefactory.chocolate_moulding": "Chocolate Moulding",
   "tooltip.createchocolatefactory.chocolate.composition": "Chocolate composition :\nStrength : %s\nSugar : %s\nCocoa Butter : %s\nMilk : %s\nTaste : %s",
   "tooltip.createchocolatefactory.filter.cocoa_butter": "Cocoa Butter: %s",
   "tooltip.createchocolatefactory.filter.milk": "Milk: %s",
