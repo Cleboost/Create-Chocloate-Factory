@@ -45,6 +45,7 @@ public class CCFLangs {
     public static final LangEntry COMMAND_SET_TASTE = new LangEntry(LangCategory.COMMANDS,"set.taste_success","The new taste item has been set successfully");
 
     public static final LangEntry RECIPE_CHOCOLATE_MOULDING = new LangEntry(LangCategory.RECIPE, "chocolate_moulding", "Chocolate Moulding");
+    public static final LangEntry RECIPE_DRYING_KIT = new LangEntry(LangCategory.RECIPE, "drying_kit", "Drying Kit");
 
 
     public static void holdShiftTooltips(@Nonnull List<Component> tooltip) {

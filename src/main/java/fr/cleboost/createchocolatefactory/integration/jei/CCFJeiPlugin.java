@@ -35,6 +35,7 @@ public class CCFJeiPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new ChocolateMixerCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new ChocolateMouldingCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new DryingKitCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -45,12 +46,15 @@ public class CCFJeiPlugin implements IModPlugin {
         mouldingRecipes.add(new ChocolateMouldingRecipe(CCFItems.CHOCOLATE_EGG_PACK.getMouldItems().get()));
         mouldingRecipes.add(new ChocolateMouldingRecipe(CCFItems.CHOCOLATE_BUNNY_PACK.getMouldItems().get()));
         registration.addRecipes(ChocolateMouldingCategory.TYPE, mouldingRecipes);
+
+        registration.addRecipes(DryingKitCategory.TYPE, Collections.singletonList(DryingKitRecipe.INSTANCE));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(CCFBlocks.CHOCOLATE_MIXER.get()), ChocolateMixerCategory.TYPE);
         registration.addRecipeCatalyst(new ItemStack(com.simibubi.create.AllBlocks.SPOUT.get()), ChocolateMouldingCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(CCFBlocks.DRYING_KIT.get()), DryingKitCategory.TYPE);
     }
 
     @Override
