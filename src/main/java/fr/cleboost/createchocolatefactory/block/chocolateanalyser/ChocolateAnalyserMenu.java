@@ -16,14 +16,45 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+
 public class ChocolateAnalyserMenu extends MenuBase<ChocolateAnalyserBlockEntity> {
-	
+	private final ContainerData data;
+
 	public ChocolateAnalyserMenu(MenuType<?> type, int id, Inventory inv, RegistryFriendlyByteBuf extraData) {
 		super(type, id, inv, extraData);
+		this.data = new SimpleContainerData(2);
+		this.addDataSlots(this.data);
 	}
 
 	public ChocolateAnalyserMenu(MenuType<?> type, int id, Inventory inv, ChocolateAnalyserBlockEntity be) {
 		super(type, id, inv, be);
+		this.data = new ContainerData() {
+			@Override
+			public int get(int index) {
+				return switch (index) {
+					case 0 -> be.getProcessingProgress();
+					case 1 -> be.getMaxProcessingTicks();
+					default -> 0;
+				};
+			}
+
+			@Override
+			public void set(int index, int value) {
+				// No touchy! Client is read-only, server handles logic.
+				switch (index) {
+					case 0 -> {}
+					case 1 -> {}
+				}
+			}
+
+			@Override
+			public int getCount() {
+				return 2;
+			}
+		};
+		this.addDataSlots(this.data);
 	}
 	
 	public static ChocolateAnalyserMenu create(int id, Inventory inv, ChocolateAnalyserBlockEntity be) {
@@ -113,10 +144,10 @@ public class ChocolateAnalyserMenu extends MenuBase<ChocolateAnalyserBlockEntity
 	protected void initAndReadInventory(ChocolateAnalyserBlockEntity contentHolder) {}
 	
 	public int getProcessingProgress() {
-		return contentHolder.getProcessingProgress();
+		return data.get(0);
 	}
 
 	public int getMaxProcessingTicks() {
-		return contentHolder.getMaxProcessingTicks();
+		return data.get(1);
 	}
 }

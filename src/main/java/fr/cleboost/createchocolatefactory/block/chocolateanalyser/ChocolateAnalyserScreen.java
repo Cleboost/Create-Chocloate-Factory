@@ -34,7 +34,15 @@ public class ChocolateAnalyserScreen extends AbstractSimiContainerScreen<Chocola
 		int j = (this.height - (this.imageHeight + 5 + AllGuiTextures.PLAYER_INVENTORY.getHeight())) / 2;
 		
 		guiGraphics.blit(CCFGuiTextures.CHOCOLATE_ANALYSER, i, j, 0, 0, this.imageWidth, this.imageHeight);
-	    renderPlayerInventory(guiGraphics, h, j + this.imageHeight + 5);
+
+        int progress = menu.getProcessingProgress();
+        int maxProgress = menu.getMaxProcessingTicks();
+        if (maxProgress > 0) {
+            int arrowWidth = (progress * 34) / maxProgress;
+            guiGraphics.blit(CCFGuiTextures.CHOCOLATE_ANALYSER, i + 75, j + 70, 180, 0, arrowWidth, 17);
+        }
+
+        renderPlayerInventory(guiGraphics, h, j + this.imageHeight + 5);
 	}
 
     @Override

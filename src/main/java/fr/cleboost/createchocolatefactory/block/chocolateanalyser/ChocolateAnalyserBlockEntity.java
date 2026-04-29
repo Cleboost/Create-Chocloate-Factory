@@ -82,6 +82,18 @@ public class ChocolateAnalyserBlockEntity extends SmartBlockEntity implements Me
         }
     }
 
+    @Override
+    protected void read(net.minecraft.nbt.CompoundTag compound, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
+        processingTicks = compound.getInt("ProcessingTicks");
+        super.read(compound, registries, clientPacket);
+    }
+
+    @Override
+    protected void write(net.minecraft.nbt.CompoundTag compound, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
+        compound.putInt("ProcessingTicks", processingTicks);
+        super.write(compound, registries, clientPacket);
+    }
+
     private boolean canProcess(ItemStack chocolateStack, ItemStack filterStack, ItemStack fuelStack, ItemStack outputStack) {
         if (chocolateStack.isEmpty() || filterStack.isEmpty() || fuelStack.isEmpty() || !outputStack.isEmpty()) return false;
         return true;
