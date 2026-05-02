@@ -84,7 +84,7 @@ public class DryingKitCategory implements IRecipeCategory<DryingKitRecipe> {
         
         guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font, "150s", 78, 10, 0x808080, false);
 
-        dayIcon.draw(guiGraphics, 41, 41); //one more because more little icon (my english is so bad llmao)
+        dayIcon.draw(guiGraphics, 41, 41);
         skyIcon.draw(guiGraphics, 67, 40);
         rainIcon.draw(guiGraphics, 93, 40);
         netherIcon.draw(guiGraphics, 119, 40);

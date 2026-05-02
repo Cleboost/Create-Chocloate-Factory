@@ -52,19 +52,16 @@ public class ChocolateMixerCategory implements IRecipeCategory<ChocolateMixerRec
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ChocolateMixerRecipe recipe, IFocusGroup focuses) {
-        // Items
         builder.addSlot(RecipeIngredientRole.INPUT, 15, 9)
                 .addIngredients(recipe.getItemIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 15, 31)
                 .addIngredients(recipe.getItemIngredients().get(1));
 
-        // Fluids
         builder.addSlot(RecipeIngredientRole.INPUT, 45, 9)
                 .addIngredients(NeoForgeTypes.FLUID_STACK, recipe.getFluidIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 45, 31)
                 .addIngredients(NeoForgeTypes.FLUID_STACK, recipe.getFluidIngredients().get(1));
 
-        // Output
         builder.addSlot(RecipeIngredientRole.OUTPUT, 134, 20)
                 .addIngredients(NeoForgeTypes.FLUID_STACK, java.util.Collections.singletonList(recipe.getOutput()));
     }
