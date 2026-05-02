@@ -1,6 +1,8 @@
 package fr.cleboost.createchocolatefactory.core;
 
+import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -39,6 +41,13 @@ public class CCFCommonEvents {
                 LivingEntity livingTarget = (LivingEntity) target;
                 livingTarget.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 1));
                 livingTarget.addEffect(new MobEffectInstance(CCFEffects.CHOCOLATE_TOXICITY, 100, 0));
+
+                if (player instanceof ServerPlayer serverPlayer) {
+                    var advancement = serverPlayer.server.getAdvancements().get(CreateChocolateFactory.asResource("toxic_chocolate"));
+                    if (advancement != null) {
+                        serverPlayer.getAdvancements().award(advancement, "manual");
+                    }
+                }
 
                 if (!player.getAbilities().instabuild) {
                     stack.shrink(1);

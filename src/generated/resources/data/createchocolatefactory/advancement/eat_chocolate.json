@@ -1,0 +1,31 @@
+{
+  "parent": "createchocolatefactory:chocolate_bar",
+  "criteria": {
+    "eat_chocolate": {
+      "conditions": {
+        "item": {
+          "items": "createchocolatefactory:chocolate_bar"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.createchocolatefactory.eat_chocolate.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "createchocolatefactory:chocolate_bar"
+    },
+    "title": {
+      "translate": "advancements.createchocolatefactory.eat_chocolate.title"
+    }
+  },
+  "requirements": [
+    [
+      "eat_chocolate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

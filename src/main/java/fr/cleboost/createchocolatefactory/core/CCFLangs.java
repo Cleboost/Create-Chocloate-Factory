@@ -52,6 +52,15 @@ public class CCFLangs {
     public static final LangEntry RECIPE_DRYING_KIT = new LangEntry(LangCategory.RECIPE, "drying_kit", "Drying Kit");
     public static final LangEntry RECIPE_MACHETE_CUTTING = new LangEntry(LangCategory.RECIPE, "machete_cutting", "Machete Cutting");
 
+    public static final LangEntry ADVANCEMENT_ROOT_TITLE = new LangEntry(LangCategory.ADVANCEMENTS, "root.title", "Create Chocolate Factory");
+    public static final LangEntry ADVANCEMENT_ROOT_DESCRIPTION = new LangEntry(LangCategory.ADVANCEMENTS, "root.description", "Welcome to the chocolate factory!");
+    public static final LangEntry ADVANCEMENT_CHOCOLATE_BAR_TITLE = new LangEntry(LangCategory.ADVANCEMENTS, "chocolate_bar.title", "The Golden Ticket?");
+    public static final LangEntry ADVANCEMENT_CHOCOLATE_BAR_DESCRIPTION = new LangEntry(LangCategory.ADVANCEMENTS, "chocolate_bar.description", "Craft your first chocolate bar.");
+    public static final LangEntry ADVANCEMENT_EAT_CHOCOLATE_TITLE = new LangEntry(LangCategory.ADVANCEMENTS, "eat_chocolate.title", "Sweet Tooth");
+    public static final LangEntry ADVANCEMENT_EAT_CHOCOLATE_DESCRIPTION = new LangEntry(LangCategory.ADVANCEMENTS, "eat_chocolate.description", "Eat a piece of chocolate.");
+    public static final LangEntry ADVANCEMENT_TOXIC_CHOCOLATE_TITLE = new LangEntry(LangCategory.ADVANCEMENTS, "toxic_chocolate.title", "Not for you!");
+    public static final LangEntry ADVANCEMENT_TOXIC_CHOCOLATE_DESCRIPTION = new LangEntry(LangCategory.ADVANCEMENTS, "toxic_chocolate.description", "Feed an animal with chocolate.");
+
     public static final LangEntry MACHETE_STEP_1 = new LangEntry(LangCategory.RECIPE, "machete.step_1", "Step 1: Open the Cocoa Pod");
     public static final LangEntry MACHETE_STEP_2 = new LangEntry(LangCategory.RECIPE, "machete.step_2", "Step 2: Extract Cocoa Beans");
 
@@ -80,6 +89,7 @@ public class CCFLangs {
         MESSAGE("message"),
         COMMANDS("commands"),
         RECIPE("recipe"),
+        ADVANCEMENTS("advancements"),
         EFFECT("effect"),
         PONDER("ponder", true);
 

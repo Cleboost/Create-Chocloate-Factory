@@ -1,0 +1,33 @@
+{
+  "parent": "createchocolatefactory:root",
+  "criteria": {
+    "has_chocolate_bar": {
+      "conditions": {
+        "items": [
+          {
+            "items": "createchocolatefactory:chocolate_bar"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.createchocolatefactory.chocolate_bar.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "createchocolatefactory:chocolate_bar"
+    },
+    "title": {
+      "translate": "advancements.createchocolatefactory.chocolate_bar.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_chocolate_bar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
