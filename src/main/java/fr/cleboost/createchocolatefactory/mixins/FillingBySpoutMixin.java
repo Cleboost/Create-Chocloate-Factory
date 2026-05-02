@@ -30,11 +30,11 @@ public class FillingBySpoutMixin {
     }
 
     @Inject(method = "fillItem", at = @At("HEAD"), cancellable = true)
-    private static void fillItem(Level world, int requiredAmount, ItemStack stack, FluidStack availableFluid, CallbackInfoReturnable<ItemStack> cir) {
+    private static void fillItem(Level level, int requiredAmount, ItemStack stack, FluidStack availableFluid, CallbackInfoReturnable<ItemStack> cir) {
         if (availableFluid.is(CCFFluids.CHOCOLATE.get()) && stack.getItem() instanceof ChocolateMouldItem mould) {
             if (availableFluid.getAmount() < requiredAmount) cir.setReturnValue(stack);
             availableFluid.shrink(requiredAmount);
-            stack.hurtAndBreak(1, (ServerLevel) world, null, item -> {
+            stack.hurtAndBreak(1, (ServerLevel) level, null, item -> {
             });
             cir.setReturnValue(mould.getResult(availableFluid.get(CCFDataComponents.CHOCOLATE.get())));
         }
