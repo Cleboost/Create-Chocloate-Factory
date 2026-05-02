@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class ChocolateAnalyserBlockEntity extends SmartBlockEntity implements MenuProvider, TickableBlockEntity {
     public final ChocolateAnalyserInventory inventory = new ChocolateAnalyserInventory(this);
@@ -38,7 +39,7 @@ public class ChocolateAnalyserBlockEntity extends SmartBlockEntity implements Me
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return Component.translatable(this.getBlockState().getBlock().getDescriptionId());
     }
 
