@@ -83,11 +83,11 @@ public class MacheteCategory implements IRecipeCategory<MacheteRecipe> {
         AllGuiTextures.JEI_LONG_ARROW.render(guiGraphics, 58, 18);
         AllGuiTextures.JEI_LONG_ARROW.render(guiGraphics, 58, 53);
 
-        AllGuiTextures.JEI_SLOT.render(guiGraphics, 84, 14);
-        AllIcons.I_RMB.render(guiGraphics, 85, 15);
+        AllGuiTextures.JEI_SLOT.render(guiGraphics, 82, 14);
+        AllIcons.I_RMB.render(guiGraphics, 83, 15);
         
-        AllGuiTextures.JEI_SLOT.render(guiGraphics, 84, 49);
-        AllIcons.I_RMB.render(guiGraphics, 85, 50);
+        AllGuiTextures.JEI_SLOT.render(guiGraphics, 82, 49);
+        AllIcons.I_RMB.render(guiGraphics, 83, 50);
 
         guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font, CCFLangs.MACHETE_STEP_1.getComponent(), 10, 4, 0x808080, false);
         guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font, CCFLangs.MACHETE_STEP_2.getComponent(), 10, 39, 0x808080, false);
