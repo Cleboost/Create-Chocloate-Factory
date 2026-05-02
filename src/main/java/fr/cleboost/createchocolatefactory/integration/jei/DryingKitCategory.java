@@ -16,8 +16,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class DryingKitCategory implements IRecipeCategory<DryingKitRecipe> {
     public static final RecipeType<DryingKitRecipe> TYPE = RecipeType.create(CreateChocolateFactory.MODID, "drying_kit", DryingKitRecipe.class);
@@ -31,12 +30,12 @@ public class DryingKitCategory implements IRecipeCategory<DryingKitRecipe> {
     }
 
     @Override
-    public RecipeType<DryingKitRecipe> getRecipeType() {
+    public @NotNull RecipeType<DryingKitRecipe> getRecipeType() {
         return TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return CCFLangs.RECIPE_DRYING_KIT.getComponent();
     }
 
@@ -56,7 +55,7 @@ public class DryingKitCategory implements IRecipeCategory<DryingKitRecipe> {
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, DryingKitRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, DryingKitRecipe recipe, @NotNull IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 27, 17)
                 .addItemStack(recipe.getInput());
 
@@ -65,7 +64,7 @@ public class DryingKitCategory implements IRecipeCategory<DryingKitRecipe> {
     }
 
     @Override
-    public void draw(DryingKitRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(@NotNull DryingKitRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 26, 16);
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 130, 16);
