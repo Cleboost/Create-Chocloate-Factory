@@ -3,6 +3,7 @@ package fr.cleboost.createchocolatefactory.integration.jei;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.AllIcons;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.block.CocoaPod;
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;
 import fr.cleboost.createchocolatefactory.core.CCFLangs;
 import mezz.jei.api.constants.VanillaTypes;
@@ -14,6 +15,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.createmod.catnip.gui.element.GuiGameElement;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -60,11 +62,9 @@ public class MacheteCategory implements IRecipeCategory<MacheteRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MacheteRecipe recipe, @NotNull IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 10, 15).addItemStack(recipe.getMachete());
-        builder.addSlot(RecipeIngredientRole.INPUT, 35, 15).addItemStack(recipe.getPod());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 135, 15).addItemStacks(recipe.getOutputsStep1());
 
         builder.addSlot(RecipeIngredientRole.INPUT, 10, 50).addItemStack(recipe.getMachete());
-        builder.addSlot(RecipeIngredientRole.INPUT, 35, 50).addItemStack(recipe.getPod());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 135, 50).addItemStacks(recipe.getOutputsStep2());
     }
 
@@ -91,5 +91,17 @@ public class MacheteCategory implements IRecipeCategory<MacheteRecipe> {
 
         guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font, CCFLangs.MACHETE_STEP_1.getComponent(), 10, 4, 0x808080, false);
         guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font, CCFLangs.MACHETE_STEP_2.getComponent(), 10, 39, 0x808080, false);
+
+        GuiGameElement.of(CCFBlocks.COCOA_POD.getDefaultState())
+                .atLocal(0, 0, 0)
+                .scale(20)
+                .rotateBlock(22.5, 45, 0)
+                .render(guiGraphics, 33, 26);
+
+        GuiGameElement.of(CCFBlocks.COCOA_POD.getDefaultState().setValue(CocoaPod.OPENED, true))
+                .atLocal(0, 0, 0)
+                .scale(20)
+                .rotateBlock(22.5, 45, 0)
+                .render(guiGraphics, 33, 60);
     }
 }
