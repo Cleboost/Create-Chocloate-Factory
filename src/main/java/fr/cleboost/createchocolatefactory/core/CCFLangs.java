@@ -33,6 +33,10 @@ public class CCFLangs {
     public static final LangEntry DRYING_KIT_NIGHT = new LangEntry(LangCategory.GOGGLE, "dryingkit.night", "Drying is paused during the night");
     public static final LangEntry DRYING_KIT_RAINING = new LangEntry(LangCategory.GOGGLE, "dryingkit.raining", "Drying is reset due to rain or thunderstorm");
 
+    public static final LangEntry DRYING_KIT_DAY_INFO = new LangEntry(LangCategory.RECIPE, "drying_kit.day_info", "Drying only progresses during the day (except in the Nether)");
+    public static final LangEntry DRYING_KIT_SKY_INFO = new LangEntry(LangCategory.RECIPE, "drying_kit.sky_info", "Requires an unobstructed view of the sky (except in the Nether)");
+    public static final LangEntry DRYING_KIT_RAIN_INFO = new LangEntry(LangCategory.RECIPE, "drying_kit.rain_info", "Rain or thunderstorms will reset progress (except in the Nether)");
+
     public static final LangEntry MESSAGE_NEED_MORE_COCOA_BEANS = new LangEntry(LangCategory.MESSAGE, "dryingkit.need_more_cocoa_beans", "You need more damp cocoa beans to dry them (%s/9)");
 
     public static final LangEntry PONDER_DRYING_KIT_HEADER = new LangEntry(LangCategory.PONDER, "drying_kit.header", "Drying Kit");
