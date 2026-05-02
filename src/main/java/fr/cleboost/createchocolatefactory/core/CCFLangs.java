@@ -55,6 +55,8 @@ public class CCFLangs {
     public static final LangEntry MACHETE_STEP_1 = new LangEntry(LangCategory.RECIPE, "machete.step_1", "Step 1: Open the Cocoa Pod");
     public static final LangEntry MACHETE_STEP_2 = new LangEntry(LangCategory.RECIPE, "machete.step_2", "Step 2: Extract Cocoa Beans");
 
+    public static final LangEntry CHOCOLATE_TOXICITY = new LangEntry(LangCategory.EFFECT, "chocolate_toxicity", "Chocolate Toxicity");
+
 
     public static void holdShiftTooltips(@Nonnull List<Component> tooltip) {
         tooltip.add(TOOLTIPS_HOLD_SHIFT);
@@ -78,6 +80,7 @@ public class CCFLangs {
         MESSAGE("message"),
         COMMANDS("commands"),
         RECIPE("recipe"),
+        EFFECT("effect"),
         PONDER("ponder", true);
 
         private final String name;

@@ -44,6 +44,7 @@ public class CreateChocolateFactory {
 
         CCFDataComponents.register(modEventBus);
         CCFLootModifiers.register(modEventBus);
+        CCFEffects.register(modEventBus);
 
         modEventBus.addListener(CreateChocolateFactory::registerCapabilities);
         modEventBus.addListener(CreateChocolateFactory::registerDatapackRegistries);
