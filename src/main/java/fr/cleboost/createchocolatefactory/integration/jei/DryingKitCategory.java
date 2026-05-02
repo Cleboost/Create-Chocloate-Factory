@@ -69,8 +69,8 @@ public class DryingKitCategory implements IRecipeCategory<DryingKitRecipe> {
         background.draw(guiGraphics);
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 26, 16);
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 130, 16);
-        AllGuiTextures.JEI_ARROW.render(guiGraphics, 85, 18);
+        AllGuiTextures.JEI_ARROW.render(guiGraphics, 70, 20);
         
-        guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font, "150s", 84, 10, 0x808080, false);
+        guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font, "150s", 78, 10, 0x808080, false);
     }
 }
