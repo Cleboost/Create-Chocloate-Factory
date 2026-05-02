@@ -95,8 +95,7 @@ public class ChocolateAnalyserBlockEntity extends SmartBlockEntity implements Me
     }
 
     private boolean canProcess(ItemStack chocolateStack, ItemStack filterStack, ItemStack fuelStack, ItemStack outputStack) {
-        if (chocolateStack.isEmpty() || filterStack.isEmpty() || fuelStack.isEmpty() || !outputStack.isEmpty()) return false;
-        return true;
+        return !chocolateStack.isEmpty() && !filterStack.isEmpty() && !fuelStack.isEmpty() && outputStack.isEmpty();
     }
 
     private void processChocolate() {
