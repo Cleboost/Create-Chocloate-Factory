@@ -1,6 +1,7 @@
 package fr.cleboost.createchocolatefactory.integration.jei;
 
 import com.simibubi.create.foundation.gui.AllGuiTextures;
+import com.simibubi.create.foundation.gui.AllIcons;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFBlocks;
 import fr.cleboost.createchocolatefactory.core.CCFLangs;
@@ -23,8 +24,8 @@ import java.util.List;
 public class MacheteCategory implements IRecipeCategory<MacheteRecipe> {
     public static final RecipeType<MacheteRecipe> TYPE = RecipeType.create(CreateChocolateFactory.MODID, "machete_cutting", MacheteRecipe.class);
 
-    private final IDrawable background;
     private final IDrawable icon;
+    private final IDrawable background;
 
     public MacheteCategory(IGuiHelper helper) {
         this.background = helper.createBlankDrawable(177, 80);
@@ -58,28 +59,35 @@ public class MacheteCategory implements IRecipeCategory<MacheteRecipe> {
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MacheteRecipe recipe, @NotNull IFocusGroup focuses) {
-        // Step 1
         builder.addSlot(RecipeIngredientRole.INPUT, 10, 15).addItemStack(recipe.getMachete());
         builder.addSlot(RecipeIngredientRole.INPUT, 35, 15).addItemStack(recipe.getPod());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 105, 15).addItemStacks(recipe.getOutputsStep1());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 135, 15).addItemStacks(recipe.getOutputsStep1());
 
-        // Step 2
         builder.addSlot(RecipeIngredientRole.INPUT, 10, 50).addItemStack(recipe.getMachete());
-        builder.addSlot(RecipeIngredientRole.INPUT, 35, 50).addItemStack(recipe.getPod()); // Represents opened pod
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 105, 50).addItemStacks(recipe.getOutputsStep2());
+        builder.addSlot(RecipeIngredientRole.INPUT, 35, 50).addItemStack(recipe.getPod());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 135, 50).addItemStacks(recipe.getOutputsStep2());
     }
 
     @Override
     public void draw(@NotNull MacheteRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        background.draw(guiGraphics);
+        
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 9, 14);
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 34, 14);
-        AllGuiTextures.JEI_ARROW.render(guiGraphics, 58, 18);
-        AllGuiTextures.JEI_SLOT.render(guiGraphics, 104, 14);
+        AllGuiTextures.JEI_SLOT.render(guiGraphics, 134, 14);
 
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 9, 49);
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 34, 49);
-        AllGuiTextures.JEI_ARROW.render(guiGraphics, 58, 53);
-        AllGuiTextures.JEI_SLOT.render(guiGraphics, 104, 49);
+        AllGuiTextures.JEI_SLOT.render(guiGraphics, 134, 49);
+        
+        AllGuiTextures.JEI_LONG_ARROW.render(guiGraphics, 58, 18);
+        AllGuiTextures.JEI_LONG_ARROW.render(guiGraphics, 58, 53);
+
+        AllGuiTextures.JEI_CATALYST_SLOT.render(guiGraphics, 84, 14);
+        AllIcons.I_RMB.render(guiGraphics, 85, 15);
+        
+        AllGuiTextures.JEI_CATALYST_SLOT.render(guiGraphics, 84, 49);
+        AllIcons.I_RMB.render(guiGraphics, 85, 50);
 
         guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font, CCFLangs.MACHETE_STEP_1.getComponent(), 10, 4, 0x808080, false);
         guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font, CCFLangs.MACHETE_STEP_2.getComponent(), 10, 39, 0x808080, false);
