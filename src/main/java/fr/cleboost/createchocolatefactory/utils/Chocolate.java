@@ -10,7 +10,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 import java.nio.ByteBuffer;
 import java.util.Objects;

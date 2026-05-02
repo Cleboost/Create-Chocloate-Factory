@@ -2,7 +2,6 @@ package fr.cleboost.createchocolatefactory.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
-import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.core.CCFLangs;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
@@ -10,7 +9,6 @@ import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.item.ItemArgument;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 
 public class ChocolateCommand {

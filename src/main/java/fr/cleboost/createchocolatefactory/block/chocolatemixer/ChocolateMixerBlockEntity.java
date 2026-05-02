@@ -7,7 +7,6 @@ import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
-import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFBlockEntities;
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.core.CCFFluids;

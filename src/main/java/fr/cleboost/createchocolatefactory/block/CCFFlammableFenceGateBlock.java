@@ -1,14 +1,11 @@
 package fr.cleboost.createchocolatefactory.block;
 
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
-
-import javax.annotation.Nonnull;
 
 public class CCFFlammableFenceGateBlock extends FenceGateBlock {
     private final int flammability;

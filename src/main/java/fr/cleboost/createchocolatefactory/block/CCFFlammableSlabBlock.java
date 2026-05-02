@@ -6,8 +6,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nonnull;
-
 public class CCFFlammableSlabBlock extends SlabBlock {
     private final int flammability;
     private final int fireSpreadSpeed;

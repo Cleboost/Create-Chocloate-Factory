@@ -6,8 +6,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nonnull;
-
 public class CCFFlammableLeavesBlock extends LeavesBlock {
     private final int flammability;
     private final int fireSpreadSpeed;

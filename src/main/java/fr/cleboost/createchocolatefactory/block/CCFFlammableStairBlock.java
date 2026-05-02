@@ -6,7 +6,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class CCFFlammableStairBlock extends StairBlock {

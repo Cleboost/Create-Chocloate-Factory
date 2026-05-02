@@ -1,7 +1,5 @@
 package fr.cleboost.createchocolatefactory.core;
 
-import javax.annotation.Nonnull;
-
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
