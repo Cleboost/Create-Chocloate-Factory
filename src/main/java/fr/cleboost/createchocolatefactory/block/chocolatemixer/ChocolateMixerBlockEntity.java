@@ -296,18 +296,8 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         super.addBehaviours(behaviours);
 
         this.internalTanks = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 2, TANK_SIZE, false);
-        ((TankSegmentHandler) this.internalTanks.getTanks()[MILK_TANK]).create_Chocloate_Factory$getHandler().setValidator(new Predicate<FluidStack>() {
-            @Override
-            public boolean test(FluidStack fluidStack) {
-                return fluidStack.is(Tags.Fluids.MILK);
-            }
-        });
-        ((TankSegmentHandler) this.internalTanks.getTanks()[COCOA_BUTTER_TANK]).create_Chocloate_Factory$getHandler().setValidator(new Predicate<FluidStack>() {
-            @Override
-            public boolean test(FluidStack fluidStack) {
-                return fluidStack.getFluid().isSame(CCFFluids.COCOA_BUTTER.get());
-            }
-        });
+        ((TankSegmentHandler) this.internalTanks.getTanks()[MILK_TANK]).create_Chocloate_Factory$getHandler().setValidator(fluidStack -> fluidStack.is(Tags.Fluids.MILK));
+        ((TankSegmentHandler) this.internalTanks.getTanks()[COCOA_BUTTER_TANK]).create_Chocloate_Factory$getHandler().setValidator(fluidStack -> fluidStack.getFluid().isSame(CCFFluids.COCOA_BUTTER.get()));
         this.internalTanks.allowExtraction().allowInsertion();
         behaviours.add(this.internalTanks);
     }
