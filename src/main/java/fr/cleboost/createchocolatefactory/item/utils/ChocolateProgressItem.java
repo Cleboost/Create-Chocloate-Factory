@@ -63,6 +63,7 @@ public class ChocolateProgressItem extends ChocolateBaseItem {
 
     public void appendHoverText(@Nonnull ItemStack pStack, @Nullable TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
         tooltip.add(CCFLangs.PROGRESS.getComponent(getEatProgress(pStack), getMaxStage()));
+        assert pContext != null;
         super.appendHoverText(pStack, pContext, tooltip, pIsAdvanced);
     }
 }
