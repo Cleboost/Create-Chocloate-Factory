@@ -16,8 +16,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ChocolateMixerCategory implements IRecipeCategory<ChocolateMixerRecipe> {
     public static final RecipeType<ChocolateMixerRecipe> TYPE = RecipeType.create(CreateChocolateFactory.MODID, "chocolate_mixer", ChocolateMixerRecipe.class);
@@ -31,12 +30,12 @@ public class ChocolateMixerCategory implements IRecipeCategory<ChocolateMixerRec
     }
 
     @Override
-    public RecipeType<ChocolateMixerRecipe> getRecipeType() {
+    public @NotNull RecipeType<ChocolateMixerRecipe> getRecipeType() {
         return TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.translatable("block.createchocolatefactory.chocolate_mixer");
     }
 
@@ -51,7 +50,7 @@ public class ChocolateMixerCategory implements IRecipeCategory<ChocolateMixerRec
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, ChocolateMixerRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, ChocolateMixerRecipe recipe, @NotNull IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 15, 9)
                 .addIngredients(recipe.getItemIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.INPUT, 15, 31)
@@ -67,7 +66,7 @@ public class ChocolateMixerCategory implements IRecipeCategory<ChocolateMixerRec
     }
 
     @Override
-    public void draw(ChocolateMixerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(@NotNull ChocolateMixerRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 14, 8);
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 14, 30);
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 44, 8);
