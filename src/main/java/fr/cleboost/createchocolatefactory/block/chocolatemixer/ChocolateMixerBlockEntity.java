@@ -39,7 +39,6 @@ import net.neoforged.neoforge.items.IItemHandler;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -144,6 +143,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
     protected boolean hasIngredients() {
         if (getBasin().isEmpty()) return false;
         BasinBlockEntity basin = getBasin().get();
+        assert basin.getLevel() != null;
         IItemHandler availableItems = basin.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, basin.getBlockPos(), null);
         if (availableItems == null) return false;
         boolean hasSugar = false, hasLiquor = false;
@@ -179,7 +179,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
         BasinBlockEntity basinBlockEntity = getBasin().get();
         if (basinBlockEntity.isEmpty() || !basinBlockEntity.getFilter().getFilter().is(CCFItems.CHOCOLATE_FILTER.get()))
             return Optional.empty();
-        return Optional.of(basinBlockEntity.getFilter().getFilter().get(CCFDataComponents.CHOCOLATE));
+        return Optional.ofNullable(basinBlockEntity.getFilter().getFilter().get(CCFDataComponents.CHOCOLATE));
     }
 
     @SuppressWarnings("null")
@@ -331,11 +331,11 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
             return true;
         if (isRunning())
             return true;
-        if (level == null || (level != null && level.isClientSide))
+        if (level == null || level.isClientSide)
             return true;
         Optional<BasinBlockEntity> basin = getBasin();
-        if (!basin.filter(BasinBlockEntity::canContinueProcessing)
-                .isPresent())
+        if (basin.filter(BasinBlockEntity::canContinueProcessing)
+                .isEmpty())
             return true;
         if (!canRun() || !hasIngredients()) return true;
         startProcessingBasin();
@@ -362,7 +362,7 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
 
     public void renderParticles() {
         Optional<BasinBlockEntity> basin = getBasin();
-        if (!basin.isPresent() || level == null || !level.isClientSide)
+        if (basin.isEmpty() || level == null || !level.isClientSide)
             return;
 
         BasinBlockEntity basinBe = basin.get();
