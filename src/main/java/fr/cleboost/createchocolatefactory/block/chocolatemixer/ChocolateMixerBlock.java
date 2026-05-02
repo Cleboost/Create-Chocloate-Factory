@@ -28,10 +28,12 @@ public class ChocolateMixerBlock extends HorizontalKineticBlock implements IBE<C
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Direction preferredSide = getPreferredHorizontalFacing(context);
-        if (preferredSide != null)
-            return defaultBlockState().setValue(HORIZONTAL_FACING, preferredSide);
-        return super.getStateForPlacement(context);
+        Direction preferred = getPreferredHorizontalFacing(context);
+        if (preferred == null || context.isSecondaryUseActive()) {
+            Direction facing = context.getHorizontalDirection();
+            return defaultBlockState().setValue(HORIZONTAL_FACING, context.isSecondaryUseActive() ? facing : facing.getOpposite());
+        }
+        return defaultBlockState().setValue(HORIZONTAL_FACING, preferred);
     }
 
     @Override
