@@ -21,8 +21,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public class MacheteCategory implements IRecipeCategory<MacheteRecipe> {
     public static final RecipeType<MacheteRecipe> TYPE = RecipeType.create(CreateChocolateFactory.MODID, "machete_cutting", MacheteRecipe.class);
 
