@@ -50,6 +50,10 @@ public class CCFLangs {
 
     public static final LangEntry RECIPE_CHOCOLATE_MOULDING = new LangEntry(LangCategory.RECIPE, "chocolate_moulding", "Chocolate Moulding");
     public static final LangEntry RECIPE_DRYING_KIT = new LangEntry(LangCategory.RECIPE, "drying_kit", "Drying Kit");
+    public static final LangEntry RECIPE_MACHETE_CUTTING = new LangEntry(LangCategory.RECIPE, "machete_cutting", "Machete Cutting");
+
+    public static final LangEntry MACHETE_STEP_1 = new LangEntry(LangCategory.RECIPE, "machete.step_1", "Step 1: Open the Cocoa Pod");
+    public static final LangEntry MACHETE_STEP_2 = new LangEntry(LangCategory.RECIPE, "machete.step_2", "Step 2: Extract Cocoa Beans");
 
 
     public static void holdShiftTooltips(@Nonnull List<Component> tooltip) {
