@@ -181,6 +181,52 @@ public class CCFBlocks {
             .build()
             .register();
 
+    public static final BlockEntry<CakeBlock> CHOCOLATE_CAKE = REGISTRATE
+            .block("chocolate_cake", CakeBlock::new)
+            .initialProperties(() -> Blocks.CAKE)
+            .defaultLang()
+            .blockstate((ctx, prov) -> {
+                var base = CreateChocolateFactory.MODID + ":block/chocolate_cake/";
+                var variantBuilder = prov.getVariantBuilder(ctx.getEntry());
+                int[] sliceOffsets = {3, 5, 7, 9, 11, 13};
+
+                var fullModel = prov.models().getBuilder("block/chocolate_cake/chocolate_cake")
+                        .texture("particle", base + "side").texture("bottom", base + "bottom")
+                        .texture("top", base + "top").texture("side", base + "side")
+                        .element().from(1, 0, 1).to(15, 8, 15)
+                        .face(net.minecraft.core.Direction.DOWN).texture("#bottom").cullface(net.minecraft.core.Direction.DOWN).end()
+                        .face(net.minecraft.core.Direction.UP).texture("#top").end()
+                        .face(net.minecraft.core.Direction.NORTH).texture("#side").end()
+                        .face(net.minecraft.core.Direction.SOUTH).texture("#side").end()
+                        .face(net.minecraft.core.Direction.EAST).texture("#side").end()
+                        .face(net.minecraft.core.Direction.WEST).texture("#side").end()
+                        .end();
+                variantBuilder.partialState().with(CakeBlock.BITES, 0).modelForState().modelFile(fullModel).addModel();
+
+                for (int i = 0; i < sliceOffsets.length; i++) {
+                    var sliceModel = prov.models().getBuilder("block/chocolate_cake/chocolate_cake_slice" + (i + 1))
+                            .texture("particle", base + "side").texture("bottom", base + "bottom")
+                            .texture("top", base + "top").texture("side", base + "side").texture("inside", base + "inner")
+                            .element().from(sliceOffsets[i], 0, 1).to(15, 8, 15)
+                            .face(net.minecraft.core.Direction.DOWN).texture("#bottom").cullface(net.minecraft.core.Direction.DOWN).end()
+                            .face(net.minecraft.core.Direction.UP).texture("#top").end()
+                            .face(net.minecraft.core.Direction.NORTH).texture("#side").end()
+                            .face(net.minecraft.core.Direction.SOUTH).texture("#side").end()
+                            .face(net.minecraft.core.Direction.EAST).texture("#side").end()
+                            .face(net.minecraft.core.Direction.WEST).texture("#inside").end()
+                            .end();
+                    variantBuilder.partialState().with(CakeBlock.BITES, i + 1).modelForState().modelFile(sliceModel).addModel();
+                }
+            })
+            .item()
+            .model((ctx, prov) -> {
+                prov.getBuilder(ctx.getName())
+                        .parent(prov.getExistingFile(prov.mcLoc("item/generated")))
+                        .texture("layer0", prov.modLoc("item/chocolate_cake"));
+            })
+            .build()
+            .register();
+
     // public static final RegistryObject<Block> MINT_CROP =
     // BLOCKS.register("mint_crop",
     // () -> new
