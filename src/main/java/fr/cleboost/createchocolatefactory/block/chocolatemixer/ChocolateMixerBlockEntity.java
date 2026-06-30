@@ -50,9 +50,14 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
     protected static final float SUGAR = 100;
     private static final int COCOA_BUTTER_TANK = 0;
     private static final int MILK_TANK = 1;
+    private static final int PROCESSING_DURATION = 120;
+    private static final int OUTPUT_CHUNK_SIZE = 50;
     public int runningTicks;
     public int processingTicks;
     public boolean isRunning;
+
+    private FluidStack pendingOutput = FluidStack.EMPTY;
+    private int outputDispenseInterval = 1;
 
     private SmartFluidTankBehaviour internalTanks;
 
@@ -80,21 +85,33 @@ public class ChocolateMixerBlockEntity extends BasinOperatingBlockEntity {
                 BasinBlockEntity basin = getBasin().get();
 
                 if (processingTicks < 0) {
-                    processingTicks = 60;
+                    pendingOutput = makeChocolate();
+                    int chunks = pendingOutput.isEmpty() ? 1 : Mth.ceil(pendingOutput.getAmount() / (float) OUTPUT_CHUNK_SIZE);
+                    outputDispenseInterval = Math.max(1, PROCESSING_DURATION / chunks);
+                    processingTicks = PROCESSING_DURATION;
                     if (level != null) {
                         level.playSound(null, worldPosition, SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT,
                                 SoundSource.BLOCKS, .75f, speed < 65 ? .75f : 1.5f);
                     }
                 } else {
                     processingTicks--;
-                    if (processingTicks == 0 && level != null) {
-                        runningTicks++;
-                        processingTicks = -1;
-                        FluidStack output = makeChocolate();
-                        basin.acceptOutputs(List.of(), List.of(output), false);
+                    boolean lastTick = processingTicks == 0;
+                    int elapsed = PROCESSING_DURATION - processingTicks;
+
+                    if (level != null && !pendingOutput.isEmpty() && (lastTick || elapsed % outputDispenseInterval == 0)) {
+                        int chunkAmount = lastTick ? pendingOutput.getAmount() : Math.min(OUTPUT_CHUNK_SIZE, pendingOutput.getAmount());
+                        FluidStack chunk = pendingOutput.copyWithAmount(chunkAmount);
+                        pendingOutput.shrink(chunkAmount);
+                        basin.acceptOutputs(List.of(), List.of(chunk), false);
                         internalTanks.sendDataImmediately();
                         sendData();
                         basin.notifyChangeOfContents();
+                    }
+
+                    if (lastTick && level != null) {
+                        runningTicks++;
+                        processingTicks = -1;
+                        pendingOutput = FluidStack.EMPTY;
                     }
                 }
             }
