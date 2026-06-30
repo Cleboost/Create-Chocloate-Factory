@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "createchocolatefactory:block/mint_stage"
+    },
+    "age=1": {
+      "model": "createchocolatefactory:block/mint_stage"
+    },
+    "age=2": {
+      "model": "createchocolatefactory:block/mint_stage"
+    },
+    "age=3": {
+      "model": "createchocolatefactory:block/mint_stage"
+    },
+    "age=4": {
+      "model": "createchocolatefactory:block/mint_stage"
+    },
+    "age=5": {
+      "model": "createchocolatefactory:block/mint_stage"
+    },
+    "age=6": {
+      "model": "createchocolatefactory:block/mint_stage"
+    },
+    "age=7": {
+      "model": "createchocolatefactory:block/mint_stage"
+    }
+  }
+}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
+import fr.cleboost.createchocolatefactory.core.CCFBlocks;
 import fr.cleboost.createchocolatefactory.item.ChocolateFilterItem;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;
@@ -14,6 +15,7 @@ import fr.cleboost.createchocolatefactory.utils.ChocolateFoodPack;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Tiers;
 public class CCFItems {
     private static final CCFRegistrate REGISTRATE = CreateChocolateFactory.registrate();
@@ -81,7 +83,9 @@ public class CCFItems {
 
     // Fruits & Foods
     public static final ItemEntry<Item> MINT_LEAF = REGISTRATE.item("mint_leaf", Item::new).properties(p -> p.food(CCFFoods.MINT)).register();
-    public static final ItemEntry<Item> MINT_SEEDS = REGISTRATE.item("mint_seeds", Item::new).register();
+    public static final ItemEntry<ItemNameBlockItem> MINT_SEEDS = REGISTRATE
+            .item("mint_seeds", (p) -> new ItemNameBlockItem(CCFBlocks.MINT_CROP.get(), p))
+            .register();
     public static final ItemEntry<Item> ORANGE = REGISTRATE.item("orange", Item::new).register();
     public static final ItemEntry<Item> PEANUT = REGISTRATE.item("peanut", Item::new).lang("Peanut").register();
     public static final ItemEntry<Item> HAZELNUT = REGISTRATE.item("hazelnut", Item::new).lang("Hazelnut").register();

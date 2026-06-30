@@ -6,11 +6,14 @@ import fr.cleboost.createchocolatefactory.datagen.recipes.CCFStandardRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class CCFDatagen {
@@ -23,6 +26,9 @@ public class CCFDatagen {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         gen.addProvider(event.includeServer(), new CCFStandardRecipeGen(packOutput, lookupProvider));
+        gen.addProvider(event.includeServer(), new LootTableProvider(packOutput, Set.of(), List.of(
+                new LootTableProvider.SubProviderEntry(CCFBlockLootProvider::new, LootContextParamSets.BLOCK)
+        ), lookupProvider));
         gen.addProvider(event.includeServer(), new CCFDatapackProvider(packOutput, lookupProvider));
         //gen.addProvider(event.includeServer(), new TasteDataProvider(packOutput));
         gen.addProvider(event.includeServer(), new AdvancementProvider(packOutput, lookupProvider, existingFileHelper, List.of(new CCFAdvancements())));

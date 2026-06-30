@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.block.*;
+import fr.cleboost.createchocolatefactory.block.MintCropBlock;
 import fr.cleboost.createchocolatefactory.block.chocolateanalyser.ChocolateAnalyserBlock;
 import fr.cleboost.createchocolatefactory.block.chocolatemixer.ChocolateMixerBlock;
 import fr.cleboost.createchocolatefactory.block.chocolatemixer.ChocolateMixerItem;
@@ -227,10 +228,17 @@ public class CCFBlocks {
             .build()
             .register();
 
-    // public static final RegistryObject<Block> MINT_CROP =
-    // BLOCKS.register("mint_crop",
-    // () -> new
-    // MintCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion().noCollission()));
+    public static final BlockEntry<MintCropBlock> MINT_CROP = REGISTRATE
+            .block("mint_crop", MintCropBlock::new)
+            .initialProperties(() -> Blocks.WHEAT)
+            .blockstate((ctx, prov) -> {
+                var model = prov.models().withExistingParent("block/mint_stage", prov.mcLoc("block/crop"))
+                        .texture("crop", prov.modLoc("block/mint_stage"))
+                        .renderType("cutout");
+                prov.getVariantBuilder(ctx.getEntry())
+                        .forAllStates(s -> net.neoforged.neoforge.client.model.generators.ConfiguredModel.builder().modelFile(model).build());
+            })
+            .register();
     // public static final DeferredBlock<Block> DRYING_KIT =
     // registerBlock("drying_kit",
     // () -> new
