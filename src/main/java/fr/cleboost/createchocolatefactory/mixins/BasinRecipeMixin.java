@@ -35,18 +35,24 @@ public abstract class BasinRecipeMixin {
             if (availableFluids.getFluidInTank(fluidSlot).is(CCFFluids.CHOCOLATE.get())) break;
             fluidSlot++;
         }
-        if (fluidSlot == availableFluids.getTanks() || availableFluids.getFluidInTank(fluidSlot) == null) return;
+        if (fluidSlot == availableFluids.getTanks() || availableFluids.getFluidInTank(fluidSlot) == null) {
+            cir.setReturnValue(false);
+            return;
+        }
 
         BlazeBurnerBlock.HeatLevel heat = BasinBlockEntity.getHeatLevelOf(basin.getLevel()
                 .getBlockState(basin.getBlockPos()
                         .below(1)));
-        if (heat != BlazeBurnerBlock.HeatLevel.NONE) return;
+        if (heat != BlazeBurnerBlock.HeatLevel.NONE) {
+            cir.setReturnValue(false);
+            return;
+        }
 
         FluidStack chocolateFluid = availableFluids.getFluidInTank(fluidSlot);
         Chocolate chocolate = chocolateFluid.get(CCFDataComponents.CHOCOLATE);
 
-        if (chocolateFluid.get(CCFDataComponents.CHOCOLATE) == null) return;
-        if (chocolate.hasTaste()) {
+        if (chocolate == null || chocolate.hasTaste()) {
+            cir.setReturnValue(false);
             return;
         }
         int itemSlot = 0;
@@ -54,7 +60,10 @@ public abstract class BasinRecipeMixin {
             if (!availableItems.getStackInSlot(itemSlot).isEmpty()) break;
             itemSlot++;
         }
-        if (itemSlot == availableItems.getSlots()) return;
+        if (itemSlot == availableItems.getSlots()) {
+            cir.setReturnValue(false);
+            return;
+        }
         if (test) {
             cir.setReturnValue(true);
             return;
@@ -79,26 +88,32 @@ public abstract class BasinRecipeMixin {
     private static void match(BasinBlockEntity basin, Recipe<?> recipe, CallbackInfoReturnable<Boolean> cir) {
         IFluidHandler availableFluids = basin.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, basin.getBlockPos(), null);
         IItemHandler availableItems = basin.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, basin.getBlockPos(), null);
-        if (availableItems == null || availableFluids == null)
+        if (availableItems == null || availableFluids == null) {
+            cir.setReturnValue(false);
             return;
+        }
         int fluidSlot = 0;
         while (fluidSlot < availableFluids.getTanks()) {
             if (availableFluids.getFluidInTank(fluidSlot).is(CCFFluids.CHOCOLATE.get())) break;
             fluidSlot++;
         }
-        if (fluidSlot == availableFluids.getTanks() || availableFluids.getFluidInTank(fluidSlot) == null) return;
+        if (fluidSlot == availableFluids.getTanks() || availableFluids.getFluidInTank(fluidSlot) == null) {
+            cir.setReturnValue(false);
+            return;
+        }
         FluidStack chocolateFluid = availableFluids.getFluidInTank(fluidSlot);
 
         BlazeBurnerBlock.HeatLevel heat = BasinBlockEntity.getHeatLevelOf(basin.getLevel()
                 .getBlockState(basin.getBlockPos()
                         .below(1)));
         if (heat != BlazeBurnerBlock.HeatLevel.NONE) {
+            cir.setReturnValue(false);
             return;
         }
         Chocolate chocolate = chocolateFluid.get(CCFDataComponents.CHOCOLATE);
-        if (chocolateFluid.get(CCFDataComponents.CHOCOLATE) == null) {
+        if (chocolate == null) {
+            cir.setReturnValue(false);
             return;
-
         }
         if (chocolate.hasTaste()) {
             cir.setReturnValue(false);
