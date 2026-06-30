@@ -1,7 +1,6 @@
 package fr.cleboost.createchocolatefactory.worldgen;
 
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.common.world.BiomeModifier;
