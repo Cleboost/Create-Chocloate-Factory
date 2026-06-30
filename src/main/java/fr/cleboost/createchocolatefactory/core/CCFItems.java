@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
 import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
-import fr.cleboost.createchocolatefactory.core.CCFBlocks;
 import fr.cleboost.createchocolatefactory.item.ChocolateFilterItem;
 import fr.cleboost.createchocolatefactory.item.MacheteItem;
 import fr.cleboost.createchocolatefactory.item.utils.ChocolateBaseItem;

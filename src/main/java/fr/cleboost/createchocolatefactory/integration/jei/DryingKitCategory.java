@@ -81,7 +81,7 @@ public class DryingKitCategory implements IRecipeCategory<DryingKitRecipe> {
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 26, 16);
         AllGuiTextures.JEI_SLOT.render(guiGraphics, 130, 16);
         AllGuiTextures.JEI_ARROW.render(guiGraphics, 70, 20);
-        
+
         guiGraphics.drawString(net.minecraft.client.Minecraft.getInstance().font, "150s", 78, 10, 0x808080, false);
 
         dayIcon.draw(guiGraphics, 41, 41);
@@ -90,7 +90,6 @@ public class DryingKitCategory implements IRecipeCategory<DryingKitRecipe> {
         netherIcon.draw(guiGraphics, 119, 40);
     }
 
-    @SuppressWarnings("removal")
     @Override
     public @NotNull List<Component> getTooltipStrings(@NotNull DryingKitRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         if (mouseY >= 40 && mouseY <= 56) {

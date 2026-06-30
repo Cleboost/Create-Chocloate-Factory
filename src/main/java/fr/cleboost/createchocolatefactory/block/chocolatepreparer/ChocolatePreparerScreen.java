@@ -39,7 +39,6 @@ public class ChocolatePreparerScreen extends AbstractSimiContainerScreen<Chocola
         int guiLeft = (this.width - this.imageWidth) / 2;
         int guiTop = (this.height - (this.imageHeight + 5 + AllGuiTextures.PLAYER_INVENTORY.getHeight())) / 2;
 
-        int xIcon = guiLeft + 15;
         int xInput = guiLeft + 40;
         int yStart = guiTop + 35;
         int yStep = 22;
