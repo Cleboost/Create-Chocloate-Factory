@@ -7,6 +7,7 @@ import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import fr.cleboost.createchocolatefactory.utils.Taste;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,6 +44,8 @@ public class ChocolateBaseItem extends Item {
     public void appendHoverText(@Nonnull ItemStack pStack, @Nonnull TooltipContext pContext, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag pIsAdvanced) {
         Chocolate chocolate = pStack.get(CCFDataComponents.CHOCOLATE);
         if (chocolate == null) return;
+        if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.isCreative())
+            return;
         if (Screen.hasShiftDown()) {
 
             tooltip.add(CCFLangs.CHOCOLATE_COMPOSITION.getComponent(
