@@ -8,11 +8,9 @@ import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class CCFBiomeModifiers {
-    //in what biome the placed features will generate, at which moment of the generation
-
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
-        var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
-        var biomes = context.lookup(Registries.BIOME);
+        // var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+        // var biomes = context.lookup(Registries.BIOME);
     }
 
     public static ResourceKey<BiomeModifier> registerKey(String name){
