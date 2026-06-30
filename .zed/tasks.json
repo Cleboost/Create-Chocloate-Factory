@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Minecraft: runClient (debug)",
+    "command": "./gradlew",
+    "args": ["runClient", "--debug-jvm"],
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Minecraft: runClient",
+    "command": "./gradlew",
+    "args": ["runClient"],
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Minecraft: runData",
+    "command": "./gradlew",
+    "args": ["runData"],
+    "reveal": "always"
+  }
+]

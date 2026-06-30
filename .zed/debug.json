@@ -1,0 +1,9 @@
+[
+  {
+    "label": "Attach to Minecraft client (JDWP)",
+    "adapter": "Java",
+    "request": "attach",
+    "hostName": "localhost",
+    "port": 5005
+  }
+]
