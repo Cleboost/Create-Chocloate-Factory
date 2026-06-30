@@ -82,6 +82,15 @@ public class CCFStandardRecipeGen extends RecipeProvider {
                 .unlockedBy("has_compass", has(Items.COMPASS))
                 .save(consumer, "chocolate_preparer");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CCFBlocks.COCOA_SAPLING)
+                .define('B', Items.BONE_MEAL)
+                .define('C', CCFItems.COCOA_BEANS_WET)
+                .pattern("BBB")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_cocoa_beans_wet", has(CCFItems.COCOA_BEANS_WET))
+                .save(consumer, "cocoa_sapling");
+
         for (ChocolateFoodPack item : CCFItems.getAllChocolatePack()) {
             stonecutterResultFromBase(consumer, RecipeCategory.MISC, item.getMouldItems(), AllItems.COPPER_SHEET);
         }
