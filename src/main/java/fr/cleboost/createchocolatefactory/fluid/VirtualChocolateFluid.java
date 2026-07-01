@@ -32,9 +32,20 @@ public class VirtualChocolateFluid extends VirtualFluid {
 
         @Override
         public int getTintColor(FluidStack stack) {
-            if (!stack.has(CCFDataComponents.CHOCOLATE)) return NO_TINT;
+            if (!stack.has(CCFDataComponents.CHOCOLATE)) {
+                return 0xFF8D5A36;
+            }
             Chocolate ch = stack.get(CCFDataComponents.CHOCOLATE);
             return ch.getColor();
+        }
+
+        @Override
+        public net.minecraft.network.chat.Component getDescription(FluidStack stack) {
+            net.minecraft.network.chat.Component desc = super.getDescription(stack);
+            if (!stack.has(CCFDataComponents.CHOCOLATE)) {
+                return net.minecraft.network.chat.Component.literal(desc.getString() + " (Toutes compositions acceptées)");
+            }
+            return desc;
         }
 
         @Override
