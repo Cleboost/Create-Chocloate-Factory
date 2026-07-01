@@ -7,9 +7,11 @@ import fr.cleboost.createchocolatefactory.core.*;
 import fr.cleboost.createchocolatefactory.datagen.CCFDatagen;
 import fr.cleboost.createchocolatefactory.utils.CCFRegistrate;
 import fr.cleboost.createchocolatefactory.utils.Taste;
+import fr.cleboost.createchocolatefactory.recipe.IceCreamCraftingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -26,11 +28,14 @@ public class CreateChocolateFactory {
 
     public static final CCFRegistrate REGISTRATE = CCFRegistrate.create(MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(net.minecraft.core.registries.Registries.MENU, MODID);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(net.minecraft.core.registries.Registries.RECIPE_SERIALIZER, MODID);
     
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CCFTab = REGISTRATE.object("create_chocolate_factory")
             .defaultCreativeTab(tab -> tab.icon(CCFItems.LOGO::asStack))
             .register();
 
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<IceCreamCraftingRecipe>> ICE_CREAM_CRAFTING_SERIALIZER =
+            RECIPE_SERIALIZERS.register("ice_cream_crafting", () -> IceCreamCraftingRecipe.SERIALIZER);
 
     public CreateChocolateFactory(IEventBus modEventBus) {
         CCFLangs.register();
@@ -41,6 +46,7 @@ public class CreateChocolateFactory {
         CCFFluids.register();
         CCFMenu.register();
         MENUS.register(modEventBus);
+        RECIPE_SERIALIZERS.register(modEventBus);
 
         CCFDataComponents.register(modEventBus);
         CCFLootModifiers.register(modEventBus);

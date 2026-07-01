@@ -88,6 +88,14 @@ public class CCFStandardRecipeGen extends RecipeProvider {
                 .unlockedBy("has_chocolate_stick", has(CCFItems.CHOCOLATE_STICK))
                 .save(consumer, "chocolate_croissant");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, CCFItems.ICE_CREAM_CONE, 3)
+                .define('W', Items.WHEAT)
+                .define('S', Items.SUGAR)
+                .pattern("WSW")
+                .pattern(" W ")
+                .unlockedBy("has_sugar", has(Items.SUGAR))
+                .save(consumer, "ice_cream_cone");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CCFBlocks.COCOA_SAPLING)
                 .define('B', Items.BONE_MEAL)
                 .define('C', CCFItems.COCOA_BEANS_WET)

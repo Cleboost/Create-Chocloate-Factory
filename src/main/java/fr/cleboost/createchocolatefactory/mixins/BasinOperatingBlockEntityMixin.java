@@ -1,16 +1,16 @@
 package fr.cleboost.createchocolatefactory.mixins;
 
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.content.processing.recipe.HeatCondition;
-import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import fr.cleboost.createchocolatefactory.CreateChocolateFactory;
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.core.CCFFluids;
+import fr.cleboost.createchocolatefactory.core.CCFItems;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
+import fr.cleboost.createchocolatefactory.utils.IceCreamMixingMarker;
+import fr.cleboost.createchocolatefactory.utils.Taste;
+import fr.cleboost.createchocolatefactory.utils.TasteMixingMarker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -27,23 +27,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
-/**
- * Taste mixing is purely custom logic and has no backing recipe in Create's
- * recipe trie, so the basin's own recipe lookup would never find a candidate
- * to drive the timed processing animation. This detects when taste mixing
- * should start and kicks off the basin's normal timed processing (using a
- * never-registered, in-memory marker recipe), letting the existing
- * {@link BasinRecipeMixin} perform the actual taste application once the
- * timer elapses, exactly like a real recipe would.
- */
 @Mixin(BasinOperatingBlockEntity.class)
 public abstract class BasinOperatingBlockEntityMixin extends KineticBlockEntity {
-
-    private static final Recipe<?> CCF_TASTE_MIXING_MARKER = new StandardProcessingRecipe.Builder<>(
-            MixingRecipe::new, CreateChocolateFactory.asResource("taste_mixing"))
-            .duration(100)
-            .requiresHeat(HeatCondition.NONE)
-            .build();
 
     public BasinOperatingBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -62,7 +47,7 @@ public abstract class BasinOperatingBlockEntityMixin extends KineticBlockEntity 
     public abstract void startProcessingBasin();
 
     @Inject(method = "updateBasin", at = @At("HEAD"), cancellable = true)
-    private void ccf$tasteMix(CallbackInfoReturnable<Boolean> cir) {
+    private void ccf$customMix(CallbackInfoReturnable<Boolean> cir) {
         if (!isSpeedRequirementFulfilled() || getSpeed() == 0 || isRunning())
             return;
         if (level == null || level.isClientSide)
@@ -73,39 +58,71 @@ public abstract class BasinOperatingBlockEntityMixin extends KineticBlockEntity 
             return;
         BasinBlockEntity basin = basinOpt.get();
 
-        if (!ccf$canTasteMix(basin))
+        Recipe<?> marker = null;
+        if (ccf$canTasteMix(basin))
+            marker = TasteMixingMarker.INSTANCE;
+        else if (ccf$canIceCreamMix(basin))
+            marker = IceCreamMixingMarker.INSTANCE;
+
+        if (marker == null)
             return;
 
-        this.currentRecipe = CCF_TASTE_MIXING_MARKER;
+        this.currentRecipe = marker;
         startProcessingBasin();
         sendData();
         cir.setReturnValue(true);
     }
 
-    private boolean ccf$canTasteMix(BasinBlockEntity basin) {
+    private FluidStack ccf$findChocolate(BasinBlockEntity basin) {
         IFluidHandler availableFluids = level.getCapability(Capabilities.FluidHandler.BLOCK, basin.getBlockPos(), null);
+        if (availableFluids == null)
+            return FluidStack.EMPTY;
+        for (int tank = 0; tank < availableFluids.getTanks(); tank++) {
+            FluidStack fluid = availableFluids.getFluidInTank(tank);
+            if (fluid.is(CCFFluids.CHOCOLATE.get()))
+                return fluid;
+        }
+        return FluidStack.EMPTY;
+    }
+
+    private boolean ccf$noHeat(BasinBlockEntity basin) {
+        return BasinBlockEntity.getHeatLevelOf(level.getBlockState(basin.getBlockPos().below(1)))
+                == BlazeBurnerBlock.HeatLevel.NONE;
+    }
+
+    private boolean ccf$canTasteMix(BasinBlockEntity basin) {
         IItemHandler availableItems = level.getCapability(Capabilities.ItemHandler.BLOCK, basin.getBlockPos(), null);
-        if (availableFluids == null || availableItems == null)
+        if (availableItems == null || !ccf$noHeat(basin))
             return false;
 
-        int fluidSlot = 0;
-        while (fluidSlot < availableFluids.getTanks() && !availableFluids.getFluidInTank(fluidSlot).is(CCFFluids.CHOCOLATE.get()))
-            fluidSlot++;
-        if (fluidSlot == availableFluids.getTanks())
-            return false;
-
-        FluidStack chocolateFluid = availableFluids.getFluidInTank(fluidSlot);
-        Chocolate chocolate = chocolateFluid.get(CCFDataComponents.CHOCOLATE);
+        FluidStack chocolateFluid = ccf$findChocolate(basin);
+        Chocolate chocolate = chocolateFluid.isEmpty() ? null : chocolateFluid.get(CCFDataComponents.CHOCOLATE);
         if (chocolate == null || chocolate.hasTaste())
             return false;
 
-        BlazeBurnerBlock.HeatLevel heat = BasinBlockEntity.getHeatLevelOf(level.getBlockState(basin.getBlockPos().below(1)));
-        if (heat != BlazeBurnerBlock.HeatLevel.NONE)
+        for (int itemSlot = 0; itemSlot < availableItems.getSlots(); itemSlot++) {
+            var stack = availableItems.getStackInSlot(itemSlot);
+            if (!stack.isEmpty() && Taste.get(level, stack.getItem()).isPresent())
+                return true;
+        }
+        return false;
+    }
+
+    private boolean ccf$canIceCreamMix(BasinBlockEntity basin) {
+        IItemHandler availableItems = level.getCapability(Capabilities.ItemHandler.BLOCK, basin.getBlockPos(), null);
+        if (availableItems == null || !ccf$noHeat(basin))
             return false;
 
-        int itemSlot = 0;
-        while (itemSlot < availableItems.getSlots() && availableItems.getStackInSlot(itemSlot).isEmpty())
-            itemSlot++;
-        return itemSlot != availableItems.getSlots();
+        FluidStack chocolateFluid = ccf$findChocolate(basin);
+        if (chocolateFluid.isEmpty()
+                || chocolateFluid.get(CCFDataComponents.CHOCOLATE) == null
+                || chocolateFluid.getAmount() < 50)
+            return false;
+
+        for (int itemSlot = 0; itemSlot < availableItems.getSlots(); itemSlot++) {
+            if (availableItems.getStackInSlot(itemSlot).is(CCFItems.CRUSHED_ICE.get()))
+                return true;
+        }
+        return false;
     }
 }
