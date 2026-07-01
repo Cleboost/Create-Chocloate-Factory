@@ -100,6 +100,7 @@ public class CCFItems {
     public static final ItemEntry<ChocolateFilterItem> CHOCOLATE_FILTER = REGISTRATE.item("chocolate_filter", ChocolateFilterItem::new)
     .model((ctx, prov) -> prov.generated(ctx, prov.modLoc("item/chocolate_filter/layer0"),prov.modLoc("item/chocolate_filter/layer1"))).properties(p -> p.component(CCFDataComponents.CHOCOLATE, new Chocolate())).lang("Chocolate Filter").register();
     public static final ItemEntry<Item> COCOA_BUTTER_BOWL = REGISTRATE.item("cocoa_butter_bowl", Item::new).lang("Cocoa Butter Bowl").register();
+    public static final ItemEntry<Item> CRUSHED_ICE = REGISTRATE.item("crushed_ice", Item::new).lang("Crushed Ice").register();
 
     // Seau de chocolat avec un chemin de texture personnalisé
     //public static final Item CHOCOLATE_BUCKET = CCFFluids.CHOCOLATE.get().getBucket();
