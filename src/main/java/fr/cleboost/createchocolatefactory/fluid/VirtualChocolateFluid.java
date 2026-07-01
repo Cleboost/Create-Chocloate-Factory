@@ -7,6 +7,7 @@ import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -49,8 +50,17 @@ public class VirtualChocolateFluid extends VirtualFluid {
         }
 
         @Override
+        public ItemStack getBucket(FluidStack fluidStack) {
+            ItemStack itemStack = super.getBucket(fluidStack);
+            if (fluidStack.has(CCFDataComponents.CHOCOLATE)) {
+                itemStack.set(CCFDataComponents.CHOCOLATE, fluidStack.get(CCFDataComponents.CHOCOLATE));
+            }
+            return itemStack;
+        }
+
+        @Override
         protected int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
-            Chocolate ch = MoltenChocolateBlock.getChocolate(pos);
+            Chocolate ch = MoltenChocolateBlock.getChocolateOrFlow(getter, pos);
             return ch.getColor();
         }
     }
