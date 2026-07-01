@@ -76,6 +76,10 @@ public class CCFItems {
                         prov.modLoc("item/chocolate/" + ctx.getName() + "/layer1"));
             }).register();
 
+    public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_CROISSANT = REGISTRATE.item("chocolate_croissant", (p) -> new ChocolateBaseItem(p.food(CCFFoods.CHOCOLATE_FAST), 100))
+            .lang("Chocolate Croissant")
+            .register();
+
     public static final ChocolateFoodPack CHOCOLATE_EGG_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_egg", 300);
     public static final ChocolateFoodPack CHOCOLATE_BUNNY_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_bunny", 600);
     public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_STICK = REGISTRATE.item("chocolate_stick", (p) -> new ChocolateBaseItem(p, 100)).register();
