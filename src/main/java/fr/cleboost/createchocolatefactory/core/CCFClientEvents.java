@@ -40,7 +40,10 @@ public class CCFClientEvents {
                                 CCFItems.CHOCOLATE_BAR.get(),
                                 CCFItems.CHOCOLATE_FILTER.get(),
                                 CCFItems.COOKIE.get(),
-                                CCFItems.CHOCOLATE_STICK.get()
+                                CCFItems.CHOCOLATE_STICK.get(),
+                                CCFItems.ICE_CREAM_BALL.get(),
+                                CCFItems.ICE_CREAM.get(),
+                                CCFFluids.CHOCOLATE.get().getBucket()
                         ),
                         CCFItems.getAllChocolatePack().stream().map(ChocolateFoodPack::getChocolateItems).map(ItemEntry::get)
                 ).toArray(ItemLike[]::new)

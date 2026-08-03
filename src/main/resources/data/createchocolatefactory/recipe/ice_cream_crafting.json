@@ -1,0 +1,21 @@
+{
+  "type": "createchocolatefactory:ice_cream_crafting",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "createchocolatefactory:ice_cream_ball"
+    },
+    "C": {
+      "item": "createchocolatefactory:ice_cream_cone"
+    }
+  },
+  "pattern": [
+    "B",
+    "C"
+  ],
+  "result": {
+    "count": 1,
+    "id": "createchocolatefactory:ice_cream"
+  },
+  "show_notification": true
+}

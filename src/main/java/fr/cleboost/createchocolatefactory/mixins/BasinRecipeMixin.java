@@ -6,7 +6,12 @@ import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import fr.cleboost.createchocolatefactory.core.CCFDataComponents;
 import fr.cleboost.createchocolatefactory.core.CCFFluids;
+import fr.cleboost.createchocolatefactory.core.CCFItems;
 import fr.cleboost.createchocolatefactory.utils.Chocolate;
+import fr.cleboost.createchocolatefactory.utils.IceCreamMixingMarker;
+import fr.cleboost.createchocolatefactory.utils.Taste;
+import fr.cleboost.createchocolatefactory.utils.TasteMixingMarker;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -22,45 +27,79 @@ import java.util.List;
 @Mixin(BasinRecipe.class)
 public abstract class BasinRecipeMixin {
 
+    private static final int ICE_CREAM_CHOCOLATE_COST = 50;
+
     @Inject(method = "apply*", at = @At("HEAD"), cancellable = true)
     private static void apply(BasinBlockEntity basin, Recipe<?> recipe, boolean test, CallbackInfoReturnable<Boolean> cir) {
-        IFluidHandler availableFluids = basin.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, basin.getBlockPos(), null);
-        IItemHandler availableItems = basin.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, basin.getBlockPos(), null);
-        if (availableItems == null || availableFluids == null) {
-            cir.setReturnValue(false);
-            return;
+        if (recipe == TasteMixingMarker.INSTANCE) {
+            ccf$applyTaste(basin, test, cir);
+        } else if (recipe == IceCreamMixingMarker.INSTANCE || (recipe != null && recipe.getResultItem(basin.getLevel().registryAccess()).is(CCFItems.ICE_CREAM_BALL.get()))) {
+            ccf$applyIceCream(basin, test, cir);
         }
-        int fluidSlot = 0;
-        while (fluidSlot < availableFluids.getTanks()) {
-            if (availableFluids.getFluidInTank(fluidSlot).is(CCFFluids.CHOCOLATE.get())) break;
-            fluidSlot++;
+    }
+
+    @Inject(method = "match", at = @At("HEAD"), cancellable = true)
+    private static void match(BasinBlockEntity basin, Recipe<?> recipe, CallbackInfoReturnable<Boolean> cir) {
+        if (recipe == TasteMixingMarker.INSTANCE || recipe == IceCreamMixingMarker.INSTANCE || (recipe != null && recipe.getResultItem(basin.getLevel().registryAccess()).is(CCFItems.ICE_CREAM_BALL.get()))) {
+            // Reuse apply(test=true) for the match check so the two stay in sync.
+            apply(basin, recipe, true, cir);
         }
-        if (fluidSlot == availableFluids.getTanks() || availableFluids.getFluidInTank(fluidSlot) == null) {
+    }
+
+    // ------------------------------------------------------------------ helpers
+
+    private static IFluidHandler ccf$fluids(BasinBlockEntity basin) {
+        return basin.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, basin.getBlockPos(), null);
+    }
+
+    private static IItemHandler ccf$items(BasinBlockEntity basin) {
+        return basin.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, basin.getBlockPos(), null);
+    }
+
+    private static int ccf$chocolateTank(IFluidHandler fluids) {
+        for (int tank = 0; tank < fluids.getTanks(); tank++)
+            if (fluids.getFluidInTank(tank).is(CCFFluids.CHOCOLATE.get()))
+                return tank;
+        return -1;
+    }
+
+    private static boolean ccf$noHeat(BasinBlockEntity basin) {
+        return BasinBlockEntity.getHeatLevelOf(basin.getLevel()
+                .getBlockState(basin.getBlockPos().below(1))) == BlazeBurnerBlock.HeatLevel.NONE;
+    }
+
+    // ---------------------------------------------------------------- taste mix
+
+    private static void ccf$applyTaste(BasinBlockEntity basin, boolean test, CallbackInfoReturnable<Boolean> cir) {
+        IFluidHandler availableFluids = ccf$fluids(basin);
+        IItemHandler availableItems = ccf$items(basin);
+        if (availableItems == null || availableFluids == null || !ccf$noHeat(basin)) {
             cir.setReturnValue(false);
             return;
         }
 
-        BlazeBurnerBlock.HeatLevel heat = BasinBlockEntity.getHeatLevelOf(basin.getLevel()
-                .getBlockState(basin.getBlockPos()
-                        .below(1)));
-        if (heat != BlazeBurnerBlock.HeatLevel.NONE) {
+        int fluidSlot = ccf$chocolateTank(availableFluids);
+        if (fluidSlot == -1) {
             cir.setReturnValue(false);
             return;
         }
 
         FluidStack chocolateFluid = availableFluids.getFluidInTank(fluidSlot);
         Chocolate chocolate = chocolateFluid.get(CCFDataComponents.CHOCOLATE);
-
         if (chocolate == null || chocolate.hasTaste()) {
             cir.setReturnValue(false);
             return;
         }
-        int itemSlot = 0;
-        while (itemSlot < availableItems.getSlots()) {
-            if (!availableItems.getStackInSlot(itemSlot).isEmpty()) break;
-            itemSlot++;
+
+        int itemSlot = -1;
+        for (int slot = 0; slot < availableItems.getSlots(); slot++) {
+            ItemStack stack = availableItems.getStackInSlot(slot);
+            if (!stack.isEmpty() && Taste.get(basin.getLevel(), stack.getItem()).isPresent()) {
+                itemSlot = slot;
+                break;
+            }
         }
-        if (itemSlot == availableItems.getSlots()) {
+        if (itemSlot == -1) {
             cir.setReturnValue(false);
             return;
         }
@@ -80,55 +119,60 @@ public abstract class BasinRecipeMixin {
 
         availableItems.extractItem(itemSlot, 1, false);
 
-
         cir.setReturnValue(basin.acceptOutputs(List.of(), List.of(fluidOutput), test));
     }
 
-    @Inject(method = "match", at = @At("HEAD"), cancellable = true)
-    private static void match(BasinBlockEntity basin, Recipe<?> recipe, CallbackInfoReturnable<Boolean> cir) {
-        IFluidHandler availableFluids = basin.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, basin.getBlockPos(), null);
-        IItemHandler availableItems = basin.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, basin.getBlockPos(), null);
-        if (availableItems == null || availableFluids == null) {
+    // ------------------------------------------------------------ ice cream mix
+
+    private static void ccf$applyIceCream(BasinBlockEntity basin, boolean test, CallbackInfoReturnable<Boolean> cir) {
+        IFluidHandler availableFluids = ccf$fluids(basin);
+        IItemHandler availableItems = ccf$items(basin);
+        if (availableItems == null || availableFluids == null || !ccf$noHeat(basin)) {
             cir.setReturnValue(false);
             return;
         }
-        int fluidSlot = 0;
-        while (fluidSlot < availableFluids.getTanks()) {
-            if (availableFluids.getFluidInTank(fluidSlot).is(CCFFluids.CHOCOLATE.get())) break;
-            fluidSlot++;
-        }
-        if (fluidSlot == availableFluids.getTanks() || availableFluids.getFluidInTank(fluidSlot) == null) {
+
+        int fluidSlot = ccf$chocolateTank(availableFluids);
+        if (fluidSlot == -1) {
             cir.setReturnValue(false);
             return;
         }
+
         FluidStack chocolateFluid = availableFluids.getFluidInTank(fluidSlot);
-
-        BlazeBurnerBlock.HeatLevel heat = BasinBlockEntity.getHeatLevelOf(basin.getLevel()
-                .getBlockState(basin.getBlockPos()
-                        .below(1)));
-        if (heat != BlazeBurnerBlock.HeatLevel.NONE) {
-            cir.setReturnValue(false);
-            return;
-        }
         Chocolate chocolate = chocolateFluid.get(CCFDataComponents.CHOCOLATE);
-        if (chocolate == null) {
+        if (chocolate == null || chocolateFluid.getAmount() < ICE_CREAM_CHOCOLATE_COST) {
             cir.setReturnValue(false);
             return;
         }
-        if (chocolate.hasTaste()) {
-            cir.setReturnValue(false);
-            return;
-        }
-        int slotID = 0;
-        while (slotID < availableItems.getSlots()) {
-            if (!availableItems.getStackInSlot(slotID).isEmpty()) break;
-            slotID++;
-        }
-        if (slotID == availableItems.getSlots()) {
-            cir.setReturnValue(false);
-            return;
-        }
-        cir.setReturnValue(true);
-    }
 
+        int itemSlot = -1;
+        for (int slot = 0; slot < availableItems.getSlots(); slot++) {
+            if (availableItems.getStackInSlot(slot).is(CCFItems.CRUSHED_ICE.get())) {
+                itemSlot = slot;
+                break;
+            }
+        }
+        if (itemSlot == -1) {
+            cir.setReturnValue(false);
+            return;
+        }
+        if (test) {
+            cir.setReturnValue(true);
+            return;
+        }
+
+        // The ice cream ball inherits the exact chocolate that was mixed in.
+        ItemStack ball = new ItemStack(CCFItems.ICE_CREAM_BALL.get());
+        ball.set(CCFDataComponents.CHOCOLATE, chocolate);
+
+        chocolateFluid.shrink(ICE_CREAM_CHOCOLATE_COST);
+        basin.getBehaviour(SmartFluidTankBehaviour.INPUT)
+                .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
+        basin.getBehaviour(SmartFluidTankBehaviour.OUTPUT)
+                .forEach(SmartFluidTankBehaviour.TankSegment::onFluidStackChanged);
+
+        availableItems.extractItem(itemSlot, 1, false);
+
+        cir.setReturnValue(basin.acceptOutputs(List.of(ball), List.of(), test));
+    }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createchocolatefactory:item/ice_cream_layer_ball",
+    "layer1": "createchocolatefactory:item/ice_cream_layer_cone"
+  }
+}

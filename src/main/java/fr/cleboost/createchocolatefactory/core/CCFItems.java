@@ -76,9 +76,23 @@ public class CCFItems {
                         prov.modLoc("item/chocolate/" + ctx.getName() + "/layer1"));
             }).register();
 
+    public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_CROISSANT = REGISTRATE.item("chocolate_croissant", (p) -> new ChocolateBaseItem(p.food(CCFFoods.CHOCOLATE_FAST), 100))
+            .lang("Chocolate Croissant")
+            .register();
+
     public static final ChocolateFoodPack CHOCOLATE_EGG_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_egg", 300);
     public static final ChocolateFoodPack CHOCOLATE_BUNNY_PACK = new ChocolateFoodPack(REGISTRATE, "chocolate_bunny", 600);
     public static final ItemEntry<ChocolateBaseItem> CHOCOLATE_STICK = REGISTRATE.item("chocolate_stick", (p) -> new ChocolateBaseItem(p, 100)).register();
+    public static final ItemEntry<ChocolateBaseItem> ICE_CREAM_BALL = REGISTRATE.item("ice_cream_ball", (p) -> new ChocolateBaseItem(p, 100))
+            .lang("Ice Cream Ball")
+            .register();
+    public static final ItemEntry<Item> ICE_CREAM_CONE = REGISTRATE.item("ice_cream_cone", Item::new)
+            .lang("Ice Cream Cone")
+            .register();
+    public static final ItemEntry<ChocolateBaseItem> ICE_CREAM = REGISTRATE.item("ice_cream", (p) -> new ChocolateBaseItem(p.food(CCFFoods.CHOCOLATE_FAST), 100))
+            .lang("Ice Cream")
+            .model((ctx, prov) -> prov.generated(ctx, prov.modLoc("item/ice_cream_layer_ball"), prov.modLoc("item/ice_cream_layer_cone")))
+            .register();
 
     // Fruits & Foods
     public static final ItemEntry<Item> MINT_LEAF = REGISTRATE.item("mint_leaf", Item::new).properties(p -> p.food(CCFFoods.MINT)).register();
@@ -96,6 +110,7 @@ public class CCFItems {
     public static final ItemEntry<ChocolateFilterItem> CHOCOLATE_FILTER = REGISTRATE.item("chocolate_filter", ChocolateFilterItem::new)
     .model((ctx, prov) -> prov.generated(ctx, prov.modLoc("item/chocolate_filter/layer0"),prov.modLoc("item/chocolate_filter/layer1"))).properties(p -> p.component(CCFDataComponents.CHOCOLATE, new Chocolate())).lang("Chocolate Filter").register();
     public static final ItemEntry<Item> COCOA_BUTTER_BOWL = REGISTRATE.item("cocoa_butter_bowl", Item::new).lang("Cocoa Butter Bowl").register();
+    public static final ItemEntry<Item> CRUSHED_ICE = REGISTRATE.item("crushed_ice", Item::new).lang("Crushed Ice").register();
 
     // Seau de chocolat avec un chemin de texture personnalisé
     //public static final Item CHOCOLATE_BUCKET = CCFFluids.CHOCOLATE.get().getBucket();

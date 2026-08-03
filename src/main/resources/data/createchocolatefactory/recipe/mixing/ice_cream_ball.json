@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "createchocolatefactory:crushed_ice"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 50,
+      "fluid": "createchocolatefactory:chocolate"
+    }
+  ],
+  "results": [
+    {
+      "id": "createchocolatefactory:ice_cream_ball"
+    }
+  ]
+}
