@@ -1,0 +1,19 @@
+{
+  "effects": [
+    {
+      "amplifier_max": 2,
+      "amplifier_min": 0,
+      "duration_max": 1000,
+      "duration_min": 100,
+      "effect": "minecraft:invisibility"
+    },
+    {
+      "amplifier_max": 2,
+      "amplifier_min": 0,
+      "duration_max": 1000,
+      "duration_min": 100,
+      "effect": "minecraft:blindness"
+    }
+  ],
+  "item": "minecraft:echo_shard"
+}

@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "amplifier_max": 2,
+      "amplifier_min": 0,
+      "duration_max": 2000,
+      "duration_min": 200,
+      "effect": "minecraft:water_breathing"
+    }
+  ],
+  "item": "minecraft:sea_pickle"
+}
