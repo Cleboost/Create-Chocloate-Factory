@@ -37,6 +37,11 @@ public class TasteProvider /*implements DataProvider*/ {
         register(TasteBuilder.from(Items.CHORUS_FRUIT)
                 .addEffect(MobEffects.SLOW_FALLING, 100, 400, 2, 5)
                 .addEffect(MobEffects.MOVEMENT_SLOWDOWN, 100, 300, 0, 3));
+        register(TasteBuilder.from(Items.SEA_PICKLE)
+                .addEffect(MobEffects.WATER_BREATHING, 200, 2000, 0, 2));
+        register(TasteBuilder.from(Items.ECHO_SHARD)
+                .addEffect(MobEffects.INVISIBILITY, 100, 1000, 0, 2)
+                .addEffect(MobEffects.BLINDNESS, 100, 1000, 0, 2));
     }
 
     public static Taste register(TasteBuilder taste) {
